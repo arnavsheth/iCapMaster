@@ -1,0 +1,136 @@
+
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{left=1.0in,right=1.0in,top=1.5in,bottom=1.5in}
+
+\usepackage{pifont}
+\usepackage{hyperref}
+\usepackage[affil-it]{authblk}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{setspace,graphicx,epstopdf,amsmath,amsfonts,amssymb,amsthm}
+\usepackage{pdflscape}
+\usepackage{docs/jf}
+\usepackage[natbib, authordate, strict, backend=bibtex8, doi=only]{biblatex-chicago}
+\addbibresource{docs/sources.bib}
+
+\usepackage{placeins}
+\usepackage{flafter}
+\usepackage{rotating}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage[font=normalsize]{subcaption}
+\usepackage{float}
+
+%\usepackage{natbib}
+%\bibliographystyle{docs/jf}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{textcomp}
+\usepackage[labelfont=bf,labelsep=none, justification=justified, singlelinecheck=false]{caption}   % Format figure 
+\captionsetup[table]{labelsep=none}
+\usepackage[bottom]{footmisc}
+
+\setlength{\textfloatsep}{10pt plus 1.0pt minus 2.0pt}
+\setlength{\floatsep}{10pt plus 1.0pt minus 2.0pt}
+\setlength{\intextsep}{10pt plus 1.0pt minus 2.0pt}
+
+%from LyX for algorithms
+\providecommand{\tabularnewline}{\\}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%plotting libraries
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{tikzscale}
+\usepgfplotslibrary{fillbetween}
+ 
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\DeclareMathOperator{\sign}{sign}
+
+\newcommand{\M}[1]{\mathbb{#1}} %For writing expectations etc.
+
+%force a label for an equation in line*
+\newcommand{\forcelabel}[1]{\addtocounter{equation}{1}\tag{\theequation} \label{#1}}
+
+\onehalfspacing      % Use 1.5 spacing
+%\doublespacing
+
+%%%%%%%%%%%%%%%%%%%%code rotating 
+% from https://tex.stackexchange.com/questions/471472/how-to-make-figures-appear-landscape-properly
+\usepackage{eso-pic,zref-user}
+\newcounter{cntsideways}
+\makeatletter
+\AddToShipoutPictureBG{%
+ \ifnum\zref@extractdefault{rotate\number\value{page}}{page}{0}=0  
+  \PLS@RemoveRotate
+ \else 
+  \PLS@AddRotate{90}%
+ \fi}
+
+%- note uncomment in order to rotate all of the sideqays figures in the pdf
+\newcommand\rotatesidewayslabel{\stepcounter{cntsideways}%
+ \zlabel{tmp\thecntsideways}\zlabel{rotate\zref@extractdefault{tmp\thecntsideways}{page}{0}}}
+%then recomment the below noop
+%\newcommand{\rotatesidewayslabel}[1]{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%caption macros
+%\newcommand{\ctabcaption}[2]{\caption[#1]{\textbar\, \textbf{#1} #2}}
+\newcommand{\ctabtitle}[1]{\caption[#1]{\\ \textbf{#1}}}
+\newcommand{\ctabsubtitle}[1]{\caption[#1]{\; \textit{#1}}}
+\newcommand{\ctabnote}[1]{\begin{flushleft} #1 \end{flushleft}}
+
+\newcommand{\cfigcaption}[2]{\caption[#1]{\textbf{\\#1} \\ #2}}
+\newcommand{\cfigtitle}[1]{\caption[#1]{ \\ \textbf{#1} }}
+%\newcommand{\cfigcaption}[1]{\def\figtitle{{#1}}\cfigcaptionandnotes}
+%\newcommand{\cfigcaptionandnotes}[1][{}]{\caption[\figtitle]{\\ \begin{flushleft} \textbf{\figtitle.} \\ #1 \end{flushleft}}}
+%\newcommand{\cfignotes}[1]{\begin{flushleft} \emph{Notes:\;}#1 \end{flushleft}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%input path
+\newcommand{\ctable}[1]{\input{sub/tab/#1}}
+%\newcommand{\capfigure}[1]{\input{sub/fig/#1}}
+\newcommand{\cfigure}[1]{\includegraphics[width=0.90\linewidth]{sub/fig/#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[page]{appendix}
+\renewcommand{\appendixpagename}{Internet Appendix}
+
+\begin{document}
+
+\newcommand{\tstar}{\ensuremath{^\text{***}}}
+\newcommand{\dstar}{\ensuremath{^\text{**}}}
+\newcommand{\ostar}{\ensuremath{^\text{*}}}
+
+
+\begin{titlepage}
+\title{Global Multi-asset Model 3.0}
+\author{iCapital}
+
+\date{\today}
+\maketitle
+
+
+\setcounter{page}{0}
+\thispagestyle{empty}
+\end{titlepage}
+\pagebreak \newpage
+
+\maketitle
+
+
+
+\clearpage
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%*******************************%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview} \label{sec:overview}
+Hello
+
+\end{document}

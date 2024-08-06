@@ -1,0 +1,167 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+We have:
+\begin_inset Formula 
+\begin{align*}
+\beta_{k}|\gamma_{k}\sim & N\left(\beta_{0k}+d^{-1}\beta_{\Delta0k},\frac{1}{\tau a_{0k}}\left[\gamma_{k}+\left(1-\gamma_{k}\right)\frac{1}{v^{2}}\right]^{-1}\right)\\
+\gamma_{k}\sim & Bernoulli\left(p_{k}^{\gamma}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then:
+\begin_inset Formula 
+\begin{align*}
+V\left(\beta_{k}\right)= & E\left[V\left(\beta_{k}|\gamma,\\tau\right)\right]+V\left(E\left[\beta_{k}|\gamma_{k}\right]\right)\\
+E\left[V\left(\beta_{k}|\gamma\right)\right]= & \frac{1}{\tau a_{0}}\left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v^{2}\right)\\
+V\left(E\left[\beta_{k}|\gamma_{k}\right]\right)= & V\left(d_{k}^{-1}\beta_{\Delta0k}\right)\\
+= & V\left(d_{k}^{-1}\right)\beta_{\Delta0k}^{2}\\
+E\left[d_{k}^{-1}\right]= & p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\\
+V\left[d_{k}^{-1}\right]= & p_{\gamma_{k}}\left(1-p_{k}^{\gamma}-\left(1-p_{k}^{\gamma}\right)v\right)^{2}+\left(1-p_{k}^{\gamma}\right)\left(v-p_{k}^{\gamma}-\left(1-p_{k}^{\gamma}\right)v\right)^{2}\\
+= & \left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v\right)^{2}+p_{k}^{\gamma}-2p_{\gamma_{k}}\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)\\
+ & +\left(1-p_{k}^{\gamma}\right)v^{2}-2\left(1-p_{k}^{\gamma}\right)v\left(p_{\gamma k}+\left(1-p_{k}^{\gamma}\right)v\right)\\
+= & p_{\gamma_{k}}+\left(1-p_{k}^{\gamma}\right)v^{2}-\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)^{2}\\
+\implies V\left(\beta_{k}\right)= & \frac{1}{\tau a_{0}}\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v^{2}\right)\\
+ & +\beta_{\Delta0k}^{2}\left[p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v^{2}-\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)^{2}\right]\\
+\implies a_{0}= & \left[\frac{1}{\tau}\left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v^{2}\right)\right]\left[V\left(\beta_{k}\right)-\beta_{\Delta0k}^{2}V\left[d_{k}^{-1}\right]\right]^{-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\beta_{\Delta0}=0$
+\end_inset
+
+, this naturally simplifies to
+\begin_inset Formula 
+\begin{align*}
+a_{0}= & \frac{p_{\gamma}+\left(1-p_{\gamma}\right)v^{2}}{V\left(\beta_{k}\right)\tau}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Check 
+\begin_inset Formula $Var\left(\beta_{k}\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+E\left[\beta_{k}\right]^{2}= & \left(p_{k}^{\gamma}\left(\beta_{0}+\beta_{0}^{\Delta}\right)+\left(1-p_{k}^{\gamma}\right)\left(\beta_{0}+v\beta_{\Delta0k}\right)\right)^{2}\\
+= & \left(\beta_{0}+p_{k}^{\gamma}\beta_{0}^{\Delta}+\left(1-p_{k}^{\gamma}\right)v\beta_{\Delta0k}\right)^{2}\\
+Var\left(\beta_{k}\right)= & E\left[V\left(\beta_{k}|\gamma\right)\right]+E\left(E\left[\beta_{k}|\gamma_{k}\right]^{2}\right)-E\left[\beta_{k}\right]^{2}\\
+= & \frac{p_{k}^{\gamma}}{a_{0k}\tau}+\frac{\left(1-p_{k}^{\gamma}\right)v^{2}}{a_{0k}\tau}+p_{k}^{\gamma}\left(\beta_{0k}+\beta_{\Delta0k}\right)^{2}+\left(1-p_{k}^{\gamma}\right)\left(\beta_{0k}+v\beta_{\Delta0k}\right)^{2}\\
+ & -\left(\beta_{0k}+p_{k}^{\gamma}\beta_{\Delta0k}+v\beta_{\Delta0k}\left(1-p_{k}^{\gamma}\right)\right)^{2}\\
+= & \frac{p_{k}^{\gamma}}{a_{0k}\tau}+\frac{\left(1-p_{k}^{\gamma}\right)v^{2}}{a_{0k}\tau}+\beta_{0k}^{2}+\left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v^{2}\right)\beta_{\Delta0k}^{2}+2\beta_{0k}\beta_{\Delta0k}\left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v\right)\\
+ & -\beta_{0k}^{2}-\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)^{2}\beta_{\Delta0k}^{2}-2\beta_{0}\beta_{\Delta0k}\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)\\
+= & \frac{p_{k}^{\gamma}}{a_{0k}\tau}+\frac{\left(1-p_{k}^{\gamma}\right)v^{2}}{a_{0k}\tau}+\beta_{\Delta0k}^{2}\left[\left(p_{\gamma k}+\left(1-p_{\gamma k}\right)v^{2}\right)-\left(p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v\right)^{2}\right]\checkmark
+\end{align*}
+
+\end_inset
+
+We are still not done.
+ The above provides the variance conditional on 
+\begin_inset Formula $\tau$
+\end_inset
+
+.
+ However, 
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1847 @@
+%% LyX 2.3.6.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\onehalfspacing
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+This version: \today
+
+\section{The generative model}
+
+\subsection{Setup and Notation}
+\begin{itemize}
+\item Consider a sequence of length $K$ factor returns$f_{t}$ where $t\in1:T$.
+The factor returns can either include a constant for the intercept,
+or the data may already be centered. Factor returns are measured on
+a monthly basis.
+\item An unobserved vector of latent returns for asset $i\in1:N$ is a function
+of these factors such that
+\begin{align*}
+x_{it}= & f_{t}'\beta_{i}+\varepsilon_{it}^{u}
+\end{align*}
+
+\begin{itemize}
+\item Here, $\beta_{i}$ is a $K\times1$ vector of exposures.
+\item For notational parsimony, and because other assets only enter the
+model through priors, drop the $i$ subscript.
+\end{itemize}
+\item The econometrician observes a length $S$ vector of returns $y$.
+Note that $S$ will not generally equal $T$. Notably, the observation
+frequency may differ from the frequency of return realization.
+\begin{itemize}
+\item For convenience, use the notation $t\left[s\right]$ to denote the
+corresponding value of $t$ for a particular $s$. Because the interval
+of time between observations is constant ($\Delta t$ periods), the
+mapping of observation period to latent return period $t$ is described
+as:
+\begin{align*}
+t\left[s\right] & \equiv P+s*\Delta t
+\end{align*}
+\item The observed returns $y$ are a function of a vector of unobserved
+(``latent'') returns $x$. 
+\begin{itemize}
+\item Intuition: The lags reflect a process whereby valuations of investments
+take up to the end of the lag window to be fully reflected in the
+returns of an asset.
+\end{itemize}
+\item The returns of $y$ follow a moving average process with $P+\Delta t$
+terms plus measurement error. The moving average window is parameterized
+by $P$ unrestricted coefficients and $\Delta t$ coefficients determined
+by restrictions. 
+\item Let $\phi$ represent the length $P$ vector of unrestricted coefficients
+and $\tilde{\phi}$ be the length $P+\Delta t$ vector containing
+both restricted and unrestricted coefficients. Note that both $\phi$
+and $\tilde{\phi}$ use indexing that is the reverse of typical, with
+$\tilde{\phi}_{P+\Delta t}$ corresponding to the coefficient on the
+contemporaneous value of $x$. Then:
+\begin{align*}
+y_{s}= & \left(\tilde{\phi}_{1:\left(P+\Delta t\right)}\right)'x_{(t[s]-P-\Delta t+1):t[s]}+\varepsilon_{t}^{y}\\
+= & \left(\tilde{\phi}_{\left(P+1\right):\left(P+\Delta t\right)}\right)'x_{\left(t[s]-\Delta t+1\right):t[s]}+\phi'x_{(t[s]-P):\left(t[s]-\Delta t\right)}+\varepsilon_{t}^{y}
+\end{align*}
+
+\begin{itemize}
+\item If the contemporaneous term $x_{t[s]}$ were unrestricted (say given
+a coefficient $\phi_{P+1}$), the coefficients $\phi$ and $\beta$
+would only be identified via priors. 
+\begin{itemize}
+\item To see the lack of identification, note that doubling $\beta$ and
+halving $\phi$ would lead to the same prediction. Setting the coefficient
+on $x_{t[s]}$ to 1 creates an implicit scaling restriction, but creates
+difficulties with respect to the scaling of $\beta$. Restricting
+the coefficient to $\Delta t-\phi'1$ preserves scaling at the cost
+of slightly increased in complexity.
+\item When $\Delta t>1$, further restrictions help the identification.
+Consider $\Delta t=3$, which corresponds to quarterly observed returns
+and monthly factor returns. If $j\in1:\Delta t$ and the sum $\tilde{\phi}_{j}+\tilde{\phi}_{j+\Delta t}+\dots+\tilde{\phi}_{j+P-\Delta t}$
+does not add to the same value for all $j$, months that fall earlier
+in the quarter will have a different long-run impact on NAV than months
+later in the quarter. This combined with the above restriction implies
+$\Delta t$ restrictions.
+\end{itemize}
+\item Subject to regularity conditions, the use of measurement error in
+the model is without loss of generality with respect to $y$ following
+a moving average process. See \ref{sec:ma} for a discussion.
+\end{itemize}
+\end{itemize}
+\item The moving average can be written in two forms with matrix notation.
+To see this, consider the special case where both $y$ and $x$ have
+the same frequency. Then: \\
+{\footnotesize{}
+\begin{align*}
+\hat{y}=\Phi x= & X_{L}R\phi+x_{S}\\
+\mkern-150mu \hat{y}=\begin{bmatrix}\phi_{1} & \cdots & \phi_{P} & \tilde{\phi}_{P+1} & 0 & 0 & 0 & 0 & 0\\
+0 & \phi_{1} & \cdots & \phi_{P} & \tilde{\phi}_{P+1} & \cdots & \cdots & \cdots & 0\\
+\vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots\\
+0 & \cdots & \cdots & \cdots & \phi_{1} & \cdots & \phi_{P} & \tilde{\phi}_{P+1} & 0\\
+0 & \cdots & \cdots & \cdots & \cdots & \phi_{1} & \cdots & \phi_{P} & \tilde{\phi}_{P+1}
+\end{bmatrix}\begin{bmatrix}x_{1}\\
+x_{2}\\
+\vdots\\
+x_{T-1}\\
+x_{T}
+\end{bmatrix}= & \begin{bmatrix}x_{1} & x_{2} & \cdots & x_{P-1} & x_{P} & x_{P+1}\\
+x_{2} & x_{3} & \cdots & x_{P} & x_{P+1} & x_{P+2}\\
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots\\
+x_{T-P-1} & x_{T-P} & \cdots & x_{T-3} & x_{T-2} & x_{T-1}\\
+x_{T-P} & x_{T-P+1} & \cdots & x_{T-2} & x_{T-1} & x_{T}
+\end{bmatrix}\left[R\right]\begin{bmatrix}\phi_{1}\\
+\phi_{2}\\
+\vdots\\
+\phi_{P-1}\\
+\phi_{P}
+\end{bmatrix}+\begin{bmatrix}x_{P+1}\\
+x_{P+2}\\
+\vdots\\
+x_{T-1}\\
+x_{T}
+\end{bmatrix}\\
+R\equiv & \begin{bmatrix}1 & 0 & \cdots & 0 & 0\\
+0 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & 1 & 0\\
+0 & 0 & \cdots & 0 & 1\\
+-1 & -1 & \cdots & -1 & -1
+\end{bmatrix}\\
+\tilde{\phi}_{P+1}\equiv & 1-1'\phi\\
+x_{S}\equiv & x_{t[s]\forall s}
+\end{align*}
+}{\footnotesize\par}
+\begin{itemize}
+\item To generalize to quarterly data and other frequencies, recall $t\left[s\right]\equiv P+s*\Delta t$
+and define
+\begin{align}
+\Phi_{sj}\equiv & \begin{cases}
+\phi_{P-\left(t\left[s\right]-\Delta t-j\right)} & 1\le P-(t\left[s\right]-\Delta t-j)\le P\\
+1-\left(\iota_{\Delta t-\left(t\left[s\right]-j\right)}^{\phi}\right)'\phi & t\left[s\right]-\Delta t<j\le t\left[s\right]\\
+0 & otherwise
+\end{cases}\label{eq:Phi}\\
+X_{Lsj}\equiv & x_{t\left[s\right]-\left(P+\Delta t-j\right)}\label{eq:XL}\\
+\iota_{pl}^{\phi}\equiv & \begin{cases}
+1 & p+l\mod\Delta t=0\\
+0 & otherwise
+\end{cases}\label{eq:iotaphi}
+\end{align}
+\item The above matrix formulation can be generalized by only including
+rows of $X_{L}$ where $t\in\left\{ t\left[1...S\right]\right\} $
+and adjusting the restriction matrix. The general version is then:
+\begin{align*}
+\hat{y}=\Phi x= & X_{L}R\phi+x_{S}\\
+s.t.\\
+x_{S}\equiv & X_{L}\iota_{\Delta t}
+\end{align*}
+where $\iota_{\Delta t}$ is a vector of $P$ zeros followed by $\Delta t$
+ones, making $x_{S}$ the sum of the last $\Delta t$ columns of $X_{L}$.
+\end{itemize}
+\item The generative process is given by:
+\begin{align*}
+p\left(y|rest\right)\sim & MN\left(X_{L}R\phi+x_{S},\frac{1}{\tau_{y}}I\right)\text{(equivelently}MN\left(\Phi x,\frac{1}{\tau_{y}}I\right))\\
+p\left(x|rest\right)\sim & MN\left(F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\\
+p\left(\phi|rest\right)\sim & MN\left(\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\\
+p\left(\beta|rest\right)\sim & MN\left(\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+d_{k}\equiv & (\gamma_{k}+(1-\gamma_{k})\frac{1}{v^{2}})^{0.5}\\
+p\left(\gamma_{k}\right)\sim & Bern\left(\omega\right)\\
+p\text{\ensuremath{\left(\omega\right)}}\sim & Beta\left(\kappa_{0},\delta_{0}\right)\\
+p\left(\tau_{y}\right)\sim & Gamma\left(\alpha_{y0},\zeta_{y0}\right)\\
+p\left(\tau_{x}\right)\sim & Gamma\left(\alpha_{x0},\zeta_{x0}\right)\\
+p\left(\psi_{t}\right)\sim & Gamma\left(\nu/2,\nu/2\right)\\
+p\left(\nu\right)\sim & Gamma\left(\alpha_{\nu0},\zeta_{\nu0}\right)\\
+p\left(\tau_{\phi}\right)\sim & Gamma\left(\alpha_{\phi0},\zeta_{\phi0}\right)\\
+p\left(\tau_{\beta}\right)\sim & Gamma\left(\alpha_{\beta0},\zeta_{\beta0}\right)
+\end{align*}
+
+\begin{itemize}
+\item Definitions for the above (some of this was already previously described):
+\begin{itemize}
+\item In the above distributions, $MN$ is the multi-variate normal distribution,
+$Bern$ is the Bernoulli distribution, $Beta$ is the beta distribution,
+and $Gamma$ is the gamma distribution with an inverse scale parameterization. 
+\item All priors are conditionally conjugate except for $\nu$. Wand et
+al 2011 has a strategy for computing $E\left[q\left(\nu\right)\right]$
+in section 4.1, though it requires numerical integration. An alternative
+is backing out a plausible value for $\nu$ from the data and treating
+$\nu$ as known (say by setting $\nu$ to match the t-distribution's
+kurtosis with that of the data.)
+\item The rest of the variables are summarized in the following table:
+\begin{table}[h]
+\caption{Variable Definitions}
+
+Variable definitions for the Data Generating Process (DGP). \textbf{DGP
+corresponds to a system with $S$ observations over $T$ periods with
+each observation dependent on $P$ terms in a moving average and $K$
+factors. }Variables are divided into the following types: observed
+values, local parameters along a particular dimension, global scalar
+parameters, and hyperparameters.\\
+
+\begin{tabular}{ccccl}
+\toprule 
+Variable & Type & Dimensions & Source & Definition/Description\tabularnewline
+\midrule
+\midrule 
+$y$ & Observed & $S\times1$ & Data & Vector of observed returns\tabularnewline
+$x;X_{L}$ & Local Parameter & $T\times1$; $S\times\left(P+1\right)$ & Estimated & $x$ is a vector of gross latent returns; $X_{L}$ is defined in Equation
+\ref{eq:XL}\tabularnewline
+$r$ & Observed & $T\times1$ & Data & Vector of risk-free returns\tabularnewline
+$\phi$; $\Phi$ & Local Parameter & $P\times1$; $S\times T$ & Estimated & $\phi$ is the moving average window; $\Phi$ is defined in Equation
+\ref{eq:Phi}.\tabularnewline
+$\tau_{y}$ & Global Parameter & - & Estimated & Precision parameter for independent measurement error\tabularnewline
+$\phi_{0}$ & Hyperparameter & $P\times1$ & Given & Prior estimate for $\phi$ \tabularnewline
+$M_{0}$ & Hyperparameter & $P\times P$ & Given & Precision of prior estimate $\phi_{0}$\tabularnewline
+$F$ & Observed & $T\times K$ & Data & Matrix of factor returns, possibly including an intercept\tabularnewline
+$\beta$ & Local Parameter & $K\times1$ & Estimated & Regression coefficients of $x$ on $F$\tabularnewline
+$\psi$; $\Psi$ & Local Parameter & $T\times1$; $T\times T$ & Estimated & $\psi$ is a vector of precision weights for $x$;$\Psi=Diag\left(\psi\right)$\tabularnewline
+$\tau_{x}$ & Global Parameter & - & Estimated & Precision multiplier parameter for the regression of $x$ on $F$\tabularnewline
+$\tau_{\beta}$ & Global Parameter & - & Estimated & Prior precision multiplier parameter for the prior on $\phi$\tabularnewline
+$\tau_{\phi}$ & Global Parameter & - & Estimated & Prior precision multiplier parameter for the prior on $\beta$\tabularnewline
+$\beta_{0}$ & Prior & $K\times1$ & Given & Prior mean of $\beta$ conditional on exclusion $\left(\gamma=0\right)$\tabularnewline
+$\beta_{0}^{\Delta}$ & Prior & $K\times1$ & Given & Shift in prior mean of $\beta$ conditional on inclusion $\left(\gamma=1\right)$\tabularnewline
+$A_{0}$ & Prior & $K\times K$ & Given & Possibly diagonal prior precision for $\beta_{0}+D^{-1}\beta_{0}^{D}$\tabularnewline
+$\gamma$ & Local Parameter & $K\times1$ & Estimated & Vector of variable selection indicators\tabularnewline
+$d$; $D$ & Local Parameter & $K\times1$; $K\times K$ & Transformation & $d$ is a function of $\gamma$ and adjusts $\beta$ for sparsity;
+$D=Diag\left(d\right)$\tabularnewline
+$v$ & Hyper Parameter & - & Given & Variance of the spike distribution as a fraction of the slab variance\tabularnewline
+$\omega$ & Global & - & Estimated & Probability of variable selection\tabularnewline
+$\kappa_{0}$; $\delta_{0}$ & Hyper & - & Given & Hyperparameters for prior on $\omega$\tabularnewline
+$\nu$ & Global & - & Estimated & Non-normality parameter for $x$; DOF of posterior $t$ distribution\tabularnewline
+$\alpha_{\phi0}$; $\zeta_{\phi0}$ & Hyper & - & Given & Hyperparameters for $\tau_{\phi}$\tabularnewline
+$\alpha_{\beta0}$; $\zeta_{\beta0}$ & Hyper & - & Given & Hyperparameters for $\tau_{\beta}$\tabularnewline
+$\alpha_{x0}$; $\zeta_{x0}$ & Hyper & - & Given & Hyperparameters for $\tau_{x}$; $\alpha_{x0}$ is shape, $\zeta_{x0}$
+is inverse scale\tabularnewline
+$\alpha_{y0}$; $\zeta_{y0}$ & Hyper & - & Given & Hyperparameters for $\tau_{y}$; $\alpha_{y0}$ is shape, $\zeta_{y0}$
+is inverse scale\tabularnewline
+$\nu_{0}^{-}$; $\nu_{0}^{+}$ & Hyper & - & Given & Hyperparameters for prior on $\nu$\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+\end{itemize}
+\end{itemize}
+\item The posterior distribution:
+\begin{align*}
+p\left(\Theta|y,F\right)\propto & p\left(y|x,\gamma,\omega,\beta,\phi,\tau_{x},\tau_{y},\tau_{\phi},\tau_{\beta},\psi,\nu,F\right)\times p\left(x|\beta,\phi,\tau_{x},\tau_{y},\psi,F\right)\\
+ & \times p\left(\phi|\tau_{y},\tau_{\phi}\right)\times p\left(\beta|\gamma,\tau_{x},\tau_{y},\tau_{\beta}\right)\times p\left(\gamma|\omega\right)\times p\left(\omega\right)\\
+ & \times p\left(\psi|\nu\right)\times p\left(\nu\right)\times p\left(\tau_{x}\right)\times p\left(\tau_{y}\right)\times p\left(\tau_{\phi}\right)\times p\left(\tau_{\beta}\right)\\
+= & MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}}\Psi^{-1}\right)\\
+ & \times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\phi};\alpha_{\phi0};\zeta_{\phi0}\right)\times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)
+\end{align*}
+\item Approximate the posterior using the Variational Bayes mean-field approach
+(see Section \ref{subsec:mfvb}).
+\begin{itemize}
+\item This entails minimizing the KL divergence via
+\begin{align*}
+\log q_{j}\left(\Theta_{j}|D,\Theta_{-j}\right)= & E_{\Theta_{-j}}\log\left[p\left(y,\Theta\right)\right]
+\end{align*}
+\item The approximate posterior is:
+\begin{align*}
+p\left(\Theta|y\right)\underset{\sim}{\propto} & q\left(\phi\right)\times q\left(\tau_{y}\right)\times q\left(x\right)\\
+ & \times q\left(\beta\right)\times q\left(\tau_{x}\right)\times\prod_{t\in1:T}q\left(\psi_{i}\right)\\
+ & \times q\left(\nu\right)\times\prod_{k\in1:K}q\left(\gamma_{k}\right)\times q\left(\omega\right)\\
+ & \times q\left(\tau_{\phi}\right)\times q\left(\tau_{\beta}\right)
+\end{align*}
+\end{itemize}
+\end{itemize}
+
+\subsection{Derivation of MCMC posterior distributions and associated moments}
+
+\subsubsection{Derivation of $p\left(\phi|rest\right)$\label{sec:qphi}}
+\begin{itemize}
+\item First, define 
+\begin{align*}
+\tilde{y} & \equiv y-x_{S}\\
+\tilde{X}_{L} & \equiv X_{L}R
+\end{align*}
+\item Then the conditional posterior is given by:
+\begin{align*}
+\log p\left(\phi|rest\right)= & -\frac{\tau_{y}}{2}\left(y-X_{L}R\phi-x_{S}\right)'\left(y-X_{L}R\phi-x_{S}\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)+c_{1}^{\phi}\\
+= & -\frac{\tau_{y}}{2}\left(\tilde{y}-\tilde{X}_{L}\phi\right)'\left(\tilde{y}-\tilde{X}_{L}\phi\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)+c_{1}^{\phi}\\
+= & -\frac{\tau_{y}}{2}\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi-\tilde{y}'\tilde{X}_{L}\phi-\phi'\tilde{X}_{L}'\tilde{y}-\tau_{\phi}\phi'M_{0}\phi-\tau_{\phi}\phi_{0}'M_{0}\phi-\tau_{\phi}\phi'M_{0}\phi_{0}\right]+c_{2}^{\phi}\\
+= & -\frac{\tau_{y}}{2}\left[\phi'\left(\tilde{X}_{L}'\tilde{X}_{L}+\tau_{\phi}M_{0}\right)\phi-\left(\tilde{y}'\tilde{X}_{L}+\tau_{\phi}\phi_{0}'M_{0}\right)\phi-\phi'\left(\tilde{X}_{L}'\tilde{y}+\tau_{\phi}M_{0}'\phi_{0}\right)\right]+c_{2}^{\phi}\\
+= & -\frac{1}{2}\left(\phi-\mu_{\phi}\right)\Lambda_{\phi}\left(\phi-\mu_{\phi}\right)+c_{3}^{\phi}\\
+= & \log MN\left(\phi;\mu_{\phi},\Lambda_{\phi}^{-1}\right)+c_{4}^{\phi}\\
+s.t.\\
+\Lambda_{\phi}\equiv & \tau_{y}\left(\tilde{X}_{L}'\tilde{X}_{L}+\tau_{\phi}M_{0}\right)\\
+\mu_{\phi}\equiv & \tau_{y}\Lambda_{\phi}^{-1}\left(\tilde{X}_{L}'\tilde{y}+\tau_{\phi}M_{0}'\phi_{0}\right)\\
+c_{1}^{\phi}\equiv & \frac{S+P}{2}\log\left(\frac{\tau_{y}}{2\pi}\right)+\frac{P}{2}\log\tau_{\phi}+\frac{1}{2}\log det\left(M_{0}\right)\\
+ & +\log\Bigg[MN\left(x;F\beta+r,\frac{T}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\\
+ & \times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg]+c^{ev}\\
+c_{2}^{\phi}\equiv & c_{1}^{\phi}-\frac{\tau_{y}}{2}\left[\tau_{\phi}\phi_{0}'M_{0}\phi+\tilde{y}'\tilde{y}\right]\\
+c_{3}^{\phi}\equiv & c_{2}^{\phi}+\frac{1}{2}\mu_{\phi}'\Lambda_{\phi}\mu_{\phi}\\
+c_{4}^{\phi}\equiv & c_{3}^{\phi}+\frac{P}{2}\log2\pi-\frac{1}{2}\log det\Lambda_{\phi}\\
+c_{ev}\equiv & -\log p\left(y_{t}\right)
+\end{align*}
+
+\begin{itemize}
+\item The last constant makes the full posterior into a valid probability
+distribution.
+\item Note that it may make sense to impose additional restrictions not
+easily captured by $R$. For instance, the prior distribution can
+be truncated to force $\phi\in\left[0,1\right]$. With this restriction,
+the above analysis applies over the interval, with the support of
+the posterior and prior distribution truncated and re-normalized as
+appropriate.
+\end{itemize}
+\item Then the approximate posterior of $\phi$ is:
+\begin{align*}
+\log q\left(\phi\right)= & E_{-\phi}\left[-\frac{\tau_{y}}{2}\left(\tilde{y}-\tilde{X}_{L}\phi\right)'\left(\tilde{y}-\tilde{X}_{L}\phi\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)\right]+\overline{c}_{1}^{\phi}\\
+= & -\frac{E[\tau_{y}]}{2}E_{-\phi}\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi-\tilde{y}'\tilde{X}_{L}\phi-\phi'\tilde{X}_{L}'\tilde{y}+\tau_{\phi}\left(\phi'M_{0}\phi-\phi_{0}'M_{0}\phi-\phi'M_{0}\phi_{0}\right)\right]+\overline{c}_{2}^{\phi}\\
+= & -\frac{E[\tau_{y}]}{2}E_{-\phi}\left[\phi'\left(\tilde{X}_{L}'\tilde{X}_{L}+\tau_{\phi}M\right)\phi-\left(\tilde{y}'\tilde{X}_{L}+\tau_{\phi}\phi_{0}'M_{0}\right)\phi-\phi'\left(\tilde{X}_{L}'\tilde{y}+\tau_{\phi}M_{0}\phi_{0}\right)\right]+\overline{c}_{2}^{\phi}\\
+= & -\frac{E[\tau_{y}]}{2}\Bigg(\phi'\left(E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]+E\left[\tau_{\phi}\right]M_{0}\right)\phi-\left(E\left[\tilde{y}'\tilde{X}_{L}\right]+E\left[\tau_{\phi}\right]\phi_{0}'M_{0}\right)\phi\\
+ & -\phi'\left(E\left[\tilde{X}_{L}'\tilde{y}\right]+E\left[\tau_{\phi}\right]E\left[M_{0}\right]\phi_{0}\right)\Bigg)+\overline{c}_{2}^{\phi}\\
+= & -\frac{1}{2}\left(\left(\phi-\overline{\mu}_{\phi}\right)'\overline{\Lambda}_{\phi}\left(\phi-\overline{\mu}_{\phi}\right)\right)+\overline{c}_{3}^{\phi}\\
+= & \log MN\left(\phi;\overline{\mu}_{\phi},\overline{\Lambda}_{\phi}^{-1}\right)+\overline{c}_{4}^{\phi}\\
+s.t.\\
+\overline{\Lambda}_{\phi}\equiv & E[\tau_{y}]\left(E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]+E\left[\tau_{\phi}\right]E\left[M_{0}\right]\right)\\
+\overline{\mu}_{\phi}\equiv & E[\tau_{y}]\Lambda_{\phi}^{-1}\left(E\left[\tilde{X}_{L}'\tilde{y}\right]+E\left[\tau_{\phi}\right]E\left[M_{0}\right]\phi_{0}\right)\\
+\overline{c}_{1}^{\phi}\equiv & \frac{S+P}{2}E\left[\log\left(\frac{\tau_{y}}{2\pi}\right)\right]+0.5\log det\left(M_{0}\right)+\frac{P}{2}\log\tau_{\phi}\\
+ & +E_{-\phi}\log\Bigg[MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\\
+ & \times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\phi}\equiv & \overline{c}_{1}^{\phi}-\frac{E[\tau_{y}]}{2}\left(E\left[\tilde{y}'\tilde{y}\right]+E\left[\tau_{\phi}\right]\phi_{0}'E\left[M_{0}\right]\phi_{0}\right)\\
+\overline{c}_{3}^{\phi}\equiv & \overline{c}_{2}^{\phi}+\frac{1}{2}\left(\overline{\mu}_{\phi}'\overline{\Lambda}_{\phi}\overline{\mu}_{\phi}\right)\\
+\overline{c}_{4}^{\phi}\equiv & \overline{c}_{3}^{\phi}+\frac{P}{2}\log2\pi-\frac{1}{2}\log\left(det\left(\overline{\Lambda}_{\phi}\right)\right)
+\end{align*}
+\item To derive the expectation of $E\left[X_{L}'X_{L}\right]$ , need Matrix
+Cookbook equation 326 which states if $x$ is an $N\times1$ random
+vector and $A$ and $B$ matrices of width $N$, then $E\left[\left(Ax\right)'Bx\right]=Tr\left(A\Sigma B'\right)+\mu'A'B\mu$
+\begin{itemize}
+\item Define $X_{L}^{p}$ as 
+\begin{align*}
+X_{L}= & \begin{bmatrix}X_{L}^{1} & X_{L}^{2} & \dots & X_{L}^{P+\Delta t}\end{bmatrix}
+\end{align*}
+\item Assume (this will be shown later) that $x\sim MV\left(\mu_{x},\Lambda_{x}^{-1}\right)$.
+The plan will be to create a weighting matrix $E\left[A^{p}x\right]$
+such that $E\left[\left(X_{L}^{i}\right)'X_{L}^{j}\right]=E\left[x'\left(A^{i}\right)'A^{j}x\right]$,
+which will allow us to use the Matrix Cookbook formula.
+\item The weighting matrix for column $p$ takes the form of a sparse $S\times T$
+selector matrix $\iota\left(X_{L}^{p}\right)$. The matrix is zero
+everywhere except for $\iota\left(X_{L}^{p}\right)_{s,t\left[s\right]-\left(P+\Delta t\right)+p}$
+for all $s\in1:S$. 
+\begin{itemize}
+\item Intuitively, $\iota\left(X_{L}^{p}\right)$ transforms vector $x$
+into $X_{L}^{p}$.
+\item Each row of $\iota\left(X_{L}^{p}\right)$ contains a single non-zero.
+Similarly column $j$ of $\iota\left(X_{L}^{p}\right)$ contains a
+single $1$ if and only if $x_{j}\in X_{L}^{p}$. 
+\item Another way of writing this:
+\begin{align*}
+\iota\left(X_{L}^{p}\right)_{sj}\equiv & \begin{cases}
+1 & j=t\left[s\right]-\left(P+\Delta t\right)+p\\
+0 & otherwise
+\end{cases}
+\end{align*}
+\end{itemize}
+\item From these definitions, 
+\begin{align*}
+E\left[X_{L}'X_{L}\right]_{ij}\equiv & E\left[\left(\iota\left(X_{L}^{i}\right)x\right)'\left(\iota\left(X_{L}^{j}\right)x\right)\right]\\
+= & Tr\left(\iota\left(X_{L}^{i}\right)\Lambda_{x}^{-1}\iota\left(X_{L}^{j}\right)'\right)+\mu_{x}'\iota\left(X_{L}^{i}\right)'\iota\left(X_{L}^{j}\right)\mu_{x}
+\end{align*}
+which fully characterizes $E\left[X_{L}'X_{L}\right]$.
+\item Note that $E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]=R'E\left[X_{L}'X_{L}\right]R$
+\end{itemize}
+\item The same approach applies to $E\left[X_{L}'\tilde{y}\right]$:
+\begin{align*}
+E\left[X_{L}'\tilde{y}\right]= & E\left[X_{L}\right]'y-E\left[X_{L}'x_{S}\right]\\
+s.t.\\
+E\left[X_{L}'x_{S}\right]_{i}= & \sum_{l=1}^{l=\Delta t}E\left[\left(\iota\left(X_{L}^{i}\right)x\right)'\left(\iota\left(X_{L}^{P+l}\right)x\right)\right]\\
+= & \sum_{l=1}^{l=\Delta t}\left[Tr\left(\iota\left(X_{L}^{i}\right)\Lambda_{x}^{-1}\iota\left(X_{L}^{P+l}\right)'\right)+\mu_{x}'\iota\left(X_{L}^{i}\right)'\iota\left(X_{L}^{P+l}\right)\mu_{x}\right]
+\end{align*}
+\item The above moments are no longer accurate if the distribution is truncated.
+The actual moments for a truncated multivariate normal are available
+in the literature if need arises.
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(x|rest\right)$\label{sec:qx}}
+\begin{itemize}
+\item The conditional posterior is characterized as:
+\begin{align*}
+\log p\left(x|rest\right)= & -\frac{\tau_{y}}{2}\left[\left(y-\Phi x\right)'\left(y-\Phi x\right)+\tau_{x}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\right]+c_{1}^{x}\\
+= & -\frac{\tau_{y}}{2}\left[x'\Phi'\Phi x-x'\Phi'y-y'\Phi x+\tau_{x}x'\Psi x+\tau_{x}x'\Psi\left(r+F\beta\right)+\left(r+F\beta\right)'\Psi x\tau_{x}\right]+c_{2}^{x}\\
+= & -\frac{\tau_{y}}{2}\left[x'\left(\Phi'\Phi+\tau_{x}\Psi\right)x-x'\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)-\left(y'\Phi+\tau_{x}\left(r+F\beta\right)'\Psi\right)x\right]+c_{2}^{x}\\
+= & -\frac{1}{2}\left(x-\mu_{x}\right)'\Lambda_{x}\left(x-\mu_{x}\right)+c_{3}^{x}\\
+= & \log MN\left(x;\mu_{x},\Lambda_{x}^{-1}\right)+c_{4}^{x}\\
+s.t.\\
+\Lambda_{x}\equiv & \tau_{y}\left(\Phi'\Phi+\tau_{x}\Psi\right)\\
+\mu_{x}\equiv & \tau_{y}\Lambda_{x}^{-1}\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)\\
+c_{1}^{x}\equiv & \frac{S+T}{2}\log\left(\frac{\tau_{y}}{2\pi}\right)+\frac{T}{2}\log\tau_{x}+\frac{1}{2}\log Det\left(\Psi\right)\\
+ & +\log\Bigg[MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg]+c^{ev}\\
+c_{2}^{x}= & c_{1}^{x}-\frac{\tau_{y}\tau_{x}}{2}\left(r+F\beta\right)'\Psi\left(r+F\beta\right)-\frac{\tau_{y}}{2}y'y\\
+c_{3}^{x}= & c_{2}^{x}+\frac{\mu_{x}'\Lambda_{x}\mu_{x}}{2}\\
+c_{4}^{x}= & c_{3}^{x}+\frac{T}{2}\log2\pi-\log det\Lambda_{x}
+\end{align*}
+\item The approximate posterior is:
+\begin{align*}
+\log q\left(x\right)= & E_{-x}\left[\frac{-\tau_{y}}{2}\left(\left(y-\Phi x\right)'\left(y-\Phi x\right)+\tau_{x}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\right)\right]+\overline{c}_{1}^{x}\\
+= & \frac{-E\left[\tau_{y}\right]}{2}\bigg(x'\left[E\left[\Phi'\Phi\right]+E\left[\tau_{x}\right]E\left[\Psi\right]\right]x-\left[y'E\left[\Phi\right]+E\left[\tau_{x}\right]\left(\mu_{\beta}'F'+r'\right)E\left[\Psi\right]\right]x\\
+ & -x'\left[E\left[\Phi\right]'y+E\left[\tau_{x}\right]E\left[\Psi\right]\left(F\mu_{\beta}+r\right)\right]\Bigg)+\overline{c}_{2}^{x}\\
+= & -\frac{1}{2}\left(x-\overline{\mu}_{x}\right)'\overline{\Lambda}_{x}\left(x-\overline{\mu}_{x}\right)+\overline{c}_{3}^{x}\\
+= & \log\left(N\left(x;\overline{\mu}_{x},\overline{\Lambda}_{x}^{-1}\right)\right)+\overline{c}_{4}^{x}\\
+s.t.\\
+\overline{\Lambda}_{x}\equiv & E\left[\tau_{y}\right]\left(E\left[\Phi'\Phi\right]+E\left[\tau_{x}\right]E\left[\Psi\right]\right)\\
+\overline{\mu}_{x}\equiv & E\left[\tau_{y}\right]\Lambda_{x}^{-1}\left(E\left[\Phi\right]'y+E\left[\tau_{x}\right]E\left[\Psi\right]\left(F\overline{\mu}_{\beta}+r\right)\right)\\
+\overline{c}_{1}^{x}\equiv & E_{-x}\Bigg[\frac{S+T}{2}\log\frac{\tau_{y}}{2\pi}+\frac{T}{2}\log\tau_{x}+\frac{1}{2}\log det\Psi\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{x}\equiv & \overline{c}_{1}^{x}-E_{-x}\left[\frac{\tau_{y}}{2}\left(\tau_{x}\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)+y'y\right)\right]\\
+\overline{c}_{3}^{x}\equiv & \overline{c}_{2}^{x}+\frac{\overline{\mu}_{x}'\overline{\Lambda}_{x}\overline{\mu}_{x}}{2}\\
+\overline{c}_{4}^{x}\equiv & \overline{c}_{3}^{x}+\frac{T}{2}\log\left(2\pi\right)-\frac{1}{2}\log\left(det\overline{\Lambda}_{x}\right)
+\end{align*}
+\item As an aside, in the code base we can test the expectation by verifying
+that, for any arbitrary value of $x$ and simulated draws $\mu_{xj}$,
+$\Lambda_{xj}$
+\begin{align*}
+-\frac{1}{2}\left(x-\mu_{x}\right)'\Lambda_{x}\left(x-\mu_{x}\right)+\frac{1}{2}\mu_{x}'\Lambda_{x}\mu_{x}= & \frac{1}{J}\sum_{j}\left(x-\hat{\mu}_{xj}\right)'\hat{\Lambda}_{xj}\left(x-\hat{\mu}_{xj}\right)+\frac{1}{2}\hat{\mu}_{xj}'\Lambda_{xj}\hat{\mu}_{x}\\
+s.t.\\
+\hat{\Lambda}_{xj}= & \tau_{yj}\left(\Phi_{j}'\Phi_{j}+\tau_{xj}\Psi\right)\\
+\hat{\mu}_{xj}= & \tau_{yj}\Lambda_{xj}\left(\Phi_{j}'y+\tau_{xj}\Psi F\beta_{j}\right)
+\end{align*}
+where all indexed variables are drawn from their respective conditional
+posterior distributions.
+\begin{itemize}
+\item The last term needs to be added back for testing purposes (it only
+affects the constant of proportionality)
+\end{itemize}
+\item The above solution depends on knowing the $T\times T$ matrix $E\left[\Phi'\Phi\right]$.
+To begin, denote each row of $\Phi$ as $\Phi_{s}'$ such that
+\begin{align*}
+\Phi\equiv & \begin{bmatrix}\Phi_{1}'\\
+\Phi_{2}'\\
+\vdots\\
+\Phi_{S}'
+\end{bmatrix}
+\end{align*}
+
+\begin{itemize}
+\item This implies the expectation can be written as:
+\begin{align*}
+E\Phi'\Phi= & \sum_{s\in1:S}E\Phi_{s}\Phi_{s}'
+\end{align*}
+\item Each outer product then consists of the second moment matrix for $\tilde{\phi}$
+padded by zeros:
+\begin{align*}
+E\left[\Phi_{s}\Phi_{s}'\right]= & \begin{bmatrix}\mathbf{0}^{UL} & \cdots & \vdots\\
+\vdots & \tilde{M} & \vdots\\
+\vdots & \cdots & \mathbf{0}^{LR}
+\end{bmatrix}\\
+s.t.\\
+\mathbf{0}^{UL}\equiv & 0_{\left(t[s]-P-\Delta t\right)\times\left(t[s]-P-\Delta t\right)}\\
+\tilde{M}\equiv & E\left[\tilde{\phi}\tilde{\phi}'\right]\\
+\mathbf{0}^{LR}\equiv & 0_{\left(T-t[s]\right)\times\left(T-t[s]\right)}
+\end{align*}
+
+\begin{itemize}
+\item The extra $\Delta t$ rows and columns of $M$ are necessary due to
+the restriction. To see this, note $\tilde{M}$ can be written compactly
+as $E\left[\tilde{\phi}\tilde{\phi}'\right]$.
+\end{itemize}
+\item With $\iota_{l}^{\phi}$ defined in Equation \ref{eq:iotaphi}, construct
+$\tilde{M}$ as follows:
+\begin{align*}
+\tilde{M}=E\left[\tilde{\phi}_{i}\tilde{\phi}_{j}\right]= & \begin{cases}
+E\left[\phi_{i}\phi_{j}'\right] & i\le P\cap j\le P\\
+E\left[\phi_{i}\left(1-\phi'\iota_{j-P}^{\phi}\right)\right] & i\le P\cap j>P\\
+E\left[\left(1-\phi'\iota_{i-P}^{\phi}\right)\phi_{j}\right] & i>P\cap j\le P\\
+E\left[\left(1-\phi'\iota_{i-P}^{\phi}\right)\left(1-\phi'\iota_{j-P}^{\phi}\right)\right] & i>P\cap j>P
+\end{cases}
+\end{align*}
+\item Define $\iota^{\phi}$ as a $P\times\Delta t$ indicator matrix such
+that $\iota^{\phi}\equiv\begin{bmatrix}\iota_{1}^{\phi} & \dots & \iota_{\Delta t}^{\phi}\end{bmatrix}$.
+Then addressing each part in turn:
+\begin{align*}
+E\left[\phi\phi'\right]= & \Lambda_{\phi}^{-1}+\mu_{\phi}\mu_{\phi}'\\
+E\left[\phi\left(1_{\Delta t}-\left(\iota^{\phi}\right)'\phi\right)'\right]= & \mu_{\phi}1'_{\Delta t}-E\left[\phi\phi'\right]\iota^{\phi}\\
+E\left[\left(1_{\Delta t}-\left(\iota^{\phi}\right)'\phi\right)\left(1_{\Delta t}-\left(\iota^{\phi}\right)'\phi\right)'\right]= & 1_{\Delta t}1'_{\Delta t}-1_{\Delta t}\mu_{\phi}'\iota^{\phi}-\left(\iota^{\phi}\right)'\mu_{\phi}1_{\Delta t}'+\left(\iota^{\phi}\right)'E\left[\phi\phi'\right]\iota^{\phi}
+\end{align*}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\tau_{y}|rest\right)$ \label{sec:qtauy}}
+\begin{itemize}
+\item Let $\tilde{\beta}\equiv\beta-\beta_{0}$. Then the conditional posterior
+is: 
+\begin{align*}
+\log p\left(\tau_{y}|rest\right)= & \frac{-\tau_{y}}{2}\left(\tilde{y}-\tilde{X}_{L}\phi\right)'\left(\tilde{y}-\tilde{X}_{L}\phi\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)\\
+ & -\frac{\tau_{x}\tau_{y}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\\
+ & -\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & -\tau_{y}\zeta_{y0}+\left(\frac{S+T+P+K}{2}+\alpha_{y0}-1\right)\log\tau_{y}+c_{1}^{\tau_{y}}\\
+= & \log Gamma\left(\tau_{y};\alpha_{y},\zeta_{y}\right)+c_{2}^{\tau_{y}}\\
+s.t.\\
+\alpha_{y}\equiv & \frac{S+T+P+K}{2}+\alpha_{y0}\\
+\zeta_{y}\equiv & \zeta_{y0}+\frac{1}{2}\Bigg[\left(\tilde{y}-\tilde{X}_{L}\phi\right)'\left(\tilde{y}-\tilde{X}_{L}\phi\right)+\tau_{\phi}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)\\
+ & +\frac{\tau_{x}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\\
+ & +\frac{\tau_{x}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta},\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\Bigg]\\
+c_{1}^{\tau_{y}}\equiv & +\alpha_{y0}\log\zeta_{y0}-\log\Gamma\left(\alpha_{0}\right)-\frac{S+T+K+P}{2}\log2\pi+\frac{T+K}{2}\log\tau_{x}\\
+ & +\frac{1}{2}\log detM_{0}+\frac{1}{2}\log det\Psi+\frac{1}{2}\log det\left(DA_{0}D\right)+\frac{P}{2}\log\tau_{\phi}+\frac{K}{2}\log\tau_{\beta}\\
+ & +\log\Bigg(\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\\
+ & \times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+c_{2}^{\tau_{y}}\equiv & c_{1}^{\tau_{y}}+\log\Gamma\left(\alpha_{y}\right)-\alpha_{y}\log\zeta_{y}
+\end{align*}
+\item Then the approximate unconditional posterior for $\tau_{y}$ is:
+\begin{align*}
+\log q\left(\tau_{y}\right)= & E_{-\tau_{y}}\Bigg[\frac{-\tau_{y}}{2}\left(\tilde{y}-\tilde{X}_{L}\phi\right)'\left(\tilde{y}-\tilde{X}_{L}\phi\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)\\
+ & -\frac{\tau_{x}\tau_{y}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\\
+ & -\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & -\tau_{y}\zeta_{y0}+\left(\frac{S+T+P+K}{2}+\alpha_{y0}-1\right)\log\tau_{y}\Bigg]+\overline{c}_{1}^{\tau_{y}}\\
+= & \log\left(Gamma\left(\tau_{y};\overline{\alpha}_{y},\overline{\zeta}_{y}\right)\right)+\overline{c}_{2}^{\tau_{y}}\\
+s.t.\\
+\overline{\alpha}_{y}\equiv & \frac{S+T+P+K}{2}+\alpha_{y0}\\
+\overline{\zeta}_{y}\equiv & \frac{1}{2}\Bigg(E\left[\tilde{y}'\tilde{y}\right]+E\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi\right]-E\left[\tilde{y}'\tilde{X}_{L}\right]\mu_{\phi}-\mu_{\phi}'E\left[\tilde{X}_{L}'\tilde{y}\right]\\
+ & +E\left[g_{y}^{-1}\right]\left(E\left[\phi'M_{0}\phi\right]+\phi_{0}M_{0}\phi_{0}-\phi_{0}'M_{0}\mu_{\phi}-\mu_{\phi}'M_{0}\phi_{0}\right)\\
+ & +E\left[\tau_{x}\right]\left(E\left[x'\Psi x\right]+E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]-\mu_{x}'E\left[\Psi\right]\left(F\mu_{\beta}+r\right)-\left(\mu_{\beta}'F'+r'\right)E\left[\Psi\right]\mu_{x}\right)\\
+ & +E\left[\tau_{x}\right]E\left[\tau_{\beta}\right]\left(E\left[\tilde{\beta}'DA_{0}D\tilde{\beta}\right]+\left(\beta_{0}^{\Delta}\right)'A_{0}\beta_{0}^{\Delta}-\left(\beta_{0}^{\Delta}\right)'A_{0}E\left[D\right]E\left[\tilde{\beta}\right]-E\left[\tilde{\beta}\right]'E\left[D\right]A_{0}\beta_{0}^{\Delta}\right)\Bigg)+\zeta_{y0}\\
+\overline{c}_{1}^{\tau_{y}}\equiv & E_{-\tau_{y}}\Bigg[-\frac{S+T+P+K}{2}\log2\pi+\frac{1}{2}\log det\left(\Psi\right)+\frac{1}{2}\log det\left(M_{0}\right)+\frac{1}{2}\log det\left(DA_{0}D\right)\\
+ & +\frac{T+K}{2}\log\tau_{x}+\alpha_{y0}\log\zeta_{y0}-\log\Gamma\left(\alpha_{y0}\right)+\frac{P}{2}\log\tau_{\phi}+\frac{K}{2}\log\tau_{\beta}\\
+ & +\log\Bigg(\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Unif\left(\nu;\nu_{0}^{-},\nu_{0}^{+}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\tau_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\tau_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\tau_{y}}\equiv & \overline{c}_{1}^{\tau_{y}}-\overline{\alpha}_{y}\log\overline{\zeta}_{y}+\log\Gamma\left(\overline{\alpha}_{y}\right)
+\end{align*}
+\item The approximate posterior depends on the moments of multiple quadratic
+forms:
+\begin{itemize}
+\item Start with $E\left[\phi'M_{0}\phi\right]$. Use Matrix Cookbook formula
+318:
+\begin{align*}
+E\left[\phi'A_{0}\phi\right]= & Tr\left(M_{0}\overline{\Lambda}_{\phi}^{-1}\right)+\overline{\mu}_{\phi}'M_{0}\overline{\mu}_{\phi}
+\end{align*}
+\item Next compute $E\left[x'\Psi x\right]$. Since under the approximation
+$\Psi$ is independent of $x$,the variables are independent, this
+is a straight-forward re-application of the same formula: 
+\begin{align*}
+E\left[x'\Psi x\right]= & Tr\left(E\left[\Psi\right]\overline{\Lambda}_{x}^{-1}\right)+\overline{\mu}_{x}'E\left[\Psi\right]\overline{\mu}_{x}
+\end{align*}
+\item A similar pattern applies to $E\left[\beta'F'\Psi F\beta\right]$:
+\begin{align*}
+E\left[\beta'F'\Psi F\beta\right]= & Tr\left(F'E\left[\Psi\right]F\overline{\Lambda}_{\beta}^{-1}\right)+\overline{\mu}_{\beta}'F'E\left[\Psi\right]F\overline{\mu}_{\beta}
+\end{align*}
+
+\begin{itemize}
+\item Hence:
+\begin{align*}
+E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]= & Tr\left(F'E\left[\Psi\right]F\overline{\Lambda}_{\beta}^{-1}\right)+\overline{\mu}_{\beta}'F'E\left[\Psi\right]F\overline{\mu}_{\beta}\\
+ & +r'E\left[\Psi\right]F\overline{\mu}_{\beta}+\overline{\mu}_{\beta}'F'E\left[\Psi\right]r+r'E\left[\Psi\right]r\\
+= & Tr\left(F'E\left[\Psi\right]F\overline{\Lambda}_{\beta}^{-1}\right)+\left(\overline{\mu}_{\beta}'F'+r'\right)E\left[\Psi\right]\left(r+F\overline{\mu}_{\beta}\right)
+\end{align*}
+\end{itemize}
+\item To compute $E\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi\right]$,
+reference \ref{sec:qx} for the derivation of $E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]$.
+Then the prior pattern applies:
+\begin{align*}
+E\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi\right]= & Tr\left(E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]\overline{\Lambda}_{\phi}^{-1}\right)+\overline{\mu}_{\phi}'E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]\overline{\mu}_{\phi}
+\end{align*}
+\item Compute $E\left[D\right]$ as a straight-forward discrete expectation:
+\begin{align*}
+E\left[D\right]= & \overline{p}_{\gamma}+\left(1-\overline{p}_{\gamma}\right)v^{-1}
+\end{align*}
+\item Calculate $E\left[\beta'DA_{0}D\beta\right]$ in two steps:
+\begin{enumerate}
+\item First compute $E\left[DA_{0}D\right]$. This step has a general case
+and a special case for when the matrix is diagonal. 
+\begin{itemize}
+\item Start with the diagonal case, which is relatively straight forward.
+This version assumes that $A_{0}$ is a diagonal matrix. The expectation
+of each element is given by:
+\begin{align*}
+E\left[d_{k}a_{0k}d_{k}\right]= & a_{0k}\overline{p}_{\gamma k}+\frac{\left(1-\overline{p}_{\gamma k}\right)a_{0k}}{v^{2}}
+\end{align*}
+\item Then the general case
+\begin{itemize}
+\item The expectation of each element is given by
+\begin{align*}
+E\left[DA_{0}D\right]= & E\left[dd'\right]\odot A_{0}\\
+= & \begin{bmatrix}E\left[d_{1}^{2}\right] & E\left[d_{1}\right]E\left[d_{2}\right] & \cdots & E\left[d_{1}\right]E\left[d_{K}\right]\\
+E\left[d_{2}\right]E\left[d_{1}\right] & E\left[d_{2}^{2}\right] & \cdots & E\left[d_{2}\right]E\left[d_{K}\right]\\
+\vdots & \vdots & \ddots & \vdots\\
+E\left[d_{K}\right]E\left[d_{1}\right] & E\left[d_{K}\right]E\left[d_{2}\right] & \cdots & E\left[d_{K}^{2}\right]
+\end{bmatrix}\odot A_{0}\\
+E\left[d_{k}^{2}\right]= & \overline{p}_{\gamma k}+\frac{\left(1-\overline{p}_{\gamma k}\right)}{v^{2}}
+\end{align*}
+where the last formula corresponds to the squared expectation of a
+Bernoulli.
+\end{itemize}
+\end{itemize}
+\item Either way, apply the typical formulas:
+\begin{align*}
+E\left[\beta'DA_{0}D\beta\right]= & Tr\left(E\left[DA_{0}D\right]\overline{\Lambda}_{\beta}^{-1}\right)+\overline{\mu}_{\beta}'E\left[DA_{0}D\right]\overline{\mu}_{\beta}\\
+E\left[\tilde{\beta}'DA_{0}D\tilde{\beta}\right]= & Tr\left(E\left[DA_{0}D\right]\overline{\Lambda}_{\beta}^{-1}\right)+\left(\overline{\mu}_{\beta}-\beta_{0}\right)'E\left[DA_{0}D\right]\left(\overline{\mu}_{\beta}-\beta_{0}\right)
+\end{align*}
+\end{enumerate}
+\item Finally, recall that $\tilde{y}=y-x_{S}$. Then $E\left[\tilde{y}'\tilde{y}\right]$
+(see section \ref{sec:qphi}) for a justification and definition of
+$\iota\left(X_{L}^{P+1}\right)$:
+\begin{align*}
+E\left[\tilde{y}'\tilde{y}\right]= & E\left[\left(y-x_{S}\right)'\left(y-x_{S}\right)\right]\\
+= & y'y-2y'\mu_{xS}+E\left[x_{S}'x_{S}\right]\\
+s.t.\\
+E\left[x_{S}'x_{S}\right]\equiv & \sum_{i=1}^{i=\Delta t}\sum_{j=1}^{j=\Delta t}E\left[x'\iota\left(X_{L}^{P+i}\right)'\iota\left(X_{L}^{P+j}\right)x\right]\\
+ & \sum_{i=1}^{i=\Delta t}\sum_{j=1}^{j=\Delta t}\left(tr\left[\iota\left(X_{L}^{P+i}\right)'\Lambda_{x}^{-1}\iota\left(X_{L}^{P+j}\right)\right]+\mu_{x}'\iota\left(X_{L}^{P+i}\right)'\iota\left(X_{L}^{P+j}\right)\mu_{x}\right)
+\end{align*}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\tau_{x}|rest\right)$ \label{sec:qtaux}}
+\begin{itemize}
+\item The conditional posterior:
+\begin{align*}
+\log p\left(\tau_{x}|rest\right)= & -\frac{\tau_{x}\tau_{y}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-r\right)-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & -\tau_{x}\zeta_{0x}+\left(\frac{T+K}{2}+\alpha_{0x}-1\right)\tau_{x}+c_{1}^{\tau_{x}}\\
+= & \log Gamma\left(\tau_{x};\alpha_{x},\zeta_{x}\right)+c_{2}^{\tau_{x}}\\
+s.t.\\
+\alpha_{x}\equiv & \frac{T+K}{2}+\alpha_{0x}\\
+\zeta_{x}\equiv & \frac{\tau_{y}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)+\frac{\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)+\zeta_{0x}\\
+c_{1}\equiv & \frac{T+K}{2}\log\frac{\tau_{y}}{2\pi}+\frac{1}{2}\log detDA_{0}D+\frac{1}{2}\log det\Psi+\frac{K}{2}\log\tau_{\beta}\\
+ & +\alpha_{y0}\log\zeta_{y0}-\log\Gamma\left(\alpha_{y0}\right)\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}\equiv & c_{1}+\log\Gamma\left(\alpha_{x}\right)-\alpha_{x}\log\zeta_{x}
+\end{align*}
+\item The approximate posterior:
+\end{itemize}
+\begin{align*}
+\log q\left(\tau_{x}\right)= & E_{-\tau_{x}}\Bigg[-\frac{\tau_{x}\tau_{y}}{2}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & -\tau_{x}\zeta_{x0}+\left(\frac{T+K}{2}+\alpha_{x0}-1\right)\log\tau_{x}\Bigg]+\overline{c}_{1}^{\tau_{x}}\\
+= & \log Gamma\left(\tau_{x};\overline{\alpha}_{x},\overline{\zeta}_{x}\right)+\overline{c}_{2}^{\tau_{x}}\\
+s.t.\\
+\overline{\alpha}_{x}\equiv & \frac{T+K}{2}+\alpha_{x0}\\
+\overline{\zeta}_{x}\equiv & \zeta_{x0}+\frac{E\left[\tau_{y}\right]}{2}\left(E\left[x'\Psi x\right]+E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]-\mu_{x}'E\left[\Psi\right]\left(F\mu_{\beta}+r\right)-\left(\mu_{\beta}'F'+r'\right)E\left[\Psi\right]\mu_{x}\right)\\
+ & +\frac{E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]}{2}\left(E\left[\tilde{\beta}'DA_{0}D\tilde{\beta}\right]+\left(\beta_{0}^{\Delta}\right)'A_{0}\beta_{0}^{\Delta}-\left(\beta_{0}^{\Delta}\right)'A_{0}E\left[D\right]E\left[\tilde{\beta}\right]-E\left[\tilde{\beta}\right]'E\left[D\right]A_{0}\beta_{0}^{\Delta}\right)\\
+\overline{c}_{1}^{\tau_{x}}= & E_{-\tau_{x}}\Bigg[-\frac{T+K}{2}\log2\pi+\frac{1}{2}\log det\left(\Psi\right)+\frac{1}{2}\log det\left(DA_{0}D\right)\\
+ & +\frac{T+K}{2}\log\tau_{y}+\alpha_{x0}\log\zeta_{x0}-\log\Gamma\left(\alpha_{x0}\right)+\frac{K}{2}\log\tau_{\beta}\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\tau_{x}}= & \overline{c}_{1}^{\tau_{x}}-\overline{\alpha}_{x}\log\overline{\zeta}_{x}+\log\Gamma\left(\overline{\alpha}_{x}\right)
+\end{align*}
+
+\begin{itemize}
+\item Refer to Section \ref{sec:qtauy} for derivations of the above expectations
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\tau_{\phi}|rest\right)$}
+
+\begin{align*}
+\log p\left(\tau_{\phi}|rest\right)= & \frac{P}{2}\log\left(\tau_{\phi}\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)+\left(\alpha_{\phi0}-1\right)\log\tau_{\phi}-\zeta_{\phi0}\tau_{\phi}+c_{1}^{\tau\phi}\\
+= & \log Gamma\left(\tau_{\phi};\alpha_{\phi},\zeta_{\phi}\right)+c_{2}^{\tau\phi}\\
+s.t.\\
+\alpha_{\phi}= & \alpha_{\phi0}+\frac{P}{2}\\
+\zeta_{\phi}= & \zeta_{\phi0}+\frac{\tau_{y}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)\\
+c_{1}= & \alpha_{\phi0}\log\zeta_{\phi0}-\log\Gamma\left(\alpha_{\phi0}\right)+\frac{1}{2}\log Det\left(M_{0}\right)+\frac{P}{2}\log\text{\ensuremath{\left(\frac{\tau_{y}}{2\pi}\right)}}\\
+ & +\log\Bigg[MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\tau_{\beta};\tau_{\beta0},\zeta_{\beta0}\right)\\
+ & \times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\Bigg]+c^{ev}\\
+c_{2}= & c_{1}-\alpha_{\phi}\log\zeta_{\phi}+\log\Gamma\left(\alpha_{\phi}\right)
+\end{align*}
+
+Approximate posterior:
+\begin{align*}
+\log q\left(\tau_{\phi}\right)= & E_{-\tau\phi}\left[-\frac{P}{2}\log\left(\tau_{\phi}\right)-\frac{\tau_{y}\tau_{\phi}}{2}\left(\phi-\phi_{0}\right)'M_{0}\left(\phi-\phi_{0}\right)+\left(\alpha_{\phi}-1\right)\log\tau_{\phi}-\zeta_{\phi0}\tau_{\phi}\right]+\overline{c}_{1}^{\tau\phi}\\
+= & \log InvGamma\left(\tau_{\phi};\overline{\alpha}_{\phi},\overline{\zeta}_{\phi}\right)+\overline{c}_{2}^{\tau\phi}\\
+s.t.\\
+\overline{\alpha}_{\phi}= & \alpha_{\phi0}+\frac{P}{2}\\
+\overline{\zeta}_{\phi}= & \zeta_{\phi0}+E\left[\phi'M_{0}\phi\right]+\phi_{0}M_{0}\phi_{0}-\phi_{0}'M_{0}\mu_{\phi}-\mu_{\phi}'M_{0}\phi_{0}\\
+\overline{c}_{1}^{\tau\phi}= & \frac{P}{2}E\left[\log\left(\frac{\tau_{y}}{2\pi}\right)\right]+\frac{1}{2}\log det\left(M_{0}\right)+\alpha_{\phi0}\log\zeta_{\phi0}-\log\Gamma\left(\alpha_{\phi0}\right)\\
+ & +E_{-gy}\log\Bigg[MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\tau_{\beta};\tau_{\beta0},\zeta_{\beta0}\right)\\
+ & \times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\tau\phi}= & c_{1}^{\tau\phi}-\overline{\alpha}_{\phi}\log\overline{\zeta}_{\phi}+\log\Gamma\left(\overline{\alpha}_{\phi}\right)
+\end{align*}
+
+
+\subsubsection{Derivation of $p\left(\tau_{\beta}|rest\right)$}
+
+Conditional posterior:
+
+\begin{align*}
+\log p\left(\tau_{\beta}|rest\right)= & -\frac{K}{2}\log\left(\tau_{\beta}\right)-\frac{\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)+\left(\alpha_{\beta}-1\right)\log\tau_{\beta}-\zeta_{x0}\tau_{\beta}+c_{1}^{\tau\beta}\\
+= & \log Gamma\left(\tau_{\beta};\alpha_{\beta},\zeta_{\beta}\right)+c_{2}^{\tau\beta}\\
+s.t.\\
+\alpha_{\beta}\equiv & \alpha_{\beta0}+\frac{K}{2}\\
+\zeta_{\beta}\equiv & \zeta_{\beta0}+\frac{\tau_{x}\tau_{y}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+c_{1}^{\tau\beta}\equiv & \alpha_{\beta0}\log\zeta_{\beta0}-\log\Gamma\left(\alpha_{\beta0}\right)+\frac{K}{2}\log\frac{\tau_{x}\tau_{y}}{2\pi}+\frac{1}{2}\log detDA_{0}D\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{\phi};\tau_{\phi0},\zeta_{\phi0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\tau\beta}\equiv & c_{1}^{\tau\beta}-\alpha_{\beta}\log\zeta_{\beta}+\log\Gamma\left(\alpha_{\beta}\right)
+\end{align*}
+
+Approximate unconditional posterior
+\begin{align*}
+\log q\left(\tau_{\beta}\right)= & E_{-\tau\beta}\Bigg[-\frac{K}{2}\log\left(\tau_{\beta}\right)-\frac{\tau_{y}\tau_{x}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & +\left(\alpha_{x0}^{g}-1\right)\log\tau_{\beta}\Bigg]-\zeta_{\beta}\tau_{\beta}+\overline{c}_{1}^{\tau\beta}\\
+= & \log Gamma\left(\tau_{\beta};\overline{\alpha}_{\beta},\overline{\zeta}_{\beta}\right)+\overline{c}_{2}^{\tau\beta}\\
+s.t.\\
+\overline{\alpha}_{\beta}= & \alpha_{\beta0}+\frac{K}{2}\\
+\overline{\zeta}_{\beta}= & \zeta_{\beta0}+\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]}{2}\left(E\left[\tilde{\beta}'DA_{0}D\tilde{\beta}\right]+\left(\beta_{0}^{\Delta}\right)'A_{0}\beta_{0}^{\Delta}-\left(\beta_{0}^{\Delta}\right)'A_{0}E\left[D\right]E\left[\tilde{\beta}\right]-E\left[\tilde{\beta}\right]'E\left[D\right]A_{0}\beta_{0}^{\Delta}\right)\\
+\overline{c}_{1}^{\tau\beta}\equiv & E_{-\tau\beta}\Bigg[\alpha_{\beta0}\log\zeta_{\beta0}-\log\Gamma\left(\alpha_{x0}^{g}\right)+\frac{K}{2}\log\frac{\tau_{x}\tau_{y}}{2\pi}+\frac{1}{2}\log detDA_{0}D\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\times Gamma\left(\tau_{\phi};\tau_{\phi0},\zeta_{\phi0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\tau\beta}\equiv & -\overline{\alpha}_{\beta}\log\overline{\zeta}_{\beta}+\log\Gamma\left(\overline{\alpha}_{\beta}\right)
+\end{align*}
+
+
+\subsubsection{Derivation of $p\left(\beta|rest\right)$\label{sec:qbeta}}
+
+Note that setting the multi-variate distribution to $MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)$
+greatly improves tractability, particularly for the approximate unconditional
+posterior approximation. 
+
+First, define $\tilde{\beta}_{0}^{\Delta}\equiv\beta_{0}-D^{-1}\beta_{0}$.
+The the conditional posterior $p\left(\beta|rest\right)$ is:
+\begin{align*}
+\log p\left(\beta|rest\right)= & -\frac{\tau_{x}\tau_{y}}{2}\Bigg[\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)+\tau_{\beta}\left(\beta-\beta_{0}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\beta-\beta_{0}-D^{-1}\beta_{0}^{\Delta}\right)\Bigg]+c_{1}^{\beta}\\
+= & -\frac{\tau_{x}\tau_{y}}{2}\Bigg[\beta'F'\Psi F\beta+\beta'F'\Psi\left(x-r\right)+\left(x-r\right)'\Psi F\beta\\
+ & +\tau_{\beta}\beta'DA_{0}D\beta-\tau_{\beta}2\beta'DA_{0}D\left(\beta_{0}+D^{-1}\beta_{0}^{\Delta}\right)\Bigg]+c_{2}^{\beta}\\
+= & -\frac{1}{2}\left(\beta-\mu_{\beta}\right)'\Lambda_{\beta}\left(\beta-\mu_{\beta}\right)+c_{3}^{\beta}\\
+= & \log MN\left(\beta;\mu_{\beta},\Lambda_{\beta}\right)+c_{4}^{\beta}\\
+s.t.\\
+\Lambda_{\beta}\equiv & \frac{\tau_{x}\tau_{y}}{2}\left[F'\Psi F+\tau_{\beta}DA_{0}D\right]\\
+\mu_{\beta}\equiv & \frac{\tau_{x}\tau_{y}}{2}\Lambda_{\beta}^{-1}\left[F'\Psi\left(x-r\right)+\tau_{\beta}DA_{0}\left(D\beta_{0}+\beta_{0}^{\Delta}\right)\right]\\
+c_{1}^{\beta}\equiv & \frac{T+K}{2}\log\frac{\tau_{x}\tau_{y}}{2\pi}+\frac{1}{2}\log detDA_{0}D+\frac{1}{2}\log det\Psi+\frac{K}{2}\log\tau_{\beta}\\
+ & -\frac{T}{2}\log T+\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\beta}= & c_{1}^{\beta}-\frac{\tau_{x}\tau_{y}}{2}\left(\left(x-r\right)'\Psi\left(x-r\right)+\tau_{\beta}\left(D\beta_{0}+\beta_{0}^{\Delta}\right)'A_{0}\left(D\beta_{0}+\beta_{0}^{\Delta}\right)\right)\\
+c_{3}^{\beta}= & c_{2}^{\beta}+\frac{\mu_{\beta}'\Lambda_{\beta}\mu_{\beta}}{2}\\
+c_{4}^{\beta}= & c_{3}^{\beta}-\frac{1}{2}\log\Lambda_{\beta}+\frac{K}{2}\log2\pi
+\end{align*}
+
+Derivation of the approximate unconditional posterior $q\left(\beta\right)$
+
+\begin{align*}
+\log q\left(\beta\right)= & -\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]}{2}E_{-\beta}\Bigg[\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\\
+ & +\tau_{\beta}\left(\beta-\beta_{0}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\beta-\beta_{0}-D^{-1}\beta_{0}^{\Delta}\right)\Bigg]+\overline{c}_{1}^{\beta}\\
+= & -\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]}{2}E_{-\beta}\Bigg[\beta'F'\Psi F\beta-\left(x'-r'\right)\Psi F\beta-\beta'F'\Psi\left(x-r\right)\\
+ & +\tau_{\beta}\beta'DA_{0}D\beta-\tau_{\beta}2\beta'DA_{0}D\left(\beta_{0}+D^{-1}\beta_{0}^{\Delta}\right)\Bigg]+\overline{c}_{2}^{\beta}\\
+= & -\frac{1}{2}\left(\beta-\overline{\mu}_{\beta}\right)'\overline{\Lambda}_{\beta}\left(\beta-\overline{\mu}_{\beta}\right)+\overline{c}_{3}^{\beta}\\
+= & \log\left[N\left(\beta;\overline{\mu}_{\beta},\overline{\Lambda}_{\beta}\right)\right]+\overline{c}_{4}^{\beta}\\
+s.t.\\
+\Lambda_{\beta}\equiv & E\left[\tau_{x}\right]E\left[\tau_{y}\right]\left(F'E\left[\Psi\right]F+E\left[\tau_{\beta}\right]E\left[DA_{0}D\right]\right)\\
+\mu_{\beta}\equiv & E\left[\tau_{x}\right]E\left[\tau_{y}\right]\overline{\Lambda}_{\beta}^{-1}\left(F'E\left[\Psi\right]\left(\overline{\mu}_{x}-r\right)+E\left[\tau_{\beta}\right]\left(E\left[DA_{0}D\right]\beta_{0}+E\left[D\right]A_{0}\beta_{0}^{\Delta}\right)\right)\\
+\overline{c}_{1}^{\beta}\equiv & E_{-\beta}\Bigg[\frac{T+K}{2}\log\left(\frac{\tau_{x}\tau_{y}}{2\pi}\right)+\frac{1}{2}\log det\left(\Psi\right)+\frac{1}{2}\log det\left(DA_{0}D\right)+\frac{K}{2}\log\tau_{\beta}\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\beta}\equiv & \overline{c}_{1}^{\beta}-E_{-\beta}\left[\frac{\tau_{y}\tau_{x}}{2}\left(\tau_{\beta}\left(D\beta_{0}+\beta_{0}^{\Delta}\right)'DA_{0}D\left(D\beta_{0}+\beta_{0}^{\Delta}\right)+\left(x-r\right)'\Psi\left(x-r\right)\right)\right]\\
+\overline{c}_{3}^{\beta}\equiv & \overline{c}_{2}^{\beta}+\frac{1}{2}\overline{\mu}_{\beta}'\overline{\Lambda}_{\beta}\overline{\mu}_{\beta}\\
+\overline{c}_{4}^{\beta}\equiv & \overline{c}_{3}^{\beta}+\frac{K}{2}\log\left(2\pi\right)-\frac{1}{2}\log det\left(\overline{\Lambda}_{\beta}\right)
+\end{align*}
+
+\begin{itemize}
+\item Testing note- remember that the expectations are within $\overline{\mu}_{\beta}$
+and $\overline{\Lambda}_{\beta}$, hence plugging in draws for the
+log normal distribution will not provide a consistent estimate.
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\gamma\right)$ \label{sec:qgamma} (Diagonal
+Case)}
+\begin{itemize}
+\item The below derives the conditional posterior for $\gamma_{k}$ in the
+scenario where each $\gamma_{k}$ is conditionally independent of
+the other values of $\gamma$ (denoted as $\gamma_{-k}$). In other
+words, $p\left(\gamma_{k}|\gamma_{-k},rest\right)=p\left(\gamma_{k}|rest\right)$.
+Note that this does not imply unconditionally that $\gamma_{k}\perp\gamma_{-k}$
+as other variables (e.g. $\beta$) influence both $\gamma_{k}$ and
+$\gamma_{-k}$.
+\begin{itemize}
+\item Practically this implies $A_{0}$ is diagonal, such that $a_{0}\equiv diag\left(A_{0}\right)$
+\item Also recall $d_{k}^{2}\equiv\gamma_{k}+\frac{1-\gamma_{k}}{v^{2}}$. 
+\end{itemize}
+\item As the only discrete distribution, the derivation for $p\left(\gamma\right)$
+proceeds somewhat differently than others. 
+\begin{itemize}
+\item The distribution for $p_{k}$ with a conditionally independent prior
+for $\beta$ is given by $\frac{\tilde{p}\left(\gamma_{k}=1\right)}{\tilde{p}_{k}\left(\gamma_{k}=0\right)+\tilde{p}_{k}\left(\gamma_{k}=1\right)}$
+\begin{align*}
+\log p\left(\gamma_{k}\right)= & \log d_{k}-\frac{\tau_{x}\tau_{y}\tau_{\beta}d_{k}^{2}a_{0k}}{2}\left(\tilde{\beta}_{k}-\frac{\beta_{0k}^{\Delta}}{d_{k}}\right)^{2}+\gamma_{k}\log\omega+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)+c_{1}^{\gamma k}\\
+= & \log\left(d_{k}\right)-\frac{\tau_{x}\tau_{y}\tau_{\beta}d_{k}^{2}a_{0k}}{2}\left(\tilde{\beta}_{k}-\frac{2\beta_{0k}^{\Delta}\tilde{\beta}_{k}}{d_{k}}\right)+\gamma_{k}\log\omega+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)+c_{2}^{\gamma_{k}}\\
+= & \gamma_{k}\log p_{\gamma k}+\left(1-\gamma_{k}\right)\log\left(1-p_{\gamma k}\right)+c_{3}^{\gamma_{k}}\\
+s.t.\\
+p_{\gamma k}= & \frac{\tilde{p}_{\gamma k}|_{1}}{\tilde{p}_{\gamma k}|_{0}+\tilde{p}_{\gamma k}|_{1}}\\
+\tilde{p}_{\gamma k}|_{1}\equiv & \exp\left(-\frac{\tau_{x}\tau_{y}\tau_{\beta}a_{0k}}{2}\left(\tilde{\beta}_{k}^{2}-2\beta_{0k}^{\Delta}\tilde{\beta}_{k}\right)\right)\omega\\
+\tilde{p}_{\gamma k}|_{0}\equiv & \exp\left(-\frac{\tau_{x}\tau_{y}\tau_{\beta}a_{0k}}{2}\left(\frac{\tilde{\beta}_{k}^{2}}{v^{2}}-\frac{2\beta_{0k}^{\Delta}\tilde{\beta}_{k}}{v}\right)\right)\frac{1-\omega}{v}\\
+c_{1}^{\gamma k}\equiv & \frac{1}{2}\log\frac{a_{0k}\tau_{x}\tau_{y}\tau_{\beta}}{2\pi}\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{j=1,j\ne k}^{K}\left(N\left(\beta_{j};\frac{\beta_{0}^{\Delta}}{d_{j}}+\beta_{0},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}a_{0j}d_{j}^{2}}\right)\times Bern\left(\gamma_{j};\omega\right)\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\gamma k}\equiv & c_{1}^{\gamma k}-\frac{\tau_{x}\tau_{y}\tau_{\beta}a_{0k}\left(\beta_{0k}^{\Delta}\right)^{2}}{2}\\
+c_{3}^{\gamma k}\equiv & c_{2}^{\gamma k}+\log\left(\tilde{p}_{\gamma k}|_{1}+\tilde{p}_{\gamma k}|_{0}\right)
+\end{align*}
+\item Note that the normalization is accounted for in $c_{3}^{\gamma k}$.
+The normalization is fully revealed as the true probabilities must
+add to one.
+\end{itemize}
+\item Similarly the approximate distribution for any $\gamma_{k}$ is given
+by $\frac{\tilde{q}_{k}\left(\gamma_{k}=1\right)}{\tilde{q}_{k}\left(\gamma_{k}=0\right)+\tilde{q}_{k}\left(\gamma_{k}=1\right)}$ 
+\begin{itemize}
+\item Begin with the relevant (approximate) priors:
+\begin{align*}
+\log q\left(\gamma_{k}\right)= & E_{-\gamma_{k}}\Bigg[\log\left(d_{k}\right)-\frac{\tau_{x}\tau_{y}\tau_{\beta}d_{k}^{2}a_{0k}}{2}\left(\tilde{\beta}_{k}-\frac{\beta_{0k}}{d_{k}}\right)^{2}\\
+ & +\gamma_{k}\log\left(\omega\right)+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)\Bigg]+\overline{c}_{1}^{\gamma_{k}}\\
+= & -\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]a_{0k}}{2}\left(d_{k}^{2}E\left[\tilde{\beta}_{k}^{2}\right]-2d_{k}E\left[\tilde{\beta}_{k}\right]\beta_{0k}^{\Delta}\right)\\
+ & +\log\left(d_{k}\right)+\gamma_{k}E\left[\log\left(\omega\right)\right]+\left(1-\gamma_{k}\right)E\left[\log\left(1-\omega\right)\right]+\overline{c}_{2}^{\gamma_{k}}\\
+= & \gamma_{k}\log\overline{p}_{\gamma k}+\left(1-\gamma_{k}\right)\log\left(1-\overline{p}_{\gamma k}\right)+\overline{c}_{3}^{\gamma_{k}}\\
+s.t.\\
+\overline{p}_{\gamma k}\equiv & \frac{\tilde{q}\left(\gamma_{k}\right)|_{1}}{\tilde{q}\left(\gamma_{k}\right)|_{1}+\tilde{q}\left(\gamma_{k}\right)|_{0}}\\
+\tilde{q}\left(\gamma_{k}\right)|_{1}= & \exp\left(-\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]a_{0k}}{2}\left(E\left[\tilde{\beta}_{k}^{2}\right]-2E\left[\tilde{\beta}_{k}\right]\beta_{0k}^{\Delta}\right)+E\left[\log\left(\omega\right)\right]\right)\\
+\tilde{q}\left(\gamma_{k}\right)|_{0}= & \exp\left(-\log\left(v\right)-\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]a_{0k}}{2}\left(\frac{E\left[\tilde{\beta}_{k}^{2}\right]}{v^{2}}-\frac{2E\left[\tilde{\beta}_{k}\right]\beta_{0k}^{\Delta}}{v}\right)+E\left[\log\left(1-\omega\right)\right]\right)\\
+\overline{c}_{1}^{\gamma_{k}}\equiv & E_{-\gamma_{k}}\Bigg[\frac{1}{2}\log\left(\frac{\tau_{x}\tau_{y}\tau_{\beta}a_{0k}}{2\pi}\right)\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\\
+ & \prod_{j=1,j\ne k}^{K}\left(N\left(\beta_{j};\frac{\beta_{0j}^{\Delta}}{d_{j}}+\beta_{0j},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}d_{j}^{2}a_{0j}}\right)\times Bern\left(\gamma_{j};\omega\right)\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\gamma_{k}}\equiv & \overline{c}_{1}^{\gamma_{k}}-\frac{1}{2}E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]a_{0k}\left(\beta_{0k}^{\Delta}\right)^{2}\\
+\overline{c}_{3}^{\gamma_{k}}\equiv & \overline{c}_{2}^{\gamma_{k}}+\log\left(\tilde{q}\left(\gamma_{k}\right)|_{1}+\tilde{q}\left(\gamma_{k}\right)|_{0}\right)
+\end{align*}
+\end{itemize}
+\item Compute the moments:
+\begin{itemize}
+\item Derivation of $E\log\omega$ and $E\log\left(1-\omega\right)$
+\begin{itemize}
+\item In subsequent sections, we show $q\left(\omega\right)=Beta\left(\omega;\overline{\kappa},\overline{\delta}\right)$
+\item Plugging in the results from, Section \ref{sec:deriveexpectations}:
+\begin{align*}
+E\log\left(\omega\right)= & \digamma\left(\overline{\kappa}\right)-\digamma\left(\overline{\kappa}+\overline{\delta}\right)\\
+E\log\left(1-\omega\right)= & \digamma\left(\overline{\delta}\right)-\digamma\left(\overline{\kappa}+\overline{\delta}\right)
+\end{align*}
+where $\digamma\left(\cdot\right)$ is the digamma function. 
+\end{itemize}
+\item Derivation of $E\left[\beta_{k}^{2}\right]$ and $E\left[\beta_{k}\right]$:
+\begin{itemize}
+\item These are just the marginals:
+\begin{align*}
+E\left[\beta_{k}\right]= & \overline{\mu}_{\beta k}\\
+E\left[\beta_{k}^{2}\right]= & \frac{1}{\overline{\Lambda}_{\beta k}}+\overline{\mu}_{\beta k}^{2}
+\end{align*}
+\item Hence:
+\begin{align*}
+E\left[\tilde{\beta}_{k}\right]= & \overline{\mu}_{\beta k}-\beta_{0k}\\
+E\left[\beta_{k}^{2}\right]= & \frac{1}{\overline{\Lambda}_{\beta k}}+\left(\overline{\mu}_{\beta k}-\beta_{0k}\right)^{2}
+\end{align*}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\gamma\right)$ \label{sec:qgamma-1} (General
+Case)}
+\begin{itemize}
+\item As the only discrete distribution, the derivation for $p\left(\gamma\right)$
+proceeds somewhat differently than others. 
+\begin{itemize}
+\item The distribution for $q_{k}$ conditional on a conditionally independent
+prior is given by $\frac{\tilde{p}\left(\gamma_{k}=1\right)}{\tilde{p}_{k}\left(\gamma_{k}=0\right)+\tilde{p}_{k}\left(\gamma_{k}=1\right)}$ 
+\end{itemize}
+\item In contrast with the conditionally independent approach, the below
+generalization allows for off-diagonal terms for $A_{0}$. 
+\begin{align*}
+p\left(\gamma_{k}\right)= & \log d_{k}-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & +\gamma_{k}\log\omega+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)+c_{1}^{\gamma k}\\
+= & \log d_{k}-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}\right)\\
+ & +\gamma_{k}\log\omega+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)+c_{2}^{\gamma k}\\
+= & \gamma_{k}\log p_{\gamma k}+\left(1-\gamma_{k}\right)\log\left(1-p_{\gamma k}\right)+c_{3}^{\gamma k}\\
+s.t.\\
+p_{\gamma k}\equiv & \frac{\tilde{p}_{\gamma k}|_{1}}{\tilde{p}_{\gamma k}|_{0}+\tilde{p}_{\gamma k}|_{1}}\\
+\tilde{p}_{\gamma k}|_{1}\equiv & \exp\left(-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left[\left(\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}\right)\right]_{d_{k}=1}\right)\omega\\
+\tilde{p}_{\gamma k}|_{0}\equiv & \exp\left(-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left[\left(\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}\right)\right]_{d_{k}=v^{-1}}\right)\frac{1-\omega}{v}\\
+c_{1}^{\gamma k}\equiv & \frac{K}{2}\log\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2\pi}+\frac{1}{2}\log detA_{0}+\sum_{j=1,j\ne k}^{K}\log d_{j}\\
+ & +\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times\prod_{j=1,j\ne k}^{K}Bern\left(\gamma_{j};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\gamma k}\equiv & c_{1}^{\gamma k}-\frac{\tau_{x}\tau_{y}}{2g_{x}}\left(\beta_{0}^{\Delta}\right)'A_{0}\beta_{0}^{\Delta}\\
+c_{3}^{\gamma k}\equiv & c_{2}^{\gamma k}+\log\left(\tilde{p}_{\gamma k}|_{1}+\tilde{p}_{\gamma k}|_{0}\right)
+\end{align*}
+
+\begin{itemize}
+\item Note that the normalization is accounted for in $c_{3}^{\gamma k}$.
+The normalization is fully revealed as the true probabilities must
+add to one.
+\item The calculations need to be computed carefully to avoid overflow/underflow
+conditions.
+\begin{itemize}
+\item A straight forward approach is to normalize the numerator and denominator
+\begin{align*}
+p_{\gamma k}= & \frac{\exp\left(\log\tilde{p}_{\gamma k}|_{1}\right)}{\exp\left(\log\tilde{p}_{\gamma k}|_{0}\right)+\exp\left(\log\tilde{p}_{\gamma k}|_{1}\right)}\\
+= & \frac{\exp\left(\log\tilde{p}_{\gamma k}|_{1}-\log h\right)}{\exp\left(\log\tilde{p}_{\gamma k}|_{0}-\log h\right)+\exp\left(\log\tilde{p}_{\gamma k}|_{1}-\log h\right)}\\
+s.t.\\
+h\equiv & \max\left(\tilde{p}_{\gamma k}|_{1},\tilde{p}_{\gamma k}|_{0}\right)
+\end{align*}
+\item Note that storing the log of this value is necessary for recovering
+the log pdf in an overflow/underflow situation.
+\end{itemize}
+\end{itemize}
+\item The general approach creates performance issues for the approximation.
+Each value of $\gamma_{k}$ affects each other value- hence the moments
+involving $D$ must be recalculated $K$ times. For comparison, $x$,
+$\beta$, and $\phi$ can all be drawn as a vector simultaneously. 
+\begin{itemize}
+\item As the only discrete distribution, the derivation for $q\left(\gamma\right)$
+proceeds somewhat differently than others. 
+\begin{itemize}
+\item The distribution for any $\gamma_{k}$ is given by $\frac{q_{k}\left(\gamma_{k}=1\right)}{\tilde{q}_{k}\left(\gamma_{k}=0\right)+\tilde{q}_{k}\left(\gamma_{k}=1\right)}$ 
+\end{itemize}
+\item Begin with the relevant (approximate) priors:
+\begin{align*}
+\log q\left(\gamma_{k}\right)= & E_{-\gamma_{k}}\Bigg[\log d_{k}-\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2}\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)'DA_{0}D\left(\tilde{\beta}-D^{-1}\beta_{0}^{\Delta}\right)\\
+ & +\gamma_{k}\log\left(\omega\right)+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)\Bigg]+\overline{c}_{1}^{\gamma k}\\
+= & -\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]}{2}\left(E_{-\gamma k}\left[\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}\right]\right)\\
+ & +\gamma_{k}E\log\left(\omega\right)+\left(1-\gamma_{k}\right)E\log\left(1-\omega\right)+\log d_{k}\Bigg]+\overline{c}_{2}^{\gamma_{k}}\\
+= & \gamma_{k}\log\overline{p}_{\gamma k}+\left(1-\gamma_{\gamma k}\right)\log\left(1-\overline{p}_{\gamma k}\right)+\overline{c}_{3}^{\gamma_{k}}\\
+s.t.\\
+\overline{p}_{\gamma k}\equiv & \frac{\tilde{q}\left(\gamma_{k}\right)|_{1}}{\tilde{q}\left(\gamma_{k}\right)|_{1}+\tilde{q}\left(\gamma_{k}\right)|_{0}}\\
+\tilde{q}\left(\gamma_{k}\right)|_{1}= & \exp\left(-\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]}{2}\left(E_{-\gamma k}\left[\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}|d_{k}=1\right]\right)+E\log\left(\omega\right)\right)\\
+\tilde{q}\left(\gamma_{k}\right)|_{0}= & \exp\left(-\log\left(v\right)-\frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]E\left[\tau_{\beta}\right]}{2}\left(E_{-\gamma k}\left[\tilde{\beta}'DA_{0}D\tilde{\beta}-2\tilde{\beta}'DA_{0}\beta_{0}^{\Delta}|d_{k}=v^{-1}\right]\right)+E\log\left(1-\omega\right)\right)\\
+\overline{c}_{1}^{\gamma k}\equiv & E_{-\gamma_{k}}\Bigg[\frac{K}{2}\log\left(\frac{\tau_{x}\tau_{y}\tau_{\beta}}{2\pi}\right)+\frac{1}{2}\log det\left(A_{0}\right)+\sum_{j=1,j\ne k}^{K}\log d_{j}\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\\
+ & \prod_{j=1,j\ne k}^{K}\left(Bern\left(\gamma_{j};\omega\right)\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\gamma_{k}}\equiv & \overline{c}_{1}^{\gamma k}-\frac{1}{2}E_{-\gamma k}\left[\tau_{x}\tau_{y}\tau_{\beta}\left(\beta_{0}^{\Delta}\right)'A_{0}\beta_{0}^{\Delta}\right]\\
+\overline{c}_{3}^{\gamma_{k}}\equiv & \overline{c}_{2}^{\gamma k}+\log\left(\tilde{q}\left(\gamma_{k}\right)|_{1}+\tilde{q}\left(\gamma_{k}\right)|_{0}\right)
+\end{align*}
+\end{itemize}
+\item The unconditional approximation requires an analogous approach to
+the conditional posterior with respect to the numerical calculation
+of the (log) probability.
+\item Compute the moments:
+\begin{itemize}
+\item Derivation of $E\left[\tilde{\beta}'DA_{0}D\tilde{\beta}-\tilde{\beta}'DA_{0}\beta_{0}-\beta_{0}'A_{0}D\tilde{\beta}|d_{k}\right]$ 
+\begin{itemize}
+\item Because by the mean-field approximation all variables are independent,
+the expectations separate and the result is the same as the unconditional
+but with $d_{k}^{2}$ and $d_{k}$ substituted in for $E\left[d_{k}\right]$
+and $E\left[d_{k}^{2}\right]$ ($d_{k}$ is now a constant). 
+\end{itemize}
+\item Derivation of $E\log\omega$ and $E\log\left(1-\omega\right)$
+\begin{itemize}
+\item In subsequent sections, we show $q\left(\omega\right)=Beta\left(\omega;\overline{\kappa},\overline{\delta}\right)$
+\item Plugging in the results from, Section \ref{sec:deriveexpectations}:
+\begin{align*}
+E\log\left(\omega\right)= & \digamma\left(\overline{\kappa}\right)-\digamma\left(\overline{\kappa}+\overline{\delta}\right)\\
+E\log\left(1-\omega\right)= & \digamma\left(\overline{\delta}\right)-\digamma\left(\overline{\kappa}+\overline{\delta}\right)
+\end{align*}
+where $\digamma\left(\cdot\right)$ is the digamma function. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Derivation $p\left(\omega\right)$}
+\begin{itemize}
+\item The derivation for $p\left(\omega\right)$ is unique in that it is
+the only beta distributed variable. The conjugation is otherwise straight
+forward.
+\item The conditional posterior:
+\begin{align*}
+\log p\left(\omega\right)= & \left(\kappa_{0}-1\right)\log\omega+\left(\delta_{0}-1\right)\log\left(1-\omega\right)\\
+ & +\sum_{k=1}^{K}\left[\gamma_{k}\log\omega+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)\right]+c_{1}^{\omega}\\
+= & \left(\kappa-1\right)\log\omega+\left(\delta-1\right)\log\left(1-\omega\right)+c_{2}^{\omega}\\
+= & \log Beta\left(\kappa,\delta\right)+c_{3}^{\omega}\\
+s.t.\\
+\kappa\equiv & \kappa_{0}+\sum_{k=1}^{K}\gamma_{k}\\
+\delta\equiv & \delta_{0}+K-\sum_{k=1}^{K}\gamma_{k}\\
+c_{1}^{\omega}\equiv & -\log B\left(\kappa_{0},\delta_{0}\right)+\log\Bigg(MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\tau_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\tau_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\omega}\equiv & c_{1}^{\omega}+\log B\left(\kappa,\delta\right)
+\end{align*}
+\item The approximate unconditional posterior:
+\begin{align*}
+\log q\left(\omega\right)= & E_{-\omega}\Bigg[\left(\kappa_{0}-1\right)\log\left(\omega\right)+\left(\delta_{0}-1\right)\log\left(1-\omega\right)\\
+ & +\sum_{k}\left(\gamma_{k}\log\left(\omega\right)+\left(1-\gamma_{k}\right)\log\left(1-\omega\right)\right)+\overline{c}_{1}^{\omega}\Bigg]\\
+= & \left(\overline{\kappa}-1\right)\log\left(\omega\right)+\left(\overline{\delta}-1\right)\log\left(1-\omega\right)+\overline{c}_{1}^{\omega}\\
+= & \log\left(Beta\left(\overline{\kappa},\overline{\delta}\right)\right)+\overline{c}_{2}^{\omega}\\
+s.t.\\
+\overline{\kappa}\equiv & \kappa_{0}+\sum_{k}\overline{p}_{\gamma k}\\
+\overline{\delta}\equiv & \delta_{0}+K-\sum_{k}\overline{p}_{\gamma k}\\
+\overline{c}_{1}^{\omega} & \equiv E_{-\omega}\Bigg[-\log B\left(\kappa_{0},\delta_{0}\right)+\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\\
+\\
+ & \times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\omega} & \equiv\overline{c}_{1}^{\omega}+\log B\left(\kappa,\delta\right)
+\end{align*}
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\psi_{t}\right)$ \label{sec:qpsit}}
+\begin{itemize}
+\item The derivation for $p\left(\psi_{t}\right)$ is straight forward as
+the diagonal matrix of $\Psi$ allows for component-wise treatment.
+\item The conditional posterior:
+\begin{align*}
+\log p\left(\psi_{t}\right)= & -\frac{\tau_{x}\tau_{y}\psi_{t}}{2}\left(\left(x_{t}-r_{t}\right)-f_{t}'\beta\right)^{2}+\frac{1}{2}\log\psi_{t}+\left(\frac{\nu}{2}-1\right)\log\psi_{t}-\frac{\nu\psi_{t}}{2}+c_{1}^{\psi t}\\
+= & \log Gamma\left(\psi_{t},\alpha_{\psi t},\zeta_{\psi t}\right)+c_{2}^{\psi t}\\
+s.t.\\
+\alpha_{\psi t}\equiv & \frac{\nu+1}{2}\\
+\zeta_{\psi t}\equiv & \frac{\nu}{2}+\frac{\tau_{x}\tau_{y}}{2}\left(\left(x_{t}-r_{t}\right)-f_{t}'\beta\right)^{2}\\
+c_{1}^{\psi t}\equiv & \frac{\nu}{2}\log\frac{\nu}{2}-\log\Gamma\left(\frac{\nu}{2}\right)+\frac{1}{2}\log\left(\frac{\tau_{x}\tau_{y}}{2\pi}\right)\\
+ & +\log\Bigg(\prod_{j=1,j\ne t}^{T}\left[N\left(x_{t};f_{t}'\beta+r,\frac{1}{\tau_{x}\tau_{y}\psi_{t}}\right)\times Gamma\left(\psi_{j};\frac{\nu}{2},\frac{\nu}{2}\right)\right]\\
+ & \times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\\
+ & \times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{\psi t}\equiv & c_{1}^{\psi t}-\alpha_{\psi t}\log\zeta_{\psi t}+\log\Gamma\left(\alpha_{\psi t}\right)
+\end{align*}
+\item The approximate unconditional posterior:
+\begin{align*}
+\log q\left(\psi_{t}\right)= & E_{-\psi t}\Bigg[-\frac{\tau_{x}\tau_{y}\psi_{t}}{2}\left(\left(x_{t}-r_{t}\right)-f_{t}'\beta\right)^{2}+\frac{1}{2}\log\psi_{t}+\left(\frac{\nu}{2}-1\right)\log\psi_{t}-\frac{\nu\psi_{t}}{2}\Bigg]+\overline{c}_{1}^{\psi t}\\
+= & \log\left(Gamma\left(\psi_{t};\alpha_{\psi t},\zeta_{\psi t}\right)\right)+\overline{c}_{2}^{\psi t}\\
+s.t.\\
+\overline{\alpha}_{\psi t}\equiv & \frac{E\left[\nu\right]}{2}+\frac{1}{2}\\
+\overline{\zeta}_{\psi t}\equiv & \frac{E\left[\tau_{x}\right]E\left[\tau_{y}\right]}{2}\left(E\left[x_{t}^{2}\right]-2\mu_{xt}\left(f_{t}'\mu_{\beta}+r_{t}\right)+E\left[\left(\beta'f_{t}+r_{t}\right)\left(f_{t}'\beta+r_{t}\right)\right]\right)+\frac{E\left[\nu\right]}{2}\\
+\overline{c}_{1}^{\psi t}\equiv & E_{-\psi t}\Bigg[\frac{1}{2}\log\frac{\tau_{x}\tau_{y}}{2\pi}+\frac{\nu}{2}\log\frac{\nu}{2}-\log\Gamma\left(\frac{\nu}{2}\right)\\
+ & +\sum_{j=1,j\ne t}^{T}\log N\left(x_{t};f_{t}'\beta+r,\frac{1}{\tau_{x}\tau_{y}\psi_{t}}\right)+\sum_{j=1,j\ne t}^{T}\log Gamma\left(\psi_{j};\nu/2,\nu/2\right)\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times Unif\left(\nu;\nu_{0}^{-},\nu_{0}^{+}\right)\times Gamma\left(\tau_{x};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\overline{c}_{2}^{\psi t}\equiv & \overline{c}_{1}^{\psi t}+\log\Gamma\left(\alpha_{\psi t}\right)-\alpha_{\psi t}log\left(\zeta_{\psi t}\right)
+\end{align*}
+\item Now derive the non-standard moments:
+\begin{itemize}
+\item From the Matrix Cookbook:
+\begin{align*}
+E\left[\left(\beta'f_{t}+r_{t}\right)\left(f_{t}'\beta+r_{t}\right)\right]= & Tr\left(f_{t}f_{t}'\overline{\Lambda}_{\beta}^{-1}\right)+\left(\overline{\mu}_{\beta}'f_{t}+r_{t}\right)\left(f_{t}'\overline{\mu}_{\beta}+r_{t}\right)
+\end{align*}
+\item $E\left[x_{t}^{2}\right]$ is straight forward:
+\begin{align*}
+E\left[x_{t}^{2}\right]= & \frac{1}{\overline{\Lambda}_{xt}}+\overline{\mu}_{xt}^{2}
+\end{align*}
+\item In contrast, the expectation of $E\left[\nu\right]$ is complex and
+is computed through brute-force numerical integration. See Section
+\ref{sec:qnu} for details.
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Derivation of $p\left(\nu\right)$ \label{sec:qnu}}
+\begin{itemize}
+\item The derivation of $p\left(\nu\right)$ is non-standard. No conjugate
+prior exists.
+\begin{itemize}
+\item The prior gamma distribution is truncated from below by $\nu_{-}$
+\end{itemize}
+\item The conditional posterior:
+\begin{align*}
+\log p\left(\nu\right)= & \frac{T\nu}{2}\log\frac{\nu}{2}-T\Gamma\left(\frac{\nu}{2}\right)+\sum_{t\in1:T}\left[\left(\frac{\nu}{2}-1\right)\log\psi_{t}-\frac{\nu}{2}\psi_{t}\right]+\left(\alpha_{\nu0}-1\right)\log\nu-\zeta_{\nu0}\nu+c_{1}^{\nu}\\
+= & \left(\frac{T\nu}{2}+\alpha_{\nu0}-1\right)\log\frac{\nu}{2}-T\log\Gamma\left(\frac{\nu}{2}\right)+\frac{\nu}{2}\eta_{1}+c_{2}^{\nu}\\
+p\left(\nu\right)= & \left(\frac{\nu}{2}\right)^{\frac{T\nu}{2}+\alpha_{\nu0}-1}\Gamma^{-T}\left(\frac{\nu}{2}\right)\exp\left(\frac{\nu\eta_{1}}{2}\right)\eta_{2}\exp c_{3}^{\nu}\\
+s.t.\\
+\eta_{1}\equiv & \sum_{t\in1:T}\left(\log\psi_{t}-\psi_{t}\right)-2\zeta_{\nu0}\\
+\eta_{2}\equiv & \left[\int_{\nu^{-}}^{\infty}\left(\frac{\nu}{2}\right)^{\frac{T\nu}{2}+\alpha_{\nu0}-1}\Gamma^{-T}\left(\frac{\nu}{2}\right)\exp\left(\frac{\nu\eta_{1}}{2}\right)d\nu\right]^{-1}\\
+c_{1}^{\nu}\equiv & \alpha_{\nu0}\log\zeta_{\nu0}-\log\Gamma\left(\alpha_{\nu0}\right)\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\times\prod_{t=1}^{T}Gamma\left(\psi_{t};\nu/2,\nu/2\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{y0},\zeta_{y0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+c_{2}^{\nu}\equiv & c_{1}^{\nu}+\left(\alpha_{\nu0}-1\right)\log2-\sum_{t\in1:T}\log\psi_{t}\\
+c_{3}^{\nu}\equiv & c_{2}^{\nu}-\log\eta_{2}
+\end{align*}
+
+\begin{itemize}
+\item Integration:
+\begin{itemize}
+\item This is unnecessary in the Metropolis-Hastings procedure. 
+\end{itemize}
+\item The lack of a conjugate prior necessitates a modified approach to
+MCMC sampling.
+\begin{itemize}
+\item The project uses an independent flavor Metropolis-Hastings sampler
+to draw from the above conditional distribution.
+\item Metropolis-Hastings procedures require a proposal distribution denoted
+as $r\left(\nu\right)$. The proposal must have fatter tails then
+the focal distribution. By default, the procedure uses the prior distribution
+as the proposal. This may be inefficient and warrant adjustment, particularly
+when the prior is diffuse.
+\item For each iteration, the sampling procedure is as follows. Let $\nu^{0}$
+represent the previous iteration of $\nu$. The goal is to select
+$\nu^{1}$, the value of $\nu$ in the subsequent iteration.
+\end{itemize}
+\begin{enumerate}
+\item Propose a value of $\nu$, denoted as $\nu'$, by drawing from the
+proposal distribution $r\left(\nu\right)$.
+\item Evaluate 
+\begin{align*}
+m\left(\nu^{0},\nu'\right) & =\frac{p\left(\nu'|rest'\right)r\left(\nu^{0}\right)}{p\left(\nu^{0}|rest'\right)r\left(\nu'\right)}
+\end{align*}
+Note that the probability density using the previous value of $\nu$
+is conditioned on the CURRENT value of the rest of the parameters.
+\item If $m\left(\nu^{0},\nu'\right)\ge1$, accept the proposal by setting
+$\nu^{1}=\nu'$
+\item If $m\left(\nu^{0},\nu'\right)<1$:
+\begin{enumerate}
+\item Draw $u$ where $u\sim Unif\left(0,1\right)$.
+\item If $u>m$, reject the proposal and let $\nu^{1}=\nu^{0}$.
+\item Otherwise, accept the proposal and let $\nu^{1}=\nu'$.
+\end{enumerate}
+\end{enumerate}
+\end{itemize}
+\item The approximate unconditional posterior:
+\begin{align*}
+\log q\left(\nu\right)\propto & E_{-\nu}\left[\frac{T\nu}{2}\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\sum_{t}\left(\left(\frac{\nu}{2}-1\right)\log\psi_{t}-\frac{\nu\psi_{t}}{2}\right)+\left(\alpha_{\nu0}-1\right)\log\left(\nu\right)-\zeta_{\nu0}\nu\right]+c_{1}^{\nu}\\
+= & \left(\frac{T\nu}{2}+\alpha_{\nu0}-1\right)\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\frac{\nu}{2}\eta_{1}+c_{2}^{\nu}\\
+q\left(\nu\right)= & \left(\frac{\nu}{2}\right)^{\frac{T\nu}{2}+\alpha_{\nu0}-1}\Gamma^{-T}\left(\frac{\nu}{2}\right)\eta_{2}\exp\left(\frac{\nu\eta_{1}}{2}\right)\exp c_{3}^{\nu}\\
+s.t.\\
+c_{1}^{\nu}\equiv & E_{-\nu}\Bigg[\alpha_{\nu0}\log\zeta_{\nu0}-\log\Gamma\left(\alpha_{\nu0}\right)\\
+ & +\log\Bigg(MN\left(y;\Phi x,\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\\
+ & \times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]\\
+c_{2}^{\nu}\equiv & c_{1}^{\nu}-\sum_{t}E\log\psi_{t}+\left(\alpha_{\nu0}-1\right)\log\left(2\right)\\
+c_{3}^{\nu}\equiv & c_{2}^{\nu}-\log\eta_{2}\\
+\overline{\eta}_{1}= & \sum_{t}E\left[\log\psi_{t}-\psi_{t}\right]-2\zeta_{\nu0}\\
+\overline{\eta}_{2}\equiv & \left(\int_{\nu^{-}}^{\infty}\left[\left(\frac{\nu}{2}\right)^{\frac{T\nu}{2}+\alpha_{\nu0}-1}\Gamma^{-T}\left(\frac{\nu}{2}\right)\exp\left(\frac{\nu\eta_{1}}{2}\right)\right]d\nu\right)^{-1}
+\end{align*}
+\item Brute-force integration gives the expectation of $\nu$:
+\begin{align*}
+E\left[\nu\right]= & \int_{\nu^{-}}^{\infty}\nu\times\left(\frac{\nu}{2}\right)^{\frac{T\nu}{2}+\alpha_{\nu0}-1}\Gamma^{-T}\left(\frac{\nu}{2}\right)\eta_{2}\exp\left(\frac{\nu\eta_{1}}{2}\right)d\nu
+\end{align*}
+
+\begin{itemize}
+\item Compute using adaptive Gaussian-Konrod quadrature (quadgk)
+\end{itemize}
+\item The definition of $\overline{\eta}_{1}$ depends on calculating $E\log\left(\psi_{t}\right)$:
+\begin{align*}
+E\log\psi_{t}= & \digamma\left(\alpha_{\psi t}\right)-\log\left(\zeta_{\psi t}\right)
+\end{align*}
+\item As a weakly informative prior, consider the following premises:
+\begin{itemize}
+\item The first four moments of $x_{t}$ most likely exist unconditionally,
+($\nu>4$, probably)
+\begin{itemize}
+\item Furthermore, assume $\nu>2$ always. This is akin to assuming that
+the mean and variance of the residuals of $x_{t}$ exists and is finite.
+The support of the distribution is therefore bounded from below.
+\end{itemize}
+\item The PDF should smoothly decay to zero at zero to reflect the low probabilities
+of extremely pathological distributions.
+\item The prior should reflect significant uncertainty around a wide range
+of values. 
+\item Conservatism- better to miss with a lower value of $\nu$ then a higher
+one. Formally this could be accounted for via the loss function, but
+as a first cut prefer more conservative estimates.
+\end{itemize}
+\end{itemize}
+
+\subsection{Predictive Distributions}
+
+\subsubsection{Predictions of $y|F,\Theta$}
+\begin{itemize}
+\item Conditional on the state and other variables, the observation equation
+is straight forward. 
+\item The conditional independence of $y$ further simplifies the math
+\item Let $y^{u}\subset y$ be the subset of $y$ to be predicted and $y^{m}$
+be its complement.
+\begin{itemize}
+\item Suppose there are $S^{u}$ values to predict, such that $y^{u}$ is
+$S^{u}\times1$. Then let $\Phi^{u}$ and $X_{L}^{u}$ be a subset
+of their complete forms, such that they represent $S^{p}\times T$
+and $S^{u}\times\left(P+1\right)$ matrices containing only rows for
+unobserved values of $y$.
+\end{itemize}
+\item Then the conditional distribution of the missing observed values of
+$y$ follows as:
+\begin{align*}
+\log p\left(y^{u}\right)= & -\frac{\tau_{y}}{2}\left(y^{u}-\tilde{X}_{L}^{u}\phi-x_{S}^{u}\right)'\left(y^{u}-\tilde{X}_{L}^{u}\phi-x_{S}^{u}\right)+c_{1}^{yu}\\
+= & \log\left(MN\left(y^{u};\mu_{yu},\Lambda_{yu}\right)\right)+c_{2}^{yu}\\
+s.t.\\
+\mu_{yu}\equiv & \tilde{X}_{L}^{u}\phi+x_{S}^{u}\\
+\Lambda_{yu}\equiv & I_{Su}\tau_{y}\\
+c_{1}^{yu}\equiv & \left(\frac{S^{u}}{2}\right)\log\frac{\tau_{y}}{2\pi}+\log\Bigg(MN\left(y^{m};\Phi x^{m},\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}}\Psi^{-1}\right)\\
+ & \times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)+c^{ev}\\
+c_{2}^{yu}\equiv & c_{1}^{yu}-\left(\frac{S^{u}}{2}\right)\log\frac{\tau_{y}}{2\pi}
+\end{align*}
+\item The approximate predictive follows the usual pattern:
+\begin{align*}
+\log q\left(y^{u}\right)= & E_{-y_{u}}\left[-\frac{\tau_{y}}{2}\left(y^{u}-\tilde{X}_{L}^{u}\phi-x_{S}^{u}\right)'\left(y^{u}-\tilde{X}_{L}^{u}\phi-\Delta tx_{S}^{u}\right)+c_{1}^{yu}\right]+\tilde{c}_{1}^{yu}\\
+= & \log\left(MN\left(y^{u};\mu_{yu},\Lambda_{yu}^{-1}\right)\right)+\tilde{c}_{2}^{yu}\\
+\tilde{\mu}_{y}^{u}\equiv & E\left[\tilde{X}_{L}^{u}\right]\mu_{\phi}+\mu_{xs}^{u}\\
+\tilde{\Lambda}_{yu}\equiv & I_{Su}E\left[\tau_{y}\right]\\
+\tilde{c}_{1}^{yu}= & E_{-yu}\Bigg[\left(\frac{S^{u}}{2}\right)\log\frac{\tau_{y}}{2\pi}+\log\Bigg(MN\left(y^{m};\Phi x^{m},\frac{1}{\tau_{y}}I\right)\times MN\left(x;F\beta+r,\frac{1}{\tau_{x}\tau_{y}}\Psi^{-1}\right)\\
+ & \times MN\left(\phi;\phi_{0},\frac{1}{\tau_{y}\tau_{\phi}}M_{0}^{-1}\right)\times MN\left(\beta;\beta_{0}+D^{-1}\beta_{0}^{\Delta},\frac{1}{\tau_{x}\tau_{y}\tau_{\beta}}\left[DA_{0}D\right]^{-1}\right)\\
+ & \times\prod_{k=1}^{K}Bern\left(\gamma_{k};\omega\right)\times Beta\left(\omega;\kappa_{0},\delta_{0}\right)\\
+ & \times\prod_{t=1}^{T}Gamma\left(\psi;\nu/2,\nu/2\right)\times Gamma\left(\nu;\alpha_{\nu0},\zeta_{\nu0}\right)\\
+ & \times Gamma\left(\tau_{x};\alpha_{x0},\zeta_{x0}\right)\times Gamma\left(\tau_{y};\alpha_{y0},\zeta_{y0}\right)\\
+ & \times Gamma\left(\tau_{\beta};\alpha_{\beta0},\zeta_{\beta0}\right)\times Gamma\left(\tau_{\phi};\alpha_{\phi0},\zeta_{\phi0}\right)\Bigg)\Bigg]+c^{ev}\\
+\tilde{c}_{2}^{yu}= & \tilde{c}_{1}^{yu}-\left(\frac{S^{u}}{2}\right)\log\frac{E\left[\tau_{y}\right]}{2\pi}+\frac{\left(\tilde{\mu}_{y}^{u}\right)'\tilde{\Lambda}_{yu}\tilde{\mu}_{y}^{u}}{2}\\
+ & -E\left[\frac{\tau_{y}}{2}\left(\tilde{X}_{L}^{u}\phi-\Delta tx_{S}^{u}\right)'\left(\tilde{X}_{L}^{u}\phi-\Delta tx_{S}^{u}\right)\right]
+\end{align*}
+\end{itemize}
+
+\subsection{Prediction of $y|F,\Theta_{-x}$ INCOMPLETE and UNTESTED}
+
+It is useful to integrate out $x$ and derive the predictions based
+on the remaining parameters, given that $x$ is unobservable.
+
+\begin{align*}
+\log p\left(x|rest\right)= & -\frac{\tau_{y}}{2}\left[\left(y-\Phi x\right)'\left(y-\Phi x\right)+\tau_{x}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\right]+c_{1}^{x}\\
+= & -\frac{\tau_{y}}{2}\left[x'\Phi'\Phi x-x'\Phi'y-y'\Phi x+\tau_{x}x'\Psi x+\tau_{x}x'\Psi\left(r+F\beta\right)+\left(\rho r+F\beta\right)'\Psi x\tau_{x}\right]+c_{2}^{x}\\
+= & -\frac{\tau_{y}}{2}\left[x'\left(\Phi'\Phi+\tau_{x}\Psi\right)x-x'\left(\Phi'y+\tau_{x}\Psi\left(r+T^{-1/2}F\beta\right)\right)-\left(y'\Phi+\tau_{x}\left(r+T^{-1/2}F\beta\right)'\Psi\right)x\right]+c_{2}^{x}\\
+= & -\frac{1}{2}\left(x-\mu_{x}\right)'\Lambda_{x}\left(x-\mu_{x}\right)+c_{3}^{x}\\
+= & \log MN\left(x;\mu_{x},\Lambda_{x}^{-1}\right)+c_{4}^{x}\\
+s.t.\\
+\Lambda_{x}\equiv & \Phi'\Phi+\tau_{x}\Psi\\
+\mu_{x}\equiv & \tau_{y}\Lambda_{x}^{-1}\left(\Phi'y+\tau_{x}\Psi\left(r+T^{-1/2}F\beta\right)\right)
+\end{align*}
+\begin{align*}
+p\left(y|F,\Theta_{-x}\right)\propto & \int_{x}\exp\left(-\frac{\tau_{y}}{2}\left[\left(y-\Phi x\right)'\left(y-\Phi x\right)+\tau_{x}\left(\left(x-r\right)-F\beta\right)'\Psi\left(\left(x-r\right)-F\beta\right)\right]\right)dx\times C_{1}^{yMx}\\
+= & \exp\left(-\frac{\tau_{y}}{2}y'y\right)\int_{x}\exp\Bigg(-\frac{\tau_{y}}{2}\Bigg[x'\Phi'\Phi x-x'\Phi'y-y'\Phi x\\
+ & +\tau_{x}x'\Psi x+\tau_{x}x'\Psi\left(r+F\beta\right)+\left(\rho r+F\beta\right)'\Psi x\tau_{x}\Bigg]\Bigg)dx\times C_{2}^{yMx}\\
+= & \exp\left(-\frac{\tau_{y}}{2}y'y\right)\int_{x}\exp\Bigg(-\frac{\tau_{y}}{2}\Bigg[x'\left(\Phi'\Phi+\tau_{x}\Psi\right)x\\
+ & -x'\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)-\left(y'\Phi+\tau_{x}\left(r+F\beta\right)'\Psi\right)x\Bigg]\Bigg)dx\times C_{2}^{yMx}\\
+= & \exp\left(-\frac{\tau_{y}}{2}y'y+\frac{1}{2}\mu_{x}'\Lambda_{x}\mu_{x}\right)\int_{x}\exp\Bigg(-\frac{1}{2}\left(x-\mu_{x}\right)'\Lambda_{x}\left(x-\mu_{x}\right)\Bigg)dx\times C_{2}^{yMx}\\
+= & \exp\left(-\frac{\tau_{y}}{2}y'y+\frac{1}{2}\mu_{x}'\Lambda_{x}\mu_{x}\right)\int_{x}MN\left(x;\mu_{x},\Lambda_{x}^{-1}\right)dx\times C_{3}^{yMx}\\
+s.t.\\
+\Lambda_{x}\equiv & \tau_{y}\left(\Phi'\Phi+\tau_{x}\Psi\right)\\
+\mu_{x}\equiv & \tau_{y}\Lambda_{x}^{-1}\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)
+\end{align*}
+
+This implies a predictive distribution given by:
+\begin{align*}
+\log p\left(y|F,\Theta_{-x}\right)\propto & -\frac{\tau_{y}}{2}y'y+\frac{\tau_{y}^{2}}{2}\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)'\Lambda_{x}^{-1}\left(\Phi'y+\tau_{x}\Psi\left(r+F\beta\right)\right)+c_{3}^{yMx}\\
+= & -\frac{\tau_{y}}{2}\left(y'y-\tau_{y}y'\Phi\Lambda_{x}^{-1}\Phi'y-\tau_{y}\tau_{x}y'\Phi\Lambda_{x}^{-1}\Psi\left(r+F\beta\right)-\tau_{y}\tau_{x}\left(r+F\beta\right)\Psi\Lambda_{x}^{-1}\Phi'y\right)+c_{4}^{yMx}\\
+= & -\frac{1}{2}\left(y-\mu_{yMx}\right)'\Lambda_{yMx}\left(y-\mu_{yMx}\right)+c_{4}^{yMx}\\
+= & \log MN\left(y;\mu_{yMx},\Lambda_{yMx}^{-1}\right)+c_{5}^{yMx}\\
+s.t.\\
+\Lambda_{yMx}= & \tau_{y}\left(I_{S}-\tau_{y}\Phi\Lambda_{x}^{-1}\Phi'\right)\\
+= & \tau_{y}\left(I_{S}-\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Phi'\right)\\
+\mu_{yMx}= & \tau_{y}^{2}\tau_{x}\Lambda_{yMx}^{-1}\Phi\Lambda_{x}^{-1}\Psi\left(r+F\beta\right)\\
+= & \tau_{y}\tau_{x}\Lambda_{yMx}^{-1}\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)
+\end{align*}
+
+Note because $\tau_{x}\Psi$ is strictly positive, the distribution
+should always exist. Also while precision increases with $\tau_{y}$
+and $\tau_{x}$ as expected, the precision is bounded from above by
+$\tau_{y}$. Further intuition is possible through manipulation of
+$\mu_{yMx}$ using the Woodbury matrix identity (Equation 156 in the
+MCB) and a Searle identity (Equation 163 in the MCB).
+\begin{align*}
+\mu_{yMx}= & \tau_{x}\left[I_{S}-\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Phi'\right]^{-1}\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)\\
+= & \tau_{x}\left(I_{S}-\Phi\left(-\left[\Phi'\Phi+\tau_{x}\Psi\right]+\Phi'\Phi\right)^{-1}\Phi'\right)\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)\\
+= & \tau_{x}\left[I_{S}+\Phi\left(\tau_{x}\Psi\right)^{-1}\Phi'\right]\Phi\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)\\
+= & \tau_{x}\Phi\left[I_{T}+\left(\tau_{x}\Psi\right)^{-1}\Phi'\Phi\right]\left[\Phi'\Phi+\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)\\
+= & \tau_{x}\Phi\left[I_{T}+\left(\tau_{x}\Psi\right)^{-1}\Phi'\Phi\right]\left[\Phi'\Phi\right]^{-1}\left[\left[\Phi'\Phi\right]^{-1}+\left[\tau_{x}\Psi\right]^{-1}\right]^{-1}\left[\tau_{x}\Psi\right]^{-1}\Psi\left(r+F\beta\right)\\
+= & \Phi\left[\left[\Phi'\Phi\right]^{-1}+\left(\tau_{x}\Psi\right)^{-1}\right]\left[\left[\Phi'\Phi\right]^{-1}+\left[\tau_{x}\Psi\right]^{-1}\right]^{-1}\left(r+F\beta\right)\\
+= & \Phi\left(r+F\beta\right)
+\end{align*}
+
+This implies $E\left[\Phi\left(r+F\beta\right)\right]$ provides the
+mean of the predictive distribution, though the other moments of a
+distribution naively calculated $\Phi\left(r+F\beta\right)$ will
+not match the true predictive distribution.
+
+Note this does not quite provide a recipe for scenario analysis, as
+$\Psi$ is still indeterminate if the data are new. However it is
+possible that $\psi_{t}$ is conditionally $iid$, even without conditioning
+on $x$, which would imply any $\psi_{t}$ could be drawn without
+issue. 
+
+\section{Supporting material}
+
+\subsection{Additional model notes}
+\begin{itemize}
+\item The core of the generative model follows in the style of George and
+Mccullock 1993/1997, Ishawaran and Rao 2006, and Rockova and George
+2014. But there are significant differences from both of these:
+\begin{itemize}
+\item This approach uses Variational Bayes (VB) for calculations as opposed
+to MCMC. Most VB papers pertaining to model selection use a delta
+spike instead of a normal distribution for spike. On the other hand,
+George and Mccullock recommend using a low variance normal spike if
+there are magnitudes of the coefficients which are not under consideration.
+This is the approach taken in this model, and it leads to some nice
+properties with respect to the posterior distributions. However, the
+spike-based approach of Carbonetto and Stephens 2012, among others,
+remains a viable back-up option.
+\item This model includes an extra layer of latent variables, leading to
+complexity with respect to the measurement.\clearpage 
+\end{itemize}
+\item This version uses a diagonal matrix among latent variables to account
+for heteroskedasticity. Wand et al 2011 (sec. 4.1) and Geweke 1993
+show how this is can be equivalent to a t-distribution. I find it
+easier to think about this in terms of a mixture of normals, but the
+t-distribution version could be more efficient.
+\begin{itemize}
+\item To show that diagonal heteroskedasticity is equivalent to a t-distribution,
+, marginalize out the heteroskedastic component of the variance. For
+instance, consider 
+\begin{align*}
+y_{i} & \sim N\left(\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right)\\
+\psi_{i} & \sim Gamma\left(\frac{\nu}{2},\frac{\nu}{2}\right)
+\end{align*}
+where all parameters except $\psi_{i}$ and $y_{i}$ are assumed known.
+Then:
+\begin{align*}
+y_{i}\sim & ST\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]
+\end{align*}
+Proof: %
+\noindent\begin{minipage}[t]{1\columnwidth}%
+\begin{align*}
+T\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]\propto & \int_{\psi_{i}}N\left[y_{i};\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right]Gamma\left[\psi_{i};\frac{\nu}{2},\frac{\nu}{2}\right]d\psi_{i}\\
+= & C_{1}\int_{\psi_{i}}\tau_{y}^{1/2}\psi_{i}^{1/2}\phi\left(\tau_{y}\psi_{i}\left(y_{i}-\mu\right)\right)\psi_{i}^{\frac{\nu-2}{2}}\exp\left[-\frac{\nu}{2}\psi_{i}\right]d\psi_{i}\\
+= & C_{1}\int_{\psi_{i}}\psi_{i}^{\frac{\nu-1}{2}}\exp\left[-\psi_{i}\left(\frac{\tau_{y}\left(y_{i}-\mu\right)^{2}}{2}+\frac{\nu}{2}\right)\right]d\psi_{i}\\
+= & C_{2}\int_{\psi_{i}}Gamma\left[\psi_{i};\frac{\nu+1}{2},\frac{\tau_{y}\left(y_{i}-\mu\right)^{2}}{2}+\frac{\nu}{2}\right]d\psi_{i}\\
+= & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\tau_{y}^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\tau_{y}\left(y_{i}-\mu\right)^{2}}{2}+\frac{\nu}{2}\right)^{\left(-\frac{\nu+1}{2}\right)}\\
+= & \frac{\left(\frac{2}{\nu}\right)^{-\frac{\nu+1}{2}}}{\left(\frac{\nu}{2}\right)^{1/2}\Gamma\left(\frac{\nu}{2}\right)}\tau_{y}^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\tau_{y}\left(y_{i}-\mu\right)^{2}}{2}+\frac{\nu}{2}\right)^{\left(-\frac{\nu+1}{2}\right)}\\
+= & \frac{\Gamma\left(\frac{\nu+1}{2}\right)\tau_{y}^{1/2}}{\left(\frac{\nu}{2}\right)^{1/2}\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}^{1/2}\left(y_{i}-\mu\right)^{2}}{\nu}+1\right)^{\left(-\frac{\nu+1}{2}\right)}\checkmark\\
+s.t.\\
+C_{1}\equiv & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\tau_{y}^{1/2}\\
+C_{2}\equiv & C_{1}\times\Gamma\left(\frac{\nu+1}{2}\right)\left(\tau_{y}^{1/2}\frac{\left(y_{i}-\mu\right)^{2}}{2}+\frac{\nu}{2}\right)^{\left(-\frac{\nu+1}{2}\right)}
+\end{align*}
+%
+\end{minipage}
+\item (The expectation and variance of the t-distribution are given by:
+$E\left[y_{i}\right]=\mu$ and $var\left(y_{i}\right)=\frac{\nu}{\tau_{y}\left(\nu-2\right)}\forall\nu>2$
+respectively)
+\end{itemize}
+\item The accuracy of the VB framework can be an issue. Several approaches
+could serve to mitigate, but in any case checking the results with
+MCMC or another method may make sense.
+\begin{itemize}
+\item Ormerod et al 2011 has accuracy results that are underwhelming, though
+the t-distribution does better than other models under consideration.
+Ormerod et al 2014 analyzes additional cases where accuracy suffers.
+\item Papers use a variety of mitigating techniques to avoid locking onto
+local optima.
+\begin{itemize}
+\item See Ray and Szabo 2019, Ormerod et al 2017, and Rockova and George
+2014 for methods for avoiding global optima.
+\item Another option would be to start optimization points indicated by
+generalized ridge regressions, and hope this helps avoid local optima.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{Derivation of Mean Field Variational Bayes\label{subsec:mfvb}}
+\begin{itemize}
+\item Follow the derivation given in Blei et al 2018
+\item The KL divergence between an approximating function $q\left(\Theta\right)$
+and the posterior given observations $x$ denoted as $p\left(\Theta|x\right)$
+is given by:
+\begin{align*}
+KL\left(q\left(z\right)||p\left(z|x\right)\right)= & E_{\Theta}\left[\log q\left(\Theta\right)\right]-E_{\Theta}\left[\log p\left(\Theta|x\right)\right]\\
+= & E_{\Theta}\left[\log q\left(\Theta\right)\right]-E_{\Theta}\left[\log\frac{p\left(\Theta,x\right)}{p\left(x\right)}\right]\\
+= & E_{\Theta}\left[\log q\left(\Theta\right)\right]-E_{\Theta}\left[\log p\left(\Theta,x\right)\right]+\log p\left(x\right)
+\end{align*}
+Note that $p\left(x\right)$ is assumed intractable.
+\begin{itemize}
+\item The Evidence Lower Bound (ELBO) is defined as
+\begin{align*}
+ELBO\left(q\right)= & -KL\left(q\left(\Theta\right)||p\left(\Theta|x\right)\right)+\log p\left(x\right)\\
+= & E_{\Theta}\left[\log p\left(\Theta,x\right)\right]-E_{z}\left[\log q\left(\Theta\right)\right]
+\end{align*}
+Hence it is the entropy difference. Note that the term $\log p\left(x\right)$
+is constant and thus maximizing the ELBO is the equivilent to minimizing
+the KL divergence.
+\begin{itemize}
+\item As described in the name, the ELBO also provides a lower bound on
+the log evidence. Because the KL divergence is strictly positive,
+\begin{align*}
+\log p\left(x\right)\ge & ELBO\left(q\right)
+\end{align*}
+\end{itemize}
+\item The maximizing the ELBO is equivalent to maximizing the expected likelihood
+and minimizing the variational distance to the prior. To see this,
+write the ELBO as a KL divergence between the approximating distribution
+and the prior:
+\begin{align*}
+ELBO\left(q\right)= & E_{\Theta}\left[\log p\left(x|\Theta\right)\right]+E_{\Theta}\left[\log p\left(\Theta\right)\right]-E_{\Theta}\left[\log q\left(\Theta\right)\right]\\
+= & E_{\Theta}\left[\log p\left(x|\Theta\right)\right]-KL\left(q\left(\Theta\right)||p\left(\Theta\right)\right)
+\end{align*}
+\end{itemize}
+\item Mean field variational inference approximates the posterior as:
+\begin{align*}
+q\left(\Theta\right)= & \prod_{j=1}^{M}q_{j}\left(\Theta_{j}\right)
+\end{align*}
+where $\Theta_{j}$ represents one of the $m$ parameter partitions.
+\item Coordinate Ascent Variational Inference maximizes the ELBO. 
+\begin{itemize}
+\item The ELBO for approximating function $q_{j}$ is given by
+\begin{align*}
+ELBO\left(q_{j}\right)= & E_{j}\left[E_{-j}\left[\log p\left(\Theta,x\right)\right]\right]-E_{j}\left[\log q_{j}\left(\Theta_{j}\right)\right]+const\\
+= & E_{j}\left[E_{-j}\left[\log p\left(\Theta_{j},\Theta_{-j},x\right)\right]\right]-E_{j}\left[\log q_{j}\left(\Theta_{j}\right)\right]+const
+\end{align*}
+\item This implies that the maximum ELBO is given by
+\begin{align*}
+\log q_{j}^{*}\left(\Theta_{j}\right)= & E_{-j}\left[\log p\left(\Theta_{j},\Theta_{-j},x\right)\right]+const
+\end{align*}
+\item The constant term implies that
+\begin{align*}
+q_{j}^{*}\left(\Theta_{j}\right)\propto & \exp E_{-j}\left[\log p\left(\Theta_{j},\Theta_{-j},x\right)\right]
+\end{align*}
+\item This suggests that iterative solutions to the above expression should
+each individually move closer towards a local optimum.
+\end{itemize}
+\end{itemize}
+
+\subsection{Unconditional approximate distribution- Additional implementation
+details}
+
+\subsection{Implementation}
+\begin{itemize}
+\item Without a closed form solution, the implementation consists of iteratively
+computing the moments until convergence. Local optimality is guaranteed,
+while global optimality is not. 
+\begin{itemize}
+\item See Table 2 and Table 3 for a summary of the auxiliary variables and
+moments.
+\begin{table}[h]
+\caption{Summary of approximate posteriors and dependencies}
+
+This table provides the approximate posterior distributions as a function
+of auxiliary variables and their first-level dependencies. The precise
+formulas of the auxiliary variables can be found in the main text.
+Dependencies may include other auxiliary variables and/or moments
+from elsewhere in the model.\\
+
+\begin{tabular}{ccc>{\raggedright}p{0.55\columnwidth}}
+\toprule 
+VB Posterior & Aux. Variable & Dimensions & Immediate Dependencies\tabularnewline
+\midrule
+\midrule 
+$q\left(\phi\right)\sim MN\left(\phi;\mu_{\phi},\Lambda_{\phi}^{-1}\right)$ & $\Lambda_{\phi}$ & $P\times P$ & $E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]$, $E\left[\tau_{y}\right]$\tabularnewline
+$q\left(\phi\right)\sim MN\left(\phi;\mu_{\phi},\Lambda_{\phi}^{-1}\right)$ & $\mu_{\phi}$ & $P\times1$ & $E\left[\tilde{X}_{L}'\tilde{y}\right]$, $E\left[\tau_{y}\right]$,
+$\Lambda_{\phi}$\tabularnewline
+$q\left(x\right)\sim MN\left(x;\mu_{x},\Lambda_{x}^{-1}\right)$ & $\Lambda_{x}$ & $T\times T$ & $E\left[\Phi'\Phi\right]$, $E\left[\tau_{y}\right]$, $E\left[\tau_{x}\right]$,
+$E\left[\Psi\right]$\tabularnewline
+$q\left(x\right)\sim MN\left(x;\mu_{x},\Lambda_{x}^{-1}\right)$ & $\mu_{x}$ & $T\times1$ & $E\left[\Phi\right]$, $\mu_{\beta}$, $\;E\left[\tau_{y}\right]$,
+$E\left[\tau_{x}\right]$, $E\left[\Psi\right]$, $\Lambda_{x}$\tabularnewline
+$q\left(\tau_{y}\right)\sim Gamma\left(\tau_{y};\alpha_{y},\zeta_{y}\right)$ & $\alpha_{y}$ & Scalar & -\tabularnewline
+$q\left(\tau_{y}\right)\sim Gamma\left(\tau_{y};\alpha_{y},\zeta_{y}\right)$ & $\zeta_{y}$ & Scalar & $E\left[\tilde{y}'\tilde{y}\right]$, $E\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi\right]$,
+$E\left[\tilde{y}'\tilde{X}_{L}\right]$, $\mu_{\phi}$, $E\left[\phi'M_{0}\phi\right]$,
+$E\left[x'\Psi x\right]$, $E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]$, 
+
+$E\left[\Psi\right]$, $\mu_{\beta}$, $\mu_{x}$, $E\left[\beta'DA_{0}D\beta\right]$,
+$E\left[D\right]$, $E\left[\tau_{x}\right]$\tabularnewline
+$q\left(\tau_{x}\right)\sim Gamma\left(\tau_{x};\alpha_{x},\zeta_{x}\right)$ & $\alpha_{x}$ & Scalar & -\tabularnewline
+$q\left(\tau_{x}\right)\sim Gamma\left(\tau_{x};\alpha_{x},\zeta_{x}\right)$ & $\zeta_{x}$ & Scalar & $E\left[x'\Psi x\right]$, $E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]$,
+$E\left[\Psi\right]$, $\mu_{\beta}$, $\mu_{x}$, $E\left[\beta'DA_{0}D\beta\right]$,
+$E\left[D\right]$, $E\left[\tau_{y}\right]$\tabularnewline
+$q\left(g_{y}\right)\sim InvGamma\left(g_{y};\alpha_{y}^{g},\zeta_{y}^{g}\right)$ & $\alpha_{y}^{g}$ & Scalar & -\tabularnewline
+$q\left(g_{y}\right)\sim InvGamma\left(g_{y};\alpha_{y}^{g},\zeta_{y}^{g}\right)$ & $\zeta_{y}^{g}$ & Scalar & $\mu_{\phi}$, , $E\left[\tau_{y}\right]$,$E\left[\phi'M_{0}\phi\right]$\tabularnewline
+$q\left(g_{x}\right)\sim InvGamma\left(g_{x};\alpha_{x}^{g},\zeta_{x}^{g}\right)$ & $\alpha_{x}^{g}$ & Scalar & -\tabularnewline
+$q\left(g_{x}\right)\sim InvGamma\left(g_{x};\alpha_{x}^{g},\zeta_{x}^{g}\right)$ & $\zeta_{x}^{g}$ & Scalar & $\mu_{\beta}$, $E\left[\beta'DA_{0}D\beta\right]$, $E\left[D\right]$,
+$E\left[\tau_{y}\right]$\tabularnewline
+$q\left(\beta\right)\sim MN\left(\beta;\mu_{\beta},\Lambda_{\beta}^{-1}\right)$ & $\Lambda_{\beta}$ & $K\times K$ & $E\left[DA_{0}D\right]$, $E\left[\Psi\right]$, $E\left[\tau_{y}\right]$,
+$E\left[\tau_{x}\right]$\tabularnewline
+$q\left(\beta\right)\sim MN\left(\beta;\mu_{\beta},\Lambda_{\beta}^{-1}\right)$ & $\mu_{\beta}$ & $K\times1$ & $\mu_{x}$, $E\left[D\right]$, $E\left[\Psi\right]$, $E\left[\tau_{y}\right]$,
+$E\left[\tau_{x}\right]$, $\Lambda_{\beta}$\tabularnewline
+$q\left(\gamma\right)\sim Bern\left(\gamma;p_{\gamma}\right)$ & $p_{\gamma}$ & Scalar & $E\left[\beta^{2}\right]$, $E\left[\log\left(1-\omega\right)\right]$,
+$E\left[\log\left(\omega\right)\right]$, $\mu_{\beta}$, $\Lambda_{\beta}$,$E\left[DA_{0}D\right]$,$E\left[\tau_{y}\right]$,
+$E\left[\tau_{x}\right]$\tabularnewline
+$q\left(\omega\right)\sim Beta\left(\omega;\kappa,\delta\right)$ & $\kappa$ & Scalar & $p_{\gamma}$\tabularnewline
+$q\left(\omega\right)\sim Beta\left(\omega;\kappa,\delta\right)$ & $\delta$ & Scalar & $p_{\gamma}$\tabularnewline
+$q\left(\psi_{t}\right)\sim Gamma\left(\psi_{t};\alpha_{\psi t},\zeta_{\psi t}\right)$ & $\alpha_{\psi t}$ & Scalar & $E\left[\nu\right]$\tabularnewline
+$q\left(\psi_{t}\right)\sim Gamma\left(\psi_{t};\alpha_{\psi t},\zeta_{\psi t}\right)$ & $\zeta_{\psi t}$ & Scalar & $E\left[\nu\right]$, $E\left[x_{t}^{2}\right]$, $\mu_{xt}$, $E\left[\left(\beta'f_{t}+r_{t}\right)^{2}\right]$,
+$\mu_{\beta}$, $E\left[\tau_{y}\right]$, $E\left[\tau_{x}\right]$\tabularnewline
+$q\left(\nu\right)\sim\text{Non-standard}\left(\eta_{1},\eta_{2}\right)$ & $\eta_{1}$ & Scalar & $E\left[\log\psi\right]$, $E\left[\psi\right]$\tabularnewline
+$q\left(\nu\right)\sim\text{Non-standard}\left(\eta_{1},\eta_{2}\right)$ & $\eta_{2}$ & Scalar & $\eta_{1}$\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+\clearpage
+\begin{table}[h]
+\caption{Summary of approximate posterior moments and dependencies}
+
+This table provides the moments of the parameters as a function of
+auxiliary variables . The precise formulas of the auxiliary variables
+can be found in the main text. Dependencies may include other auxiliary
+variables and/or moments from elsewhere in the model. Definitions
+of quadratic forms and other complex transformations are in the text.
+Definitions for straight-forward first moments are readily available
+in terms of the respective distribution parameters.\\
+
+\begin{tabular}{ccc>{\raggedright}p{0.55\columnwidth}}
+\toprule 
+Moment & Defined in Section & Dimensions & Immediate Dependencies\tabularnewline
+\midrule
+\midrule 
+$E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]$ & \ref{sec:qphi} & $P\times P$ & $\mu_{x}$, $\Lambda_{x}$\tabularnewline
+$E\left[\tilde{X}_{L}'\tilde{y}\right]$ & \ref{sec:qphi} & $P\times1$ & $\mu_{x}$, $\Lambda_{x}$\tabularnewline
+$E\left[\tau_{y}\right]$ & - & Scalar & $\alpha_{y}$, $\zeta_{y}$\tabularnewline
+$E\left[\Phi\right]$ & - & $S\times T$ & $\mu_{\phi}$\tabularnewline
+$E\left[\Phi'\Phi\right]$ & \ref{sec:qx} & $T\times T$ & $\mu_{\phi}$, $\Lambda_{\phi}$\tabularnewline
+$E\left[\tau_{x}\right]$ & - & Scalar & $\alpha_{x}$, $\zeta_{x}$\tabularnewline
+$E\left[\Psi\right]$ & - & $T\times T$ (Diagonal) & $\alpha_{\psi}$, $\zeta_{\psi}$\tabularnewline
+$E\left[g_{y}^{-1}\right]$ & - & Scalar & $\alpha_{y}^{g}$, $\zeta_{y}^{g}$\tabularnewline
+$E\left[g_{x}^{-1}\right]$ & - & Scalar & $\alpha_{x}^{g}$, $\zeta_{x}^{g}$\tabularnewline
+$E\left[\tilde{y}'\tilde{y}\right]$ & \ref{sec:qtauy} & Scalar & $\mu_{x}$, $\Lambda_{x}$\tabularnewline
+$E\left[\phi'\tilde{X}_{L}'\tilde{X}_{L}\phi\right]$ & \ref{sec:qtauy} & Scalar & $E\left[\tilde{X}_{L}'\tilde{X}_{L}\right]$, $\mu_{x}$, $\Lambda_{x}$\tabularnewline
+$E\left[\phi'M_{0}\phi\right]$ & \ref{sec:qtauy} & Scalar & $\mu_{\phi}$, $\Lambda_{\phi}$\tabularnewline
+$E\left[x'\Psi x\right]$ & \ref{sec:qtaux} & Scalar & $\mu_{x}$, $\Lambda_{x}$,$E\left[\Psi\right]$\tabularnewline
+$E\left[\left(\beta'F'+r'\right)\Psi\left(F\beta+r\right)\right]$ & \ref{sec:qtaux} & Scalar & $\mu_{\beta}$, $\Lambda_{\beta}$,$E\left[\Psi\right]$\tabularnewline
+$E\left[D\right]$ & \ref{sec:qtaux} & Scalar & $p_{\gamma}$\tabularnewline
+$E\left[DA_{0}D\right]$ & \ref{sec:qtaux} & $K\times K$ & $p_{\gamma}$\tabularnewline
+$E\left[\beta'DA_{0}D\beta\right]$ & \ref{sec:qtaux} & Scalar & $\mu_{\beta}$, $\Lambda_{\beta}$, $E\left[DA_{0}D\right]$\tabularnewline
+$E\left[\beta^{2}\right]$ & \ref{sec:qgamma} & Scalar & $\mu_{\beta}$, $\Lambda_{\beta}$\tabularnewline
+$E\left[\log\left(\omega\right)\right]$ & \ref{sec:qgamma} & Scalar & $\kappa$, $\delta$\tabularnewline
+$E\left[\log\left(1-\omega\right)\right]$ & \ref{sec:qgamma} & Scalar & $\kappa$, $\delta$\tabularnewline
+$E\left[x_{t}^{2}\right]$ & \ref{sec:qpsit} & Scalar & $\mu_{x}$, $\Lambda_{x}$\tabularnewline
+$E\left[\left(\beta'f_{t}+r_{t}\right)^{2}\right]$ & \ref{sec:qpsit} & Scalar & $\mu_{\beta}$, $\Lambda_{\beta}$\tabularnewline
+$E\log\left(\psi_{t}\right)$ & \ref{sec:qnu} & Scalar & $\alpha_{\psi}$, $\zeta_{\psi}$\tabularnewline
+$E\left[\nu\right]$ & \ref{sec:qnu} & Scalar & $\eta_{1}$, $\eta_{2}$\tabularnewline
+\bottomrule
+\end{tabular}
+\end{table}
+\clearpage
+\end{itemize}
+\end{itemize}
+
+\section{Appendix}
+
+\subsection{Possible Revision}
+
+The goal is to squash the first layer of the hierarchy under an assumption
+of zero reporting variance.
+
+Start by assuming 1:1 periodicity and a single value of $y_{t}$:
+\begin{align*}
+y_{t}= & \left(x_{t}^{L}\right)'\phi+\tilde{\phi}_{P+1}x_{t}
+\end{align*}
+
+where $x_{t}^{L}\equiv\left\{ x_{t}L^{P-p+1}\right\} \forall p\in1:P$
+
+The likelihood of $y$ is given by:
+\begin{align*}
+\log p\left(y|rest\right)\propto & -\frac{\tau_{x}}{2}\left(y-\mu^{y}\right)'\Omega\left(y-\mu^{y}\right)\\
+\mu^{y}\equiv & \Phi F\beta
+\end{align*}
+
+Suppose we have the first $P$ shocks denoted as $\varepsilon^{-}$.
+Then conditional on the other parameters and no intermediate missing
+values of $y$, $\varepsilon$ and therefore $x$ are fully determined.
+Moreover, the likelihood is also determined by examining the likelihood
+of $\varepsilon$. This seems like a promising track to examine. It
+suggests the following algorithm:
+\begin{enumerate}
+\item Draw $y^{m}|rest$, the missing values of $y$ conditional on all
+other parameters. Note that it may be possible to integrate out $\varepsilon^{-}$,
+so that this draw is from a standard conditional multivariate normal.
+\item Draw from $\varepsilon^{-}|rest$ where the likelihood is based on
+the likelihood of the implied forward shocks.
+\end{enumerate}
+Lots of details to work out.
+
+\subsection{Derivation of Expectations\label{sec:deriveexpectations}}
+\begin{itemize}
+\item $E\left[\log X\right]$ s.t. $X\sim Beta\left(\eta,\delta\right)$:
+\begin{align*}
+E\left[\log X\right]= & \frac{1}{B\left(\eta,\delta\right)}\int_{0}^{1}x^{\eta-1}\left(1-x\right)^{\delta-1}\log xdx\\
+= & \frac{\partial}{\partial\eta}\int_{0}^{1}x^{\eta-1}\left(1-x\right)^{\delta-1}dx\\
+\text{(since } & \frac{\partial}{\partial\eta}x^{\eta}=x^{\eta}\frac{\partial}{\partial\eta}\log x^{\eta}=x^{\eta}\log x\text{ )}\\
+= & \frac{1}{B\left(\eta,\delta\right)}\frac{\partial}{\partial\eta}B\left(\eta,\delta\right)\\
+= & \frac{1}{B\left(\eta,\delta\right)}\frac{\partial}{\partial\eta}\frac{\Gamma\left(\eta\right)\Gamma\left(\delta\right)}{\Gamma\left(\eta+\delta\right)}\\
+= & \frac{\Gamma\left(\delta\right)}{B\left(\eta,\delta\right)}\left(\frac{\Gamma'\left(\eta\right)\Gamma\left(\eta+\delta\right)-\Gamma\left(\eta\right)\Gamma'\left(\eta+\delta\right)}{\Gamma^{2}\left(\eta+\delta\right)}\right)\\
+= & \frac{}{B\left(\eta,\delta\right)}\left(B\left(\eta,\delta\right)\psi\left(\eta\right)-B\left(\eta,\delta\right)\psi\left(\eta+\delta\right)\right)\\
+= & \digamma\left(\eta\right)-\digamma\left(\eta+\delta\right)
+\end{align*}
+where $\digamma\left(\cdot\right)$ is the digamma distribution.
+\item $E\left[\log\left(1-X\right)\right]$ s.t. $X\sim Beta\left(\eta,\delta\right)$:
+\begin{align*}
+E\left[\log\left(1-X\right)\right]= & \frac{1}{B\left(\eta,\delta\right)}\int_{0}^{1}x^{\eta-1}\left(1-x\right)^{\delta-1}\log\left(1-x\right)dx\\
+= & \frac{1}{B\left(\delta,\eta\right)}\int_{0}^{1}\left(1-u\right)^{\eta-1}u^{\delta-1}\log\left(u\right)dx\\
+= & \digamma\left(\delta\right)-\digamma\left(\eta+\delta\right)\\
+s.t.\\
+u\equiv & 1-x
+\end{align*}
+\end{itemize}
+
+\subsection{Reconciliation of $q\left(\nu\right)$ with Wand et al 2011}
+\begin{itemize}
+\item The derivation of $q\left(\nu\right)$ should be equivalent to the
+solution given in Wand et al 2011 (WOPF) after accounting for the
+following differences:
+\begin{itemize}
+\item WOPF elect to use a uniform prior of $Unif\left(\nu_{min},\nu_{max}\right)$
+instead of the gamma prior. A gamma prior seems more consistent with
+the rest of the model and has an advantage in not needing to truncate
+the support. However, for reconciliation purposes, this derivation
+will walk through the previous derivation using the Wand prior
+\item WOPF parameterizes the variance instead of the precision ($\psi_{t}^{-1}$
+instead of $\psi_{t}$), and hence the prior and posterior variables
+at each point in time are inverse gamma distributions instead of gamma
+distributions. This difference is innocuous.
+\end{itemize}
+\item Reconciling with WOPF equation 14:
+\begin{align*}
+\log\tilde{q}\left(\nu\right)= & E_{-\nu}\left[\frac{T\nu}{2}\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\sum_{t}\left(\frac{\nu}{2}\log\psi_{t}-\frac{\nu\psi_{t}}{2}\right)\right]+\tilde{c}_{1}^{\nu}\\
+= & \frac{T\nu}{2}\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\frac{\nu}{2}\tilde{\eta}_{1}\\
+q\left(\nu\right)= & \exp\left(\frac{T\nu}{2}\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\frac{\nu}{2}\tilde{\eta}_{1}\right)\tilde{\eta}_{2}\\
+s.t.\\
+\tilde{c}_{1}^{\nu}= & c_{1}^{\nu}-\sum_{t}\log\psi_{t}-\alpha_{\nu0}\log\zeta_{\nu0}+\log\Gamma\left(\alpha_{\nu0}\right)+\frac{1}{\nu_{\max}-\nu_{\min}}\\
+\tilde{\eta}_{1}= & E\left[\sum_{t}\left(\log\psi_{t}-\psi_{t}\right)\right]\\
+\tilde{\eta}_{2}= & \left(\int_{\nu_{\min}}^{\nu_{\max}}\exp\left(\frac{T\nu}{2}\log\left(\frac{\nu}{2}\right)-T\log\Gamma\left(\frac{\nu}{2}\right)+\frac{\nu}{2}\tilde{\eta}_{1}\right)d\nu\right)^{-1}\\
+= & F\left(0,\nu,-\tilde{\eta}_{1},\nu_{\min},\nu_{\max}\right)
+\end{align*}
+
+\begin{itemize}
+\item Plugging in the property that $\psi_{t}^{-1}$ equals the $a_{t}$
+from the Wand notation:
+\begin{align*}
+-\eta_{1} & =\sum_{t}\left(-E\left[\log\psi_{t}\right]+E\left[\psi_{t}\right]\right)\\
+ & =\sum_{t}\left(E\left[\log a_{t}\right]+E_{t}\left[\frac{1}{a_{t}}\right]\right)\\
+ & =C_{1}
+\end{align*}
+\item Thus using a uniform prior and accounting for the inverse gamma distribution
+leads to the same answer as WOPF.
+\end{itemize}
+\end{itemize}
+
+\subsection{Derivation of the precision $a_{0k}$ given the expectation and variance
+of $\beta$ and $p_{\gamma k}$}
+
+This is helpful for deriving sequential priors. First, consider the
+simpler scenario where $\beta_{0}^{\Delta}=0$ and $\beta_{0}$ is
+matched to the expectation. This does not fully reflect the DGP, but
+it is a convenient and simple way to generate the prior:
+\begin{align*}
+\beta_{0}= & E\left[\beta_{k}\right]\\
+Var\left(\beta_{k}\right)= & E\left[Var\left(\beta_{k}|\gamma_{k}\right)\right]+Var\left(E\left[\beta_{k}|\gamma_{k}\right]\right)\\
+= & Var\left(\beta_{k}|\gamma_{k}=1\right)p_{k}^{\gamma}+Var\left(\beta_{k}|\gamma_{k}=0\right)\left(1-p_{k}^{\gamma}\right)+Var\left(E\left[\beta_{k}|\gamma_{k}\right]\right)\\
+= & \frac{p_{k}^{\gamma}}{a_{0k}}+\frac{\left(1-p_{k}^{\gamma}\right)v^{2}}{a_{0k}}
+\end{align*}
+
+Next, consider the more complex scenario where $\beta_{0}$ is given,
+and derive $\beta_{0}^{\Delta}$
+\begin{align*}
+E\left[\beta\right] & =\beta_{0}+p_{k}^{\gamma}\beta_{0}^{\Delta}+v\beta_{0}^{\Delta}\left(1-p_{k}^{\gamma}\right)\\
+\implies\beta_{0}^{\Delta}= & \frac{E\left[\beta\right]-\beta_{0}}{p_{k}^{\gamma}+v*\left(1-p_{k}^{\gamma}\right)}
+\end{align*}
+
+Then apply the law of total variance to compute the implied $a_{0k}$:
+\begin{align*}
+Var\left(\beta_{k}\right)= & E\left[Var\left(\beta_{k}|\gamma_{k}\right)\right]+Var\left(E\left[\beta_{k}|\gamma_{k}\right]\right)\\
+= & Var\left(\beta_{k}|\gamma_{k}=1\right)p_{k}^{\gamma}+Var\left(\beta_{k}|\gamma_{k}=0\right)\left(1-p_{k}^{\gamma}\right)+Var\left(E\left[\beta_{k}|\gamma_{k}\right]\right)\\
+= & \frac{p_{k}^{\gamma}}{a_{0k}}+\frac{\left(1-p_{k}^{\gamma}\right)v^{2}}{a_{0k}}+p_{k}^{\gamma}\left(\beta_{0}+\beta_{0}^{\Delta}\right)^{2}+\left(1-p_{k}^{\gamma}\right)\left(\beta_{0}+v\beta_{0}^{\Delta}\right)^{2}-E\left[\beta_{k}\right]^{2}\\
+a_{0k}= & \frac{p_{k}^{\gamma}+\left(1-p_{k}^{\gamma}\right)v^{2}}{Var\left(\beta_{k}\right)-p_{k}^{\gamma}\left(\beta_{0}+\beta_{0}^{\Delta}\right)^{2}-\left(1-p_{k}^{\gamma}\right)\left(\beta_{0}+v\beta_{0}^{\Delta}\right)^{2}+E\left[\beta_{k}\right]^{2}}
+\end{align*}
+
+
+\subsection{Approximate moving average equivalence \label{sec:ma}}
+\begin{itemize}
+\item While the employment of measurement error may seem odd given that
+returns are generally considered factual, it is without loss of generality
+with respect to modeling a moving average process.
+\begin{itemize}
+\item Consider the sequential dynamics of $y$ (if $\Delta t>0$, model
+some values of $y$ as unobserved). 
+\begin{align*}
+y_{t}= & \left(\Delta t-\sum_{p=1}^{P}\phi_{p}\right)x_{t}+\sum_{p=1}^{P}\phi_{p}L^{P-p}x_{t-1}+\epsilon_{t}
+\end{align*}
+\item To start, rescale the series towards the cannonical MA representation.
+Difference the new series:
+\begin{align*}
+z_{t}\equiv & \left(y_{t}-\mu\right)\left(\Delta t-\sum_{p=1}^{P}\phi_{p}\right)^{-1}\\
+z_{t}= & \left(1+\sum_{p=1}^{P}\varphi_{P-p+1}L^{p}\right)x_{t}+\varepsilon_{t}
+\end{align*}
+\item Assume the state variable $x_{t}$ has an unconditional variance of
+$\sigma_{x}^{2}$. Then autocovariance is characterized as:
+\begin{align*}
+\gamma_{0}= & \left(1+\sum_{p=1}^{P}\varphi_{P-p+1}^{2}\right)\sigma_{x}^{2}+\sigma_{\varepsilon}^{2}\\
+\gamma_{1}= & \sigma_{x}^{2}\left(\varphi_{P}+\sum_{p=2}^{P}\varphi_{P-p+1}\varphi_{P-p+2}\right)\\
+\gamma_{2}= & \sigma_{x}^{2}\left(\varphi_{P-1}+\sum_{p=3}^{P}\varphi_{P-p+1}\varphi_{P-p+3}\right)\\
+\gamma_{s}= & \begin{cases}
+\left(1+\sum_{p=1}^{P}\varphi_{P-p+1}^{2}\right)\sigma_{x}^{2}+\sigma_{\varepsilon}^{2} & s=0\\
+\sigma_{x}^{2}\left(\varphi_{P-s+1}+\sum_{p=s+1}^{P}\varphi_{P-p+1}\varphi_{P-p+1+s}\right) & 0<s\le P-1\\
+\sigma_{x}^{2}\varphi_{1} & s=P\\
+0 & P<s
+\end{cases}
+\end{align*}
+\item The Wold decomposition theorem states that for any covariance stationary
+process, the following form is equivalent up to the second moment:
+\begin{align*}
+z_{t}= & \sum_{j=0}^{\infty}a_{j}\eta_{t-j}
+\end{align*}
+As the autocovariance function is unique and terminates, the Wold
+representation is characterized as
+\begin{align*}
+z_{t}= & \eta_{t}+\sum_{p=1}^{P}a_{1}\eta_{t-p}
+\end{align*}
+which is a moving average process. 
+\item Matching the terms:
+\begin{align*}
+\sigma_{\eta}^{2}\left(1+\sum_{p=1}^{P}a_{p}^{2}\right)= & \left(1+\sum_{p=1}^{P}\varphi_{P-p+1}^{2}\right)\sigma_{x}^{2}+\sigma_{\varepsilon}^{2}\\
+\sigma_{\eta}^{2}\left(a_{s}+\sum_{p=s+1}^{P}a_{p}a_{p-s}\right)= & \sigma_{x}^{2}\left[\left(\varphi_{P-s+1}+\sum_{p=s+1}^{P}\varphi_{P-p+1}\varphi_{P-p+1+s}\right)\right]\\
+a_{P}\sigma_{\eta}^{2}= & \sigma_{x}^{2}\varphi_{1}
+\end{align*}
+Future work could recover the Wold shocks (at least as stochastic
+variables), which would improve the MA fit. However, such recovery
+is of little practical benefit as the measurement error component
+is unforecastable and iid.
+\item The assumption that second moment exists is highly plausible but not
+without loss of generality. As the errors of $x$ are $t$ distributed,
+a necessary but not sufficient condition is $\nu>2$. 
+\end{itemize}
+\end{itemize}
+
+\subsection{Standard Proof of Metropolis-Hastings}
+
+Notation: Let $p\left(\theta|y\right)$ be the posterior pdf. The
+goal is to show $p\left(\theta|y\right)$ is the unique stationary
+distribution of the Markov Chain. Follow BDA 3rd pg 279, generalized
+for Metropolis-Hastings and with additional added emphasis on the
+detailed balance condition. 
+\begin{itemize}
+\item Step 1: Show that the simulated sequence is a Markov Chain with a
+unique stationary distribution
+\begin{itemize}
+\item Most of this step is true by assumption.
+\item This is always true if the Markov chain is irreducible, aperiodic,
+and not transient. 
+\begin{itemize}
+\item Irreducible: This means any state is accessible from any other state.
+Irreducibility is a standard limitation of these algorithms that usually
+holds.
+\item Aperiodic: This means that there is never a regular pattern such that
+for $i,2i,\dots$ the transition probability is zero, and non-zero
+for all other iterations. This should always hold.
+\item Transient: There are no states with finite probability that shift
+to zero probability. This should always hold.
+\end{itemize}
+\item Hence if $p\left(\theta|y\right)$ is a stationary distribution of
+the Markov Chain, it is the unique distribution and the proof is complete.
+\end{itemize}
+\item Step 2: Show that $p\left(\theta|y\right)$ is a stationary distribution
+for the Markov Chain. 
+\begin{itemize}
+\item Let $\theta_{a},\theta_{b}$ represent any potential parameter draws
+in the support of $p$. Let $q\left(\theta_{b}|\theta_{a}\right)$
+be any proposal distribution density with the same support as $p$\footnote{\begin{itemize}
+\item The proposal distribution $q$ must satisfy additional technical conditions,
+including a fat tail constraint. These are beyond the scope of this
+proof outline.
+\end{itemize}
+}Following the Hastings extension of the Metropolis algorithm, do not
+assume that the distribution is symmetric. This is particularly important
+for the Independent Metropolis Hastings algorithm used in the model.
+\item Let $T$ be the transition distribution as defined by the Metropolis-Hastings
+algorithm. In other words, $T$ is the process for generating the
+Markov Chain. By definition, this is:
+\begin{align*}
+T\left(\theta_{b}|\theta_{a}\right)= & q\left(\theta_{b}|\theta_{a}\right)\min\left(1,\frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}\times\frac{q\left(\theta_{a}|\theta_{b}\right)}{q\left(\theta_{b}|\theta_{a}\right)}\right)\\
+T\left(\theta_{a}|\theta_{b}\right)= & q\left(\theta_{a}|\theta_{b}\right)\min\left(1,\frac{p\left(\theta_{a}|y\right)}{p\left(\theta_{b}|y\right)}\times\frac{q\left(\theta_{b}|\theta_{a}\right)}{q\left(\theta_{a}|\theta_{b}\right)}\right)
+\end{align*}
+\item Assume the Markov Chain has detailed balance, that is, the probability
+of drawing $\theta_{a}$ from the stationary distribution and transitioning
+to $\theta_{b}$ is the same as the reverse. Then the balance assumption
+implies that $\pi\left(\theta|y\right)$ is the unique stationary
+distribution:
+\begin{align*}
+\pi\left(\theta_{a}|y\right)T\left(\theta_{a}|\theta_{b}\right)= & T\left(\theta_{b}|\theta_{a}\right)\pi\left(\theta_{b}|y\right)\\
+\implies\frac{\pi\left(\theta_{b}|y\right)}{\pi\left(\theta_{a}|y\right)}= & \frac{T\left(\theta_{b}|\theta_{a}\right)}{T\left(\theta_{a}|\theta_{b}\right)}\\
+= & \frac{q\left(\theta_{b}|\theta_{a}\right)}{q\left(\theta_{a}|\theta_{b}\right)}\frac{\min\left(1,\frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}\times\frac{q\left(\theta_{a}|\theta_{b}\right)}{q\left(\theta_{b}|\theta_{a}\right)}\right)}{\min\left(1,\frac{p\left(\theta_{a}|y\right)}{p\left(\theta_{b}|y\right)}\times\frac{q\left(\theta_{b}|\theta_{a}\right)}{q\left(\theta_{a}|\theta_{b}\right)}\right)}
+\end{align*}
+\item Suppose $\frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}\times\frac{q\left(\theta_{a}|\theta_{b}\right)}{q\left(\theta_{b}|\theta_{a}\right)}\ge1$
+(the opposite condition follows identical logic). Then:
+\begin{align*}
+\frac{\pi\left(\theta_{b}|y\right)}{\pi\left(\theta_{a}|y\right)}= & \frac{q\left(\theta_{b}|\theta_{a}\right)}{q\left(\theta_{a}|\theta_{b}\right)}\frac{1}{\frac{p\left(\theta_{a}|y\right)}{p\left(\theta_{b}|y\right)}\times\frac{q\left(\theta_{b}|\theta_{a}\right)}{q\left(\theta_{a}|\theta_{b}\right)}}\\
+= & \frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}
+\end{align*}
+\item This concludes the proof. Because the ratios are equal for all $\theta_{a}$
+and $\theta_{b}$, $\pi=p$, otherwise one of the distributions wouldn't
+be valid. Combined with step 1, the results show $p$ is the unique
+stationary distribution.
+\end{itemize}
+\item Special cases
+\begin{itemize}
+\item For Metropolis (but not Metropolis-Hastings), the distribution is
+assumed to by symmetric. Then:
+\begin{align*}
+T\left(\theta_{b}|\theta_{a}\right)= & q\left(\theta_{b}|\theta_{a}\right)\min\left(1,\frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}\right)
+\end{align*}
+\item For the Independent Metropolis Hastings (IMH) algorithm used in the
+model, $q$ is an independent distribution with no dependency on the
+previous parameter draw, such that $q\left(\theta_{b}|\theta_{a}\right)=q\left(\theta_{b}\right)$.
+Then:
+\begin{align*}
+T\left(\theta_{b}|\theta_{a}\right)= & q\left(\theta_{b}\right)\min\left(1,\frac{p\left(\theta_{b}|y\right)}{p\left(\theta_{a}|y\right)}\times\frac{q\left(\theta_{a}\right)}{q\left(\theta_{b}\right)}\right)
+\end{align*}
+\item For a conjugate prior where the conditional distribution is the proposal
+distribution, define the proposal distribution for parameter $k$
+as follows: 
+\begin{align*}
+q\left(\theta_{b}|\Theta^{-k},\theta_{a}^{k},y\right) & \equiv p\left(\theta_{b}^{k}|\Theta^{-k},\theta_{a}^{k},y\right)
+\end{align*}
+Then:
+\begin{align*}
+T\left(\theta_{b}^{k}|\theta_{a}^{k}\right)= & p\left(\theta_{b}^{k}|\Theta^{-k},\theta_{a}^{k},y\right)\min\left(1,\frac{p\left(\theta_{b}^{k}|y\right)}{p\left(\theta_{a}^{k}|y\right)}\times\frac{p\left(\theta_{a}^{k}|\Theta^{-k},\theta_{b}^{k},y\right)}{p\left(\theta_{b}^{k}|\Theta^{-k},\theta_{a}^{k},y\right)}\right)\\
+= & p\left(\theta_{b}^{k}|\Theta^{-k},\theta_{a}^{k},y\right)\min\left(1,\frac{p\left(\theta_{a},\theta_{b}|\Theta^{-k},y\right)}{p\left(\theta_{a},\theta_{b}|\Theta^{-k},y\right)}\right)\\
+= & p\left(\theta_{b}^{k}|\Theta^{-k},\theta_{a}^{k},y\right)
+\end{align*}
+which implies the proposal distribution is always accepted. Simlarly,
+allowing $q$ to depend on $\Theta^{-k}$ does not change any of the
+other discussed proofs.
+\end{itemize}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,435 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+The metric
+\end_layout
+
+\begin_layout Standard
+The standard CV 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+R_{cv}^{2}= & 1-\frac{TE\left(r_{t},\hat{r}_{-t}\right)}{Var\left(r_{t}\right)}\\
+= & 1-\frac{E\left[\left(r_{t}-\hat{r}_{t}\right)^{2}\right]}{E\left[\left(r_{t}-\overline{r}_{t}\right)^{2}\right]}\\
+\implies\hat{R}_{cv}^{2}= & 1-\frac{\sum_{t=1}^{T}\left(r_{t}-\hat{r}_{t}\right)^{2}}{\sum_{t=1}^{T}\left(r_{t}-\overline{r}_{t}\right)^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bayesian:
+\begin_inset Formula 
+\begin{align*}
+R_{cv}^{2}= & 1-\frac{E\left[E_{t}\left(r_{t}-\hat{r}_{-t}\right)^{2}|f_{t}\right]}{E\left[E_{t}\left(r_{t}-\overline{r}_{-t}\right)^{2}\right]}\\
+= & 1-\frac{E\left[\int_{\Theta}\left(r_{t}-\hat{r}_{-t}\right)^{2}p\left(r_{-t}|F_{-t}\right)d\Theta\right]}{E\left[\int_{\Theta^{0}}\left(r_{t}-\overline{r}_{-t}\right)^{2}p\left(r_{-t}^{0}|F_{-t}\right)d\Theta_{-t}^{0}\right]}\\
+\hat{R}_{cv}^{2}= & 1-\frac{E\left[\frac{1}{J}\sum_{j\in1:J}\left(r_{t}-\hat{r}_{-tj}\right)^{2}\right]}{E\left[\frac{1}{J}\sum_{j\in1:J}\left(r_{t}-\overline{r}_{-tj}\right)^{2}\right]}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unortunately, the above estimator is infeasible without re-running the model.
+ To make it feasible, weight each data point by its importance weight using
+ the pdf
+\begin_inset Formula 
+\begin{align*}
+\hat{R}_{cv}^{2}= & 1-\frac{E\left[\sum_{j\in1:J}\left(r_{t}-\hat{r}_{-tj}\right)^{2}w_{jt}\right]}{E\left[\sum_{j\in1:J}\left(r_{t}-\overline{r}_{-tj}\right)^{2}w_{jt}^{0}\right]}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Following Vehtari 2016:
+\begin_inset Formula 
+\begin{align*}
+\tilde{w}_{jt}\equiv & \frac{p\left(\Theta_{jt}|F_{-t}\right)}{p\left(\Theta_{jt}|F\right)}\\
+w_{jt}= & \frac{\sum_{j\in1:J}w_{jt}}{\sum_{j}w_{jt}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is naturally adjusted such that 
+\begin_inset Formula $F_{-t}$
+\end_inset
+
+ refers only to returns before date 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Drawing from the mean model:
+\end_layout
+
+\begin_layout Standard
+The normal model
+\begin_inset Formula 
+\begin{align*}
+p^{0}\left(\mu,\tau|y\right)\propto & \prod_{s=1}^{S}N\left(y_{s};\mu,\tau^{-1}\right)\times N\left(\mu;\mu_{0},\frac{1}{\tau_{\mu0}\tau}\right)\times Gamma\left(\tau;\alpha_{0},\zeta_{0}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Approach #1: Semi-conditional Draws
+\end_layout
+
+\begin_layout Standard
+First compound the normals:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu|y,\tau\right)= & \frac{\tau}{2}\left(-\sum_{s=1}^{S}\left(\mu-y_{s}\right)^{2}-\tau_{\mu0}\left(\mu-\mu_{0}\right)^{2}\right)+c_{1}^{\mu}\\
+= & -\frac{\tau}{2}\left(\left(S+\tau_{\mu0}\right)\mu^{2}-2\mu\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\right)+c_{2}^{\mu}\\
+= & -\frac{\tau\left(S+\tau_{\mu0}\right)}{2}\left(\mu^{2}-2\mu\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\left(S+\tau_{\mu0}\right)^{-1}\right)+c_{2}^{\mu}\\
+= & -\frac{\tau_{\mu}}{2}\left(\mu-\mu_{\mu}\right)^{2}+c_{3}^{\mu}\\
+= & \log N\left(\mu;\mu_{\mu},\tau_{\mu}^{-1}\right)+c_{4}^{\mu}\\
+s.t.\\
+\tau_{\mu}= & \tau\left(S+\tau_{\mu0}\right)\\
+\mu_{\mu}= & \tau\tau_{\mu}^{-1}\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\\
+c_{1}^{\mu}\equiv & \frac{S+1}{2}\left(\log\left(\tau\right)-\log\left(2\pi\right)\right)+\frac{1}{2}\log\left(\tau_{\mu0}\right)+\log Gamma\left(\tau;\alpha_{0},\zeta_{0}\right)+c_{1}^{ev0}\\
+c_{2}^{\mu}\equiv & c_{1}^{\mu}-\frac{\tau}{2}\sum_{s=1}^{S}y_{s}^{2}-\frac{\tau\tau_{\mu0}}{2}\mu_{0}^{2}\\
+c_{3}^{\mu}\equiv & c_{2}^{\mu}+\frac{\tau_{\mu}}{2}\mu_{\mu}^{2}\\
+c_{4}^{\mu}\equiv & c_{3}^{\mu}-\frac{1}{2}\log\left(\frac{\tau_{\mu}}{2\pi}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Marginalize out 
+\begin_inset Formula $\mu$
+\end_inset
+
+ to allow for independent draws:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\tau|y\right)= & \frac{S+1}{2}\log\left(\tau\right)+\left(\alpha_{0}-1\right)\log\tau-\zeta_{0}\tau-\frac{\tau}{2}\sum_{s=1}^{S}y_{s}^{2}-\frac{\tau\tau_{\mu0}}{2}\mu_{0}^{2}+\frac{\tau_{\mu}}{2}\mu_{\mu}^{2}-\frac{1}{2}\log\left(\tau_{\mu}\right)+c_{1}^{\tau}\\
+= & \frac{S+1}{2}\log\left(\tau\right)+\left(\alpha_{0}-1\right)\log\tau-\frac{1}{2}\log\left(\tau\right)\\
+ & -\left(\frac{1}{2}\sum_{s=1}^{S}y_{s}^{2}+\frac{\tau_{\mu0}}{2}\mu_{0}^{2}-\tau\left(\frac{S+\tau_{\mu0}}{2}\right)\mu_{\mu}^{2}+\zeta_{0}\right)\tau+c_{1}^{\tau}\\
+= & \left(\alpha-1\right)\log\tau-\zeta\tau+c_{1}^{\tau}\\
+= & \log\left(Gamma\left(\tau;\alpha,\zeta\right)\right)+c_{2}^{\tau}\\
+s.t.\\
+\alpha\equiv & \frac{S}{2}+\alpha_{0}\\
+\zeta\equiv & \frac{1}{2}\sum_{s=1}^{S}y_{s}^{2}+\frac{\tau_{\mu0}}{2}\mu_{0}^{2}-\frac{\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)^{2}}{2\left(S+\tau_{\mu0}\right)}+\zeta_{0}\\
+c_{1}^{\tau}\equiv & \frac{1}{2}\log\left(\tau_{\mu0}\right)+\alpha_{0}\log\zeta_{0}-\log\Gamma\left(\alpha_{0}\right)-\frac{S}{2}\log\left(2\pi\right)+c_{1}^{ev0}\\
+c_{2}^{\tau}\equiv & c_{1}^{\tau}-\frac{1}{2}\log\left(S+\tau_{\mu0}\right)\\
+c_{3}^{\tau}\equiv & -\alpha\log\zeta+\log\Gamma\left(\alpha\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Approach #2: Conditional draws
+\end_layout
+
+\begin_layout Standard
+The posterior of 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is exactly the same.
+ The posterior of 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is now without marginalization:
+\begin_inset Formula 
+\begin{align*}
+\log p\left(\tau|y,\mu\right)= & \left(\frac{S+1}{2}\right)\log\tau-\sum_{s}\frac{\tau}{2}\left(y_{s}-\mu\right)^{2}-\frac{\tau\tau_{\mu0}}{2}\left(\mu-\mu_{0}\right)^{2}+\left(\alpha_{0}-1\right)\log\tau+c_{1}^{\tau}\\
+= & \log Gamma\left(\tau;\alpha,\zeta\right)+c_{2}^{\tau}\\
+s.t.\\
+\alpha\equiv & \frac{S+1}{2}+\alpha_{0}\\
+\zeta\equiv & \sum_{s}\frac{1}{2}\left(y_{s}-\mu\right)^{2}+\frac{\tau_{\mu0}}{2}\left(\mu-\mu_{0}\right)^{2}+\zeta_{0}\\
+c_{1}^{\tau}= & -\left(S+1\right)\log2\pi-\frac{1}{2}\log\tau_{\mu0}-\log\Gamma\left(\alpha_{0}\right)+\alpha_{0}\log\zeta_{0}\\
+c_{2}^{\tau}= & c_{1}^{\tau}+\log\Gamma\left(\alpha\right)-\alpha\log\zeta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Approach #3: Normal-Gamma
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\log p\left(\mu,\tau|y\right)\propto & \left(\frac{S+1}{2}\right)\log\tau-\frac{\tau}{2}\left(\sum_{s=1}^{S}\left(\mu-y_{s}\right)^{2}-\tau_{\mu0}\left(\mu-\mu_{0}\right)^{2}\right)+\left(\alpha_{0}-1\right)\log\tau-\zeta_{0}\tau+c_{1}^{\mu\tau}\\
+= & \left(\alpha_{0}+\frac{S-1}{2}\right)\log\tau-\left(\zeta_{0}+\frac{1}{2}\sum_{s=1}^{S}y_{s}^{2}+\frac{\tau_{\mu0}}{2}\mu_{0}^{2}\right)\tau\\
+ & -\frac{\tau\left(S+\tau_{\mu0}\right)}{2}\left(\mu^{2}-\frac{2\mu}{\left(S+\tau_{\mu0}\right)}\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\right)+c_{1}^{\mu\tau}\\
+= & \alpha\log\tau-\zeta\tau-\frac{\tau_{\mu}\tau}{2}\left(\mu-\mu_{\mu}\right)^{2}+c_{1}^{\mu\tau}\\
+= & \log NormalGamma\left(\mu,\tau;\mu,\tau_{\mu},\alpha,\zeta\right)+c_{3}^{\mu\tau}\\
+s.t.\\
+\alpha\equiv & \frac{S}{2}+\alpha_{0}\\
+\tau_{\mu}\equiv & S+\tau_{\mu0}\\
+\mu_{\mu}\equiv & \tau_{\mu}^{-1}\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\\
+\zeta\equiv & \zeta_{0}+\frac{1}{2}\sum_{s=1}^{S}y_{s}^{2}+\frac{\tau_{\mu0}}{2}\mu_{0}^{2}-\frac{\tau_{\mu}}{2}\mu_{\mu}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that this is effectively the same as approach #1, as drawing from the
+ normal gamma implies drawing 
+\begin_inset Formula $\tau$
+\end_inset
+
+ from 
+\begin_inset Formula $Gamma\left(\tau;\alpha,\zeta\right)$
+\end_inset
+
+ and then drawing 
+\begin_inset Formula $\mu_{\mu}$
+\end_inset
+
+ from 
+\begin_inset Formula $Normal\left(\mu;\mu_{\mu},\frac{1}{\tau\lambda}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Appendix
+\end_layout
+
+\begin_layout Subsection*
+Proof on the equivalence of a T distribution
+\end_layout
+
+\begin_layout Itemize
+To show that diagonal heteroskedasticity is equivalent to a t-distribution,
+ , marginalize out the heteroskedastic component of the variance.
+ For instance, consider 
+\begin_inset Formula 
+\begin{align*}
+y_{i} & \sim N\left(\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right)\\
+\psi_{i} & \sim Gamma\left(\frac{\nu}{2},\frac{\nu}{2}\right)
+\end{align*}
+
+\end_inset
+
+where all parameters except 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ are assumed known.
+ Then:
+\begin_inset Formula 
+\begin{align*}
+y_{i}\sim & ST\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Proof:
+\begin_inset Formula 
+\begin{align*}
+T\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]\propto & \int_{\psi_{i}}N\left(y_{i};\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right)\times Gamma\left(\psi_{i};\frac{\nu}{2},\frac{\nu}{2}\right)d\psi_{i}\\
+= & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}\psi_{i}}{2\pi}\right)^{1/2}\exp\left[-\frac{\psi_{i}\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right]\psi_{i}^{\nu/2-1}\exp\left(-\frac{\nu}{2}\psi_{i}\right)\\
+= & \int_{\psi_{i}}\frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{2\pi}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}Gamma\left(\psi_{i};\frac{\nu+1}{2},\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)d\psi_{i}\\
+= & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{2\pi}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}\\
+= & =\frac{}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{\pi\nu}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(1+\frac{\tau_{y}}{\nu}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+PSIS Approach 
+\end_layout
+
+\begin_layout Standard
+(Following Vehtari et al 2022 and Burkner-Gabry-Vehtari 2020)
+\end_layout
+
+\begin_layout Standard
+Derive the inverse CDF of a Generalized Pareto Distribution (GPD):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F\left(x\right)= & 1-\left(1+\frac{x-\mu}{\sigma}\xi\right)^{-1/\xi}\\
+\implies1+\frac{x-\mu}{\sigma}\xi= & \left(1-F\right)^{-\xi}\\
+x= & \mu+\frac{\sigma}{\xi}\left[\left(1-F\right)^{-\xi}-1\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+fitting guess: let x be the series.
+ Then
+\begin_inset Formula 
+\begin{align*}
+\mu= & \min\left(x\right)\\
+\bar{x}= & \mu+\frac{\sigma}{1-k}\\
+\implies\sigma= & \left(\bar{x}-\mu\right)\left(1-k\right)\\
+x_{M}= & \mu+\frac{\left(\bar{x}-\mu\right)\left(1-k\right)\left(2^{k}-1\right)}{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Notes on Bayes Factor
+\end_layout
+
+\begin_layout Standard
+Consider the Bayesian formulation:
+\begin_inset Formula 
+\begin{align*}
+p\left(\Theta|D,M\right)= & \frac{p\left(D|\Theta,M\right)\times p\left(\Theta|M\right)}{p\left(D|M\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Bayes factor between two models is defined as:
+\begin_inset Formula 
+\begin{align*}
+ & \frac{p\left(D|M_{1}\right)}{p\left(D|M_{2}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

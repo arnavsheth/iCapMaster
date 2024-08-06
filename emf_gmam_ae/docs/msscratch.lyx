@@ -1,0 +1,184 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+The MS technique (with plug-in estimators)
+\begin_inset Formula 
+\begin{align*}
+ & \min_{x}E\left[e'e\right]\\
+s.t.\\
+0\le & x\\
+1\ge & 1'x\\
+e\equiv & r_{p}-Ax\\
+0= & \lambda_{k}x_{k}\\
+0= & \gamma\left(1-x'1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Langrangian:
+\begin_inset Formula 
+\begin{align*}
+L= & \left(r_{p}-Ax\right)'\left(r_{p}-Ax\right)-\lambda'x+\gamma\left(1-x'1\right)\\
+FOC:\\
+0= & -2A'\left(r_{p}-Ax\right)-\lambda-\gamma1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For simplicity, assume that 
+\begin_inset Formula $\lambda_{k}=0$
+\end_inset
+
+.
+ Then the FOC simplifies to:
+\begin_inset Formula 
+\begin{align*}
+\gamma1= & -2A'\left(r_{p}-Ax\right)\\
+x= & \gamma\left(\delta+\beta_{a}\right)\\
+s.t.\\
+\delta\equiv & \frac{\left[A'A\right]^{-1}1}{2}\\
+\beta_{a}\equiv & \left[A'A\right]^{-1}A'r_{p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Furthermore:
+\begin_inset Formula 
+\begin{align*}
+\gamma= & -2x'A'r_{p}+2x'A'Ax
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This implies:
+\begin_inset Formula 
+\begin{align*}
+r_{b}= & \gamma a_{t}'\left(\delta+\beta_{a}\right)\\
+E\left[r_{b}\right]= & \gamma\mu_{a}'\left(\delta+\beta_{a}\right)\\
+\sigma_{b}^{2}= & x'E\left[aa'\right]x+x'\mu_{a}\mu_{a}'x\\
+= & x'\Sigma_{a}x\\
+= & \gamma^{2}\left(\delta+\beta_{a}\right)'\Sigma_{a}\left(\delta+\beta_{a}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that:
+\begin_inset Formula 
+\begin{align*}
+E\left[r_{pt}|r_{bt}\right]= & \mu_{p}+\frac{cov\left(r_{pt},r_{bt}\right)}{\sigma_{b}^{2}}\left(r_{bt}-\mu_{b}\right)\\
+cov\left(r_{pt},r_{bt}\right)= & cov\left(r_{p},\gamma a_{t}'\left(\delta+\beta_{a}\right)\right)\\
+= & cov\left(a_{t}'\beta_{a},\gamma a_{t}'\beta_{a}+\gamma a_{t}\delta\right)\\
+= & \gamma\beta_{a}'\Sigma_{a}\left(\beta+\delta\right)\\
+\implies\left[r_{pt}|r_{bt}\right]= & \mu_{p}+\frac{\beta_{a}'\Sigma_{a}\left(\delta+\beta_{a}\right)}{\left(\delta+\beta_{a}\right)'\Sigma_{a}\left(\delta+\beta_{a}\right)}\left(a_{t}-\mu_{a}\right)'\left(\delta+\beta_{a}\right)\\
+= & \mu_{a}'\beta_{a}+\frac{\beta_{a}'\Sigma_{a}\left(\delta+\beta_{a}\right)}{\left(\delta+\beta_{a}\right)'\Sigma_{a}\left(\delta+\beta_{a}\right)}\left(a_{t}-\mu_{a}\right)'\left(\delta+\beta_{a}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

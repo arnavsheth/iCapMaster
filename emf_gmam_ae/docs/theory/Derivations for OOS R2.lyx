@@ -1,0 +1,265 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize custom
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+The normal model
+\begin_inset Formula 
+\begin{align*}
+p^{0}\left(\mu,\tau|y\right)\propto & N\left(y_{s};\mu,\tau^{-1}\right)\times N\left(\mu;\mu_{0},\frac{1}{\tau_{\mu0}\tau}\right)\times Gamma\left(\tau;\alpha_{0},\zeta_{0}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Marginalize out 
+\begin_inset Formula $\tau$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu,\tau|y\right)= & \frac{S+1}{2}\log\tau-\sum_{s=1}^{S}\frac{\tau}{2}\left(\mu-y_{s}\right)^{2}-\frac{\tau\tau_{\mu0}}{2}\left(\mu-\mu_{0}\right)^{2}+\left(\alpha_{0}-1\right)\log\tau-\zeta_{0}\tau+c_{1}^{\tau}\\
+= & \log\left(Gamma\left(\tau;\alpha,\zeta\right)\right)+c_{2}^{\tau}\\
+\alpha\equiv & \alpha_{0}+\frac{S+1}{2}\\
+\zeta\equiv & \zeta_{0}+\sum_{s=1}^{S}\frac{1}{2}\left(\mu-y_{s}\right)^{2}+\frac{\tau_{\mu0}}{2}\left(\mu-\mu_{0}\right)^{2}\\
+c_{1}^{\tau}\equiv & -\frac{S+1}{2}\log\left(2\pi\right)-\log\Gamma\left(\alpha_{0}\right)+\alpha_{0}\log\zeta_{0}+c_{1}^{ev0}\\
+c_{2}^{\tau}\equiv & c_{1}^{\tau}-\alpha\log\zeta+\log\Gamma\left(\alpha\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu|y\right)= & -\alpha\log\left(\sum_{s=1}^{S}\frac{1}{2}\left(\mu-y_{s}\right)^{2}+\frac{\tau_{\mu0}}{2}\left(\mu-\mu_{0}\right)^{2}+\zeta_{0}\right)+c_{1}^{\mu}\\
+= & -\alpha\log\left(\mu^{2}\left(S+\tau_{\mu0}\right)-2\mu\left(\mu_{0}\tau_{\mu0}+\sum_{t=s}^{S}y_{s}\right)+\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}\right)+c_{2}^{\mu}\\
+= & -\alpha\log\left(\left(S+\tau_{\mu0}\right)\left[\mu^{2}-2\mu\left(\mu_{0}\tau_{\mu0}+\sum_{s=1}^{S}y_{s}\right)\left(T+\tau_{\mu0}\right)^{-1}\right]+\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}\right)+c_{2}^{\mu}\\
+= & -\alpha\log\left(\left(\frac{S+\tau_{\mu0}}{\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}-\tau_{\mu}\mu_{\mu}^{2}}\right)\left(\mu-\mu_{\mu}\right)^{2}+1\right)+c_{2}^{\mu}\\
+= & -\left(\frac{\nu_{m}+1}{2}\right)\log\left(\frac{\tau_{m}}{\nu_{m}}\left(\mu-\mu_{m}\right)^{2}+1\right)+c_{2}^{\mu}\\
+= & \log ST\left(y_{s};\mu_{m},\tau_{m}^{-1},\nu_{m}\right)+c_{3}^{\mu}\\
+s.t.\\
+\mu_{m}= & \left(\mu_{0}\tau_{\mu0}+\sum_{t=s}^{S}y_{s}\right)\left(S+\tau_{\mu0}\right)^{-1}\\
+\nu_{m}= & 2\alpha-1\\
+\tau_{m}= & \nu_{m}\left(\frac{S+\tau_{\mu0}}{\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}-\tau_{\mu}\mu_{\mu}^{2}}\right)\\
+c_{1}^{\mu}= & \log\Gamma\left(\alpha\right)-\frac{S+1}{2}\log\left(2\pi\right)-\log\Gamma\left(\alpha_{0}\right)+\alpha_{0}\log\zeta_{0}+c_{1}^{ev0}\\
+c_{2}^{\mu}= & c_{1}^{\mu}+\alpha\log2\\
+c_{3}^{\mu}= & c_{2}^{\mu}-\log\Gamma\left(\frac{\nu_{m}+1}{2}\right)+\log\left(\frac{\nu_{m}}{2}\right)-\frac{1}{2}\log\left(\frac{\tau_{m}}{\pi\nu_{m}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Attempt #2: First compound the normals:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu,\tau|y\right)= & -\frac{\tau}{2}\left(\sum_{s=1}^{S}\left(\mu-y_{t}\right)^{2}-\tau_{\mu0}\left(\mu-\mu_{0}\right)^{2}\right)+c_{1}^{\mu}\\
+= & -\frac{\tau}{2}\left(\left(S+\tau_{\mu0}\right)\mu^{2}-2\mu\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\right)+c_{2}^{\mu}\\
+= & -\frac{\tau\left(S+\tau_{\mu0}\right)}{2}\left(\mu^{2}-2\mu\left(\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}\right)\left(S+\tau_{\mu0}\right)^{-1}\right)+c_{2}^{\mu}\\
+= & -\frac{\tau\left(S+\tau_{\mu0}\right)}{2}\left(\mu-\mu_{\mu}\right)^{2}+c_{3}^{\mu}\\
+= & \log N\left(\mu_{\mu},\tau^{-1}\tau_{\mu}^{-1}\right)+c_{4}^{\mu}\\
+s.t.\\
+\tau_{\mu}= & S+\tau_{\mu0}\\
+\mu_{\mu}= & \frac{\sum_{s=1}^{S}y_{s}+\tau_{\mu0}\mu_{0}}{\tau_{\mu}}\\
+c_{1}^{\mu}\equiv & \frac{S+1}{2}\log\left(\frac{\tau}{2\pi}\right)+\frac{1}{2}\log\left(\tau_{\mu0}\right)+\log Gamma\left(\tau;\alpha_{0},\zeta_{0}\right)+c_{1}^{ev0}\\
+c_{2}^{\mu}\equiv & c_{1}^{\mu}-\frac{\tau}{2}\sum_{s=1}^{S}y_{t}^{2}-\frac{\tau\tau_{\mu0}}{2}\mu_{0}^{2}\\
+c_{3}^{\mu}\equiv & c_{2}^{\mu}+\frac{\tau\tau_{\mu}}{2}\mu_{\mu}^{2}\\
+c_{4}^{\mu}\equiv & c_{3}^{\mu}+\frac{1}{2}\log\left(\frac{\tau\tau_{\mu}}{2\pi}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Marginalize out 
+\begin_inset Formula $\tau$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu,\tau|y\right)= & -\frac{\tau\tau_{\mu}}{2}\left(\mu-\mu_{\mu}\right)^{2}+\frac{\tau\tau_{\mu}\mu_{\mu}^{2}}{2}-\frac{\tau}{2}\sum_{s=1}^{S}y_{s}^{2}-\frac{\tau\tau_{\mu0}}{2}\mu_{0}^{2}+\frac{S+1}{2}\log\left(\tau\right)-\zeta_{0}+\left(\alpha_{0}-1\right)\log\tau+c_{1}^{\tau}\\
+= & \log\left(Gamma\left(\tau;\alpha,\zeta\right)\right)+c_{2}^{\tau}\\
+s.t.\\
+\alpha\equiv & \frac{S+1}{2}+\alpha_{0}\\
+\zeta\equiv & \frac{\tau_{\mu}}{2}\left(\mu-\mu_{\mu}\right)^{2}-\frac{\tau_{\mu}\mu_{\mu}^{2}}{2}+\frac{1}{2}\sum_{s=1}^{S}y_{s}^{2}+\frac{\tau_{\mu0}}{2}\mu_{0}^{2}+\zeta_{0}\\
+c_{1}^{\tau}\equiv & \frac{1}{2}\log\left(\tau_{\mu0}\right)+\alpha_{0}\log\zeta_{0}-\log\Gamma\left(\alpha_{0}\right)-\frac{S+1}{2}\log\left(2\pi\right)+c_{1}^{ev0}\\
+c_{2}^{\tau}\equiv & -\alpha\log\zeta+\log\Gamma\left(\alpha\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore:
+\begin_inset Formula 
+\begin{align*}
+\log p^{0}\left(\mu|y\right)= & -\alpha\log\left(\tau_{\mu}\left(\mu-\mu_{\mu}\right)^{2}-\tau_{\mu}\mu_{\mu}^{2}+\sum_{s=s}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}\right)+c_{1}^{m}\\
+= & -\alpha\log\left(\frac{\tau_{\mu}}{\sum_{t=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}-\tau_{\mu}\mu_{\mu}^{2}}\left(\mu-\mu_{\mu}\right)^{2}+1\right)+c_{2}^{m}\\
+= & -\left(\frac{\nu_{m}+1}{2}\right)\log\left(\frac{\tau_{m}}{\nu_{m}}\left(\mu-\mu_{\mu}\right)^{2}+1\right)+c_{2}^{m}\\
+= & \log t\left(\mu;\mu_{\mu},\tau_{m}^{-1},\nu_{m}\right)+c_{3}^{m}\\
+s.t.\\
+\nu_{m}= & 2\alpha-1\\
+\tau_{m}= & \nu_{m}\left[\frac{\tau_{\mu}}{\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}-\tau_{\mu}\mu_{\mu}^{2}}\right]\\
+c_{1}^{m}= & \alpha\log2+\frac{1}{2}\log\left(\tau_{\mu0}\right)+\alpha_{0}\log\zeta_{0}-\log\Gamma\left(\alpha_{0}\right)-\frac{T+1}{2}\log\left(2\pi\right)+c_{1}^{ev0}\\
+c_{2}^{m}= & c_{1}^{m}-\alpha\log\left(\sum_{s=1}^{S}y_{s}^{2}+\tau_{\mu0}\mu_{0}^{2}+2\zeta_{0}-\tau_{\mu}\mu_{\mu}^{2}\right)\\
+c_{3}^{m}= & c_{2}^{m}-\log\Gamma\left(\frac{\nu_{m}+1}{2}\right)+\log\Gamma\left(\frac{\nu_{m}}{2}\right)-\frac{1}{2}\log\left(\frac{\tau_{m}}{\pi\nu_{m}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+TODO- pick the better one of the above, and test the algorithm
+\end_layout
+
+\begin_layout Subsection*
+Proof on the equivalence of a T distribution
+\end_layout
+
+\begin_layout Itemize
+To show that diagonal heteroskedasticity is equivalent to a t-distribution,
+ , marginalize out the heteroskedastic component of the variance.
+ For instance, consider 
+\begin_inset Formula 
+\begin{align*}
+y_{i} & \sim N\left(\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right)\\
+\psi_{i} & \sim Gamma\left(\frac{\nu}{2},\frac{\nu}{2}\right)
+\end{align*}
+
+\end_inset
+
+where all parameters except 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ are assumed known.
+ Then:
+\begin_inset Formula 
+\begin{align*}
+y_{i}\sim & ST\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Proof:
+\begin_inset Formula 
+\begin{align*}
+T\left[y_{i};\mu,\tau_{y}^{-1},\nu\right]\propto & \int_{\psi_{i}}N\left(y_{i};\mu,\tau_{y}^{-1}\psi_{i}^{-1}\right)\times Gamma\left(\psi_{i};\frac{\nu}{2},\frac{\nu}{2}\right)d\psi_{i}\\
+= & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}\psi_{i}}{2\pi}\right)^{1/2}\exp\left[-\frac{\psi_{i}\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right]\psi_{i}^{\nu/2-1}\exp\left(-\frac{\nu}{2}\psi_{i}\right)\\
+= & \int_{\psi_{i}}\frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{2\pi}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}Gamma\left(\psi_{i};\frac{\nu+1}{2},\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)d\psi_{i}\\
+= & \frac{\left(\frac{\nu}{2}\right)^{\nu/2}}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{2\pi}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(\frac{\nu}{2}+\frac{\tau_{y}}{2}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}\\
+= & =\frac{}{\Gamma\left(\frac{\nu}{2}\right)}\left(\frac{\tau_{y}}{\pi\nu}\right)^{1/2}\Gamma\left(\frac{\nu+1}{2}\right)\left(1+\frac{\tau_{y}}{\nu}\left(y_{i}-\mu\right)^{2}\right)^{-\frac{\nu}{2}-\frac{1}{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
