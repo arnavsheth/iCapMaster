@@ -1,0 +1,885 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Simple LaTeX CV Template %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% NOTE: If you find that it says                                     %%
+%%                                                                    %%
+%%                           1 of ??                                  %%
+%%                                                                    %%
+%% at the bottom of your first page, this means that the AUX file     %%
+%% was not available when you ran LaTeX on this source. Simply RERUN  %%
+%% LaTeX to get the ``??'' replaced with the number of the last page  %%
+%% of the document. The AUX file will be generated on the first run   %%
+%% of LaTeX and used on the second run to fill in all of the          %%
+%% references.                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[11pt]{article}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage[utf8]{inputenc}
+
+% Simpler bibsection for CV sections
+% (thanks to natbib for inspiration)
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newenvironment{bibsection}%
+        {\begin{list}{}{%
+       \setlength{\leftmargin}{\bibhang}%
+       \setlength{\itemindent}{-\leftmargin}%
+       \setlength{\itemsep}{\bibsep}%
+       \setlength{\parsep}{\z@}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+\makeatother
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+\usepackage[paper=letterpaper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=1.1in,     % Length of section titles
+            marginparsep=.05in,       % Space between titles and text
+            margin=0.75in,               % 0.75 inch margins
+            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+%\usepackage[paper=a4paper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=30.5mm,    % Length of section titles
+%            marginparsep=1.5mm,       % Space between titles and text
+%            margin=25mm,              % 25mm margins
+%            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{purple}{rgb}{0.5,0.0,0.5}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=purple,urlcolor=purple,
+            anchorcolor=purple,citecolor=purple}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
+%
+% the picture will be flush right across from the name.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \hyphenpenalty=10000%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=10pt,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}\vspace{-.6\baselineskip}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{Arnav A. Sheth, MBA, Ph.D. \hspace{65pt} +1 (415) 862-7628~ \email{arnavsheth@gmail.com}}
+%\section{Contact}
+%+1 (415) 862-7628, \email{shetha@mit.edu}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{1.65in}%
+
+%
+%\begin{innerlist}
+%\item[] ~
+%	\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+%		1 Avery St, Apt 32C,		& +1 (415) 862-7628		 	\\
+%		Boston, MA 02111		& \email{shetha@mit.edu}		\\
+%	\end{tabular}
+%\end{innerlist}
+
+%\begin{innerlist}
+%\item[] 
+%	\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+%%		1 Avery St, Apt 32C,		& +1 (415) 862-7628		 	\\
+%		+1 (415) 862-7628		& \email{shetha@mit.edu}		\\
+%	\end{tabular}
+%\end{innerlist}
+
+\vspace{-5 pt}
+
+\section{About}
+%\begin{innerlist}
+%	\item[] 
+%	{\large Seasoned academic looking to transition to industry in a quant research position.}
+	\vspace{2pt}
+%	\item[] \textbf{Strong Quantitative Background}
+%        \begin{innerlist}
+%            	\item Over two decades of modeling and analyzing data in finance, economics and other areas.
+%		\item Doctorate in stochastic optimization and computational finance; master's in behavioral economics; bachelor's in economics-mathematics. Erd\"os number of 2.
+%		\item Strong interest in combining behavioral ideas with quantitative modeling. 
+%	\end{innerlist}
+%	\item[] \textbf{Client-Facing Experience}
+	\begin{innerlist}
+            	\item Seasoned quant researcher with peer-reviewed publications in the areas of:
+		\begin{innerlist}
+			\item portfolio optimization techniques, behavioral finance, machine learning for investing.
+		\end{innerlist}
+            	\item Entrepreneurial, client-facing, leader; founded two companies, many academic initiatives.
+		\begin{innerlist} 
+			\item {\small Involved in all aspects of business: sales, consulting, recruiting, and research.}
+		\end{innerlist}
+%		\item Worked in sales for startup, garnering them their first two clients.
+	\end{innerlist}
+%	\item[] \textbf{Exceptional Communication Skills}
+	\begin{innerlist}
+            	\item Tenured finance prof; taught math at MIT, economics at UC, Berkeley, and more.
+		\begin{innerlist} 
+			\item {\small Courses incl.: Investing, Derivatives, Quant Methods, Macroecon, Risk Mgmt., Calculus.}
+		\end{innerlist}
+	\end{innerlist}
+%	\item[] \textbf{Advanced Data Science and Programming Abilities}
+%        \begin{innerlist}
+%            	\item Over two decades of \textbf{programming} in Matlab, R, Python, C, Java, MySQL, Fortran.
+%%		\item Experience in working with large data sets.
+%	\end{innerlist}
+%\end{innerlist}
+
+\vspace{-7pt}
+%
+%\section{Current Research}
+%	\begin{innerlist}
+%%		\item Algorithmic trading strategy exploiting a behavioral anomaly in foreign exchange markets using machine learning techniques. (\href{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3069629}{SSRN link})
+%		\item Research on behaviors of explanatory (Fama French) factors across business cycles measured in various ways. (\href{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3082577}{SSRN link})
+%		\begin{innerlist}
+%			\item[] \textit{This paper was in the top ten percent by downloads for over twelve months on the Social Science Research Network (SSRN), the largest repository of working papers in finance and economics.}
+%		\end{innerlist}
+%	\end{innerlist}
+
+\section{Skills} 
+Julia, R, Python, Factset, Matlab, C, Java, MySQL, Fortran, Stata, VBA, many more
+
+\vspace{-7pt}
+
+\section{Experience}
+
+Quantitative Researcher, Vice President \hfill{June 2023 to Present}
+\begin{innerlist}
+	\item[] \textbf{iCapital Network}, New York City, NY
+	\begin{innerlist}
+		\item Research into alternative investments for a \textbf{Goldman Sachs} spinoff.
+		\item iCapital is a marketplace for alternatives directed towards RIAs and advisors.
+		\item Portfolio construction, factor decomposition, and more, using Bayesian techniques.
+	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}
+
+Quantitative Researcher \hfill{August 2022 to May 2023}
+\begin{innerlist}
+	\item[] \textbf{American Century Investment Management}, New York City, NY
+	\begin{innerlist}
+		\item Quantamental research for \$5b AUM fundamental and \$7b AUM systematic funds.
+		\item Alpha research via value, momentum, quality, growth, and other factors.
+		\item Responsible for portfolio construction, risk management using Barra models.
+%		\item Construct portfolio for maximal alpha, and optimize  with risk and return constraints. 
+%		\item Conduct risk management for funds using Barra-style risk models.
+%		\item Quantitative equity research for \$8b fundamental fund; alpha risk modeling, portfolio construction, 
+	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}
+
+Principal \hfill{September 2014 to July 2022} 
+\begin{innerlist}
+	\item[]  \textbf{Gaji Analytics Consulting}, LLC, Remote
+%	\textit{Consultant in analytics and quantitative finance since 2014. Some project examples:}
+	\begin{innerlist}
+		\item ESG factor search for Aperio Research (acquired by \textbf{Blackrock} in 2020).
+%		Used proprietary data and to research if socially responsible investing contributes to stock returns in a statistically significant manner. \vspace{7pt}
+		\item Modeling and machine learning for alternative data provider startup \textbf{brightquery.com}.
+%		\begin{innerlist}
+%			\item Developing capital markets products using proprietary data; also database management on AWS.
+%		\end{innerlist}
+		\item Bayesian inference using Black-Litterman for hedge fund \textbf{Lumen Advisors}.
+%		\begin{innerlist}
+%			\item Developed, coded, and tested Bayesian-style portfolio optimization model.
+%		\end{innerlist}
+		\item Returns-based style analysis (RBSA) algorithm for confidential \textbf{roboadviser startup}.
+%		Verified algorithms for startup used for returns based style analysis (RBSA). \vspace{7pt}	
+
+		\item Comment scoring algorithm for \textbf{projectmanagement.com}.
+
+		\item \textbf{Cofounded} FP\&A platform; involved in sales, \textbf{profitmodeler.com}.
+%		Created scoring algorithm for comments section of website. \vspace{7pt}	
+%		\item Helped non profit switch to automatic monthly donations from ad hoc annual ones.
+%		\item \textit{Automatic Donations Plan for a large non-profit (client confidential).} \\
+%		Switched from ad hoc donation solicitation to automatic monthly donation plan.  \vspace{7pt}
+%		A non-profit wanted to switch from ad hoc donation solicitation to automatic monthly donations. I cleaned and organized donations data related to all of Northern California, summarized data segmented by zip code, and calculated optimal donation amount for each area. Automatic monthly donation plan was implemented about a year after my project was completed. \vspace{5pt}
+%		\begin{innerlist}
+%			\item My primary contribution was to influence the firm on soliciting different donation amounts for each zip code. \vspace{5pt}
+%		\end{innerlist}
+%		\item Created a scoring algorithm for comments section on online portal. 
+%		\item Explanatory factor analysis on socially responsible investing data for advisory.	
+%		\item Returns-based style analysis verification for startup.
+%		\item \textit{Various research- and data-related task for data vending startup (BrightQuery.com)} \\
+%		Created new variables within dataset for proprietor of unique dataset on six million US businesses using a variety of quantitative and machine learning techniques that included splines, logistic regression, ARIMA, etc. Also, involved with cleaning, organizing, quality-testing, and scraping data, as well as data management and parallel computing using AWS. \vspace{5pt}		
+	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}
+
+%\vspace{-8pt}
+%
+%\section{Industry Experience}
+
+%Director of Research, \textbf{BrightQuery.com} \hfill{April 2020 to January 2021}
+%%\begin{innerlist}
+%%	\item[] 
+%\begin{innerlist}
+%%	\item Worked to create several new variables within dataset for proprietor of unique dataset on six million US businesses.
+%	\item Created credit, welfare, and resilience scores using machine learning techniques.
+%	\item Cleaned, organized, and quality-tested data; parallel computing using AWS.
+%\end{innerlist}
+
+%\vspace{7pt}
+
+
+%\textbf{Founding Program Director} \hfill {April 2019 to July 2019}
+%\begin{innerlist}
+%	\item[] FinTech Certificate Program, Saint Mary's College of California \\
+%	\textit{Program caters to individuals in both, the finance and technology industries to make them attractive to firms in the FinTech sector. We aim to prepare our students for the future of the financial services industry with this program.}
+%%	\begin{innerlist}
+%%		\item Will be teaching Python for Computational Finance in the program.
+%%		\item Inaugural cohort to start in 2021.
+%%	\end{innerlist}
+%\end{innerlist}
+%
+%\vspace{7pt}
+
+%\textbf{Program Director} \hfill {July 2014 to July 2019}
+%\begin{innerlist}
+%	\item[] MS in Finance, Saint Mary's College of California \\
+%	\textit{I was responsible for the entire program, right from student recruiting through student experience during the program, to student placement after they graduate. In my years as director, I have:}
+%	\begin{innerlist}
+%		\item Implemented partnerships with local societies such as the CFA Society of San Francisco;
+%		\item Created an \href{https://www.stmarys-ca.edu/ms-in-finance/advisory-board}{Advisory Board} consisting of local luminaries in the industry to support our students, and to aid in curriculum development; 
+%%		\item Created a mentorship program for students to connect with the Advisory Board and other local firms; and
+%%		\item Taught several courses in the program to consistently high evaluation numbers.		
+%	\end{innerlist}
+%%	\begin{innerlist}
+%%		\item Responsible for entire program, including curriculum, recruiting, and placement.
+%%%		\item Translating complex financial ideas into layman terms.
+%%%		\item Consistent high numbers for evaluations.
+%%	\end{innerlist}
+%\end{innerlist}
+
+%\vspace{7pt}
+
+%Technical Co Founder, \textbf{Profitmodeler.com}  \hfill {June 2015 to December 2015}
+%%\begin{innerlist}
+%%	\item[] 
+%%	\textit{Software platform providing tools for financial planning and analysis. In my time there:}
+%	\begin{innerlist}
+%		\item Software platform providing tools for financial planning and analysis. 
+%		\item Aided in creation and design of some of the back-end algorithms.
+%%		\item Worked on sales garnering their first two clients.
+%	\end{innerlist}
+%%	\begin{innerlist}
+%%		\item Software platform providing tools for financial planning and analysis.
+%%		\item Helped with designing back-end algorithms, and also with front-end sales.
+%%	\end{innerlist}
+%%\end{innerlist}
+
+
+%\newpage
+
+%\vspace{-8pt}
+
+
+%\vspace{7pt}
+%
+%\textbf{Associate} (part-time) \hfill{2008}
+%\begin{innerlist}
+%	\item[] StatAssist.com
+%	\begin{innerlist}
+%		\item[$\bullet$] Statistical assistance and guidance on Ph.D. dissertations.
+%	\end{innerlist}
+%\end{innerlist}
+
+%\vspace{7pt}
+%
+%\textbf{Research Associate} 	\hfill{2004 to 2005}
+%\begin{innerlist}
+%	\item[] Stevens Institute of Technology, Hoboken, New Jersey
+%	\begin{innerlist}
+%%		\item[$\bullet$] NSF Grant: \textit{Creating New Wealth by Improving the Fuzzy Front End of the Innovation Engine}
+%		\item[$\bullet$]	Analysis of the innovation process in firms (funded by an NSF grant).
+%%		\item[$\bullet$] Survey execution, and analysis of results using factor models in SPSS.
+%%		\begin{innerlist}
+%%			\item[$-$] Survey execution and factor analysis using SPSS
+%%		\end{innerlist}
+%	\end{innerlist}
+%\end{innerlist}
+%
+%\vspace{7pt}
+%
+%\textbf{Graduate Assistant}	\hfill{2002 to 2004}
+%\begin{innerlist}
+%	\item[] School of Communication, Information and Library Sciences, Rutgers University
+%	\begin{innerlist}
+%		\item[$\bullet$] Analysis and pattern recognition of brain images (funded by an NSF grant).
+%%		\item[$\bullet$] Created stochastic model in Java to emulate communication within the brain.
+%%		\item[$\bullet$] Searched for patterns within fMRI brain images using clustering in R.
+%	\end{innerlist}
+%\end{innerlist}
+
+Lecturer in Mathematics \hfill{July 2020 to June 2022} 
+\begin{innerlist}
+	\item[] \textbf{Massachusetts Institute of Technology}, Cambridge, MA
+\end{innerlist}
+
+\vspace{2pt}
+
+Digital Learning Fellow in Finance \hfill {July 2019 to June 2020}
+\begin{innerlist}
+	\item[] \textbf{MIT Sloan}, Massachusetts Institute of Technology, Cambridge, MA
+%	\begin{innerlist}
+%		\item Launched Finance Micromasters program on EdX platform.
+%	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}
+
+Lecturer in Strategic Finance \hfill {January 2019 to December 2021}
+\begin{innerlist}
+	\item[] \textbf{Minerva University}, San Francisco, CA
+%	\begin{innerlist}
+%		\item Teaching finance to undergraduates via proprietary online platform at startup university.
+%		\item Assisted with implementing lesson plans, designed classes, gained significant experience with online engagement and learning.
+%%		\item Minerva focuses heavily on an active learning teaching methodology and puts its instructors through training programs focused on these techniques.
+%	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}
+
+Associate Professor of Finance (\textbf{tenured} in 2015) \hfill {July 2009 to June 2019}
+\begin{innerlist}
+	\item[] Graduate Business School, \textbf{Saint Mary's College of California}, Moraga, CA
+	\begin{innerlist}
+		\item \textit{\textbf{Director}} of MS in Finance; \textit{\textbf{Founding Director}} of FinTech Certificate program.
+%		\item Taught across executive masters programs: MBA, MS in Finance, MS in Mgmt.
+%%		\item Director of MS in Finance, and founding director of FinTech certificate program which was Saint Mary's first online program.
+%%%		\item Teaching finance and operations to working adults across five different graduate degrees in either a hybrid online, or face-to-face setting.
+%%%		\item Currently founding Saint Mary's first FinTech Certificate Program, which will be mostly online.
+%%%		\item Taught in several first-iterations of hybrid programs (50\% online, 50\% face to face), including founding first MS Finance Hybrid Program.
+%%		\item Courses taught include (graduate programs in parentheses): Managerial Finance (all MBA programs), Finance for Executives (EMBA), Derivative Markets (MSF), Quantitative Methods (MSF, PMBA), Data Analysis (MSM), Financial Engineering and Risk Management (MSF).
+%%%		\item Served on numerous high-level committees including the Educational Technology Group, the Program Review Committee and the Rank and Tenure Task Force.
+%%%		\item Consistent high numbers for evaluations.
+	\end{innerlist}
+\end{innerlist}
+
+\vspace{2pt}		
+
+%Visiting Researcher-Scholar in Finance \hfill {Summer 2019}
+%\begin{innerlist}
+%	\item[] Department of Banking and Finance, \textbf{University of Zurich}, Switzerland 
+%%	\begin{innerlist}
+%%		\item Research collaborations with leading Swiss finance academics into various areas such as machine learning and artificial intelligence in finance.
+%%	\end{innerlist}
+%\end{innerlist}
+%
+%\vspace{5pt}		
+%
+%Visiting Associate Professor of Finance \hfill{Summer 2017}
+%\begin{innerlist}
+%	\item[] \textbf{Lord Meghnad Desai Academy of Economics}, Mumbai, India
+%%	\begin{innerlist}
+%%		\item Taught finance to post-graduate students; mentored and coached students for careers in finance.
+%%	\end{innerlist}
+%\end{innerlist}
+%
+%\vspace{5pt}		
+
+%\textbf{Associate Professor of Finance} \hfill {2014 to Present}
+%\begin{innerlist}
+%	\item[] Graduate Business, Saint Mary's College of California
+%%	\begin{innerlist}
+%%		\item Teaching finance to working adults across five different graduate degrees.
+%%%		\item Consistent high numbers for evaluations.
+%%	\end{innerlist}
+%\end{innerlist}
+
+
+
+%\textbf{Program Director} \hfill {2014 to Present}
+%\begin{innerlist}
+%	\item[] MS in Finance, Saint Mary's College of California
+%	\begin{innerlist}
+%		\item Responsible for curriculum, student recruiting, career placement, and overall student satisfaction.
+%		\item Developed many initiatives and partnerships to enhance recruitment, marketing, and employment for students post-graduation, including:
+%		\begin{innerlist}
+%			\item Partnership with local CFA Society.
+%			\item Created Advisory Board consisting of senior Bay Area finance executives.
+%			\item Frequent outreach to local area financial services firms for student recruitment post-graduation.
+%		\end{innerlist}
+%		\item Founded and taught first hybrid cohort for program.
+%%		\item Translating complex financial ideas into layman terms.
+%%		\item Consistent high numbers for evaluations.
+%	\end{innerlist}
+%\end{innerlist}
+%
+%\vspace{7pt}
+
+%\vspace{7pt}
+
+Visiting Assistant Professor of Economics \hfill {Autumn 2010}
+\begin{innerlist}
+	\item[] \textbf{Haas School of Business}, University of California, Berkeley, CA
+%	\begin{innerlist}
+%		\item Taught Managerial Economics.
+%%		\item Taught Intermediate Macroeconomics for the Economics Department.
+%	\end{innerlist}
+\end{innerlist}
+
+%\vspace{5pt}
+%
+%Assistant Professor of Finance \hfill {July 2009 to July 2014}
+%\begin{innerlist}
+%	\item[] Graduate Business, \textbf{Saint Mary's College of California}, Moraga, CA
+%\end{innerlist}
+
+\vspace{2pt}
+
+Economist (Senior Consultant)	 \hfill {September 2008 to May 2009}
+\begin{innerlist}
+	\item[]  \textbf{Deloitte Tax}, San Francisco, CA
+%	\begin{innerlist}
+%		\item[$\bullet$] Research into industry sectors during recessions.
+%%		\item[$\bullet$] Company-specific cost-sharing valuation and analysis.
+%%		\item[$\bullet$] Intangible asset and intellectual property valuation.
+%		\item[$\bullet$] Discount rate and cost of capital estimation.
+%	\end{innerlist}
+\end{innerlist}
+
+
+%\vspace{5pt}
+%
+%Lecturer in Economics \hfill {Jan 2007 to June 2009}
+%\begin{innerlist}
+%	\item[] \textbf{University of California}, Berkeley, CA
+%%	\begin{innerlist}
+%%%		\item Taught Managerial Economics.
+%%		\item Taught Intermediate Macroeconomics.
+%%	\end{innerlist}
+%\end{innerlist}
+
+\vspace{-7pt}
+
+\section{Select Media Interviews}
+
+%KGO Radio, Christian Science Monitor, CBS News, KTVU News, ABC News, and more.
+%\begin{description}
+%	\item[ABC Channel 7 News] On the Facebook initial public offering. 
+%	\item[KTVU Channel 5 News] On the Amazon.com sales tax and its effect on the stock.
+%\end{description}
+
+\textit{KGO Radio} Causes of volatility in US Markets in August 2015. %\hfill{2015}
+
+%\vspace{5pt}
+
+\textit{Money's Edge} Ripple versus Bitcoin and bank adoption. %\hfill{2015}
+
+%\vspace{5pt}
+
+\textit{Christian Science Monitor} IRS Ruling of bitcoin as property. %\hfill{2014}
+
+%\vspace{5pt}
+
+\textit{CBS News} Mt.Gox collapse and future of bitcoin. %\hfill{2014}
+%
+%\vspace{5pt}
+%
+%\textbf{KTVU News} Amazon.com CA sales tax and its stock price. \hfill{2012}
+%%\begin{innerlist}
+%%	\item[] Interviewed on the Amazon.com sales tax and its effect on the stock.
+%%\end{innerlist}
+%
+%\vspace{5pt}
+%
+%\textbf{ABC News} Facebook initial public offering. \hfill{2012}
+%%\begin{innerlist}	
+%%	\item[] Interviewed on the Facebook initial public offering.
+%%\end{innerlist}
+
+
+%\section{Skills}
+%%Skills include:
+%\begin{loneinnerlist}
+%	\item Active equity, fixed income and derivative securities portfolio management.
+%	\item Risk management for working capital and commodities using derivative securities.
+%	\item Understanding, developing and implementing risk measurement methodologies.
+%	\item Review and validation of quantitative models and methodologies.
+%	\item Liaising between quantitative traders and technologists.
+%\end{loneinnerlist}
+
+%\vspace{-8pt}
+
+
+%\newpage
+%\section{Technical Expertise}
+%\textbf{Analytical} Cluster, mixed-effects and factor models; Numerical methods; Linear programming
+
+%%\begin{innerlist}
+%%	\item[] Clustering, Mixed-effects models, Factor models, Numerical techniques, Linear programming
+%%\end{innerlist}
+%
+%\vspace{7pt}
+%
+%\textbf{Software} Research Insight (Compustat), Matlab, Stata, SPSS, R, Gauss
+%%\begin{innerlist}
+%%	\item[] Research Insight (Compustat), Matlab, Stata, SPSS, R, Gauss
+%%\end{innerlist}
+%
+%\vspace{7pt}
+%\textbf{Programming} Fortran, Java, PHP, MySQL, Matlab, R, C
+
+%\newpage
+
+%\section{Programming}
+%
+%Fortran, Java, PHP, MySQL, Matlab, R, C
+
+%\section{Certification}
+%
+%\textbf{Level I Certification}, Chartered Financial Analyst (CFA) Program \hfill{2012}
+
+%\vspace{-8pt}
+
+\vspace{-7pt}
+
+\section{Books}
+
+\begin{bibsection}
+	\item Sheth, Arnav, \emph{Optimal Operating Strategies Under Stochastic Cash Flows.} Lambert Academic Publishing GmbH \& Co. KG, 2011.
+\end{bibsection}
+
+%\section{Working Papers}
+%
+%\begin{bibsection}
+%	\item A. Sheth and K. Teeple (2017). Leveraging Herd Behavior in Foreign Exchange Markets: A Trading Strategy.
+%
+%	\item A. Sheth and T. Lim (2017). Fama French Factors and Business Cycles.
+%\end{bibsection}
+
+\vspace{-5pt}
+
+\section{Select Peer-Reviewed Publications}
+
+\begin{bibsection}
+	\item Lam, Nancy L., and Sheth, Arnav. (2020), Too Much of a Good Thing: The Tipping Point of Employee Voice. \emph{Journal of Economics and Business}.
+	\item A. Sheth and K. Teeple (2019). Connecting equity and foreign exchange markets through the WM ``Fix'': a trading strategy. \emph{The Journal of Investment Strategies}.
+	\item A. Sheth (2017). The Carrot: Executive Compensation, Risk-Taking and Innovation. \emph{Advances in Quantitative Analysis of Finance and Accounting}.
+%	\item N. Lam and A. Sheth (2016). Too Much of a Good Thing: The Tipping Point of Employee Voice. \emph{Academy of Management 2016 Proceedings}.
+	\item J. Kale, and A. Sheth (2016). Power-Log Portfolio Optimization for Managing Downside Risk. \emph{International Review of Business Research Papers}.
+	\item J. Kale and A. Sheth (2016). Power-Log Optimization and Positively Skewed Option Returns Raise Portfolio Performance and Reduce Risk. \emph{Journal of Investing}.
+	\item J. Kale and A. Sheth (2015). Downside Loss Aversion and Portfolio Growth. \emph{Journal of Finance and Bank Management}.
+	\item A. Sheth. (2012). Hiring, Firing and Infighting: A Tale of Two Companies. \emph{Computational Economics}.
+%	\item A. Sheth, L. Shepp, and O. Palmon (2011). Risk-taking, financial distress, and innovation. In \textit{Proceedings of the World Congress on Engineering 2011}. World Congress of Engineering, International Association of Engineers (IAENG).
+	\item A. Sheth, L. Shepp, and O. Palmon. (2011). Risk-taking, Financial Distress and Innovation. \emph{Academy of Business Journal: Special Issue on the Global Debt Crisis}.
+%	\item B. Sopher and A. Sheth (2007). A deeper look at hyperbolic discounting. In M. Abdellaoui, editor, \textit{Uncertainty and Risk: Mental, Formal Experimental Representations}, Volume 41, pages 125 to 150. Springer.
+%	\item A. Sheth, and B. Sopher. (2006). A Deeper Look at Hyperbolic Discounting. \emph{Theory and Decision}, 60:219-255.
+\end{bibsection}
+
+%\vspace{-8pt}
+
+\section{Select Presentations}
+
+\begin{bibsection}
+	\item Panel Discussion on Generative AI. CxO Conference. NYC, May 2024.
+	\item GenAI: Issues and Ethics. AdvisoryCloud Finance Board. Online, May 2024.
+	\item Artificial Intelligence: What's the Story? Indian School of Management and Entrepreneurship. Mumbai, India. April 2018.
+%	\item Artificial Intelligence: What's the Story? Meghnad Desai Academy of Economics. Mumbai, India. April 2018.
+	\item Leveraging Herd Behavior in Foreign Exchange Markets. Consortium for Data Analytics in Risk. Berkeley, CA. January 2017.
+%	\item Leveraging Herd Behavior in Foreign Exchange Markets. International Conference on Operations Research. Havana, Cuba. March 2016.
+	\item Power-Log Portfolio Optimization for Maximizing Portfolio Growth and Controlling Tail Risk. INFORMS Minneapolis, MN. October 2013.
+	\item The carrot: Rewarding Bad Managers. Western Economic Association (WEA). San Francisco, CA. June 2012.
+%%	\item Rewarding Bad Managers and Innovation. Institute for Operations Research and Management Science (INFORMS). Raleigh, NC. November 2011.
+%	\item Risk-taking, Financial Distress and Innovation. World Congress of Engineering. London, UK. July 2011.
+	\item Capturing the Chaos: Measuring Market Volatility. Pillai Institute of Management Studies. Mumbai, India. June 2011.
+%%	\item The Carrot: Rewarding Bad Managers and Innovation. Tenth International Conference on Operations and Quantitative Management (ICOQM). Nashik, India. June 2011. 
+%	\item Gambling When Broke: A Model for Optimal Managerial Behavior Under Financial Distress. Society for Industrial and Applied Mathematics Financial Mathematics and Engineering (SIAM-FME). San Francisco, CA. November 2010.
+%
+%
+\end{bibsection}
+
+
+%\section{Select Media Interviews}
+%
+%%KGO Radio, Christian Science Monitor, CBS News, KTVU News, ABC News, and more.
+%%\begin{description}
+%%	\item[ABC Channel 7 News] On the Facebook initial public offering. 
+%%	\item[KTVU Channel 5 News] On the Amazon.com sales tax and its effect on the stock.
+%%\end{description}
+%
+%\textit{KGO Radio} Causes of volatility in US Markets in August 2015. \hfill{2015}
+%
+%%\vspace{5pt}
+%
+%\textit{Money's Edge} Ripple versus Bitcoin and bank adoption. \hfill{2015}
+%
+%%\vspace{5pt}
+%
+%\textit{Christian Science Monitor} IRS Ruling of bitcoin as property. \hfill{2014}
+%
+%%\vspace{5pt}
+%
+%\textit{CBS News} Mt.Gox collapse and future of bitcoin. \hfill{2014}
+%%
+%%\vspace{5pt}
+%%
+%%\textbf{KTVU News} Amazon.com CA sales tax and its stock price. \hfill{2012}
+%%%\begin{innerlist}
+%%%	\item[] Interviewed on the Amazon.com sales tax and its effect on the stock.
+%%%\end{innerlist}
+%%
+%%\vspace{5pt}
+%%
+%%\textbf{ABC News} Facebook initial public offering. \hfill{2012}
+%%%\begin{innerlist}	
+%%%	\item[] Interviewed on the Facebook initial public offering.
+%%%\end{innerlist}
+
+%\vspace{-8pt}
+
+\section{Education}
+
+%\vspace{7pt}
+
+Ph.D., M.B.A, Quantitative Finance \hfill{2007} 
+\begin{innerlist}
+	\item[] \textbf{Rutgers Business School}, Newark and New Brunswick, New Jersey
+%	\item[] Advisor: Larry Shepp
+\end{innerlist}
+
+%\vspace{5pt}
+%
+%\textbf{M.B.A.}, Finance \hfill{2007} 
+%\begin{innerlist}
+%	\item[] Rutgers Business School, Newark and New Brunswick, New Jersey
+%\end{innerlist}
+
+\vspace{5pt}
+
+M.A., Economics \hfill{2004} 
+\begin{innerlist}
+	\item[] \textbf{Rutgers University}, New Brunswick, New Jersey 
+%	\item[] Advisor: Barry Sopher
+\end{innerlist}
+
+\vspace{5pt}
+
+B.A., Economics-Mathematics and Philosophy \hfill{2000} 
+\begin{innerlist}
+	\item[] \textbf{Lawrence University}, Appleton, Wisconsin 
+\end{innerlist}
+
+
+
+
+%\section{Non-Peer-Reviewed Publications}
+%\begin{bibsection}
+%
+%\end{bibsection}
+	
+
+
+
+
+%\section{Miscellaneous}
+%\section{Hobbies}
+%
+%Distance running, mountaineering/climbing, open water swimming, flying/aviation
+
+%Competitive Distance Runner \hfill{2005 to present}
+%\begin{innerlist}
+%	\item[] Three marathons and numerous half-marathons.
+%\end{innerlist}
+%
+%\vspace{7pt}
+%
+%Mountaineer \hfill{1991 to 1997}
+%\begin{innerlist}
+%	\item[] Four Himalayan expeditions; one as leader; altitude of up to $\sim$18,000 feet.
+%\end{innerlist}
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
