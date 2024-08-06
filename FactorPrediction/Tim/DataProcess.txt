@@ -1,0 +1,57 @@
+email service desk and ask for:
+	-alpha environment on aws
+	-qa env
+	-prod env
+
+Tim will email Yang on the environment. And information on Postman.
+
+Postman should be the priority.
+	
+What do I do with the two repos?
+
+Clone these two repos on to my laptop.
+
+aws-okta 
+	-read the readme -- you can do it after you get aws access
+	
+appscripts
+	-run the script Tim sent
+
+Set up postman:
+	-application that helps you hit / set up endpoints 
+		- endpoint is a web url that connects to an underlying function
+		- clicking on the url will do something
+	-postman helps interaction with endpoints in a user friendly way
+	
+
+We have data services that have this data.
+Postman helps with which id is associated with the asset class.
+
+Postman links:
+
+https://icapitalnetwork.atlassian.net/wiki/spaces/ENG/pages/2980381265/Setting+up+Postman+by+Data+Team
+
+https://icapitalnetwork.sendsafely.com/receive/?thread=TKES-6APT&packageCode=YPHnnV6tU4HZNqMxZW2SXDHvETCA5wCWpT0HiRW0DYQ#keyCode=khsec4VnF40oOJmO2cdoYJJXOsF1XvGCBDzfCdJ30vc
+
+Above SendSafely link has the following info:
+DEV/QA:
+token_url = https://simongroup.oktapreview.com/oauth2/ausesty3dmANUL4lH0h7/v1/token
+token_client_secret = mrbRUNxGTk1JoiGKldwoRJJRJscSMQI6N3fILAw2
+token_client_id = 0oaevl54gplnFvyx70h7
+
+PROD:
+token_url = https://simongroup.okta.com/oauth2/aus12xhtrm4lv59w32p7/v1/token
+token_client_secret = BDmENwH7svhD_kKphxNocZh9eXL7pX7jD2yn4sEo
+token_client_id = 0OA2H4RE4YM0fH3S82P7
+
+
+Feb 21 2024
+- Tim is involved with Kunpeng on mapping asset classes to indices
+	- Why indices? Because ETFs have fees.
+- Next steps:
+	- I have to do the Postman stuff and clone the Gitlab repos
+
+- Logic:
+	- Start with building blocks ETFs
+	- If not available use Envestnet Index
+	- If not available then he uses his judgement

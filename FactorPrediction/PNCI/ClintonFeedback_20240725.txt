@@ -1,0 +1,8 @@
+- keep first methodology pic, and last one; fill in the gaps with words (one slide)
+- add point estimates to fund return distributions (mean and sd)
+- pick one bad fund, put in appendix
+- clip out appendix if slides are asked for
+- let them know in the next steps slide that these results will be plugged into the optimization
+
+- rerun OLS on entire dataset, include standard errors and factor projection point estimates
+

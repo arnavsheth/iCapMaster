@@ -1,0 +1,82 @@
+Yes. Very helpful. Thank you so much. I’ll implement the changes you suggested and send you an updated deck. Thanks again and have a great rest of your time off. Sorry to have bothered you, and thanks again. 
+
+From: Clinton Tepper <ctepper@icapitalnetwork.com>
+Sent: Friday, July 12, 2024 11:26:38 AM
+To: Arnav Sheth <asheth@icapitalnetwork.com>
+Subject: Re: PNCI presentation.
+ 
+Hi Arnav,
+ 
+I think 4 and 5 are roughly at the right level, though the text needs some focus and refinement (which is fine at this stage, it’s an early draft).
+ 
+For the rest, I would bring it up a level.
+ 
+Slides 6-10 (or even including slide 5) could be distilled to a single slide or two- basically you are doing a regularized regression of the factors on the asset classes to identify the covariation. Avoid terms like multi-colinearity, linear algebra, orthogonal, etc. If you want to be fancy you could say we are doing some light machine learning to enhance the regression. I would just have an info graphic that went something like asset class indexes => ML-identified core drivers => G3 factor returns- this could be something like a less technical version of the slide 6 graphic. Then explain how we then plug in the PNCI CMAs to get the factor returns based on this relationship. Use some judgement- I think its ok to think of these as finance-centric MBA/CFA level practitioners. This altogether could be about 1-3 slides.
+
+Slide 11 could be refined to be more intuitive and less technical, but the overall message is on point.
+
+Slide 12 is (necessary and useful) appendix material- I don’t think we need to get into the risk side for this audience unless we get questions, though we could verbally mention it at a high level.
+
+I’d motivate the methodology by discussing the importance of having forward views on return and risk for both sizing positions and SAA.
+Any results slides would come after the methodology. A few live examples would probably be helpful.
+ 
+Hope this is helpful,
+Clinton
+ 
+From: Arnav Sheth <asheth@icapitalnetwork.com>
+Date: Friday, July 12, 2024 at 7:02 AM
+To: Clinton Tepper <ctepper@icapitalnetwork.com>
+Subject: Re: PNCI presentation.
+
+For what it’s worth, I had originally planned to use the flow charts from my original methodology doc written about a month ago.
+ 
+Attached is what I had planned before I spoke with Jess (slightly modified since we last spoke – I added screenshots and made a few minor changes to the flow charts). To this, I will add some results from Aniket, using PNCI’s CMAs.
+ 
+What do you think of this? Is this better? Or too technical?
+ 
+Sorry for the multiple emails.
+ 
+From: Clinton Tepper <ctepper@icapitalnetwork.com>
+Date: Thursday, July 11, 2024 at 7:57 PM
+To: Arnav Sheth <asheth@icapitalnetwork.com>
+Subject: Re: PNCI presentation.
+
+Hi Arnav,
+ 
+Per our conversation, I mean my feedback in as constructive a manner as possible. In the future, please message me when you are confused on the direction- I almost always will respond to e-mail while on vacation within 48 hours, and usually within a day.
+ 
+ 
+Slide 8 is a good start- I would use it to organize the methodology that you will present. However, the point of the slide could be clearer- we take the externally provided CMAs, use them to project the factors, and use those to project the assets (risk and return). The optimization then can use these inputs.
+Slides 2-7 are not usable in their present form. Much of this is copy and pasted verbatim (slides 2-4,6) or from the speaker notes (slide 5). We can insert G3 slides, if we wish, where it makes sense, but they have seen all these slides in past presentations- for some of them, they have seen it multiple times. I’ll have the G3 quant deck available in any case.
+As discussed, please run the model and create factor projections using their CMAs, and present the results in an interesting format. I think it’s fine to only project a couple of assets, but live numbers will make this concrete. You could also work with Aniket to use G3 to create a histogram (or some other visualization/table) for potential asset level results- this is probably as far as we want to go, and only for a few important sample assets.
+Eventually we will want to run this through an optimizer, but I think we can hold off on that for now (though I may check with Jess there).
+ 
+All that said, I am quite happy with your work in general, and greatly appreciate your contribution to the group. Please let me know if you have any questions about the above.
+ 
+Safe travels,
+Clinton
+ 
+ 
+From: Arnav Sheth <asheth@icapitalnetwork.com>
+Date: Thursday, July 11, 2024 at 6:18 PM
+To: Aniket Inamdar <ainamdar@icapitalnetwork.com>, Kunpeng Lin <klin@icapitalnetwork.com>
+Cc: Clinton Tepper <ctepper@icapitalnetwork.com>
+Subject: PNCI presentation.
+
+Hi All,
+ 
+We have a call with PNCI on Monday July 29 for the factor projection/optimization. I need your help to finalize the attached deck. How much do we want to add about the optimization methodology and issues? Also, I’m a little unsure on what technical aspect to include in the deck since I spoke with Jess on Tuesday about this presentation and our past relationship with PNCI.
+ 
+Here are the highlights of my conversation with her. This will, hopefully, put the deck into context.
+They are a very friendly bunch; almost the anti-Alphacore.
+All are non-PhDs, and we should try and say at the 10,000 foot level as far as possible.
+Nick Bailey (senior member of their group) asked how we derive SI and alts CMAs, and Jess thought it would be good to share our factor projection/optimization methodology.
+They are trying to attach a sleeve of alts to their model portfolios.
+As of now they have their own CMAs, but they might be interested in iCMAs once they are out.
+They use “harmonization” instead of portfolio optimization so I’ve used that word in the deck.
+ 
+We will have a dry run with Jess on Friday July 26. I am back in office on July 25. I’m available through my vacation, though the time zones will be a bit off (I’m in Mongolia). Also, connectivity might be an issue.
+ 
+Thanks,
+Arnav
+ 

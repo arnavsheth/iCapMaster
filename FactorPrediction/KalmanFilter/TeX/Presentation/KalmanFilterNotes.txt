@@ -1,0 +1,52 @@
+WHAT IS A KALMAN FILTER?
+
+SLIDE 1
+
+There is confusion in the way they are commonly used across the two disciplines:
+	- In engineering, parameters known, state variables to be estimated.
+	- In economics, parameters to be estimated, state variables known.
+
+SLIDE 2
+
+
+
+
+
+WHY KALMAN FILTERS?
+
+SLIDE 3
+
+1. They embody the Markov property and boil down to a set of recursions. Thus amenable to situations where we have a lot of data.
+
+2. Standard linear models likely to be thrown off course by unknown structural breaks and regime changes, resulting in biased parameter estimates and inaccurate forecasts.
+
+For example, you could use rolling OLS to cope with structural breaks, but fitted values of Kalman filters react more quickly. 
+
+3. The Kalman filter construction of the state vector is essentially via OLS. 
+
+
+SLIDE 7
+
+- In this setup, \eta_t is the element in the transition equation driving mu_t to change over time.
+- If \sigma^2_\eta is zero or close to zero this implies that \mu_t is effectively constant and does not need to be allowed to vary over time.
+	- In this situation, a constant drift model would probably be preferable.
+	
+SLIDE 8
+
+- This model is more familiar. Also known as the STOCHASTIC SLOPE model.
+
+- Time-varying parameter models are an extension of the fixed-parameter models. 
+	- E.g., the effects of improving technology, improving efficiency,, reduced production costs, increased scarcity of resources, etc.
+	- If fuel consumption is y, and engine size is x, the slope estimate ought to be positive, diminishing as engines become more fuel efficient.
+
+SLIDE 10
+- \beta is assumed to follow a normal distribution with mean b and variance P. 
+	- Since no prior information is usually available, the convention is to set b to its expected value of 0, and P to an arbitrarily large number such as 1,000,000.
+	- Logic is that \beta is assumed to be integrated of order one. Meaning, it requires one degree of differencing to be stationary. 
+	- A non-stationary series usually exhibits an infinite variance.
+	- The arbitrary nature of setting these values is considered a disadvantage of using Kalman filters.
+
+
+- The recursive process is used to effectively choose the Kalman gain to effectively minimize \sigma_\eta^2.
+
+

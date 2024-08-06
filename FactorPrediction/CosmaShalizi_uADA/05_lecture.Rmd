@@ -1,0 +1,538 @@
+---
+title: "Minimal Advice on Programming in R"
+author: "36-402"
+date: "January 25, 2016"
+output: html_document
+---
+
+Style
+===
+
+- You _will_ comment your code
+    - Comment every function with purpose, inputs, outputs
+- You _will_ use meaningful names
+- You _will_ indent code blocks (Control-I)
+    ```{r}
+# Calculate quantiles of the Pareto distribution
+# Inputs: desired quantile (p)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: the pth quantile
+qpareto.1 <- function(p, exponent, threshold) {
+  q <- threshold*((1-p)^(-1/(exponent-1)))
+  return(q)
+}
+```
+
+- You _ought_ to avoid calling your main data set `data`
+    - vague
+    - already the name of a function for loading data sets from packages
+    - often the name of arguments in e.g. model-fitting functions
+    - both of those make it hard to trace what's going on
+    ```{r,eval=FALSE}
+#Excerpt from HW1 solutions
+data <- read.csv("http://www.stat.cmu.edu/~cshalizi/uADA/16/hw/01/CAPA.csv")
+value.median.mean <- lm(Median_house_value ~ Median_household_income
+                        + Mean_household_income, data=data)
+```
+    - Makes you feel crazy
+
+
+**A treat:** The following is code from a prominent statistician:
+```{r,eval=FALSE}
+### CENSORED TO PROTECT THE INNOCENT ###
+```
+
+Functions
+===
+
+- Use functions to tie together related commands so they can be repeated
+
+    *Example:* Suppose that we want to easily compute the quantiles of the Pareto distribution.  The density function is:
+\[f(x;\alpha,x_0) = \begin{cases}
+\frac{\alpha-1}{x_0}\left(\frac{x}{x_0}\right)^{-\alpha} & x \ge x_0\\
+0 & x < x_0
+\end{cases}\]
+and the quantile function is
+\[Q(p; \alpha,x_0) = x_0(1-p)^{-\frac{1}{\alpha-1}}\]
+    ```{r}
+# Calculate quantiles of the Pareto distribution
+# Inputs: desired quantile (p)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: the pth quantile
+qpareto.1 <- function(p, exponent, threshold) {
+  q <- threshold*((1-p)^(-1/(exponent-1)))
+  return(q)
+}
+```
+
+    Then instead of 
+    ```{r}
+# alpha = 2.33, x_0 = 6e8, p = 0.5
+6e8 * (1-0.5)^(-1/(2.33-1))
+
+# alpha = 2.33, x_0 = 6e8, p = 0.4
+6e8 * (1-0.4)^(-1/(2.33-1))
+
+# alpha = 2.5, x_0 = 1e6, p = 0.92
+1e6 * (1-0.92)^(-1/(2.5-1))
+```
+
+    we can say
+
+    ```{r}
+qpareto.1(p=0.5, exponent=2.33, threshold=6e8)
+qpareto.1(p=0.4, exponent=2.33, threshold=6e8)
+qpareto.1(p=0.92, exponent=2.5, threshold=1e6)
+```
+
+    Much harder to make mistakes!
+
+
+- Arguments: what does the function need to know?
+    - Default values let you omit arguments that don't change often
+    - Default values can always be over-ridden
+    ```{r}
+# Calculate quantiles of the Pareto distribution
+# Inputs: desired quantile (p)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+  # flag for whether to give lower or upper quantiles (lower.tail)
+# Outputs: the pth quantile
+qpareto.2 <- function(p, exponent, threshold, lower.tail=TRUE) {
+  if(lower.tail==FALSE) {
+    p <- 1-p
+  }
+  q <- threshold*((1-p)^(-1/(exponent-1)))
+  return(q)
+}
+
+qpareto.2(p=0.92, exponent=2.5, threshold=1e6)
+qpareto.2(p=0.92, exponent=2.5, threshold=1e6, lower.tail=FALSE)
+```
+    - No-argument functions can be useful for simulation
+    ```{r, fig.height=3,fig.width=4}
+# (Unrelated to the quantile functions)
+# Function to return the biggest correlation of 5 length-10 Gaussian vectors
+# Takes no arguments, so it can be used in a simulation
+random.correlation.max = function(){
+  #Draw a 10x5 matrix of Gaussians
+  X = matrix(rnorm(50),nrow=10,ncol=5)
+  #Compute the correlation matrix
+  cor.matrix = cor(X)
+  #Find the biggest entry, making sure to avoid the diagonal (which is all 1)
+  return(max(cor.matrix[upper.tri(cor.matrix)]))
+}
+
+#Draw 100 samples and plot them
+hist(replicate(100,random.correlation.max()),20,col='grey', main="Max. Correlation",xlab='correlation')
+```
+    - `...` indicates pass-through arguments.  You won't use this very often, but many `R` functions do.
+- Return value
+    - Try to be explicit about what you return
+    - Use `c()` or `list()` to return more than one thing (We will see some examples of this)
+
+
+
+
+When should we write functions?
+===
+
+- When we're repeating the same thing multiple times
+- When we're writing very similar code over and over
+- When we're breaking down a big job into smaller ones
+- When we're told to
+
+**Example:** From Solutions to Homework 1.  You were asked to make several maps of your residuals.  The following function was modified from last term.
+```{r, eval=FALSE}
+# Set up a function to make maps
+  # "Terrain" color-levels set based on quantiles of the variable being plotted
+# Inputs: vector to be mapped over the data frame; number of levels to
+  # use for colors; name of the longitude coordinate; name of the lattitude
+  # coordinate; data frame to take coordinates from; other plotting arguments
+# Outputs: invisibly, list giving cut-points and the level each observation
+  # was assigned
+mapper <- function(z, levels, x="LONGITUDE", y="LATITUDE", data,
+                   legend.loc="topright", ncol=1, ...) {
+    # Which quantiles do we need?
+    probs <- seq(from=0, to=1, length.out=(levels+1))
+    # What are those quantiles?
+    z.quantiles <- quantile(z, probs)
+    # Assign each observation to its quantile
+    z.categories <- cut(z, z.quantiles, include.lowest=TRUE)
+    # Make up a color scale
+    shades <- terrain.colors(levels)
+    plot(x=data[,x], y=data[,y], col=shades[z.categories], ...)
+    legend(x=legend.loc, legend=levels(z.categories), col=shades,
+           ncol=ncol, pch=19)
+    invisible(list(quantiles=z.quantiles, categories=z.categories))
+}
+```
+
+Chaining functions together
+===
+
+- Divide the big job ("come up with a confidence band") into smaller parts
+- Write a function for each part
+- Make sure the outputs of the early steps can be used as inputs to the later steps
+- Recurse if need be: the sub-functions spawn sub-sub-functions, etc.
+- We can often re-use the sub-functions (e.g., `resample()`)
+
+**Example** I work on a statistics problem in inference for networks/graphs.  Suppose that I want to run a hypothesis test about an edge in the graph.  I might need:
+
+- A function that carries out the test.  It calls:
+    - A function that can draw a sample from a particular null distribution.  It calls:
+        - A function that can check the validity of a particular sample.
+
+This is helpful for many reasons:
+
+- Many different tests use this null distribution
+- The validity check shows up in many other problems
+- I can debug each piece individually, starting from the bottom
+- I can have a set of tests for each piece, so I notice when I break it
+
+Calling functions from other functions
+===
+
+It is often convenient to call functions from other functions, as we build functionality.  As a simple example, we could have avoided replicating the quantile code from `qpareto.1` in `qpareto.2` as follows.
+```{r}
+# Calculate quantiles of the Pareto distribution
+# Inputs: desired quantile (p)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+  # flag for whether to give lower or upper quantiles (lower.tail)
+# Outputs: the pth quantile
+qpareto.3 <- function(p, exponent, threshold, lower.tail=TRUE) {
+  if(lower.tail==FALSE) {
+    p <- 1-p
+  }
+  q <- qpareto.1(p, exponent, threshold)
+  return(q)
+}
+```
+This calls `qpareto.1` to do the actual calculation, after making corrections for the `lower.tail` argument.
+
+This is very useful!  You will often be working with several intertwined functions at the same time.  We should be very careful to understand what happens.
+
+A *very* simple example:
+```{r}
+# A very simple function that adds one to its argument
+add.one = function(x){
+  x+1
+}
+
+# A function that calls add.one to do its addition
+add.stuff = function(x){
+  return(add.one(x))
+}
+
+# See? We can add!
+add.stuff(3)
+
+# A terrible job rewriting add.one
+add.one = function(x){
+  x+2
+}
+
+#Now what?
+add.stuff(3)
+```
+The `add.stuff` function looks for `add.one` each time it is called.  If `add.one` has changed, it uses the new version of the function.  It does not save a snapshot at the time `add.stuff` is defined.
+
+This is great, since it lets you easily edit all your functions and have the changes propagate.  However, you do need to be aware and careful. 
+
+
+Debugging
+===
+
+Eventually, you will break something.
+
+- **Problem**: the final piece of code you write gives an incomprehensible error message
+- **Idea**: Carefully characterize the bug, then narrow down where it could be until the the problem is obvious.
+- Strategy: make sure all the lower-level pieces are working properly
+    - Start debugging from the bottom
+    - If all the small bits work on their own, the bug comes when you put them together
+- Use test cases
+    - "What should this do if it works?"
+    - "What should this _not_ do if it's broken?"
+- When you meet a new bug, write a new test
+    - "How do I know if this is fixed?"
+    - Test could be very minimal: "It runs without crashing"
+- `traceback()`: Show all the calls leading to the last error
+    - Look for the last line of code you wrote
+    - This helps localize where things went wrong
+- `browser()`: A convenient way to mess around inside a function
+    -When called within a function, gives you an R shell there
+    -Avoids problems with local variables disappearing
+- A favorite line: Executes `[Dangerous Expression]` and calls `browser()` if there is an error.  Great for seeing problems that only happen     sometimes inside of for loops inside of functions.
+    ```{r, eval=FALSE}
+tryCatch({[Dangerous Expression]},warning=function(w){browser()},
+         error=function(e){browser()})
+```
+
+**Example:**  Suppose that I want to sample a Pareto random variable.  I know that if $F(x)$ is the CDF for a distribution and $U$ is a uniform random variable, then $F^{-1}(U)$ has the F distribution.
+
+First, for good practice, define a version of the quantile function that validates inputs
+```{r}
+# Calculate quantiles of the Pareto distribution
+# Inputs: desired quantile (p)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+  # flag for whether to give lower or upper quantiles (lower.tail)
+# Outputs: the pth quantile
+qpareto.4 <- function(p, exponent, threshold, lower.tail=TRUE) {
+  #browser()
+  stopifnot(p >= 0, p <= 1, exponent > 1, threshold > 0)
+  q <- qpareto.3(p,exponent,threshold,lower.tail)
+  return(q)
+}
+```
+```{r, eval=FALSE}
+#Try it with a bad input
+qpareto.4(p=0.92,exponent=2.5,threshold=-1,lower.tail=FALSE)
+```
+
+Now we can define a random pareto function.  This version is (intentionally) buggy!
+```{r}
+# Generate random numbers from the Pareto distribution
+# Inputs: number of random draws (n)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: vector of random numbers
+rpareto <- function(n,exponent,threshold) {
+  x <- vector(length=n)
+  for (i in 1:n) {
+    x[i] <- qpareto.4(p=runif(1),exponent=exponent,threshold=threshold)
+  }
+  return(x)
+}
+```
+
+We can run it and get an error
+```{r, eval=FALSE}
+# If we run this block in Rmarkdown, it will break our document
+# Run this in an R session.
+rpareto(10)
+rpareto(n=10,exponent=2.5,threshold=1)
+
+```
+
+
+
+Avoid iteration
+===
+
+- Iterating in R is often quite slow
+- R has lots of ways to avoid iteration
+- This is often faster!  And easier to follow!
+
+Compare:
+```{r}
+# Generate random numbers from the Pareto distribution
+# Inputs: number of random draws (n)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: vector of random numbers
+rpareto.1 <- function(n,exponent,threshold) {
+  x <- vector(length=n)
+  for (i in 1:n) {
+    x[i] <- qpareto.4(p=runif(1),exponent=exponent,threshold=threshold)
+  }
+  return(x)
+}
+
+# Generate random numbers from the Pareto distribution
+# Inputs: number of random draws (n)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: vector of random numbers
+rpareto.2 <- function(n,exponent,threshold) {
+  x = replicate(n, qpareto.4(p=runif(1),exponent=exponent,threshold=threshold))
+  return(x)
+}
+
+system.time(rpareto.1(10000,exponent=2.5,threshold=1))
+system.time(rpareto.2(10000,exponent=2.5,threshold=1))
+```
+
+We could try vectorizing our function better:
+```{r}
+#Our `qpareto1` functions can handle vector `p` arguments just fine.
+qpareto.4(c(.1,.2,.3), 2.5, 1)
+
+# Generate random numbers from the Pareto distribution
+# Inputs: number of random draws (n)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: vector of random numbers
+rpareto.3 <- function(n,exponent,threshold) {
+  x = qpareto.4(p=runif(n), exponent=exponent, threshold=threshold)
+  return(x)
+}
+system.time(rpareto.3(10000,exponent=2.5,threshold=1))
+
+```
+
+**Other approaches to removing iteration**
+
+- use `ifelse` to do conditional things to entire vectors
+    ```{r, fig.width=4, fig.height=4}
+    # Calculate Huber's loss function
+# Input: vector of numbers x
+# Return: x^2 for |x|<1, 2|x|-1 otherwise
+huber <- function(x) {
+  return(ifelse(abs(x) <= 1, x^2, 2*abs(x)-1))
+}
+x = seq(from=-3,to=3,length.out=100)
+plot(x,huber(x))
+```
+
+- use matrix operations
+    ```{r}
+# Get some long vectors
+n = 100000
+a = rnorm(n)
+b = rnorm(n)
+# Find the inner product with a for loop
+system.time({
+total = 0
+for(i in 1:length(a)){total = total + a[i]*b[i]}
+})
+# Find the inner product with matrix operations
+system.time({
+a %*% b #R handles vector dimensions in a funny way here.  Read ?matmult
+})
+```
+
+- use vector arithmetic 
+    ```{r}
+# Get some long vectors
+n = 100000
+a = rnorm(n)
+b = rnorm(n)
+
+# Find the sum with a for loop, don't preallocate memory
+system.time({
+total = numeric(0) #Don't actually allocate any space
+for(i in 1:length(a)){total[i] = a[i]+b[i]}
+})
+
+# Find the sum with a for loop, allocate memory all at once
+system.time({
+total = numeric(n) #Allocate space ahead of time
+for(i in 1:length(a)){total[i] = a[i]+b[i]}
+})
+
+# Find the inner product with matrix operations
+system.time({
+a + b #R handles vector dimensions in a funny way here.  Read ?matmult
+})
+```
+- use `apply` to apply a function to rows or columns of a matrix.  Use `sapply` to apply a function to every element of a vector.
+    ```{r}
+#Make a 100x100 matrix of uniform [0,1] variables
+X = matrix(runif(10000),nrow=100,ncol=100)
+#Find the maximum of each column
+column.maxs = apply(X, MARGIN = 2, FUN = max)
+#Plot a histogram.  Do you know the distribution?
+hist(column.maxs,20)
+```
+
+**A sidenote on matrix arithmetic and subsetting**
+
+When subsetting a matrix, we expect R to return another matrix.
+```{r}
+#Make a matrix
+X = matrix(rnorm(12),nrow=4,ncol=3)
+X
+#We would expect the following to all return 3x3 matrices
+t(X) %*% X
+t(X[1:3,]) %*% X[1:3,]
+t(X[1:2,]) %*% X[1:2,]
+t(X[1,]) %*% X[1,]
+```
+
+What went wrong?
+```{r}
+    dim(X)
+    dim(X[1:2,])
+    dim(X[1,])
+```
+
+When we choose a subset with at least one dimension 1, R drops those dimensions!  For a 2-D matrix, this becomes a 1-D vector!  Many functions treat a vector very differently.
+```{r}
+dim(X)
+length(X)
+dim(X[,1])
+length(X[,1])
+```
+
+To fix this, we can specify that the additional dimension should not be dropped.
+```{r}
+dim(X[,1,drop=FALSE])
+length(X[,1,drop=FALSE])
+t(X[1,,drop=FALSE]) %*% X[1,,drop=FALSE]
+```
+
+Do not be afraid of iteration
+===
+
+- Some jobs are just inherently iterative
+- Use it when that's what you need to do
+- If you're storing stuff as you go, create the variables which you're storing into
+outside the loop
+```{r, eval=FALSE}
+sim.ar <- function(n,x1,phi=0,sd=1) {
+  x <- vector(length=n)
+  x[1] <- x1
+  for (t in 2:n) {
+    x[t] <- phi*x[t-1]+rnorm(1,mean=0,sd=sd)
+  }
+  return(x)
+}
+```
+
+Returning vectors and lists
+=====
+
+A function can return one *thing*.  Often you want to return more than one value.
+- For several values of the same type, you can return a vector
+- For several different sorts of values, you can return a list.  You can even assign names!
+
+For an example of returning a list, we return to the random correlation matrix example
+```{r}
+# Function to return the correlation matrix of 5 length-10 Gaussian vectors
+random.correlation.matrix = function(){
+  #Draw a 10x5 matrix of Gaussians
+  X = matrix(rnorm(50),nrow=10,ncol=5)
+  #Compute the correlation matrix
+  cor.matrix = cor(X)
+  cor.matrix
+}
+#Function to compute summaries of a correlation matrix
+matrix.extremes = function(M){
+  #Extract the off-diagonal entries
+  off.diagonal = M[upper.tri(M)]
+  #Return the largest and smallest off-diagonal entries
+  return(list(max = max(off.diagonal), min = min(off.diagonal)))
+}
+matrix.extremes(random.correlation.matrix())
+replicate(5,matrix.extremes(random.correlation.matrix()))
+```
+
+For an example of returning a vector, we look at our rpareto function from earlier:
+```{r}
+# Generate random numbers from the Pareto distribution
+# Inputs: number of random draws (n)
+  # exponent of the distribution (exponent)
+  # lower threshold of the distribution (threshold)
+# Outputs: vector of random numbers
+rpareto.3 <- function(n,exponent,threshold) {
+  x = qpareto.4(p=runif(n), exponent=exponent, threshold=threshold)
+  return(x) #If n>1, this is a vector!
+}
+
+#This will return a vector of 10 things:
+rpareto.3(10,2.5,1)
+```

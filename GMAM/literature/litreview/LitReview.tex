@@ -1,0 +1,420 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+%\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+ \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+
+%% \makeatletter
+%\def\ps@pprintTitle{%
+%\let\@oddhead\@empty
+% \let\@evenhead\@empty
+% \def\@oddfoot{}%
+% \let\@evenfoot\@oddfoot}
+%%\makeatother
+
+\makeatletter \def\ps@pprintTitle{  \let\@oddhead\@empty  \let\@evenhead\@empty  \def\@oddfoot{\hfill\emph{\today}}  \def\@evenfoot{\thepage\hfill}} \makeatother
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb, enumitem, amsmath, mathtools, yhmath, enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+%% You might want to define your own abbreviated commands for common used terms, e.g.:
+\newcommand{\kms}{km\,s$^{-1}$}
+
+%%\journal{Nuclear Physics B}
+
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{Literature Review for GMAM 3.0}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[first]{Arnav A. Sheth, Ph.D.}
+\affiliation[first]{organization={iCapital Network},%Department and Organization
+            addressline={60 E 42 St}, 
+            city={New York City}}
+            %%postcode={}, 
+            %%state={},
+            %%country={}}
+
+\begin{abstract}
+%% Text of abstract
+There are two purposes to this review. First, to familiarize myself with the literature on quantifying and measuring Private Equity (and alternative asset) risk and returns in a systematic manner. And second, to see if we can use this to identify where we can place GMAM 3.0 in the literature. There are also some additional papers I've added here that will help in the discussion of future directions we can take the model.
+\end{abstract}
+
+%%Graphical abstract
+%\begin{graphicalabstract}
+%\includegraphics{grabs}
+%\end{graphicalabstract}
+
+%%Research highlights
+%\begin{highlights}
+%\item Research highlight 1
+%\item Research highlight 2
+%\end{highlights}
+
+%%\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword, up to a maximum of 6 keywords
+%% keyword 1 \sep keyword 2 \sep keyword 3 \sep keyword 4
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+%%\end{keyword}
+
+
+\end{frontmatter}
+
+%\tableofcontents
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}
+The task of doing a literature survey in this area while keeping the specific idea of GMAM 3.0 (henceforth, GMAM) in mind is twofold. Firstly, there is the literature on PE risk and valuation itself. Secondly, there are the specific mathematical and statistical techniques used within GMAM in particular, and empirical asset pricing of financial time series in general, which have their own vast literature. There is, from what I've seen so far, fairly limited overlap between the two. In fact, the only paper that arguably falls into this category that I've seen so far is \cite{Ang2014}, and possibly \cite{Ang2007}. \\
+
+To that end, I've split this review into two parts. The first part goes through some of the literature on PE valuation (i.e., return measurements) and risk. The second part goes through the literature on Bayesian modeling of financial time series, and also filling gaps in data using Bayesian techniques. In this part, I've also included some techniques that might be used to enhance or extend GMAM or make for interesting reading perhaps for GMAM 4.0. 
+
+\section{PE Return, Risk, and Cash Flow Dynamics}
+
+\begin{enumerate}[label=(\roman*)]
+	\item \cite{Kaplan2015} have arguably the most comprehensive set of articles on measuring PE performance. 
+	
+	\item \cite{Korteweg2019} has an excellent review on the empirical methods to assess risk and return in PE.  
+\end{enumerate}
+
+Several articles below are from the above two articles. Articles not included in the above two reviews were either found in the reference lists of the papers listed above, or via compelling abstracts found online in public repositories such as SSRN or ArXiv. All studies in this list perform some kind of empirical analysis.
+
+\subsection{IRR and MOIC: The PME Techniques}
+
+The PME or public market equivalent techniques compare various aspects of the PE portfolio (IRR, MOIC) with an equivalent measure that can be found in public markets.
+
+\begin{enumerate}[resume, label=(\roman*)]
+	\item \cite{Long1996} create a market-adjusted IRR in what has become known as the Long Nickels Public Market Equivalent (LN PME) or Index Comparison Method (ICM). PME techniques infer alpha \emph{indirectly} by comparison to a return that could have been obtained by investing in some benchmark by equating capital flows form the PE fund, with equivalent capital flows into a public benchmark. Then they compare the IRR of a fund to the IRR of a comparable public equity benchmark (the S\&P 500). Their measure is extremely sensitive to investment sequencing, and cannot be calculated for funds that are very successful, i.e., return capital very early on in their lives. It is essentially a heuristic approach. In essence, their method can be summed up in the following equations. \\
+	
+	The residual value of the PME is defined as:
+	\begin{equation}
+		NAV_{ICM} = \sum FV(C) - \sum FV(D)
+	\end{equation}
+	where $C$ are the contributions, and $D$ are the distributions. The IRR is defined as
+	\begin{equation}
+		IRR_{ICM} = IRR(C, D, NAV_{ICM})
+	\end{equation}
+	And the IRR spread of the PE portfolio is defined as
+	\begin{equation}
+		\Delta IRR = IRR_{PE} - IRR_{ICM}
+	\end{equation}
+
+	The PME approach has tremendous intuitive value and has been improved on by several papers including \cite{Rouvinez2003}, \cite{Cambridge2013}, and more.
+
+	\item \cite{Kaplan2005} propose another PME, which is a method to market-adjust the MOIC instead of the IRR. In essence, they seek to find out how much wealthier the investor has become at time $n$ by investing in the PE portfolio instead of a reference benchmark. They calculate the ratio of the sum of discounted distributions to the sum of discounted capital calls, where the discount rate is from a specific reference starting date up to the date of the cash flow in question. They also provide quantiles to fund returns, along with size weighted (based on committed capital) returns. The advantage to their technique is its intuitiveness. They provide a PME for each fund that if greater than 1 outperforms the benchmark (in their paper, the S\&P 500), and if less than 1 underperforms the benchmark. The basic equation is as follows:
+	\begin{equation}
+		\frac{\sum FV(D) + NAV_{PE}}{\sum FV(C)}
+	\end{equation}
+	So it ends up being effectively, a TVPI (total value paid-in capital\footnote{The ratio of cash distributions and, for unrealized investments, accounting values to total cash invested.}) or money multiple of the future values of the portfolio's cash flows. 
+	
+	\cite{Sorensen2013} provide a formal and rigorous justification for the Kaplan-Schoar PME, and show that it is a generalized method-of-moments estimator using the stochastic discount factor implied by \cite{Rubinstein1976}'s version of the capital asset pricing model (CAPM).
+
+	\item \cite{Gredil2014} improve on the various PMEs with another PME technique called the Direct Alpha method. They discount the alpha to the relevant benchmark that discounts the PE fund cash flows to a NPV of zero. This method is easier to calculate, more intuitive, and has fewer instances where it cannot be calculated. They frame the other PMEs as \emph{indirectly} calculating a $\Delta$ IRR against matched investments in the reference benchmark, whereas the Direct Alpha technique represents direct calculation of the PE portfolio's exact alpha:
+	\begin{equation}
+		\alpha = \frac{\ln \left(1 + a \right)}{\Delta}
+	\end{equation}
+	where $a$ is the discrete-time analog of $\alpha$:
+	\begin{equation}
+		a = IRR(FV(C), FV(D), NAV_{PE})
+	\end{equation}
+	and $\Delta$ here is the time interval for which $\alpha$ is computed (typically one year). One can think of Direct Alpha as annualizing the \cite{Kaplan2005} method, while taking into account both the performance of the reference benchmark and the precise times at which capital is actually employed.	
+
+	\item \cite{Sorensen2013}
+
+\end{enumerate}
+
+These studies are pertinent in that they are techniques used to measure returns on PE funds. Furthermore, they are relevant for historical placement of GMAN in the literature. And finally, while several studies look at averages of returns of funds, these focus on individual fund returns. 
+
+\subsubsection{My Take on the PMEs}
+The power of these techniques is in their intuitive appeal, and their ability to match with some public market reference rate. Models that possesses these qualities are easy to market. While they may not have the statistical or mathematical rigor of more complicated models, they do have the advantage of intuition and popularity. 
+
+\subsection{Other Related Papers: Non-PME Techniques}
+
+\begin{enumerate}[resume, label=(\roman*)]
+	\item \cite{Ewens2013} use model PE valuation as a principal-agent problem, and use it to value fund performance. They estimate quarterly private equity returns using GP estimates of value changes as we do at iCapital. They use these to measure whether and how idiosyncratic risk is priced into PE using a simple one-factor model, as well as factor analysis al la \cite{Fama1993}. They use \cite{Dimson1979} (among others) as a way to correct for regressing lagged fund returns with nonlagged factor data. Their data consists of 741 buyout and 1,040 VC funds. \\
+	
+	Their formulation is as a utility-maximization problem:
+	\begin{equation} 
+	\begin{split}
+		&\max_{\phi} E_{\Omega_{vc}} \left[u(w(\phi))\right]  \\
+			&s.t. E_{\Omega_{vc}} \left[ \frac{\theta_i^{*} ( 1 - \phi ) \mu_i I}{1 + \theta_i^{*}( 1 - \phi) \beta_i E \left[ R_m \right]}\right] \geq I. 
+	\end{split}
+	\end{equation}
+	
+	where $\theta_i^{*}$ is the optimal fraction of the portfolio company given up to PE investors\footnote{As a solution of the minimization problem $\min \theta_i, s.t., \phi\theta_iI\mu_i - \frac{1}{2} AI^2 \phi^2 \theta_i^2 \sigma_i^2 \geq e_{vc}$}, $\phi$ is the predetermined contract between the PE firm and the portfolio company, $\sigma_i^2 = \beta_i^2 + \sigma_m^2 + \sigma_{\epsilon_i}^2$ is the total variance of payoffs, and $\mu_i = 1 + \alpha_i + \beta_i E\left[ R_m \right]$ is the expected return on the project.
+	
+	\item \cite{Ljungqvist2002} is another paper that measures individual fund returns. Theirs is a purely empirical study and they do not have a PME. They focus on funds in the 1980s and 1990s, and they calculate fund betas by regressing excess IRRs on a number of variables, including: log fund size, dummy for first-timers, portfolio firm beta, log fund inflows, a portfolio firm concentration measure, and more. They do find some interesting facts. For instance, the greater the money raised in the fund's vintage year, the worse is the fund's subsequent performance; fund size is a significant contributor to performance; and pooling venture and buyout funds does not significantly change the results. Though $R^2$ values are low, including portfolio firm concentration (as measured by the Herfindahl index) increases $R^2$ from 3.7\% to 5.7\%. Overall, statistical inference should be made with caution since it is not clear if standard errors are robust to  heteroskedasticity. They use US data from one PE firm with 73 funds.
+
+	\item \cite{Takahashi2002} introduce the very popular `Yale Model' which is a discrete-time deterministic approach. It is used as a benchmark for several other papers including \cite{Karatas2021} (see below). Their model consists of three deterministic equations:
+	\begin{align}
+		C_t 		&= RC_t (CC - PIC_t), 				\text{where $PIC_t = \sum_0^{t-1} C_t$}		\\
+		D_t 		&= RD \left[NAC_{t-1} \times (1 + G) \right], 	\\
+				&\qquad \qquad \text{where $RD = \max \left[ Y, (t/L)^B \right]$}	\notag \\
+		NAV_t	&= \left[ NAV_{t-1} \times (1 + G) \right] + C_t - D_t
+	\end{align}
+	
+	The model is built upon these three simple interrelated equations, and it is adjustable with actual data. However, the model depends on certain assumptions, and some input parameters are needed to be estimated. The values of rate of contribution, bow factor\footnote{Defined as the distribution rate over the life of the investment.}, and life of the fund assigned by investor’s knowledge and growth rate is projected using the given data before implementing the model. Another drawback of the model is the dependency of contributions and distributions in the model. The calibration of the model with recent data is difficult because of this dependency.
+
+	\item \cite{Cochrane2004} measures the mean, standard deviation, alpha and beta of venture capital \emph{project returns} (not fund returns), using a maximum likelihood estimate that corrects for selection bias. He only observes a valuation when a firm goes public, receives new financing, or is acquired. Since these events are more likely when the firm has experienced a good return, there is a survival bias to these firms. This bias is the one that is corrected for using the MLE. His main model is:
+	\begin{align}
+		\ln \left( \frac{V_{t+1}}{V_t} \right) &= \gamma + \ln R_t^f + \delta \left( \ln R_{t+1}^m - \ln R_t^f \right) + \varepsilon_{t+1} 	\\
+		\epsilon_{t+1} &\sim N(0, \sigma^2) \notag
+	\end{align}
+	Note that the equation above is like the CAPM but using log instead of arithmetic returns. Though the identification strategy is similar to that of \cite{Ang2014}, this focuses on selection bias, as well as only focusing on VC projects, not PE projects. From a modeling standpoint, it is an evolutionary precursor to \cite{Ang2014}, \cite{Korteweg2011}, and others who have estimated private equity returns. 
+
+	\item \cite{Korteweg2011} 	combine a Type-2 Tobit model with a dynamic filtering and smoothing problem. They use a MCMC estimator using Gibbs sampling, which produces the posterior distribution by iteratively simulating from three simpler distributions: a Bayesian regression, a draw of truncated random variables, and a path from a Kalman Filter. They focus on the endogenous reporting of returns (what they call the ``dynamic selection problem'') and combine an asset-pricing model with Bayesian estimation of returns to solve this so-called dynamic selection problem. Their main equation is:
+	\begin{equation}
+		v(t) = v(t-1) + X^\prime (t) \theta + \varepsilon(t)
+	\end{equation}
+	where $v(t)$ is the (log) valuation at time $t$, and $\theta$ contains parameters of interest. The valuation is only observed when $w(t) \geq 0$. This is a latent selection variable given by the equation:
+	\begin{equation}
+		w(t) = Z^\prime(t) \gamma_0 + v(t) \gamma_v + \eta(t)
+	\end{equation}
+	where $\eta(t)$ is orthogonal to $\varepsilon(t)$, and $E(\varepsilon(t)) = 0$. The sample selection problem arises with $\gamma_v \neq 0$, which happens because $E(\varepsilon(t) | data) \neq 0$. In other words, when the valuation is influenced by the valuation itself, because it is positive. Since they also use Bayesian techniques, it is worth spending some time reviewing this in some detail.
+	
+	\item \cite{Franzoni2011} aim to quantify liquidity risk in private equity. They also use the liquidity factor to estimate an asset pricing model for PE. They use cash flows to estimate returns as a Modified Internal Rate of Return (MIRR):
+	\begin{align}
+		(1 + MIRR)^T &= D_1 \prod_{t=1}^{T-1} ( 1 + x_t ) + D_2 \prod_{t=2}^{T-1} ( 1 + x_t ) + \cdots  \notag \\
+			 + D_{T-1} ( 1 + x_{T-1} ) &+ D_T \bigg/ I_0 + \frac{I_1}{(1 + x_0)} +  \frac{I_2}{\prod_{t=0}^1 ( 1 + x_t )} + \notag \\
+			  \cdots + \frac{I_T}{\prod_{t=0}^{T-1} ( 1 + x_t )}  \notag \\
+			  &=	\frac{FV(Div, x_t)}{PV(Inv, x_t)}
+	\end{align}
+	where $FV(\cdot, x_t)$ and $PV(\cdot, x_t)$ respectively denote the forward and present value of a stream of cash flows computed using the discount rate, $x_t$. Note that when no cash is returned the MIRR equals -100\%. 
+	
+	\item \cite{Driessen2008}
+	
+	\item \cite{Hwang2005}
+
+	\item \cite{Gottschalg2007} and \cite{Phalippou2008}
+
+	\item \cite{Moskowitz2002} find that a portfolio of all private equity has a mean and standard deviation of return close to that of the value-weighted index of traded stocks. They use self-reported valuations from the survey of consumer finances. This study is also not entirely relevant to our model but it deserves a mention in the review of literature on the topic. 
+
+	\item \cite{Stucke2011} does not model cash flows or returns but analyzes the Thomson VentureXpert database used in almost every study of Private Equity or Venture Capital risk and returns (e.g., \cite{Kaplan2005}). They find about 40\% of funds stopped being updated at a certain point in their active lifetime. This would impact return calculations since \cite{Ljungqvist2002} find that it takes over 8 and 10 years for IRRs to turn positive and exceed public equity returns. 
+
+\end{enumerate}
+
+\subsection{Alternative Techniques and Approaches}
+
+This section is to give us some ideas on where we can take GMAM, or perhaps inspire ideas on ways in which we can currently enhance GMAM.
+
+\begin{enumerate}[resume, label=(\roman*)]
+
+	\item \cite{Buchner2009} model cash flow dynamics of PE funds, as opposed to fund returns. They use stochastic differential equations to model drawdowns and distributions. They test this on a set of data consisting of 95 liquidated funds, and 203 mature funds using conditional least squares. They find $R^2$ values as high as $\approx$97\%. The instantaneous drawdown is modeled as
+	\begin{equation}
+	\begin{split}
+		E_s\left[d_t\right] &= -U_s\left[A^\prime(s,t) - B^\prime(s,t) \delta_s\right] \times \\
+		&\exp \left[A(s,t) - B(s,t)\delta_s\right]
+	\end{split}
+	\end{equation}
+	where $A(s,t)$ and $B(s,t)$ are deterministic functions depending on model parameters and time subscripts $s$ and $t$. In addition, $A^\prime(s,t) = \partial A(s,t) / \partial t$ and $B^\prime (s,t) = \partial B(s, t) / \partial t$. $\delta_t$ is the drawdown rate and it is a mean-reverting square root process given by the SDE:
+	\begin{equation}
+		d\delta_t = \kappa (\theta - \delta_t)dt + \sigma_\delta \sqrt{\delta_t} dB_{\delta,t}
+	\end{equation}
+	where $\theta > 0$ is the long-run mean of the drawdown rate, $\kappa > 0$ governs the rate of reversion to this mean, and $\sigma_\delta > 0$ reflects the volatility of the drawdown rate; $B_{\delta, t}$ is the standard Brownian motion. This process is well-known in the financial literature as the Cox-Ingersoll-Ross model, a la \cite{Cox1985}. 
+	
+	The distributions are modeled as 
+	\begin{equation}
+		E_s \left[ p_t \right] = p_s \exp \left[ \int_s^t \mu_u du + \frac{1}{2} \sigma_P^2 ( t - s ) \right]
+	\end{equation}
+	
+	What is interesting about this paper is the conditional least squares (CLS) technique used to estimate the parameters used above ($\kappa, \theta, \sigma_\delta,$ and $\alpha$). CLS is an 
+	\begin{quote}
+		estimation procedure for stochastic processes based on the mini- mization of a sum of squared deviations about conditional expectations is developed. Strong consistency, asymptotic joint normality and an iterated logarithm rate of convergence are shown to hold for the estimators under a variety of conditions. Special attention is given to the widely studied cases of stationary ergodic processes and Markov processes with are asymptotically stationary and ergodic. (\cite{Klimko1978})
+	\end{quote}
+
+	\item \cite{Karatas2021} use supervised neural networks to predict the cash flows of PE funds. They use LSTM (Long Short-Term Memory) and GRU (Gated Recurrent Unit) to predict future cash flows of contributions and distributions. They use a sliding window approach and weight the rolling windows to avoid biasing the model towards older funds. They also evaluate the impact of macroeconomic variables such as unemployment rate and GDP on cash flow forecasting. They also build stress-testing methodologies into the model to measure the impact of market shocks on the robustness of the model. Finally, they examine a variety of data interpolation techniques such as Brownian bridge, VG bridge, Fourier transform techniques, and more. They settle on using piecewise cubic polynomial interpolation. \\
+	
+	They have two models that they use. The first model is an indirect one, where they estimate the parameters, $RC$ (rate of contribution), $G$ (annual growth rate), and $B$ (bow factor, defined above). The second model has no assumptions and directly estimates the cash flows themselves, i.e., $C$, $D$, and $NAV$. Their parameter estimation technique is an optimization problem:
+	\begin{align}
+		\widehat{RC} &\coloneqq \argmin_{0 \leq RC \leq 1} \left\{ \sigma_{t=1}^{\mathbf{w_{out}}} \left( qCC_t - \widehat{qCC_t} \right)^2 \right\} \\
+		\begin{split}
+			\widehat{G}, \widehat{B} &\coloneqq \argmin_{G, B} \left\{ \sigma_{t=1}^{\mathbf{w_{out}}} \left( qDC_t - \widehat{qDC_t} \right)^2 + \right. \\
+			&\sigma_{t=1}^{\mathbf{w_{out}}} \left. \left( RVC_t - \widehat{RVC_t} \right)^2 : 0 \leq B \leq 5; 0 \leq G \leq 1 \right\}
+		\end{split}
+	\end{align}
+	where $\widehat{\cdot}$ indicates the estimated value of a parameter, and $RVC$ is the residual value to commitment. See \cite{Takahashi2002} for more details on this measure. 
+	
+	There are several aspects of this paper that are interesting. Firstly, it is the only one that uses machine learning techniques in the traditional sense. Secondly, their data interpolation technique might be worth looking into.
+
+	\item \cite{Geweke1991} is the seminal paper cited for convergence of Markov Chain Monte Carlo techniques. The paper yields systematic assessments of the numerical accuracy of approximations to the expected values of functions of interest under the posterior. Using these systematic assessments, a spectral analysis is used to evaluate numerical accuracy formally and construct diagnostics for convergence. He presents the posterior density as the ``Bayesian multiple integration problem''.
+	\begin{equation}
+		E [ g(\theta) ] = \frac{\int_\Theta g(\theta) \pi(\theta) L(\theta; X) d\theta}{\int_\Theta \pi(\theta) L(\theta; X) d\theta}
+	\end{equation}
+	where $\theta$ is the finite-dimensional vector of parameters whose domain is a subset of Euclidean space $\Theta$; $X$ is the observed data; $g(\theta)$ is the function of interest; $\pi(\theta)$ is proportional to a proper or improper prior density; and $L(\theta; X)$ is proportional to the likelihood function.
+	
+	It so happens that this paper also has a good primer on Gibbs sampling as proposed in \cite{Geman1984}. 
+
+\end{enumerate}
+
+\subsection{Conclusion}
+
+The list here is by no means comprehensive, and it is a work in progress. There are several papers listed in \cite{Kaplan2015} and \cite{Korteweg2019} that are important to this area that I have not touched on here. More will be added with time.
+
+\section{Bayesian Techniques Used for Private Equity Returns Generation}
+
+This section has detailed summaries of \cite{Ang2014}, and \cite{Korteweg2011}. Other papers using Bayesian techniques in this space will be listed here as they are discovered.
+
+\subsection{\cite{Ang2014}}
+\label{sec:bayesian_ang}
+
+I've broken up the discussion of the papers into two sections, as seen below.
+
+\subsubsection{Estimating PE Returns Using Bayesian Filtering --  \cite{Ang2014}}
+
+
+They use the log of the PME from \cite{Kaplan2005}, i.e.,
+\begin{equation}
+\label{eq:state}
+	\ln \frac{PV(I)}{PV(D)} = 0 \sim N(-\frac{\sigma^2}{2}, \sigma^2)
+\end{equation}
+
+where $PV(I)$ is the present value of the investments and $PV(D)$ is the present value of the distributions. They assume this to be normally distributed with mean $-\frac{\sigma^2}{2}$ and variance $\sigma^2$. This ensures that log of the expected value of the PME is $-\frac{\sigma^2}{2} + \frac{\sigma^2}{2} = 0$, which is as shown above. This represents the likelihood function of the cash flows. 
+
+The state equation is given by
+\begin{align}
+	g_t^e 	&= ( 1 - \phi ) \alpha + \phi g_{t-1}^e + \beta^\prime \left( F_t - \phi F_{t-1} \right) + \sigma_g \epsilon_t	\label{eq:obs} \\
+			&= \alpha + \beta^\prime F_t + \phi \left( g_{t-1}^e - (\alpha + \beta^\prime F_{t-1} ) \right) + \sigma_g \epsilon_t
+\end{align}
+
+This combines the equations for $g_t^e = \alpha + \beta^\prime F_t + f_t$ and $f_t = \phi f_{t-1} + \sigma_f \epsilon_t$, where $g_t^e$ is the private equity return that satisfies \eqref{eq:state}, and $f_t$ is the private equity-specific return. Together, equation \eqref{eq:state} and \eqref{eq:obs} constitute a state equation and a non-linear observation equation. Once $g_t^e$ is estimated, we can infer the private equity-specific return using
+\begin{equation}
+	f_t = g_t^e - ( \alpha + \beta^\prime F_t )
+\end{equation}
+
+The rest of the terms are as follows: $\beta$ are the loadings (betas) on the common factors, $F$. Note that $f_t$ follows an AR(1) process with coefficient $\phi$, and the error terms $\epsilon_t$ are drawn from an i.i.d. standard normal distribution.
+
+\subsubsection{Bayesian Filtering}
+
+The parameters of the model: $\theta = (\alpha, \beta, \phi, \sigma_g, \sigma)$ are estimated using MCMC and Gibbs sampling along the lines of \cite{Jacquier2004} and \cite{Jacquier1994}, who infer about unobserved variance states using MCMC, and illustrate their method using stock returns and exchange rates. More on them later. For \cite{Ang2014}, the Gibbs sampler iterates over the following sets of states and parameters conditions on other parameters and state variables:
+\begin{itemize}[noitemsep]
+	\item Private equity returns $p\left( \{ g_t^e \} \mid \theta, Y \right)$, 
+	\item parameters of the private equity-specfic return: $p\left( \beta, \phi, \alpha \mid \theta_0, \left\{ g_t^e \right\}, Y \right)$,
+	\item standard deviation of the private equity return shocks: $p\left(\sigma_g \mid \theta_0, \left\{ g_t^e \right\}, Y \right)$, and
+	\item standard deviation of the likelihood errors: $p\left(\sigma \mid \theta_0, \left\{ g_t^e \right\}, Y \right)$.
+\end{itemize}
+
+The assumptions (priors, etc.) around the model will be listed here.
+
+\section{Text Books}
+
+\begin{enumerate}[resume, label=(\roman*)]
+	\item \cite{Brooks2019}
+\end{enumerate}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\bibliographystyle{plainnat} 
+\setcitestyle{numbers}
+\bibliography{LitReview}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+%%\begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% For example:
+
+%% \bibitem[Aladro et al.(2015)]{Aladro15} Aladro, R., Martín, S., Riquelme, D., et al. 2015, \aas, 579, A101
+
+
+%%\end{thebibliography}
+
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.

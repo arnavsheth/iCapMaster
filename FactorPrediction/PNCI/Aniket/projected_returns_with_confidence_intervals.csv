@@ -1,0 +1,30 @@
+Factor,Projected Return,Projected Monthly Return,Std Error,95% CI Lower,95% CI Lower,95% CI Upper,95% CI Upper
+Alt Commodities,0.0033,0.33,0.0174,-0.0345,-3.4514,0.0412,4.1179
+Fixed Duration,0.0025,0.25,0.0047,-0.0077,-0.7671,0.0127,1.2675
+Emerging Markets,0.0012,0.12,0.0035,-0.0065,-0.6524,0.0089,0.8883
+Alt Trend,0.0111,1.11,0.0122,-0.0154,-1.5423,0.0377,3.7692
+US Dollar,-0.0007,-0.07,0.0140,-0.0311,-3.1110,0.0298,2.9751
+Equity Quality,0.0001,0.01,0.0141,-0.0307,-3.0671,0.0309,3.0895
+Equity Market,0.0051,0.51,0.0020,0.0006,0.0627,0.0096,0.9557
+Equity SmallCap,0.0053,0.53,0.0118,-0.0205,-2.0548,0.0311,3.1061
+Alt HF Crowding,-0.0063,-0.63,0.0262,-0.0635,-6.3453,0.0508,5.0761
+Fixed Credit,0.0012,0.12,0.0083,-0.0170,-1.7005,0.0193,1.9349
+Equity Momentum,0.0033,0.33,0.0345,-0.0720,-7.2010,0.0785,7.8511
+Equity Value,0.0001,0.01,0.0123,-0.0268,-2.6824,0.0270,2.6956
+Alt Oil,0.0072,0.72,0.0242,-0.0456,-4.5574,0.0599,5.9888
+,,,,,,,
+,,,,,,,
+Factor,Projected Return (Annualized),Std Error,,,,,
+Alt Commodities,4.00,0.0174,,,,,
+Fixed Duration,3.00,0.0047,,,,,
+Emerging Markets,1.42,0.0035,,,,,
+Alt Trend,13.36,0.0122,,,,,
+US Dollar,-0.82,0.0140,,,,,
+Equity Quality,0.13,0.0141,,,,,
+Equity Market,6.11,0.0020,,,,,
+Equity SmallCap,6.31,0.0118,,,,,
+Alt HF Crowding,-7.62,0.0262,,,,,
+Fixed Credit,1.41,0.0083,,,,,
+Equity Momentum,3.90,0.0345,,,,,
+Equity Value,0.08,0.0123,,,,,
+Alt Oil,8.59,0.0242,,,,,

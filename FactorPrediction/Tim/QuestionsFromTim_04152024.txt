@@ -1,0 +1,37 @@
+-The new methodology is dependent on having a reasonable GMAM3 fit on the reference asset. How do we define "reasonable fit"? Would it be the same criteria as what is used in the analysis page today? Why or why not?
+
+	Need an explanation for why curreny model efficacy numbers used for backwards projection, are also appropriate for forward projection.
+
+	Maybe show some additional metrics (show RMSE from CV on your projections).
+
+-Before implementing asset class level methodology (i.e. iCapital CMA's), we should train GMAM3 on asset class index representations and check that there is a sufficient fit. If there is a sufficient fit, does the new methodology generate reasonable results?
+
+	Tim said asset class projections are higher priority than asset-level projections. NEED CLARITY.
+
+-If we do have asset class projections (CMAs), should we socialize iCapital CMA's before they are included in Architect optimization?
+
+	Refer to above.
+
+-For asset level optimization, do we require a minimum GMAM3 fit before generating expected returns/vols/corr and optimizing? Should this criteria be done on the portfolio level or the asset level?
+
+	Same answer as first question.
+
+-Is it possible that the correlation matrix generated from the new methodology could be ill-conditioned? If so, can we quantity how large the condition number could be? If it requires a large shrinkage, that could result in poor user experience.
+
+	This might be true. We can adjust this if necessary.
+	
+-How often should we update asset class and asset level CMA's? I assume the former is yearly and latter is periodic.
+
+	Quarterly for assets, annual for asset classes.
+	
+	
+MORE QUESTIONS ON ASSET CLASS PROJECTION:
+
+-Can we establish a criteria for which CMA providers we can support?
+
+-Can we test on Envestnet CMA's? If there are other CMA's we think we will likely onboard, we should test with those as well
+
+-If a CMA provider does not have enough CMA's to generate a good fit on the factors, what is the plan?
+
+-What if GMAM3 does not have a good enough fit on one of the CMA provider indices?
+

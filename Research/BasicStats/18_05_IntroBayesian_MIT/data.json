@@ -1,0 +1,25 @@
+{
+  "course_title":"Introduction to Probability and Statistics",
+  "course_description":"This course provides an elementary introduction to probability and statistics with applications. Topics include: basic combinatorics, random variables, probability distributions, Bayesian inference, hypothesis testing, confidence intervals, and linear regression.\n\nThe Spring 2014 version of this subject employed the residential MITx system, which enables on-campus subjects to provide MIT students with learning and assessment tools such as online problem sets, lecture videos, reading questions, pre-lecture questions, problem set assistance, tutorial videos, exam review content, and even online exams.\n",
+  "site_uid":"fe78b94b-dc98-4449-bdce-5f0f2a65dc98",
+  "legacy_uid":"e5609df4-43ee-617e-ddfe-45413f3d7c5a","instructors": [{
+    "first_name":"Jeremy",
+    "last_name":"Orloff",
+    "middle_initial":"",
+    "salutation":"Dr.",
+    "title":"Dr. Jeremy Orloff"},{
+    "first_name":"Jonathan",
+    "last_name":"Bloom",
+    "middle_initial":"",
+    "salutation":"",
+    "title":"Jonathan Bloom"}],"department_numbers":["18"],
+  "learning_resource_types":["Problem Sets with Solutions","Exams with Solutions","Lecture Notes","Instructor Insights","Other Video"],
+  "topics":[["Mathematics","Probability and Statistics"],["Mathematics","Discrete Mathematics"]],
+  "primary_course_number":"18.05",
+  "extra_course_numbers":"",
+  "term":"Spring",
+  "year":"2014",
+  "level":["Undergraduate"],
+  "image_src":"./static_resources/c16c76a278bc037b6226b880e87201b4_18-05s14.jpg",
+  "course_image_metadata":{"content_type":"resource","description":"Bayesian updating with conjugate normal distributions. (Image by Jerry Orloff and Jonathan Bloom.)","draft":false,"file":"/courses/18-05-introduction-to-probability-and-statistics-spring-2014/c16c76a278bc037b6226b880e87201b4_18-05s14.jpg","file_type":"image/jpeg","image_metadata":{"caption":"Bayesian updating with conjugate normal distributions. (Image by Jerry Orloff and Jonathan Bloom.)","credit":"Image by Jerry Orloff and Jonathan Bloom.","image-alt":"A graph plot with 5 curves in different colors."},"iscjklanguage":false,"learning_resource_types":[],"license":"https://creativecommons.org/licenses/by-nc-sa/4.0/","ocw_type":"OCWImage","resourcetype":"Image","title":"18-05s14.jpg","uid":"c16c76a2-78bc-037b-6226-b880e87201b4","video_files":{"video_thumbnail_file":null},"video_metadata":{"youtube_id":null}}}
+

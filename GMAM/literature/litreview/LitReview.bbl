@@ -1,0 +1,203 @@
+\begin{thebibliography}{34}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ang and Chen(2007)]{Ang2007}
+Andrew Ang and Joseph Chen.
+\newblock Capm over the long run: 1926-2001.
+\newblock \emph{Journal of Empirical Finance}, 14:\penalty0 1--40, 1 2007.
+\newblock ISSN 09275398.
+\newblock \doi{10.1016/j.jempfin.2005.12.001}.
+
+\bibitem[Ang et~al.(2018)Ang, Chen, Goetzmann, and Phalippou]{Ang2014}
+Andrew Ang, Bingxu Chen, William~N Goetzmann, and Ludovic Phalippou.
+\newblock Estimating private equity returns from limited partner cash flows.
+\newblock 2018.
+\newblock URL \url{http://ssrn.com/abstract\_id=2356553}.
+
+\bibitem[Brooks(2019)]{Brooks2019}
+Chris Brooks.
+\newblock \emph{Introductory econometrics for finance}.
+\newblock Cambridge university press, 2019.
+
+\bibitem[Buchner et~al.(2009)Buchner, Kaserer, and Wagner]{Buchner2009}
+Axel Buchner, Christoph Kaserer, and Niklas Wagner.
+\newblock Modeling the cash flow dynamics of private equity funds-theory and
+  empirical evidence * modeling the cash flow dynamics of private equity
+  funds-theory and empirical evidence, 2009.
+
+\bibitem[{Cambridge Associates}(2013)]{Cambridge2013}
+{Cambridge Associates}.
+\newblock Cambridge associates u.s. private equity and venture capital
+  benchmark commentary quarter ending september 30, 2013, 2013.
+\newblock URL
+  \url{https://www.cambridgeassociates.com/wp-content/uploads/2013/05/B-Third-Quarter-2013-USPE-and-VC-Benchmark-Commentary.pdf}.
+
+\bibitem[Cochrane(2004)]{Cochrane2004}
+John~H Cochrane.
+\newblock The risk and return of venture capital, 2004.
+\newblock URL
+  \url{http://gsbwww.uchicago.edu/fac/john.cochrane/research/Papers/.JELcode:G24.}
+
+\bibitem[Cox et~al.(1985)Cox, Ingersoll, and Ross]{Cox1985}
+John~C Cox, Jonathan~E Ingersoll, and Stephen~A Ross.
+\newblock A theory of the term structure of interest rates, 1985.
+
+\bibitem[Dimson(1979)]{Dimson1979}
+Elroy Dimson.
+\newblock Risk measurement when shares are subject to infrequent trading.
+\newblock \emph{Journal of Financial Economics}, 7\penalty0 (2):\penalty0
+  197--226, 1979.
+
+\bibitem[Driessen et~al.(2008)Driessen, Lin, and Phalippou]{Driessen2008}
+Joost Driessen, Tse-Chun Lin, and Ludovic Phalippou.
+\newblock A new method to estimate risk and return of non-traded assets from
+  cash flows: The case of private equity funds, 2008.
+\newblock URL \url{http://www.nber.org/papers/w14144}.
+
+\bibitem[Ewens et~al.(2013)Ewens, Jones, and Rhodes-Kropf]{Ewens2013}
+Michael Ewens, Charles~M Jones, and Matthew Rhodes-Kropf.
+\newblock The price of diversifiable risk in venture capital and private equity
+  *, 2013.
+
+\bibitem[Fama and French(1993)]{Fama1993}
+Eugene~F Fama and Kenneth~R French.
+\newblock Common risk factors in the returns on stocks and bonds, 1993.
+
+\bibitem[Franzoni et~al.(2011)Franzoni, Nowak, and Phalippou]{Franzoni2011}
+Francesco Franzoni, Eric Nowak, and Ludovic Phalippou.
+\newblock Private equity performance and liquidity risk, 2011.
+
+\bibitem[Geman and Geman(1984)]{Geman1984}
+Stuart Geman and Donald Geman.
+\newblock Stochastic relaxation, gibbs distributions, and the bayesian
+  restoration of images.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 6:\penalty0 721--741, 1984.
+
+\bibitem[Geweke(1991)]{Geweke1991}
+John Geweke.
+\newblock Evaluating the accuracy of sampling-based approaches to the
+  calculation of posterior moments, 1991.
+
+\bibitem[Gottschalg and Phalippou(2007)]{Gottschalg2007}
+Oliver~F Gottschalg and Ludovic Phalippou.
+\newblock The truth about private equity performance.
+\newblock \emph{Harvard Business Review}, 12 2007.
+\newblock URL
+  \url{https://hbr.org/2007/12/the-truth-about-private-equity-performance}.
+
+\bibitem[Gredil et~al.(2014)Gredil, Griffiths, and Stucke]{Gredil2014}
+Oleg Gredil, Barry Griffiths, and R{\"u}diger Stucke.
+\newblock Benchmarking private equity the direct alpha method, 2014.
+\newblock URL \url{https://ssrn.com/abstract\_id=2403521}.
+
+\bibitem[Hwang et~al.(2005)Hwang, Quigley, and Woodward]{Hwang2005}
+Min Hwang, John~M Quigley, and Susan~E Woodward.
+\newblock An index for venture capital, 1987-2003.
+\newblock 2005.
+\newblock URL \url{http://www.bepress.com/bejeap.}
+
+\bibitem[Jacquier et~al.(1994)Jacquier, Polson, and Rossi]{Jacquier1994}
+Eric Jacquier, Nicholas~G. Polson, and Peter~E. Rossi.
+\newblock Bayesian analysis of stochastic volatility models.
+\newblock \emph{Journal of Business \& Economic Statistics}, 12:\penalty0 371,
+  10 1994.
+\newblock ISSN 07350015.
+\newblock \doi{10.2307/1392199}.
+
+\bibitem[Jacquier et~al.(2004)Jacquier, Polson, and Rossi]{Jacquier2004}
+Eric Jacquier, Nicholas~G Polson, and Peter~E Rossi.
+\newblock Bayesian analysis of stochastic volatility models with fat-tails and
+  correlated errors, 2004.
+
+\bibitem[Kaplan and Schoar(2005)]{Kaplan2005}
+Steven~N Kaplan and Antoinette Schoar.
+\newblock Private equity performance: Returns, persistence, and capital flows,
+  2005.
+
+\bibitem[Kaplan and Sensoy(2015)]{Kaplan2015}
+Steven~N. Kaplan and Berk~A. Sensoy.
+\newblock Private equity performance: A survey, 12 2015.
+\newblock ISSN 19411375.
+
+\bibitem[Karatas et~al.(2021)Karatas, Klinkert, and Hirsa]{Karatas2021}
+Tugce Karatas, Federico Klinkert, and Ali Hirsa.
+\newblock Supervised neural networks for illiquid alternative asset cash flow
+  forecasting.
+\newblock 8 2021.
+\newblock URL \url{http://arxiv.org/abs/2108.02853}.
+
+\bibitem[Klimko and Nelson(1978)]{Klimko1978}
+Lawrence~A Klimko and Paul~I Nelson.
+\newblock On conditional least squares estimation for stochastic processes,
+  1978.
+
+\bibitem[Korteweg(2019)]{Korteweg2019}
+Arthur Korteweg.
+\newblock Risk adjustment in private equity returns.
+\newblock 2019.
+\newblock \doi{10.1146/annurev-financial-110118}.
+\newblock URL \url{https://doi.org/10.1146/annurev-financial-110118-}.
+
+\bibitem[Korteweg and Sorensen(2011)]{Korteweg2011}
+Arthur Korteweg and Morten Sorensen.
+\newblock Risk and return characteristics of venture capital-backed
+  entrepreneurial companies, 2011.
+\newblock URL \url{http://ssrn.com/abstract=1816370}.
+
+\bibitem[Ljungqvist and Richardson(2002)]{Ljungqvist2002}
+Alexander Ljungqvist and Matthew Richardson.
+\newblock The cash flow, return and risk characteristics of private equity
+  working paper series corporate governance research group, 2002.
+\newblock URL \url{https://ssrn.com/abstract\_id=1295253}.
+
+\bibitem[Long et~al.(1996)Long, Mpa, and Nickels]{Long1996}
+Austin~M Long, Iii Mpa, and Craig~J Nickels.
+\newblock Aimr conference on venture capital investing a private investment
+  benchmark.
+\newblock 1996.
+
+\bibitem[Moskowitz and Vissing-Jørgensen(2002)]{Moskowitz2002}
+Tobias~J Moskowitz and Annette Vissing-Jørgensen.
+\newblock The returns to entrepreneurial investment: A private equity premium
+  puzzle?, 2002.
+
+\bibitem[Phalippou(2008)]{Phalippou2008}
+Ludovic Phalippou.
+\newblock The hazards of using irr to measure performance: The case of private
+  equity, 2008.
+\newblock URL
+  \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1111796}.
+
+\bibitem[Rouvinez(2003)]{Rouvinez2003}
+Christophe Rouvinez.
+\newblock Private equity benchmarking with pme+.
+\newblock \emph{Venture Capital Journal}, 2003.
+\newblock URL
+  \url{https://www.venturecapitaljournal.com/private-equity-benchmarking-with-pme/}.
+
+\bibitem[Rubinstein(1976)]{Rubinstein1976}
+Mark Rubinstein.
+\newblock The valuation of uncertain income streams and the pricing of options.
+\newblock \emph{The Bell Journal of Economics}, 7:\penalty0 407--425, 1976.
+
+\bibitem[Sorensen and Jagannathan(2013)]{Sorensen2013}
+Morten Sorensen and Ravi Jagannathan.
+\newblock The public market equivalent and private equity performance, 2013.
+\newblock URL
+  \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2347972}.
+
+\bibitem[Stucke(2011)]{Stucke2011}
+Rüdiger Stucke.
+\newblock Updating history, 2011.
+\newblock URL \url{https://ssrn.com/abstract\_id=1967636}.
+
+\bibitem[Takahashi and Alexander(2002)]{Takahashi2002}
+Dean Takahashi and Seth Alexander.
+\newblock Illiquid alternative asset fund modeling, 2002.
+
+\end{thebibliography}

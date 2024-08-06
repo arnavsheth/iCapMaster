@@ -1,0 +1,2376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+    
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NMQZ25T');</script>
+    
+  
+  
+
+
+
+
+    
+    <link href="../../static_shared/css/course_offline.904c3.css" rel="stylesheet">
+    
+
+
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  
+
+  <meta name="description" content="MIT OpenCourseWare is a web based publication of virtually all MIT course content. OCW is open and available to the world and is a permanent MIT activity">
+  <meta name="keywords" content="opencourseware,MIT OCW,courseware,MIT opencourseware,Free Courses,class notes,class syllabus,class materials,tutorials,online courses,MIT courses">
+  
+  <meta property="og:site_name" content="MIT OpenCourseWare">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ocw.mit.edu/https://ocw.mit.edu/pages/r-tutorial-1b-random-numbers/" />
+  <meta property="og:title" content="R Tutorial 1B: Random Numbers | Introduction to Probability and Statistics | Mathematics | MIT OpenCourseWare" />
+  <meta property="og:description" content="MIT OpenCourseWare is a web based publication of virtually all MIT course content. OCW is open and available to the world and is a permanent MIT activity" />
+
+  
+
+<meta property="og:image" content="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/c16c76a278bc037b6226b880e87201b4_18-05s14.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@mitocw" />
+<meta name="twitter:image:src" content="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/c16c76a278bc037b6226b880e87201b4_18-05s14.jpg" />
+  
+  <link rel="canonical" href="https://ocw.mit.edu/https://ocw.mit.edu/pages/r-tutorial-1b-random-numbers/" />
+
+  <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type" : "WebPage",
+        "name": "MIT OpenCourseWare",
+        "description": "MIT OpenCourseWare is a web based publication of virtually all MIT course content. OCW is open and available to the world and is a permanent MIT activity",
+        "license": "http://creativecommons.org/licenses/by-nc-sa/4.0/", 
+        "publisher": {
+          "@type": "CollegeOrUniversity",
+          "name": "MIT OpenCourseWare"
+        }
+      }
+  </script>
+
+  <title>R Tutorial 1B: Random Numbers | Introduction to Probability and Statistics | Mathematics | MIT OpenCourseWare</title>
+  
+  
+
+
+    
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+  <style>
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url(../../static_shared/fonts/MaterialIcons-Regular.subset.woff2) format('woff2'),
+      url(../../static_shared/fonts/MaterialIcons-Regular.subset.woff) format('woff'),
+      url(../../static_shared/fonts/MaterialIcons-Regular.subset.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Material Icons Round';
+    font-style: normal;
+    font-weight: 400;
+    src: local("MaterialIcons-Round"),
+    url(../../static_shared/fonts/MaterialIconsRound-Regular.subset.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Cardo Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Cardo'),
+      local('Cardo-Bold'),
+      url(../../static_shared/fonts/Cardo-Bold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Cardo Italic';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Cardo'),
+      local('Cardo-Italic'),
+      url(../../static_shared/fonts/Cardo-Italic.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Helvetica Light';
+    font-style: normal`;
+    font-weight: 400;
+    src: local('Helvetica Light'),
+      local('Helvetica-Light'),
+      url(../../static_shared/fonts/Helvetica-Light.ttf) format('truetype');
+  }
+  </style>
+</head>
+
+<body class="course-home-page">
+  
+    
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NMQZ25T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+  
+  <div class="overflow-auto">
+    <div
+  id="mobile-course-nav"
+  class="navbar-offcanvas offcanvas-toggle offcanvas-toggle-close medium-and-below-only drawer">
+  <h3 class="my-4 d-flex align-items-center justify-content-between">
+    Browse Course Material
+    <button
+      class="btn"
+      type="button"
+      aria-label="Close Course Menu"
+      onclick="$('#mobile-course-nav-toggle').click();"
+      id="close-mobile-course-menu-button"
+      >
+      <img
+        src="../../static_shared/images/close_small.svg"
+        alt=""
+        width="12px"
+      />
+    </button>
+  </h3>
+  
+
+<nav class="course-nav" aria-label="Course materials">
+  <ul class="w-100 m-auto list-unstyled">
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="ac53cbde-5f80-dfed-cf91-80c97c88acee"
+        href="../../pages/syllabus/index.html">
+        Syllabus
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_ac53cbde-5f80-dfed-cf91-80c97c88acee"
+    aria-labelledby="nav-button_mobile_ac53cbde-5f80-dfed-cf91-80c97c88acee"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="34f1a99d-c912-2193-c437-231b1fc08afe"
+        href="../../pages/calendar/index.html">
+        Calendar
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_34f1a99d-c912-2193-c437-231b1fc08afe"
+    aria-labelledby="nav-button_mobile_34f1a99d-c912-2193-c437-231b1fc08afe"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="1b685882-0e39-dbc6-ba03-dc47858871bd"
+        href="../../pages/instructor-insights/index.html">
+        Instructor Insights
+      </a>
+    </span>
+    
+    <button
+      class="course-nav-section-toggle"
+      type="button"
+      id="nav-button_mobile_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      data-toggle="collapse"
+      data-target="#nav-container_mobile_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      data-uuid="1b685882-0e39-dbc6-ba03-dc47858871bd"
+      aria-controls="nav-container_mobile_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      aria-expanded="false"
+      aria-label="Subsections for Instructor Insights"
+    >
+      <i class="material-icons md-18" aria-hidden="true"></i>
+    </button>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_1b685882-0e39-dbc6-ba03-dc47858871bd"
+    aria-labelledby="nav-button_mobile_1b685882-0e39-dbc6-ba03-dc47858871bd"
+  >
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="2d69a0de-0f58-08a2-3880-f4a28f594d72"
+        href="../../pages/instructor-insights/course-history/index.html">
+        Course History
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_2d69a0de-0f58-08a2-3880-f4a28f594d72"
+    aria-labelledby="nav-button_mobile_2d69a0de-0f58-08a2-3880-f4a28f594d72"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="e612a220-f47d-26cb-1df4-1379920545d8"
+        href="../../pages/instructor-insights/a-unified-curriculum-with-bayesian-statistics/index.html">
+        A Unified Curriculum with Bayesian Statistics
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_e612a220-f47d-26cb-1df4-1379920545d8"
+    aria-labelledby="nav-button_mobile_e612a220-f47d-26cb-1df4-1379920545d8"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="c087d0ea-b9b0-a8e6-9867-02428a46325e"
+        href="../../pages/instructor-insights/targeted-readings-and-questions/index.html">
+        Targeted Readings and Online Reading Questions
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_c087d0ea-b9b0-a8e6-9867-02428a46325e"
+    aria-labelledby="nav-button_mobile_c087d0ea-b9b0-a8e6-9867-02428a46325e"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="47372cd3-e919-0e97-d65a-ddc960247454"
+        href="../../pages/instructor-insights/problem-set-checker/index.html">
+        Problem Set Checkers
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_47372cd3-e919-0e97-d65a-ddc960247454"
+    aria-labelledby="nav-button_mobile_47372cd3-e919-0e97-d65a-ddc960247454"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="a3b80720-d701-2da0-a420-760cbd667430"
+        href="../../pages/instructor-insights/clicker-questions/index.html">
+        Clicker Questions
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_a3b80720-d701-2da0-a420-760cbd667430"
+    aria-labelledby="nav-button_mobile_a3b80720-d701-2da0-a420-760cbd667430"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+        href="../../pages/instructor-insights/trust-in-an-active-learning-classroom/index.html">
+        Trust in an Active Learning Classroom
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+    aria-labelledby="nav-button_mobile_3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+        href="../../pages/instructor-insights/co-teaching/index.html">
+        Co-Teaching
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+    aria-labelledby="nav-button_mobile_bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="12233ebe-f550-072f-c1cb-c292891e2f81"
+        href="../../pages/instructor-insights/challenges/index.html">
+        Challenges
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_12233ebe-f550-072f-c1cb-c292891e2f81"
+    aria-labelledby="nav-button_mobile_12233ebe-f550-072f-c1cb-c292891e2f81"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+        href="../../pages/readings/index.html">
+        Readings
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+    aria-labelledby="nav-button_mobile_579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="94de8151-483a-826f-90af-93d292b79cf2"
+        href="../../pages/class-slides/index.html">
+        Class Slides
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_94de8151-483a-826f-90af-93d292b79cf2"
+    aria-labelledby="nav-button_mobile_94de8151-483a-826f-90af-93d292b79cf2"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="fed85a98-064c-2e2a-4378-f3f7549df9b8"
+        href="../../pages/assignments/index.html">
+        Assignments
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_fed85a98-064c-2e2a-4378-f3f7549df9b8"
+    aria-labelledby="nav-button_mobile_fed85a98-064c-2e2a-4378-f3f7549df9b8"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+        href="../../pages/exams/index.html">
+        Exams
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+    aria-labelledby="nav-button_mobile_ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="795a5521-0a16-d54d-c4e8-910a0c21496f"
+        href="../../pages/studio-resources/index.html">
+        Studio Resources
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_795a5521-0a16-d54d-c4e8-910a0c21496f"
+    aria-labelledby="nav-button_mobile_795a5521-0a16-d54d-c4e8-910a0c21496f"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="a4d4ed52-37df-946d-c2b1-9d114f44c277"
+        href="../../pages/related-resources/index.html">
+        Related Resources
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_mobile_a4d4ed52-37df-946d-c2b1-9d114f44c277"
+    aria-labelledby="nav-button_mobile_a4d4ed52-37df-946d-c2b1-9d114f44c277"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</nav>
+
+</div>
+
+    <div
+  id="course-info-drawer"
+  class="bg-faded pt-3 bg-light navbar-offcanvas navbar-offcanvas-right medium-and-below-only drawer"
+>
+  <div class="col-12">
+    <button
+      class="btn close-mobile-course-info"
+      type="button"
+      aria-label="Close Course Info"
+      onclick="$('#mobile-course-info-toggle').click();"
+      id="close-mobile-course-info-button"
+      >
+      <img
+        class=""
+        src="../../static_shared/images/close_small.svg"
+        alt=""
+        width="12px"
+      />
+    </button>
+  </div>
+    
+
+<div class="course-info">
+  <div class="course-detail-title bg-light-gray">
+    <h2 class="font-black py-1 pl-3 m-0">
+      Course Info
+    </h2>
+  </div>
+  <div class="px-3 mt-4">
+    <div class="row">
+      <div class="col-12 ">
+        
+        <div class="">
+          
+          <h5 class="panel-course-info-title ">
+            Instructors
+            </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-instructor strip-link-offline"  href="https://ocw.mit.edu/search?q=Dr.&#43;Jeremy&#43;Orloff">Dr. Jeremy Orloff</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-instructor strip-link-offline"  href="https://ocw.mit.edu/search?q=Jonathan&#43;Bloom">Jonathan Bloom</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+         
+        <div class="mt-4">
+          
+          <h5 class="panel-course-info-title ">
+            Departments
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-department strip-link-offline"  href="https://ocw.mit.edu/search?d=Mathematics">Mathematics</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+         
+        
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            As Taught In
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            Spring
+            
+              2014
+            
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            Level
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+              
+                <a class=" strip-link-offline"  href="https://ocw.mit.edu/search?l=Undergraduate">Undergraduate</a><br />
+              
+            
+          </div>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+
+
+<div class=" mt-4">
+  <h5 class="panel-course-info-title ">
+    Topics
+  </h5>
+  <ul class="list-unstyled pb-2 m-0 panel-course-info-text">
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_mobile_0"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_mobile_0"
+    aria-expanded="true"
+    aria-label="Mathematics subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Mathematics">Mathematics</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse show list-unstyled"
+  id="subtopic-container_mobile_0"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Discrete&#43;Mathematics">Discrete Mathematics</a></span>
+    </div>
+    <ul
+      class="collapse show list-unstyled"
+      id="speciality-container_mobile_0_0"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Probability&#43;and&#43;Statistics">Probability and Statistics</a></span>
+    </div>
+    <ul
+      class="collapse show list-unstyled"
+      id="speciality-container_mobile_0_1"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      
+  </ul>
+</div>
+
+  
+
+
+
+<div class="">
+  <h5 class="course-detail-title panel-course-info-title mt-3">
+    Learning Resource Types
+  </h5>
+  <div>
+    <div class="row d-inline m-0">
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment_turned_in</i>
+    <span>Problem Sets with Solutions</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">grading</i>
+    <span>Exams with Solutions</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">notes</i>
+    <span>Lecture Notes</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1"><span class="material-icons-round">
+        co_present
+      </span></i>
+    <span>Instructor Insights</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">theaters</i>
+    <span>Other Video</span>
+  </div>
+</div>
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+<hr>
+<div class="pb-3">
+  <a class="download-course-link-button btn btn-outline-primary btn-link link-button text-decoration-none px-4 py-2"
+    role="button"
+    href="../../download/index.html">
+    <div class="text-center w-100">Browse Resources</div>
+  </a>
+</div>
+
+</div>
+
+    
+
+
+
+
+
+<div id="mobile-header" class="position-relative bg-black medium-and-below-only">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black d-flex">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="material-icons display-4 text-white align-bottom">menu</i>
+    </button>
+    <div class="mx-auto">
+      <a href="https://ocw.mit.edu/">
+        <img width="250" src="../../static_shared/images/ocw_logo_white_v2.svg" alt="MIT OpenCourseWare"/>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto pl-2 pt-2">
+        <li class="nav-item"></li>
+        <li class="nav-item">
+          <a class="nav-link"  href="https://giving.mit.edu/give/to/ocw/?utm_source=ocw&amp;utm_medium=homepage_banner&amp;utm_campaign=nextgen_home">Give Now</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="https://ocw.mit.edu/about">About OCW</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  target="_blank"  href="https://mitocw.zendesk.com/hc/en-us">Help &amp; Faqs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="https://ocw.mit.edu/contact">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<div id="desktop-header">
+  <div class="contents">
+    <div class="left">
+      <div class="ocw-logo mr-6">
+        <a href="https://ocw.mit.edu/">
+          <img src="../../static_shared/images/ocw_logo_white_v2.svg" alt="MIT OpenCourseWare" />
+        </a>
+      </div>
+    </div>
+    <div class="right">
+      
+      <a class="give-button-header font-weight-bold py-2 px-3"  href="https://giving.mit.edu/give/to/ocw/?utm_source=ocw&amp;utm_medium=homepage_banner&amp;utm_campaign=nextgen_home">give now</a>
+      <a class="text-white text-decoration-none font-weight-bold pl-5 pr-3 py-2"  href="https://ocw.mit.edu/about">about ocw</a>
+      <a class="text-white text-decoration-none font-weight-bold px-3 py-2"  target="_blank"  href="https://mitocw.zendesk.com/hc/en-us">help &amp; faqs</a>
+      <a class="text-white text-decoration-none font-weight-bold px-3 py-2"  href="https://ocw.mit.edu/contact">contact us</a>
+    </div>
+  </div>
+</div>
+
+    
+    
+
+<div id="course-banner" class="p-0">
+  <div class="max-content-width course-banner-content m-auto py-3">
+    
+    <span class="course-number-term-detail">18.05 | Spring 2014 | Undergraduate</span>
+    <br>
+    <h1>
+      <a
+        class="text-capitalize m-0 text-white"
+        href="../../index.html"
+      >Introduction to Probability and Statistics</a>
+    </h1>
+  </div>
+</div>
+
+
+    <div id="course-main-content">
+      <div class="row">
+        <div class="col-12 course-home-grid">
+          <div class="medium-and-below-only">
+            <div class="d-flex align-items-center mb-3">
+              <div class="col-6 px-0">
+                <div>
+  <button
+    id="mobile-course-nav-toggle"
+    class="mobile-course-nav-toggle-btn d-inline-flex align-items-center offcanvas-toggle"
+    data-toggle="offcanvas"
+    data-target="#mobile-course-nav"
+  >
+    <img src="../../static_shared/images/expand.svg" alt=""/>
+    <span class="pl-1">Menu</span>
+  </button>
+</div>
+
+              </div>
+              <div class="col-6 px-0">
+                
+
+
+  <button 
+    class="btn btn-link float-right mobile-course-info-toggle-btn toggle navbar-toggle offcanvas-toggle"
+    id="mobile-course-info-toggle"
+    data-toggle="offcanvas" 
+    data-target="#course-info-drawer">
+    More Info
+  </button>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row course-cards">
+        <div class="col-2 course-home-grid large-and-above-only">  
+          <div class="card">
+  <div class="card-body pr-2">
+    
+
+<nav class="course-nav" aria-label="Course materials">
+  <ul class="w-100 m-auto list-unstyled">
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="ac53cbde-5f80-dfed-cf91-80c97c88acee"
+        href="../../pages/syllabus/index.html">
+        Syllabus
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_ac53cbde-5f80-dfed-cf91-80c97c88acee"
+    aria-labelledby="nav-button_desktop_ac53cbde-5f80-dfed-cf91-80c97c88acee"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="34f1a99d-c912-2193-c437-231b1fc08afe"
+        href="../../pages/calendar/index.html">
+        Calendar
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_34f1a99d-c912-2193-c437-231b1fc08afe"
+    aria-labelledby="nav-button_desktop_34f1a99d-c912-2193-c437-231b1fc08afe"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="1b685882-0e39-dbc6-ba03-dc47858871bd"
+        href="../../pages/instructor-insights/index.html">
+        Instructor Insights
+      </a>
+    </span>
+    
+    <button
+      class="course-nav-section-toggle"
+      type="button"
+      id="nav-button_desktop_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      data-toggle="collapse"
+      data-target="#nav-container_desktop_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      data-uuid="1b685882-0e39-dbc6-ba03-dc47858871bd"
+      aria-controls="nav-container_desktop_1b685882-0e39-dbc6-ba03-dc47858871bd"
+      aria-expanded="false"
+      aria-label="Subsections for Instructor Insights"
+    >
+      <i class="material-icons md-18" aria-hidden="true"></i>
+    </button>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_1b685882-0e39-dbc6-ba03-dc47858871bd"
+    aria-labelledby="nav-button_desktop_1b685882-0e39-dbc6-ba03-dc47858871bd"
+  >
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="2d69a0de-0f58-08a2-3880-f4a28f594d72"
+        href="../../pages/instructor-insights/course-history/index.html">
+        Course History
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_2d69a0de-0f58-08a2-3880-f4a28f594d72"
+    aria-labelledby="nav-button_desktop_2d69a0de-0f58-08a2-3880-f4a28f594d72"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="e612a220-f47d-26cb-1df4-1379920545d8"
+        href="../../pages/instructor-insights/a-unified-curriculum-with-bayesian-statistics/index.html">
+        A Unified Curriculum with Bayesian Statistics
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_e612a220-f47d-26cb-1df4-1379920545d8"
+    aria-labelledby="nav-button_desktop_e612a220-f47d-26cb-1df4-1379920545d8"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="c087d0ea-b9b0-a8e6-9867-02428a46325e"
+        href="../../pages/instructor-insights/targeted-readings-and-questions/index.html">
+        Targeted Readings and Online Reading Questions
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_c087d0ea-b9b0-a8e6-9867-02428a46325e"
+    aria-labelledby="nav-button_desktop_c087d0ea-b9b0-a8e6-9867-02428a46325e"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="47372cd3-e919-0e97-d65a-ddc960247454"
+        href="../../pages/instructor-insights/problem-set-checker/index.html">
+        Problem Set Checkers
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_47372cd3-e919-0e97-d65a-ddc960247454"
+    aria-labelledby="nav-button_desktop_47372cd3-e919-0e97-d65a-ddc960247454"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="a3b80720-d701-2da0-a420-760cbd667430"
+        href="../../pages/instructor-insights/clicker-questions/index.html">
+        Clicker Questions
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_a3b80720-d701-2da0-a420-760cbd667430"
+    aria-labelledby="nav-button_desktop_a3b80720-d701-2da0-a420-760cbd667430"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+        href="../../pages/instructor-insights/trust-in-an-active-learning-classroom/index.html">
+        Trust in an Active Learning Classroom
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+    aria-labelledby="nav-button_desktop_3f220109-a2fa-c42b-47f0-b1be29e4f8ab"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+        href="../../pages/instructor-insights/co-teaching/index.html">
+        Co-Teaching
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+    aria-labelledby="nav-button_desktop_bcc7c9ac-7b81-71b2-3cc4-5d69d98f83cd"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="12233ebe-f550-072f-c1cb-c292891e2f81"
+        href="../../pages/instructor-insights/challenges/index.html">
+        Challenges
+      </a>
+    </span>
+    
+  </div>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_12233ebe-f550-072f-c1cb-c292891e2f81"
+    aria-labelledby="nav-button_desktop_12233ebe-f550-072f-c1cb-c292891e2f81"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+        href="../../pages/readings/index.html">
+        Readings
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+    aria-labelledby="nav-button_desktop_579c055a-ccb4-eb7e-bb6b-f294146b45a5"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="94de8151-483a-826f-90af-93d292b79cf2"
+        href="../../pages/class-slides/index.html">
+        Class Slides
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_94de8151-483a-826f-90af-93d292b79cf2"
+    aria-labelledby="nav-button_desktop_94de8151-483a-826f-90af-93d292b79cf2"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="fed85a98-064c-2e2a-4378-f3f7549df9b8"
+        href="../../pages/assignments/index.html">
+        Assignments
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_fed85a98-064c-2e2a-4378-f3f7549df9b8"
+    aria-labelledby="nav-button_desktop_fed85a98-064c-2e2a-4378-f3f7549df9b8"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+        href="../../pages/exams/index.html">
+        Exams
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+    aria-labelledby="nav-button_desktop_ad95d694-8a5a-21e8-d68c-2ed80b877e38"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="795a5521-0a16-d54d-c4e8-910a0c21496f"
+        href="../../pages/studio-resources/index.html">
+        Studio Resources
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_795a5521-0a16-d54d-c4e8-910a0c21496f"
+    aria-labelledby="nav-button_desktop_795a5521-0a16-d54d-c4e8-910a0c21496f"
+  >
+    
+  </ul>
+</li>
+
+    
+      
+
+
+
+
+
+<li class="course-nav-list-item">
+  <div class="course-nav-parent d-flex flex-direction-row align-items-center justify-content-between">
+    <span class="course-nav-text-wrapper">
+      <a class="text-dark nav-link"
+        data-uuid="a4d4ed52-37df-946d-c2b1-9d114f44c277"
+        href="../../pages/related-resources/index.html">
+        Related Resources
+      </a>
+    </span>
+    
+  </div>
+  
+  <span class="medium-and-below-only"><hr/></span>
+  
+  <ul
+    class="course-nav-child-nav m-auto collapse"
+    id="nav-container_desktop_a4d4ed52-37df-946d-c2b1-9d114f44c277"
+    aria-labelledby="nav-button_desktop_a4d4ed52-37df-946d-c2b1-9d114f44c277"
+  >
+    
+  </ul>
+</li>
+
+    
+  </ul>
+</nav>
+
+  </div>
+</div>
+
+        </div>
+        <div class="col-sm-12 col-lg-10 course-home-grid">
+          <div class="">
+            <div class="card">
+              <div class="d-flex justify-content-between">
+                <div class="p-0 col-lg-9" id="main-course-section">
+                  <div class="card-body">
+                    
+<div class="mb-2">
+  <header>
+  <div class="course-section-title-container">
+    <div id="course-title">
+      
+      <h2 class="pb-1 mb-1">R Tutorial 1B: Random Numbers</h2>
+    </div>
+  </div>
+</header>
+
+  <article class="content pt-3 mt-1">
+    <main id="course-content-section"><p>In order to run simulations of experiments with random outcomes we make use of R&rsquo;s ability to generate random numbers. More precisely it generates a &lsquo;pseudo-random&rsquo; number, which behaves in many ways like a truly random number.</p>
+
+    <h4 id="the-function-samplex-k-replace--true">The function sample(x, k, replace = TRUE)</h4>
+
+<p># sample(x,k) generates a random permutation of k objects from the vector x. That is, all k choices are different</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># start with a vector x with 5 elements.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">5</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> x 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">5</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># randomly sample 3 of the elements of x.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">1</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">5</span> 
+</span></span><span style="display:flex;"><span><span style="color:#579"># Note every element is chosen at most once.
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># randomly sampling 5 elements of x is a permutation of all 5 elements.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">5</span>) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">5</span>) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">5</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># You can&#39;t pick more than 5 different elements from a set of 5 things, so R gives an error.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">6</span>) 
+</span></span><span style="display:flex;"><span>Error in sample.<span style="color:#339;font-weight:bold">int</span>(<span style="color:#06b;font-weight:bold">length</span>(x), size, replace, prob) <span style="color:#333">:&amp;</span>nbsp;<span style="color:#333">&amp;</span>nbsp; 
+</span></span><span style="display:flex;"><span> cannot take a sample larger than the population when <span style="color:#f00;background-color:#faa">&#39;</span>replace <span style="color:#333">=</span> FALSE<span style="color:#f00;background-color:#faa">&#39;</span>
+</span></span></code></pre></div><p>Allowing repeated elements   <br>
+# Sometimes you want to allow repeats. For example when  we roll a die repeatedly we expect to see numbers repeating. We can think of this as picking a random element from a set and then putting it back, i.e. replacing it, so it can be drawn again.</p>
+<p># In R we do this by setting the optional argument replace=TRUE</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Note that we get can get repeated values&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">3</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">5</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">5</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">5</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">1</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">5</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">1</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Now there is no problem asking for more than 5 things from a set of 5 elements.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">12</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">5</span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sample</span>(x,<span style="color:#00d;font-weight:bold">12</span>,replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">5</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">1</span>
+</span></span></code></pre></div><p># To generate an m x n array of random values we can use the function sample function followed by the matrix function.</p>
+<p># Let&rsquo;s simulate rolling a die.    <br>
+# We use 1:6 to make vector (1,2,3,4,5,6).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Generate a 3 x 4 array of random dice rolls.&amp;nbsp; 
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> y <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>, <span style="color:#00d;font-weight:bold">12</span>, replace<span style="color:#333">=</span>TRUE) 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">matrix</span>(y,nrow<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">3</span>,ncol<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">4</span>) 
+</span></span><span style="display:flex;"><span>     [,<span style="color:#00d;font-weight:bold">1</span>] [,<span style="color:#00d;font-weight:bold">2</span>] [,<span style="color:#00d;font-weight:bold">3</span>] [,<span style="color:#00d;font-weight:bold">4</span>] 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>,]    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">1</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">2</span>,]    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">6</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">3</span>,]    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">3</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Or we could make it a 2 x 6 array.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">matrix</span>(y,nrow<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">2</span>,ncol<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">6</span>)<span style="color:#f00;background-color:#faa"> </span> 
+</span></span><span style="display:flex;"><span>     [,<span style="color:#00d;font-weight:bold">1</span>] [,<span style="color:#00d;font-weight:bold">2</span>] [,<span style="color:#00d;font-weight:bold">3</span>] [,<span style="color:#00d;font-weight:bold">4</span>] [,<span style="color:#00d;font-weight:bold">5</span>] [,<span style="color:#00d;font-weight:bold">6</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>,]    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">6</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">2</span>,]    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">3</span>
+</span></span></code></pre></div>
+    <h4 id="simulation">Simulation</h4>
+
+<p># First let&rsquo;s simulate rolling 1 die 3 times and checking if one of the rolls was a 6.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># First we use sample to generate 3 samples from 1:6   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>,<span style="color:#00d;font-weight:bold">3</span>, replace<span style="color:#333">=</span>TRUE)<span style="color:#f00;background-color:#faa"> </span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> x<span style="color:#f00;background-color:#faa"> </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">6</span> <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">1</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># To check if any of the 3 rolls are 6 we use the following command. It returns a vector of TRUE or FALSE depending on whether that entry of x is 6 or not. Note the use of the double equal sign. We can&#39;t use a single equal sign because that would mean &#39;set the value of x to 6&#39;. Compare the result with the value of x above.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">6</span><span style="color:#f00;background-color:#faa"> </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] TRUE FALSE FALSE
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579">#  We can also see which elements of x are less than 6   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">&lt;</span> <span style="color:#00d;font-weight:bold">6</span><span style="color:#f00;background-color:#faa"> </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] FALSE TRUE TRUE
+</span></span></code></pre></div><p>#  Now let&rsquo;s roll the die 5000 times and see what fraction of the rolls give 6. We expect that about 1/6 of them will be.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Simulate 1000 rolls   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>,<span style="color:#00d;font-weight:bold">1000</span>, replace<span style="color:#333">=</span>TRUE)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># x == 6 gives a vector of TRUE or FALSE. R is clever, when we sum the vector: each TRUE counts as 1 and each FALSE counts as 0. So the sum is the number of TRUE&#39;s. In this case that means the number of 6&#39;s, which happens to be 168.    
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sum</span>(x <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">6</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">168</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Divide by 1000 to get the fraction of 6&#39;s.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sum</span>(x <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">6</span>)<span style="color:#333">/</span><span style="color:#00d;font-weight:bold">1000</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#60e;font-weight:bold">0.168</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Compare that with the theoretical value of 1/6.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">1</span><span style="color:#333">/</span><span style="color:#00d;font-weight:bold">6</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#60e;font-weight:bold">0.1666667</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#579"># Not bad!
+</span></span></span></code></pre></div><p># Now let&rsquo;s estimate the probability of getting at least one 6 in 4 rolls.</p>
+<p># Goal: estimate the probability of getting at least one 6 in 4 rolls.   <br>
+# Experiment: roll 1 die 4 times and check for a 6.    <br>
+# Repeat the experiment 10 times and see what fraction of times this happens.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># So you can see all the commands at once, we&#39;ll show them all and then explain them later. For commenting, we&#39;ll put a command number before each &#39;&gt;&#39;    
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#60e;font-weight:bold">1.</span> <span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">matrix</span>(<span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>, <span style="color:#00d;font-weight:bold">4</span><span style="color:#333">*</span><span style="color:#00d;font-weight:bold">10</span>, replace<span style="color:#333">=</span>TRUE), nrow<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">4</span>, ncol<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">10</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">2.</span> <span style="color:#333">&gt;</span> x<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>    [,<span style="color:#00d;font-weight:bold">1</span>] [,<span style="color:#00d;font-weight:bold">2</span>] [,<span style="color:#00d;font-weight:bold">3</span>] [,<span style="color:#00d;font-weight:bold">4</span>] [,<span style="color:#00d;font-weight:bold">5</span>] [,<span style="color:#00d;font-weight:bold">6</span>] [,<span style="color:#00d;font-weight:bold">7</span>] [,<span style="color:#00d;font-weight:bold">8</span>] [,<span style="color:#00d;font-weight:bold">9</span>] [,<span style="color:#00d;font-weight:bold">10</span>]<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>,]    <span style="color:#00d;font-weight:bold">5</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">6</span>     <span style="color:#00d;font-weight:bold">1</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">2</span>,]    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">6</span>     <span style="color:#00d;font-weight:bold">5</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">3</span>,]    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">5</span>    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">5</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">2</span>     <span style="color:#00d;font-weight:bold">5</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">4</span>,]    <span style="color:#00d;font-weight:bold">2</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">6</span>    <span style="color:#00d;font-weight:bold">5</span>    <span style="color:#00d;font-weight:bold">5</span>    <span style="color:#00d;font-weight:bold">3</span>    <span style="color:#00d;font-weight:bold">1</span>    <span style="color:#00d;font-weight:bold">4</span>    <span style="color:#00d;font-weight:bold">5</span>     <span style="color:#00d;font-weight:bold">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">3.</span> <span style="color:#333">&gt;</span> y <span style="color:#333">=</span> (x<span style="color:#333">==</span><span style="color:#00d;font-weight:bold">6</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">4.</span> <span style="color:#333">&gt;</span> y<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>     [,<span style="color:#00d;font-weight:bold">1</span>]  [,<span style="color:#00d;font-weight:bold">2</span>]  [,<span style="color:#00d;font-weight:bold">3</span>]  [,<span style="color:#00d;font-weight:bold">4</span>]  [,<span style="color:#00d;font-weight:bold">5</span>]  [,<span style="color:#00d;font-weight:bold">6</span>]  [,<span style="color:#00d;font-weight:bold">7</span>]  [,<span style="color:#00d;font-weight:bold">8</span>]  [,<span style="color:#00d;font-weight:bold">9</span>] [,<span style="color:#00d;font-weight:bold">10</span>]<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>,] FALSE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">2</span>,] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">3</span>,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">4</span>,] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">5.</span> <span style="color:#333">&gt;</span> z <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">colSums</span>(y)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">6.</span> <span style="color:#333">&gt;</span> z<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">0</span> <span style="color:#00d;font-weight:bold">3</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">0</span> <span style="color:#00d;font-weight:bold">1</span> <span style="color:#00d;font-weight:bold">2</span> <span style="color:#00d;font-weight:bold">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">7.</span> <span style="color:#333">&gt;</span> z <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">8.</span> <span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sum</span>(z <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">9.</span> <span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">mean</span>(z <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#60e;font-weight:bold">0.5</span>
+</span></span></code></pre></div><p># Command 1: Generate a 4 by 10 random array. Each column represents one experimental trial of 4 rolls. The 10 columns represent the 10 trials.</p>
+<p># Command 2: Display x</p>
+<p># Command 3: See which of the rolls are 6&rsquo;s. Note the double equals to check which rolls were 6. The result y is an array of TRUE or FALSE. You can check that it picks out the 6&rsquo;s.</p>
+<p># Command 4: Display y</p>
+<p># Command 5: Sum each of the columns. The result is then number of 6&rsquo;s in each   <br>
+trial (column).</p>
+<p># Command 6: Display z</p>
+<p># Command 7: If the column sum is greater than 0 there was at least one TRUE in the column, that is at least one 6. This command returns a vector of TRUE or FALSE representing  whether or not the experiment yielded a 6.</p>
+<p># command 8: sum the vector in command 7 to get the number of trials that yielded a 6. We see that 5 out of 10 trials did.</p>
+<p># command 9: The mean function is just the sum divided by the number of trials. This is just 5/10 = .5. Half the trials yielded a 10.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Let&#39;s repeat this but with 1000 trials instead of 10. Without all the comments it&#39;s pretty short.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">matrix</span>(<span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>, <span style="color:#00d;font-weight:bold">4</span><span style="color:#333">*</span><span style="color:#00d;font-weight:bold">1000</span>, replace<span style="color:#333">=</span>TRUE), nrow<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">4</span>, ncol<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">1000</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> y <span style="color:#333">=</span> (x<span style="color:#333">==</span><span style="color:#00d;font-weight:bold">6</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> z <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">colSums</span>(y)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">sum</span>(z <span style="color:#333">&gt;</span> <span style="color:#00d;font-weight:bold">0</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#00d;font-weight:bold">525</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">mean</span>(z<span style="color:#333">&gt;</span><span style="color:#00d;font-weight:bold">0</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#60e;font-weight:bold">0.525</span>
+</span></span></code></pre></div><p>Our estimate of the probability of at least one 6 in 4 rolls is .525. This is pretty close to the theoretical value of .518.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>The <span style="color:#06b;font-weight:bold">dim</span>() function<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#579"># We can always check that x has 4 rows and 1000 columns using the dim() function.   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span><span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">dim</span>(x)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>]    <span style="color:#00d;font-weight:bold">4</span> <span style="color:#00d;font-weight:bold">1000</span>
+</span></span></code></pre></div>
+    <h4 id="one-more-simulation">One more simulation</h4>
+
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#579"># Goal: estimate the probability of getting a sum   
+</span></span></span><span style="display:flex;"><span><span style="color:#579"></span>of <span style="color:#00d;font-weight:bold">7</span> when rolling two dice.<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">1.</span> <span style="color:#333">&gt;</span> ntrials <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">10000</span><span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">2.</span> <span style="color:#333">&gt;</span> x <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">matrix</span>(<span style="color:#06b;font-weight:bold">sample</span>(<span style="color:#00d;font-weight:bold">1</span><span style="color:#333">:</span><span style="color:#00d;font-weight:bold">6</span>, <span style="color:#00d;font-weight:bold">2</span><span style="color:#333">*</span>ntrials, replace<span style="color:#333">=</span>TRUE), nrow<span style="color:#333">=</span><span style="color:#00d;font-weight:bold">2</span>, ncol<span style="color:#333">=</span>ntrials)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">3.</span> <span style="color:#333">&gt;</span> y <span style="color:#333">=</span> <span style="color:#06b;font-weight:bold">colSums</span>(x)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span><span style="color:#60e;font-weight:bold">4.</span> <span style="color:#333">&gt;</span> <span style="color:#06b;font-weight:bold">mean</span>(y <span style="color:#333">==</span> <span style="color:#00d;font-weight:bold">7</span>)<span style="color:#f00;background-color:#faa">  </span> 
+</span></span><span style="display:flex;"><span>[<span style="color:#00d;font-weight:bold">1</span>] <span style="color:#60e;font-weight:bold">0.1658</span>
+</span></span></code></pre></div><p># Command 1: We assign the number of trials to the variable ntrials. Writing code like this makes it easier to modify later. If we want to change the number of trials to 7 we just have to change this one line of code.   <br>
+# Command 2: we create 10000 columns with 2 rows. That is, we run 10000 experiments of rolling 2 dice.   <br>
+# Command 3: we sum each of the columns, i.e., we sum the two dice.   <br>
+# Command 4: we find the fraction of sums that are 7.</p>
+<p># Note, this is essentially the exact answer of 1/6.</p>
+<p>Exercise: Try to estimate the probability of two sixes  when rolling two dice.</p>
+</main>
+  </article>
+</div>
+
+
+                  </div>
+                </div>
+                
+                  <button 
+  type="button" 
+  class="btn course-info-button large-and-above-only"
+  id="desktop-course-drawer-button"
+  data-target="#desktop-course-drawer"
+  data-toggle="collapse"
+  aria-label="Course Info"
+  aria-controls="desktop-course-drawer"
+  aria-expanded="false"
+>
+  <img
+    class="expand-drawer-img drawer-icon-img"
+    src="../../static_shared/images/left_arrow.svg"
+    alt=""
+  />
+  <img
+    class="collapse-drawer-img drawer-icon-img"
+    src="../../static_shared/images/close_small.svg"
+    alt=""
+  />
+</button>
+
+<div class="collapse border-left p-0 large-and-above-only col-3" id="desktop-course-drawer">
+    
+
+<div class="course-info">
+  <div class="course-detail-title bg-light-gray">
+    <h2 class="font-black py-1 pl-3 m-0">
+      Course Info
+    </h2>
+  </div>
+  <div class="px-3 mt-4">
+    <div class="row">
+      <div class="col-12 ">
+        
+        <div class="">
+          
+          <h5 class="panel-course-info-title ">
+            Instructors
+            </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-instructor strip-link-offline"  href="https://ocw.mit.edu/search?q=Dr.&#43;Jeremy&#43;Orloff">Dr. Jeremy Orloff</a>
+  </li>
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-instructor strip-link-offline"  href="https://ocw.mit.edu/search?q=Jonathan&#43;Bloom">Jonathan Bloom</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+         
+        <div class="mt-4">
+          
+          <h5 class="panel-course-info-title ">
+            Departments
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+
+
+
+
+<ul class="list-unstyled m-0">
+  
+  
+  
+    
+  
+  <li>
+    <a class="course-info-department strip-link-offline"  href="https://ocw.mit.edu/search?d=Mathematics">Mathematics</a>
+  </li>
+  
+</ul>
+
+
+          </div>
+        </div>
+         
+        
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            As Taught In
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            Spring
+            
+              2014
+            
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="panel-course-info-title ">
+            Level
+          </h5>
+          <div class="course-info-content panel-course-info-text">
+            
+              
+                <a class=" strip-link-offline"  href="https://ocw.mit.edu/search?l=Undergraduate">Undergraduate</a><br />
+              
+            
+          </div>
+        </div>
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+  <div class="px-3">
+    
+
+
+
+
+
+<div class=" mt-4">
+  <h5 class="panel-course-info-title ">
+    Topics
+  </h5>
+  <ul class="list-unstyled pb-2 m-0 panel-course-info-text">
+      <li>
+
+
+
+
+
+
+
+
+<div class="position-relative pt-1 pb-1 pl-4 ml-n2 ">
+  
+  <button
+    type="button"
+    class="topic-toggle border-0 bg-transparent pl-0"
+    data-target="#subtopic-container_desktop_0"
+    data-toggle="collapse"
+    aria-controls="subtopic-container_desktop_0"
+    aria-expanded="true"
+    aria-label="Mathematics subtopics"
+  >
+    <i aria-hidden="true" class="material-icons"></i>
+  </button>
+  
+  <span class="topic-text-wrapper">
+    <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Mathematics">Mathematics</a></span>
+</div>
+
+<ul
+  class="pl-4 subtopic-container collapse show list-unstyled"
+  id="subtopic-container_desktop_0"
+  aria-label="Subtopics"
+>
+  
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Discrete&#43;Mathematics">Discrete Mathematics</a></span>
+    </div>
+    <ul
+      class="collapse show list-unstyled"
+      id="speciality-container_desktop_0_0"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+  
+  <li>
+    <div class="position-relative pt-1 pb-1  pl-2 ">
+      
+      <span class="topic-text-wrapper">
+        
+        <a class="text-black course-info-topic strip-link-offline"  href="https://ocw.mit.edu/search?t=Probability&#43;and&#43;Statistics">Probability and Statistics</a></span>
+    </div>
+    <ul
+      class="collapse show list-unstyled"
+      id="speciality-container_desktop_0_1"
+      aria-label="Specialties"
+    >
+      
+    </ul>
+    
+  </li>
+  
+</ul>
+
+</li>
+      
+  </ul>
+</div>
+
+    
+
+
+
+<div class="">
+  <h5 class="course-detail-title panel-course-info-title mt-3">
+    Learning Resource Types
+  </h5>
+  <div>
+    <div class="row d-inline m-0">
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">assignment_turned_in</i>
+    <span>Problem Sets with Solutions</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">grading</i>
+    <span>Exams with Solutions</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">notes</i>
+    <span>Lecture Notes</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1"><span class="material-icons-round">
+        co_present
+      </span></i>
+    <span>Instructor Insights</span>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="panel-course-info-text my-2">
+          
+
+<div class="">
+  <div class="d-flex">
+    <i aria-hidden="true" class="material-icons pr-1">theaters</i>
+    <span>Other Video</span>
+  </div>
+</div>
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+    
+
+
+<hr>
+<div class="pb-3">
+  <a class="download-course-link-button btn btn-outline-primary btn-link link-button text-decoration-none px-4 py-2"
+    role="button"
+    href="../../download/index.html">
+    <div class="text-center w-100">Browse Resources</div>
+  </a>
+</div>
+
+  </div>
+</div>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+<div class="footer">
+    <div class="footer-main-content mx-auto">
+    	<div class="col-12">
+        	<div class="row align-items-center">
+            	<div class="col-12 col-md-9">
+					<div class="d-md-flex align-items-center">
+						<a href="https://openlearning.mit.edu/" target="_blank">
+							<img width="150px" src="../../static_shared/images/mit-ol.png" alt="MIT Open Learning" />
+						</a>
+						<div class="ml-md-3 mt-4 mt-md-0">
+							<div class="font-weight-bold">
+								Over 2,500 courses & materials
+							</div>
+							<div>
+								Freely sharing knowledge with learners and educators around the world. <a href='https://ocw.mit.edu/about'>Learn more</a>
+							</div>
+						</div>
+					</div>
+            	</div>
+				<div class="col-12 col-md-3 d-none d-md-block">
+					<div class="d-flex justify-content-md-end">
+	<div>
+		<a href="https://www.facebook.com/MITOCW" target="_blank">
+			<img class="footer-social-icon ml-0" src="../../static_shared/images/Facebook.png" alt="facebook"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.instagram.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Instagram.png" alt="instagram"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/MITOCW" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Twitter.png" alt="twitter"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.youtube.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Youtube.png" alt="youtube"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.linkedin.com/company/mit-opencourseware/" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/LinkedIn.png" alt="LinkedIn"/>
+		</a>
+	</div>
+</div>
+				</div>
+        	</div>
+    	</div>
+		
+		<div class="col-12 mt-3 mt-md-4">
+			<div class="row align-items-center">
+            	<div class="col-12 col-md-8">
+					<div class="d-lg-flex">
+						<div class="pr-md-2 mt-2 mt-lg-0 d-none d-lg-block">
+							© 2001–2023 Massachusetts Institute of Technology
+						</div>
+						<div class="px-md-2 mt-2 mt-lg-0">
+							<a href="https://accessibility.mit.edu" target="_blank">Accessibility</a>
+						</div>
+						<div class="px-md-2 mt-2 mt-lg-0">
+							<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons License</a>
+						</div>
+						<div class="px-md-2 mt-2 mt-lg-0">
+							<a class="hide-offline" href='https://ocw.mit.edu/pages/privacy-and-terms-of-use/'>Terms and Conditions</a>
+						</div>
+					</div>
+            	</div>
+				<div class="col-12 col-md-4">
+					<div class="d-flex justify-content-md-end mt-4 mt-lg-0">
+						<div>
+						Proud member of: 
+						<a href="https://www.oeglobal.org/" target="_blank">
+							<img class="oeg-logo" src="../../static_shared/images/oeg_logo.png" alt="Open Education Global"/>
+						</a>
+						</div>
+					</div>
+				</div>
+        	</div>
+		</div>
+
+		<div class="col-12 mt-5 d-md-none">
+			<div class="d-flex justify-content-md-end">
+	<div>
+		<a href="https://www.facebook.com/MITOCW" target="_blank">
+			<img class="footer-social-icon ml-0" src="../../static_shared/images/Facebook.png" alt="facebook"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.instagram.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Instagram.png" alt="instagram"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/MITOCW" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Twitter.png" alt="twitter"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.youtube.com/mitocw" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/Youtube.png" alt="youtube"/>
+		</a>
+	</div>
+	<div>
+		<a href="https://www.linkedin.com/company/mit-opencourseware/" target="_blank">
+			<img class="footer-social-icon" src="../../static_shared/images/LinkedIn.png" alt="LinkedIn"/>
+		</a>
+	</div>
+</div>
+		</div>
+
+		<div class="col-12 mt-4 pl-3 pl-md-4 d-lg-none">
+			© 2001–2023 Massachusetts Institute of Technology
+		</div>
+	</div>
+</div>
+
+  </div>
+  <script>
+function hideLinksOffline(){
+  if (!window.navigator.onLine) {
+    const stripLinks = document.querySelectorAll(".strip-link-offline")
+    const hideOffline = document.querySelectorAll(".hide-offline")
+    const showOffline = document.querySelectorAll(".show-offline")
+    Array.prototype.forEach.call(stripLinks, function(link) {
+      link.outerHTML = link.innerHTML
+    })
+    Array.prototype.forEach.call(hideOffline, function(link) {
+      link.classList.add("d-none")
+    })
+    Array.prototype.forEach.call(showOffline, function(link) {
+      link.classList.remove("d-none")
+    })
+  }
+}
+hideLinksOffline()
+</script>
+
+  <script>
+    
+    
+    
+    
+    
+    
+    'use strict';
+    const COURSE_DRAWER_LOCAL_STORAGE_KEY = "desktopCourseDrawerState"
+    const COURSE_DRAWER_OPENED = "opened"
+    const COURSE_DRAWER_CLOSED = "closed"
+    
+    const DESKTOP_COURSE_DRAWER_ID = "desktop-course-drawer"
+    const COURSE_DRAWER_BTN_ID = "desktop-course-drawer-button"
+    const MAIN_COURSE_SECTION_ID = "main-course-section"
+
+    try{
+
+      
+
+      function initializeDesktopCourseDrawerState() {
+        const state = getLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY)
+        if (state === null) {
+          
+          setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_OPENED)
+          showOrHideDesktopCourseDrawer(COURSE_DRAWER_OPENED)
+        } else {
+          showOrHideDesktopCourseDrawer(state)
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          const drawer = $(`#${DESKTOP_COURSE_DRAWER_ID}`)
+          const mainSection = $(`#${MAIN_COURSE_SECTION_ID}`)
+
+          drawer.on("shown.bs.collapse", (event) => {
+            if (event.target.id !== DESKTOP_COURSE_DRAWER_ID) {
+              return;
+            }
+            mainSection.addClass("col-lg-9")
+            mainSection.removeClass("col-12")
+            setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_OPENED)
+          })
+      
+          drawer.on("hidden.bs.collapse", (event) => {
+            if (event.target.id !== DESKTOP_COURSE_DRAWER_ID) {
+              return;
+            }
+            mainSection.addClass("col-12")
+            mainSection.removeClass("col-lg-9")
+            setLocalStorageItem(COURSE_DRAWER_LOCAL_STORAGE_KEY, COURSE_DRAWER_CLOSED)
+          })
+        })
+      }
+
+      function showOrHideDesktopCourseDrawer(state) {
+        const drawer = document.getElementById(DESKTOP_COURSE_DRAWER_ID)
+        const button = document.getElementById(COURSE_DRAWER_BTN_ID)
+        const mainSection = document.getElementById(MAIN_COURSE_SECTION_ID)
+
+        if (state === COURSE_DRAWER_OPENED) {
+          drawer.classList.add("show")
+          button.setAttribute("aria-expanded", "true")
+        } else {
+          drawer.classList.remove("show")
+          button.setAttribute("aria-expanded", "false")
+          mainSection.classList.remove("col-lg-9")
+          mainSection.classList.add("col-12")
+        }
+      }
+
+      function setOrGetLocalStorageItem(action,key,value) {
+        try {
+          
+          if (typeof Storage !== "undefined") {
+            if (action === "set") {
+              localStorage.setItem(key, value)
+              return true
+            } else {
+              return localStorage.getItem(key)
+            }
+          }
+          console.error("This browser has no web storage support.")
+          return null
+        } catch (e) {
+          console.error("An exception occurred while storing/fetching data in/from localstorage: ", e)
+          return null
+        }
+      }
+
+      function setLocalStorageItem(key, value) {
+        return setOrGetLocalStorageItem("set", key, value)
+      }
+      
+      function getLocalStorageItem(key){
+        return setOrGetLocalStorageItem("get", key)
+      }
+
+      initializeDesktopCourseDrawerState();
+    }
+    catch(e){
+      console.error("Something went wrong in maintaining/toggling course drawer state", e)
+    }
+  </script>
+
+  
+
+<script>
+function expandNav(e,t){t.classList.add("show"),e.querySelector(".course-nav-section-toggle, video-tab-toggle-section").setAttribute("aria-expanded","true")}function courseNav(){document.querySelectorAll(".course-nav, .transcript-header").forEach(e=>{e.querySelectorAll(".nav-link").forEach(e=>{const t=e.getAttribute("href")?e.getAttribute("href"):"";if(t.replace(/\/$/,"")===window.location.pathname.replace(/\/$/,"")){e.classList.add("active");const s=e.dataset.uuid,t=e.closest(".course-nav-list-item"),n=t?.querySelector(".collapse"),o=Array.prototype.filter.call(document.querySelectorAll(".course-nav-section-toggle"),e=>e.dataset.uuid===s);t&&n&&o.length>0&&expandNav(t,n)}});const t=e.querySelector("a.nav-link.active");e.querySelectorAll(".course-nav-list-item").forEach(e=>{const n=e.querySelector(".collapse");n&&n.contains(t)&&expandNav(e,n)})})}courseNav()
+</script>
+
+  
+
+<script>
+(()=>{var e=()=>document.querySelectorAll("#course-content-section table"),t=()=>document.getElementById("course-content-section");function n(){const o=e(),n=t();if(!n)return;if(!window.ResizeObserver)return;const i=new ResizeObserver(()=>s());i.observe(n),o.forEach(e=>{const t=e.getElementsByTagName("th"),n=e.querySelectorAll("table tr");n.forEach(e=>{const n=e.querySelectorAll("td");n.forEach((e,s)=>{t.length>=s+1&&(n[s].dataset.title=t[s].innerText.trim().concat(": "))})})})}function s(){const s=e(),n=t();if(!n)return;s.forEach(e=>{const t=n.getBoundingClientRect(),o=+(e.dataset.minWidth??0);t.width>o&&e.classList.remove("mobile-table");const s=e.getBoundingClientRect();s.right>t.right&&(e.dataset.minWidth=`${s.width}`,e.classList.add("mobile-table"))})}n()})()
+</script>
+
+  
+
+
+    
+    <script src="../../static_shared/js/course_offline.904c3.js"></script>
+    
+
+  
+</body>
+
+</html>

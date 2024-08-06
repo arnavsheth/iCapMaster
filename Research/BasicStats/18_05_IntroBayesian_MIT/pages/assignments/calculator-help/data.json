@@ -1,0 +1,6 @@
+
+{
+  "title":"Calculator Help",
+  "content":"problemNumber = 0; wl(\u0026quot;\u0026lt;h3\u0026gt;Calculator\u0026lt;/h3\u0026gt;\u0026quot;); writecalculator(\u0026ldquo;psetcheckcalcid\u0026rdquo;, \u0026ldquo;Calculate\u0026rdquo;); whr(kdivcol,kdivwid);\nBasic Arthmetic You can do basic calculations like: 2+3, 2-3, 2*3, 3/2, 2^3, 5*(2-6).\nConstants The calculator knows the constants pi and e.\nFunctions You can use the functions sin, cos, exp, log, log10.\nFactorials Conveniently it knows factorials, e.g. 5!.\nTemporary variables You can set the value of a variable and use it later. You do this by separating multiple expressions by semicolons.\nTry the following:\nx=5; y=6; x*y x=3; y=x^2+1; z=(x+1)/y; z\nMuch More! The features are quite extensive. See Mathjs documentation.\n"}
+
+

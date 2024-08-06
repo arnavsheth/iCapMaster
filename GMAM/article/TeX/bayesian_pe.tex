@@ -1,0 +1,278 @@
+\documentclass[11pt]{article}
+
+\usepackage{amssymb,amsmath,amsfonts,eurosym,geometry,ulem,graphicx,caption,color,setspace,sectsty,comment,footmisc,caption,pdflscape,subfigure,array,xr,paralist}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\newcommand*{\footcite}[1]{\cite{#1}}
+
+\externalcitedocument{/Users/asheth/Library/CloudStorage/OneDrive-iCapitalNetwork/GMAM/literature/litreview/LitReview}
+
+\normalem
+
+\onehalfspacing
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}{Proposition}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\newtheorem{hyp}{Hypothesis}
+\newtheorem{subhyp}{Hypothesis}[hyp]
+\renewcommand{\thesubhyp}{\thehyp\alph{subhyp}}
+
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\arraybackslash\hspace{0pt}}m{#1}}
+
+\geometry{left=1.0in,right=1.0in,top=1.0in,bottom=1.0in}
+
+\begin{document}
+
+\begin{titlepage}
+\title{Bayesian Estimation of Private Equity Fund Returns}
+\author{Ginger Chang \and Aniket Inamdar \and Weidong Jin \and Kunpeng Lin \and Arnav Sheth \and Clinton Tepper\thanks{All authors are at iCapital Network. Corresponding author: Arnav Sheth (asheth (at) icapitalnetwork.com).}}
+\date{}
+\maketitle
+\begin{abstract}
+\noindent We develop a methodology to estimate a time series of private equity returns based on returns as reported by general partners using a hierarchical Bayesian model.  We do this at the fund level. Our methodology incorporates a moving-average process to manage the problem of stale NAVs and returns smoothing. In addition, we use a spike-and-slab regression to determine which factors drive a specific funds returns. We use a unique dataset of fund-level returns provided to us by General Partners. This process also allows us to easily analyze the returns of a portfolio consisting of public and private securities. \\
+\vspace{0in}\\
+\noindent\textbf{Keywords:} Bayesian filtering, private equity, returns generation\\
+%\vspace{0in}\\
+%\noindent\textbf{JEL Codes:} key1, key2, key3\\
+\noindent\textbf{This version:} \today\\
+
+\bigskip
+\end{abstract}
+\setcounter{page}{0}
+\thispagestyle{empty}
+\end{titlepage}
+\pagebreak \newpage
+
+
+
+
+\doublespacing
+
+
+\section{Introduction} 
+\label{sec:introduction}
+According to Bain \& Company\footnote{Source:\href{https://www.bain.com/insights/topics/global-private-equity-report/}{https://www.bain.com/insights/topics/global-private-equity-report/}}, private equity (PE) buyout deals for 2022 alone were valued at \$654 billion globally. This was the second-highest valuation since 2008, and brought the value of the total deal volume to \$2.4 trillion\footnote{Source:\href{https://www.mckinsey.com/industries/private-equity-and-principal-investors/our-insights/mckinseys-private-markets-annual-review/}{https://www.mckinsey.com/industries/private-equity-and-principal-investors/our-insights/mckinseys-private-markets-annual-review/}}. Additionally, total private markets AUM reached \$11.7 trillion as of June 2022. This makes PE a major asset class, with institutions like colleges, foundations, pension funds, and more investing in it. Furthermore, SEC rules defining what an accredited investor is, have recently been broadened to include ``individual investors that have the knowledge and expertise to participate in [financial] markets.'' One no longer needs to pass the income requirement. All of this has hastened the market expansion and liquidity of alternative investments and made it a viable option for accredited investors and private wealth funds\footnote{Source:\href{https://icapital.com/insights/practice-management/untapped-potential-alternative-investments-and-the-wealth-management-channel/}{https://icapital.com/insights/practice-management/untapped-potential-alternative-investments-and-the-wealth-management-channel/}}.
+
+A significant limitation for the analysis for PE returns is the lack of availability of performance metrics based on actual transactions since PE is largely exempt from public disclosure requirements (\cite{Kaplan2005}). The available time series data often relies on non-market valuations or multiyear internal rates of return (IRR) that are segmented by the vintage years of the funds. This limitation impedes the process of optimal wealth allocation since this requires data on the risk, return, and covariance of asset classes. In liquid markets, these can be calculated via historical return data. This provides a significant problem for retail investors who would like to optimally combine PE with publicly available investment opportunities. 
+
+Apart from the limitation related to data availability, there are measurement concerns raised by \cite{Gottschalg2007} related to the IRR itself. The implicit assumption of reinvestment of cash proceeds does not coincide with the reality of cash flow distributions by PE. For example, if a PE fund reports a 50\% IRR and has returned cash early in its life, the assumption is that the cash is reinvested at 50\%. However, it is unlikely that the fund will find such an investment opportunity every time cash is distributed. Furthermore, as \cite{Phalippou2008} shows, IRR distorts manager incentives, and upwardly biases both, volatility and performance measures\footnote{The modified IRR (MIRR) is a solution to this problem related to IRR, but as \cite{Phalippou2008} points out -- its practical implementation in a private partnership context is not obvious. Readers are encouraged to read the article for more details on this topic.}. And finally, as \cite{Sorensen2013} say, "The IRR may not exist, and it may not be unique."
+
+As as result of this, there exists a substantial degree of heterogeneity in risk-adjusted return estimates, depending on the time period, empirical method, and data source used (\cite{Korteweg2019}). There is currently no consensus as to what the main empirical approach should be toward estimating risk and return in PE.
+
+In this paper, we aim to fill this gap. We devise a technique to generate monthly PE returns over several years using a hierarchical Bayesian model, factor decomposition, and a unique returns smoothing process that allows for the mimicking of fund characteristics which, to some extent, deals with the problem described above of IRR. 
+
+Bayesian techniques offer a more robust and flexible approach to capture the complex dynamics of private equity returns due to their ability to incorporate prior knowledge, handle limited data, account for illiquidity, and update estimates as new information becomes available. They allow one to incorporate prior beliefs or information about specific funds into the estimation of returns. This prior information is leveraged to handle limited data and allow for the incorporation of uncertainty into the return estimates by providing probability distributions rather than point estimates. They provide a framework that aligns well with the unique characteristics of private equity investments, allowing for more accurate and informed returns estimation.
+
+To the best of our knowledge, only two studies use Bayesian techniques in the PE literature in finance and economics. The first is \cite{Korteweg2011}, who  combine a Type-2 Tobit model with a dynamic filtering and smoothing model. They use a Markov Chain Monte Carlo (MCMC) estimator using Gibbs sampling. The second study is \cite{Ang2014}, who use MCMC to estimate a series of PE returns using cash flows accruing to limited partners and factor returns from public capital markets. We extend this methodology in various ways, including estimating returns at the fund-level, whereas \cite{Ang2014} estimate it at the asset class level. Our other contributions are as follows:
+\begin{itemize}
+	\item We generate returns at the fund level using data provided to us by general partners. Though there are others that have done this (e.g., \cite{Long1996}), we have estimated these returns using our unique Bayesian methodology, that allows us to generate full distributions rather than point estimates.
+	\item We device a smoothing process on fund returns which allows us to mimic the characteristics of the reported returns to a greater degree. We estimate smoothing parameters for this process via Bayesian techniques. This helps with the problem described by \cite{Gottschalg2007} above, i.e., the incentive to upwardly-bias returns\footnote{Financial Accounting Standard 157, released by the FASB in 2006 during the run-up to the financial crisis of that time, and now called Accounting Standards Code Topic 820, required companies to mark their assets to market. This was a radical change from historic cost accounting, and required LPs to periodically mark the assets to market, even though markets in many portfolio companies are illiquid. This backwards appraisal may also result in a managerial bias towards smoothing asset values.}.
+	\item We perform a traditional factor decomposition of fund returns which aids in the understanding of drivers of both, risk and return.
+	\item We can provide full distributions of the both, the smoothed, and non-smoothed returns, as well as the factor loadings.
+\end{itemize}
+
+Section \ref{sec:literature} has a literature review, Section \ref{sec:data} discusses our data, Section \ref{sec:methodology} describes the methodology we use, Section \ref{sec:results} has the results, and Section \ref{sec:conclusion} concludes.
+
+\section{Literature Review} 
+\label{sec:literature}
+Readers are encouraged to read \cite{Korteweg2019} and \cite{Kaplan2015} for excellent surveys on the evolution of the measurement of risk and performance of PE, including buyout funds and venture capital. We provide a brief overview here, focusing mainly on estimation of PE returns. The literature is broadly divided into three parts. The first part is on Public Market Equivalents, or PMEs, the second part deals with other non-PME models of PE returns-generation, and the third part focuses on the papers that use Bayesian techniques in this arena.
+
+\subsection{Public Market Equivalents}
+
+The early models were called Public Market Equivalents or PMEs and used some measure of the public market, i.e., a benchmark like the S\&P 500, to indirectly estimate an alpha versus this benchmark for PE. 
+
+\cite{Long1996} are, to the best of our knowledge, the earliest cited work in the literature on PMEs. They create a market-adjusted IRR in what has become known as the Long-Nickels Index Comparison Method/Public Market Equivalent (LN ICM/PME) or Index Comparison Method (ICM). They do this by equating capital flows from the PE fund with equivalent capital flows into a public benchmark. Then they compare the IRR of a fund to the IRR of a comparable public equity benchmark. 
+
+
+Amongst the issues associated with the IRR mentioned earlier, i.e., a high sensitivity to investment sequencing, the LN ICM/PME cannot be calculated for successful funds that return capital quickly. Their model was extended by \cite{Rouvinez2003} with the PME+, and \cite{Cambridge2013} with the mPME and Capital Dynamics. While all of these methods are highly intuitive and powerful, they are heuristic approaches. They seek to estimate the excess return in an indirect way, i.e., by investing and divesting a PE portfolio’s cash flows with the reference benchmark, and calculating the spread against the PE portfolio's IRR.
+
+\cite{Kaplan2005} go a step farther with their PME. They seek to answer the question: how much wealthier has the investor become at some time, $n$, instead of investing in the reference benchmark? To that end, they market-adjust the multiple of invested capital (MOIC) rather than the IRR. They calculate the ratio of the sum of discounted distributions to the sum of discounted capital calls, where the discount rate is the total return on the relevant public equity benchmark from an arbitrary reference date, to the date of the cash flow in question. A fund with a PME greater than 1 outperforms the benchmark, and a fund with a PME less than 1 underperforms (net of all fees). It is a cumulative, rather than an annualized return measure, so it is difficult to use the returns calculated here for portfolio analytics. \cite{Sorensen2013} provide a formal and rigorous justification for the Kaplan-Schoar PME, and show that it is a generalized method-of-moments estimator using the stochastic discount factor implied by \cite{Rubinstein1976}'s version of the capital asset pricing model (CAPM).
+
+\cite{Gredil2014} have a PME called the Direct Alpha method. They calculate the alpha to the relevant benchmark by discounting the PE fund cash flows to a NPV of zero. One can think of Direct Alpha as annualizing the \cite{Kaplan2005} method, while taking into account both the performance of the reference benchmark and the precise times at which capital is actually employed. This annualization allows for a degree of standardization in the effective duration of funds, which can have material variation. Direct Alpha also forges a closer connection between SDF-type performance measures and the intercept in factor models.
+
+The PME measure works under three conditions as stated by \cite{Sorensen2013}:
+\begin{inparaenum}[(i)]
+	\item Markets have perfect information, and no taxes or transactions costs;
+	\item the Limited Partner (LP) has log utility; and
+	\item the return on the LP's total wealth portfolio equals the return on the public market.
+\end{inparaenum} Our model does not need any of these assumptions.
+
+\subsection{Beyond the PMEs}
+Numerous other techniques have been devised to measure PE returns and we do not provide an exhaustive survey here. 
+
+\cite{Ewens2013} use model PE valuation as a principal-agent problem, and use it to value fund performance. They estimate quarterly private equity returns using GP estimates of value changes as we do at iCapital. They use these to measure whether and how idiosyncratic risk is priced into PE using a simple one-factor model, as well as factor analysis al la \cite{Fama1993}. They use \cite{Dimson1979} (among others) as a way to correct for regressing lagged fund returns with nonlagged factor data. Their data consists of 741 buyout and 1,040 VC funds. 
+
+\cite{Ljungqvist2002} is a purely empirical study that focuses on funds in the 1980s and 1990s. They calculate fund betas by regressing excess IRRs on a number of variables, including: log fund size, dummy for first-timers, portfolio firm beta, log fund inflows, a portfolio firm concentration measure, and more. They do find some interesting facts. For instance, the greater the money raised in the fund's vintage year, the worse is the fund's subsequent performance; fund size is a significant contributor to performance; and pooling venture and buyout funds does not significantly change the results. Though $R^2$ values are low, including portfolio firm concentration (as measured by the Herfindahl index) increases $R^2$ from 3.7\% to 5.7\%. Overall, statistical inference should be made with caution since it is not clear if standard errors are robust to heteroskedasticity. They use US data from one PE firm with 73 funds.
+
+\cite{Cochrane2004} measures the mean, standard deviation, alpha and beta of venture capital \emph{project returns} (not fund returns), using a maximum likelihood estimate that corrects for selection bias. He only observes a valuation when a firm goes public, receives new financing, or is acquired. Since these events are more likely when the firm has experienced a good return, there is a survival bias to these firms. This bias is the one that is corrected for using the MLE. Though the identification strategy is similar to that of \cite{Ang2014}, this focuses on selection bias, as well as only focusing on VC projects, not PE projects. From a modeling standpoint, it may be described as an evolutionary precursor to \cite{Ang2014}, \cite{Korteweg2011}, and others who have estimated private equity returns. 
+
+\subsection{Bayesian Statistics in the Private Equity Literature}
+The two studies we have found that use Bayesian methods to analyze PE performance are \cite{Ang2014} and \cite{Sorensen2013}. 
+
+
+
+
+
+\section{Data} 
+\label{sec:data}
+
+We use return data provided by fund managers.
+
+\section{Methodology}
+\label{sec:methodology}
+For each asset, $i \in 1:N$, we start with an unobserved vector of latent returns to the asset:
+\begin{equation}
+\label{eq:x_i}
+	x_{i,t} = f_t^\prime \beta_i + \varepsilon_{i,t}
+\end{equation}
+where $f_t$ is a sequence of factor returns of length $K$, $t \in 1:T$ is the time period which is monthly for the factor returns, and $\beta_i$ is a $K \times 1$ vector of exposures.
+
+The reported PE returns, $y$, are assumed to follow a moving-average process with the following definition:
+\begin{equation}
+\label{eq:y_hat}
+	\hat{y} = \Phi x %= X_L R \phi + x_s, ~s.t.~ x_s \equiv X_{L\iota_{\Delta t}}
+\end{equation}
+
+Here, $\phi$ is the moving-average window\footnote{Note that this follows from the Wold Decomposition Theorem, which states that any discrete-time stochastic process can be decomposed into a deterministic process and a moving-average process. A moving-average process in this sense, may be interpreted as a finite impulse response filter applied to white noise. Conceptually, it is a linear regression of the current value of the series against current and previous (observed) white noise error terms or random shocks. See any introductory econometrics text for more information (for example, \cite{Brooks2019}).}  whose posterior probability distribution function is estimated via MCMC, see equation \eqref{eq:phi}. It has a mean of $\phi_0$, and variance $\frac{1}{\tau_x \tau_y} M_0^{-1} $. We do this step in our returns estimation process to account for differences in the timing between changes in portfolio value and when the PE fund returns are reported\footnote{Fund data typically consist of fund cash flows that occur at irregular times, with reported net asset values (NAVs) that are often stale and in some cases biased. See, for example, \cite{Korteweg2019}.}. Further, we assume that some degree of returns-smoothing takes place. Thus, the returns generated are de-smoothed to reflect the economic reality of the underlying drivers of private company returns. Details of how $\phi$ is determined can be found in the next section.
+
+\subsection{Moving Average Process}
+The returns of $y$ follow a moving average process with $P + \Delta t$ terms plus measurement error\footnote{While the employment of a measurement error may seem odd given that the returns are generally considered factual, it is WLOG with respect to modeling a moving-average process.}. The moving average process in equation \eqref{eq:y_hat} can be expanded to:
+\begin{equation}
+	\hat{y} = \Phi x = X_L R \phi + x_s, ~s.t.~ x_s \equiv X_{L\iota_{\Delta t}} \tag{\ref{eq:y_hat}}
+\end{equation}
+
+Here, 
+\begin{itemize}
+	\item $s \in 1:S$ is the length of returns, $y$. This notation is different from the one used for $x$ as $S$ may or may not equal $T$. For instance, when reported PE returns are quarterly, and the latent returns generated by the factors, $x$, are monthly. 
+	\item $\phi$ is the moving average window whose posterior probability distribution function is estimated via MCMC. It is assumed to be multivariate normal. It has length $P$.
+	\item $X_L$ is a $T \times P$ matrix of latent returns.
+	\item $P$ is a term used to synchronize $s$ and $t$ using the equation, and for quarterly returns (the vast majority), it is equal to 3.
+	\begin{equation}
+		t[s] = P + s \Delta t
+	\end{equation}
+	For example, assume reported returns, $y$, are quarterly (4 per year), and latent returns, $x$, are monthly (12 per year). Then $\Delta t = \frac{12}{4} = 3$. And so, when $s=2$, i.e., the second quarter, $t$ should equal 9..
+\end{itemize}
+
+The moving average window is parametrized by $P$ unrestricted coefficients and $\Delta t$ restricted coefficients. The matrix $R$ above systematically quantifies the restrictions. 
+
+Note that for returns that are monthly 
+
+
+%\begin{itemize}
+%	\item $s \in 1:S$ is the length of returns, $y$. This notation is different from the one used for $x$ as $S$ may or may not equal $T$. For instance, when reported PE returns are quarterly, and the latent returns generated by the factors, $x$, are monthly. 
+%	\item $\phi$ is the moving average window whose posterior probability distribution function is determined via MCMC. It is assumed to be multivariate normal.  
+%	\item $X_L$ is a $T \times P$ matrix of latent returns 
+%\end{itemize}
+
+The main returns-generating process is given via the following equations:
+\begin{align}
+	p(y | rest) &\sim MN\left( \Phi x, \frac{1}{\tau_y} I \right)	\\
+	p(x | rest) &\sim MN\left( F \beta + r, \frac{1}{\tau_x \tau_y} \Psi^{-1} \right)	\\
+	\label{eq:phi} p(\phi | rest) &\sim MN\left( \phi_0, \frac{1}{\tau_x \tau_y} M_0^{-1} \right) 	\\
+	p(\beta | rest) &\sim MN\left( \beta_0 + D^{-1}\beta_0^\Delta, \frac{1}{\tau_x \tau_y \tau_\beta} [D A_0 D]^{-1} \right)
+\end{align}
+
+Here, $MN$ is the multivariate normal distribution; $\tau_y \sim Gamma \left( \alpha_{y_0}, \zeta_{y_0} \right)$; $\tau_x \sim Gamma \left( \alpha_{x_0}, \zeta_{x_0} \right)$; $\tau_\beta \sim Gamma \left( \alpha_{\beta_0}, \zeta_{\beta_0} \right)$. Any variable with a subscript of 0 is a hyperparameter, i.e., prespecified. Also, $D$ is a diagonal matrix of $d_k$, where
+\begin{equation}
+	d_k \equiv \left( \gamma_k + (1 - \gamma_k) \frac{1}{v^2} \right)^{0.5}
+\end{equation}
+
+The $\gamma_k$ vector consists of dummies (i.e., its elements are all either 0 or 1). Note that $d_k$ reduces to 0 or 1, depending on the value of $\gamma_k$.  They are part of the spike-and-slab prior on the regression coefficients in the factor decomposition. The section below gives a brief summary of how this works.
+
+\subsection{Spike and Slab Regression}
+
+This technique ensures that only a subset of regressors are retained, and $\gamma_k$ determines whether or not a factor is economically significant. 
+
+We start with a Bernoulli or binomial prior on $\gamma_k$. This gives each variable an equally likely chance to of being in the factor regression. Next, conditional on a variable being in the regression, we specify a prior distribution for the regression coefficient associated with that variable. In our case, this is multivariate normal, with a mean of $\beta_0 + D^{-1}\beta_0^\Delta$ and variance $\frac{1}{\tau_x \tau_y \tau_\beta} [D A_0 D]^{-1}$. These two priors are the source of the method's name: the `spike' indicates the probability of a distribution conditional on low economic significance; the `slab' is the (diffuse) prior describing the values that the coefficient can take on.
+
+Next, we take a draw of $\gamma$ from its respective prior which is a beta distribution. This will just be a list of factors that are included in the regression. Conditional on this list, we draw from the prior of the $\beta$ variables. We combine these two draws with the likelihood in the usual way, which gives us a draw from the posterior distribution on both: the probability of inclusion, and the coefficients. We repeat this process several thousand times using MCMC, and this gives us a table summarizing the posterior distribution of $\gamma$ (indicating variable inclusion), $\beta$ (the factor loadings), and the associated returns, $y$.
+
+
+
+
+%
+\section{Results} 
+\label{sec:results}
+%
+%
+%
+%%\section{Discussions} 
+%%\label{sec:discussion}
+%
+\section{Conclusion} 
+\label{sec:conclusion}
+
+
+\newpage
+
+\singlespacing
+\setlength\bibsep{0pt}
+
+\input{/Users/asheth/Library/CloudStorage/OneDrive-iCapitalNetwork/GMAM/literature/litreview/LitReview.bbl}
+
+%\bibliographystyle{my-style}
+%\bibliography{/Users/asheth/Library/CloudStorage/OneDrive-iCapitalNetwork/GMAM/literature/Bayesian Valuation of Alternative Assets_ Literature Review/LitReview}
+
+
+
+%\clearpage
+%
+%\onehalfspacing
+%
+%\section*{Tables} \label{sec:tab}
+%\addcontentsline{toc}{section}{Tables}
+%
+%
+%
+%\clearpage
+%
+%\section*{Figures} \label{sec:fig}
+%\addcontentsline{toc}{section}{Figures}
+
+%\begin{figure}[hp]
+%  \centering
+%  \includegraphics[width=.6\textwidth]{../fig/placeholder.pdf}
+%  \caption{Placeholder}
+%  \label{fig:placeholder}
+%\end{figure}
+
+
+
+
+\clearpage
+
+\section*{Appendix} 
+\label{sec:appendix}
+\addcontentsline{toc}{section}{Appendix}
+The returns of $y$ follow a moving average process with $P + \Delta t$ terms plus measurement error\footnote{While the employment of a measurement error may seem odd given that the returns are generally considered factual, it is WLOG with respect to modeling a moving-average process.}. The moving average process in equation \eqref{eq:y_hat} can be expanded to:
+\begin{equation}
+	\hat{y} = \Phi x = X_L R \phi + x_s, ~s.t.~ x_s \equiv X_{L\iota_{\Delta t}} \tag{\ref{eq:y_hat}}
+\end{equation}
+
+Here, 
+\begin{itemize}
+	\item $s \in 1:S$ is the length of returns, $y$. This notation is different from the one used for $x$ as $S$ may or may not equal $T$. For instance, when reported PE returns are quarterly, and the latent returns generated by the factors, $x$, are monthly. 
+	\item $\phi$ is the moving average window whose posterior probability distribution function is determined via MCMC. It is assumed to be multivariate normal. It has length $P$.
+	\item $X_L$ is a $T \times P$ matrix of latent returns.
+	\item $P$ is a term used to synchronize $s$ and $t$ using the equation, and for quarterly returns (the vast majority), it is equal to 3.
+	\begin{equation}
+		t[s] = P + s \Delta t
+	\end{equation}
+	For example, assume reported returns, $y$, are quarterly (4 per year), and latent returns, $x$, are monthly (12 per year). Then $\Delta t = \frac{12}{4} = 3$. And so, when $s=2$, i.e., the second quarter, $t$ should equal 9..
+\end{itemize}
+
+The moving average window is parametrized by $P$ unrestricted coefficients and $\Delta t$ restricted coefficients. The matrix $R$ above systematically quantifies the restrictions. 
+
+Note that for returns that are monthly 
+
+
+
+\end{document}

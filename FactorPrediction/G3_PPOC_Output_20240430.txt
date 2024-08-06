@@ -1,0 +1,30 @@
+starting asset Buyout and Growth
+Setting market and smallcap beta priors to 1
+ Timer check triggered 
+asset Buyout and Growth failed with exception: nlag must be smaller than nobs - 1
+starting asset Cash
+ Timer check triggered 
+asset Cash failed with exception: 'beta'
+starting asset Commodity
+ Timer check triggered 
+asset Commodity failed with exception: 'beta'
+starting asset Emerging Markets Equities
+ Timer check triggered 
+asset Emerging Markets Equities failed with exception: 'beta'
+starting asset Emerging Markets Fixed Income
+ Timer check triggered 
+asset Emerging Markets Fixed Income failed with exception: 'beta'
+starting asset Event Driven
+ Timer check triggered 
+asset Event Driven failed with exception: 'beta'
+starting asset Fund of Funds
+Setting market and smallcap beta priors to 1
+ Timer check triggered 
+asset Fund of Funds failed with exception: nlag must be smaller than nobs - 1
+starting asset Global Macro
+ Timer check triggered 
+asset Global Macro failed with exception: 'beta'
+starting asset Hedged Equity
+ Timer check triggered 
+asset Hedged Equity failed with exception: 'beta'
+starting asset Long/Short Credit

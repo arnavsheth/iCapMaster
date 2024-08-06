@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Readings on MIT OpenCourseWare</title>
+    <link>/resources/readings/</link>
+    <description>Recent content in Readings on MIT OpenCourseWare</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/resources/readings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reading 10a: Introduction to Statistics</title>
+      <link>/resources/mit18_05s14_reading10a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading10a/data.json</guid>
+      <description>This resource file contains information regarding reading 10a: introduction to statistics.</description>
+    </item>
+    
+    <item>
+      <title>Reading 10b: Maximum Likelihood Estimates</title>
+      <link>/resources/mit18_05s14_reading10b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading10b/data.json</guid>
+      <description>This resource file contains information regarding reading 10b: maximum likelihood estimates.</description>
+    </item>
+    
+    <item>
+      <title>Reading 11: Bayesian Updating with Discrete Priors</title>
+      <link>/resources/mit18_05s14_reading11/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading11/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 11: bayesian updating with discrete priors.</description>
+    </item>
+    
+    <item>
+      <title>Reading 12a: Bayesian Updating: Probabilistic Prediction</title>
+      <link>/resources/mit18_05s14_reading12a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading12a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 12a: bayesian updating: probabilistic prediction.</description>
+    </item>
+    
+    <item>
+      <title>Reading 12b: Bayesian Updating: Odds</title>
+      <link>/resources/mit18_05s14_reading12b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading12b/data.json</guid>
+      <description>This resource file contains information regarding reading 12b: bayesian updating: odds.</description>
+    </item>
+    
+    <item>
+      <title>Reading 13a: Bayesian Updating with Continuous Priors</title>
+      <link>/resources/mit18_05s14_reading13a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading13a/data.json</guid>
+      <description>This resource file contains information regarding reading 13a: bayesian updating with continuous priors.</description>
+    </item>
+    
+    <item>
+      <title>Reading 13b: Notational Conventions</title>
+      <link>/resources/mit18_05s14_reading13b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading13b/data.json</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reading 14a: Beta Distributions</title>
+      <link>/resources/mit18_05s14_reading14a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading14a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 14a: beta distributions.</description>
+    </item>
+    
+    <item>
+      <title>Reading 14b: Continuous Data with Continuous Priors</title>
+      <link>/resources/mit18_05s14_reading14b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading14b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 14b: continuous data with continuous priors.</description>
+    </item>
+    
+    <item>
+      <title>Reading 15a: Conjugate Priors: Beta and Normal</title>
+      <link>/resources/mit18_05s14_reading15a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading15a/data.json</guid>
+      <description>This resource file contains information regarding reading 15a: conjugate priors: beta and normal.</description>
+    </item>
+    
+    <item>
+      <title>Reading 15b: Choosing Priors</title>
+      <link>/resources/mit18_05s14_reading15b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading15b/data.json</guid>
+      <description>This resource file contains information regarding reading 15b: choosing priors.</description>
+    </item>
+    
+    <item>
+      <title>Reading 16: Probability Intervals</title>
+      <link>/resources/mit18_05s14_reading16/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading16/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 16: probability intervals.</description>
+    </item>
+    
+    <item>
+      <title>Reading 17a: The Frequentist School of Statistics</title>
+      <link>/resources/mit18_05s14_reading17a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading17a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 17a: the frequentist school of statistics.</description>
+    </item>
+    
+    <item>
+      <title>Reading 17b: Null Hypothesis Significance Testing I</title>
+      <link>/resources/mit18_05s14_reading17b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading17b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 17b: null hypothesis significance testing I.</description>
+    </item>
+    
+    <item>
+      <title>Reading 18: Null Hypothesis Significance Testing II</title>
+      <link>/resources/mit18_05s14_reading18/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading18/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 18: null hypothesis significance testing II.</description>
+    </item>
+    
+    <item>
+      <title>Reading 19: Null Hypothesis Significance Testing III</title>
+      <link>/resources/mit18_05s14_reading19/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading19/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 19: null hypothesis significance testing III.</description>
+    </item>
+    
+    <item>
+      <title>Reading 1a: Introduction</title>
+      <link>/resources/mit18_05s14_class1intro/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_class1intro/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 1a: Introduction.</description>
+    </item>
+    
+    <item>
+      <title>Reading 1a: Introduction</title>
+      <link>/resources/mit18_05s14_reading1a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading1a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 1a: introduction.</description>
+    </item>
+    
+    <item>
+      <title>Reading 1b: Counting and Sets</title>
+      <link>/resources/mit18_05s14_reading1b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading1b/data.json</guid>
+      <description>This resource file contains information regarding reading 1b: counting and sets.</description>
+    </item>
+    
+    <item>
+      <title>Reading 2: Probability: Terminology and Examples</title>
+      <link>/resources/mit18_05s14_reading2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading2/data.json</guid>
+      <description>This resource file contains information regarding reading 2: probability: terminology and examples.</description>
+    </item>
+    
+    <item>
+      <title>Reading 20: Comparison of Frequentist and Bayesian Inference</title>
+      <link>/resources/mit18_05s14_reading20/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading20/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 20: comparison of frequentist and bayesian inference.</description>
+    </item>
+    
+    <item>
+      <title>Reading 22: Confidence Intervals Based on Normal Data</title>
+      <link>/resources/mit18_05s14_reading22/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading22/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 22: confidence intervals based on normal data.</description>
+    </item>
+    
+    <item>
+      <title>Reading 23a: Confidence Intervals: Three Views</title>
+      <link>/resources/mit18_05s14_reading23a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading23a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 23a: confidence intervals: three views.</description>
+    </item>
+    
+    <item>
+      <title>Reading 23b: Confidence Intervals for the Mean of Non-normal Data</title>
+      <link>/resources/mit18_05s14_reading23b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading23b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 23b: confidence intervals for the mean of non-normal data.</description>
+    </item>
+    
+    <item>
+      <title>Reading 3: Conditional Probability, Indepedence and Bayes&#39; Theorem</title>
+      <link>/resources/mit18_05s14_reading3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading3/data.json</guid>
+      <description>This resource file contains information regarding reading 3: conditional probability, indepedence and bayes&amp;rsquo; theorem.</description>
+    </item>
+    
+    <item>
+      <title>Reading 4a: Discrete Random Variables</title>
+      <link>/resources/mit18_05s14_reading4a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading4a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 4a: discrete random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 4b: Discrete Random Variables: Expected Value</title>
+      <link>/resources/mit18_05s14_reading4b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading4b/data.json</guid>
+      <description>This resource file contains information regarding reading 4b: discrete random variables: expected value.</description>
+    </item>
+    
+    <item>
+      <title>Reading 5a: Variance of Discrete Random Variables</title>
+      <link>/resources/mit18_05s14_reading5a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading5a/data.json</guid>
+      <description>This resource file contains information regarding reading 5a: variance of discrete random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 5b: Continuous Random Variables</title>
+      <link>/resources/mit18_05s14_reading5b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading5b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 5b: continuous random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 5c: Gallery of Continuous Random Variables</title>
+      <link>/resources/mit18_05s14_reading5c/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading5c/data.json</guid>
+      <description>This resource file contains information regarding reading 5c: gallery of continuous random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 5d: Manipulating Continuous Random Variables</title>
+      <link>/resources/mit18_05s14_reading5d/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading5d/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 5d: manipulating continuous random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 6a: Expectation, Variance and Standard Deviation for Continuous Random Variables</title>
+      <link>/resources/mit18_05s14_reading6a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading6a/data.json</guid>
+      <description>This resource file contains information regarding reading 6a: expectation, variance and standard deviation for continuous random variables.</description>
+    </item>
+    
+    <item>
+      <title>Reading 6b: Central Limit Theorem and the Law of Large Numbers</title>
+      <link>/resources/mit18_05s14_reading6b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading6b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 6b: central limit theorem and the law of large numbers.</description>
+    </item>
+    
+    <item>
+      <title>Reading 6c: Appendix</title>
+      <link>/resources/mit18_05s14_reading6c/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading6c/data.json</guid>
+      <description>This resource file contains information regarding reading 6c: appendix.</description>
+    </item>
+    
+    <item>
+      <title>Reading 7a: Joint Distributions, Independence</title>
+      <link>/resources/mit18_05s14_reading7a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading7a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 7a: joint distributions, independence.</description>
+    </item>
+    
+    <item>
+      <title>Reading 7b: Covariance and Correlation</title>
+      <link>/resources/mit18_05s14_reading7b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading7b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 7b: covariance and correlation.</description>
+    </item>
+    
+    <item>
+      <title>Reading 8a: Exam Review</title>
+      <link>/resources/mit18_05s14_reading8a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading8a/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 8a: Exam review.</description>
+    </item>
+    
+    <item>
+      <title>Reading 8b: Exam Review</title>
+      <link>/resources/mit18_05s14_reading8b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading8b/data.json</guid>
+      <description>This is a resource file that contains information regarding reading 8b: Exam review.</description>
+    </item>
+    
+    <item>
+      <title>Reading for 24: Bootstrap Confidence Intervals</title>
+      <link>/resources/mit18_05s14_reading24/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading24/data.json</guid>
+      <description>This resource file contains information regarding reading for 24: bootstrap confidence intervals.</description>
+    </item>
+    
+    <item>
+      <title>Reading for 25: Linear Regression</title>
+      <link>/resources/mit18_05s14_reading25/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_reading25/data.json</guid>
+      <description>This resource file contains information regarding reading for 25: linear regression.</description>
+    </item>
+    
+    <item>
+      <title>Reading for Class 1: Introduction</title>
+      <link>/resources/mit18_05s14_class1counting/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_class1counting/data.json</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reading for Class 1: Introduction</title>
+      <link>/resources/mit18_05s14class1intro/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14class1intro/data.json</guid>
+      <description>This is a resource file that contains information regarding reading for Class 1: Introduction.</description>
+    </item>
+    
+    <item>
+      <title>Reading for Class 2: Probability: Terminology and Examples</title>
+      <link>/resources/mit18_05s14_class2prep/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_class2prep/data.json</guid>
+      <description>This is a resource file that contains information regarding reading for Class 2: Probability: Terminology and examples.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions - R Intro</title>
+      <link>/pages/readings/reading-questions-r-intro/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-r-intro/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 10a</title>
+      <link>/pages/readings/reading-questions-10a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-10a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 10b</title>
+      <link>/pages/readings/reading-questions-10b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-10b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 11</title>
+      <link>/pages/readings/reading-questions-11/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-11/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 12a</title>
+      <link>/pages/readings/reading-questions-12a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-12a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 12b</title>
+      <link>/pages/readings/reading-questions-12b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-12b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 13a</title>
+      <link>/pages/readings/reading-questions-13a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-13a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 14a and 14b</title>
+      <link>/pages/readings/reading-questions-14a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-14a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 14b</title>
+      <link>/pages/readings/reading-questions-14b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-14b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 15a</title>
+      <link>/pages/readings/reading-questions-15a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-15a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 16</title>
+      <link>/pages/readings/reading-questions-16/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-16/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 17b</title>
+      <link>/pages/readings/reading-questions-17b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-17b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 18</title>
+      <link>/pages/readings/reading-questions-18/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-18/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 19</title>
+      <link>/pages/readings/reading-questions-19/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-19/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 1b</title>
+      <link>/pages/readings/reading-questions-1b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-1b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 2</title>
+      <link>/pages/readings/reading-questions-2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-2/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 22</title>
+      <link>/pages/readings/reading-questions-22/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-22/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 24</title>
+      <link>/pages/readings/reading-questions-24/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-24/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 25</title>
+      <link>/pages/readings/reading-questions-25/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-25/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 3</title>
+      <link>/pages/readings/reading-questions-3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-3/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 4a</title>
+      <link>/pages/readings/reading-questions-4a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-4a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 4b</title>
+      <link>/pages/readings/reading-questions-4b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-4b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 5a</title>
+      <link>/pages/readings/reading-questions-5a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-5a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 5b</title>
+      <link>/pages/readings/reading-questions-5b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-5b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 5c</title>
+      <link>/pages/readings/reading-questions-5c/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-5c/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 5d</title>
+      <link>/pages/readings/reading-questions-5d/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-5d/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 6a</title>
+      <link>/pages/readings/reading-questions-6a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-6a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 6b</title>
+      <link>/pages/readings/reading-questions-6b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-6b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 7a</title>
+      <link>/pages/readings/reading-questions-7a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-7a/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions 7b</title>
+      <link>/pages/readings/reading-questions-7b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-7b/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Reading Questions for R</title>
+      <link>/pages/readings/reading-questions-for-r/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/reading-questions-for-r/data.json</guid>
+      <description>Reading Questions Answer Checker To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.
+As you work you should have pencil and paper handy for calculations and thinking!
+Note: some questions ask for a formula. For the checker we ask you to plug a value into the formula.</description>
+    </item>
+    
+    <item>
+      <title>Readings</title>
+      <link>/pages/readings/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/readings/data.json</guid>
+      <description>Listed in the following table are assigned readings that students were expected to complete prior to attending class sessions. Students also completed online multiple choice or numerical answer questions based on each week&amp;rsquo;s readings. Students received instant feedback and could make multiple attempts. [Note: the online reading questions are not available to OpenCourseWare users.] WEEK # SES # READINGS Probability 1 C1 1a: Introduction (PDF)
+1b: Counting and Sets (PDF)</description>
+    </item>
+    
+  </channel>
+</rss>

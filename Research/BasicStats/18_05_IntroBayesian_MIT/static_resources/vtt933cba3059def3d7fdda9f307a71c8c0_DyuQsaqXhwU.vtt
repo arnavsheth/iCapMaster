@@ -1,0 +1,4798 @@
+WEBVTT
+
+00:00:00.070 --> 00:00:02.500
+The following content is
+provided under a Creative
+
+00:00:02.500 --> 00:00:04.010
+Commons license.
+
+00:00:04.010 --> 00:00:06.360
+Your support will help
+MIT OpenCourseWare
+
+00:00:06.360 --> 00:00:10.710
+continue to offer high quality
+educational resources for free.
+
+00:00:10.710 --> 00:00:13.340
+To make a donation or
+view additional materials
+
+00:00:13.340 --> 00:00:17.260
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+00:00:17.260 --> 00:00:17.910
+at ocw.mit.edu.
+
+00:00:20.861 --> 00:00:23.110
+PROFESSOR: All right, I guess
+we can get started here.
+
+00:00:23.110 --> 00:00:24.670
+So welcome.
+
+00:00:24.670 --> 00:00:28.290
+Today we're going to do
+Bayesian updating, which
+
+00:00:28.290 --> 00:00:30.490
+is to say we're going to
+be using Bayes' Theorem
+
+00:00:30.490 --> 00:00:31.560
+to learn from data.
+
+00:00:31.560 --> 00:00:33.200
+We're going to
+update our beliefs
+
+00:00:33.200 --> 00:00:36.950
+about various hypotheses
+based on the data.
+
+00:00:36.950 --> 00:00:40.190
+For this week, we're going
+to have known priors.
+
+00:00:40.190 --> 00:00:42.570
+We're going to know our
+belief about the data ahead
+
+00:00:42.570 --> 00:00:43.960
+of time for certain.
+
+00:00:43.960 --> 00:00:50.480
+We'll draw coins out of
+drawers or pull things out
+
+00:00:50.480 --> 00:00:52.020
+of hats, things like that.
+
+00:00:52.020 --> 00:00:54.120
+Starting next week,
+and we discussed
+
+00:00:54.120 --> 00:00:56.340
+this a little last
+time, we'll have
+
+00:00:56.340 --> 00:00:58.050
+unknown priors,
+which is you'll have
+
+00:00:58.050 --> 00:00:59.380
+to be making up those priors.
+
+00:00:59.380 --> 00:01:03.050
+And we'll teach you
+techniques for making it up.
+
+00:01:03.050 --> 00:01:10.360
+So the first slide is just
+XKCD's view of Bayes' Theorem.
+
+00:01:10.360 --> 00:01:10.860
+Let's go on.
+
+00:01:10.860 --> 00:01:14.645
+We want to start with a
+clicker question here.
+
+00:01:17.920 --> 00:01:21.027
+So the question is: which
+treatment would you choose
+
+00:01:21.027 --> 00:01:22.110
+if you needed a treatment?
+
+00:01:22.110 --> 00:01:25.870
+Treatment 1 cured
+100% of the patients.
+
+00:01:25.870 --> 00:01:29.060
+Treatment 2 cured
+95% in a trial.
+
+00:01:29.060 --> 00:01:31.930
+And treatment 3 cured 90%.
+
+00:01:31.930 --> 00:01:34.835
+So with this information,
+which would you choose?
+
+00:01:39.229 --> 00:01:40.770
+AUDIENCE: With only
+this information?
+
+00:01:40.770 --> 00:01:41.853
+PROFESSOR: With only this.
+
+00:01:41.853 --> 00:01:44.610
+If this is all I told you.
+
+00:01:44.610 --> 00:01:46.020
+Which would you choose?
+
+00:01:46.020 --> 00:01:48.785
+I recognizing that you might
+not be too happy with just
+
+00:01:48.785 --> 00:01:52.430
+this information, but if this
+is their best information, what
+
+00:01:52.430 --> 00:01:53.590
+would you choose?
+
+00:01:53.590 --> 00:01:57.110
+All right, there's some
+holdouts for the 95% cure.
+
+00:01:57.110 --> 00:02:00.470
+I'm not sure why.
+
+00:02:00.470 --> 00:02:02.740
+Really, that 95%
+was just, you know,
+
+00:02:02.740 --> 00:02:08.139
+they've cured one
+person 19 out of 20--
+
+00:02:08.139 --> 00:02:11.640
+they got them 19 out of 20
+well, or however you say that.
+
+00:02:11.640 --> 00:02:12.390
+Yeah.
+
+00:02:12.390 --> 00:02:16.880
+All right, so there's
+even a few more holdouts.
+
+00:02:16.880 --> 00:02:20.790
+All right, what if I gave
+you this information?
+
+00:02:20.790 --> 00:02:24.590
+Treatment 1 cured 3
+out of 3 patients.
+
+00:02:24.590 --> 00:02:26.430
+That's 100%.
+
+00:02:26.430 --> 00:02:28.990
+Treatment 2 cured
+19 of 20 patients.
+
+00:02:28.990 --> 00:02:32.226
+That's 95%.
+
+00:02:32.226 --> 00:02:33.600
+Or, you have a
+standard treatment
+
+00:02:33.600 --> 00:02:38.920
+which has cured 90,000 out
+of 100,000 patients, 90%,
+
+00:02:38.920 --> 00:02:41.120
+in clinical practice.
+
+00:02:41.120 --> 00:02:42.490
+Now which one would you choose?
+
+00:02:49.832 --> 00:02:51.290
+PROFESSOR 2: It's
+very interesting.
+
+00:02:53.706 --> 00:02:54.747
+Yeah, it totally changed.
+
+00:02:54.747 --> 00:02:55.670
+PROFESSOR: What's that?
+
+00:02:55.670 --> 00:02:56.580
+PROFESSOR 2: It totally shifted.
+
+00:02:56.580 --> 00:02:58.360
+PROFESSOR: It totally
+shifted, really?
+
+00:02:58.360 --> 00:03:00.734
+PROFESSOR 2: We have a bunch
+of very conservative people.
+
+00:03:00.734 --> 00:03:02.400
+PROFESSOR: Right.
+
+00:03:02.400 --> 00:03:06.800
+So the majority would
+choose the third choice,
+
+00:03:06.800 --> 00:03:09.720
+90 out of 100,000.
+
+00:03:09.720 --> 00:03:13.554
+I think-- well, someone tell
+me, what's the intuition there?
+
+00:03:13.554 --> 00:03:15.330
+AUDIENCE: Because
+it's been more tested.
+
+00:03:15.330 --> 00:03:16.705
+PROFESSOR: It's
+been more tested.
+
+00:03:16.705 --> 00:03:20.480
+3 out of 3 is 100%, but do
+you really believe 100%?
+
+00:03:20.480 --> 00:03:21.300
+Not yet.
+
+00:03:21.300 --> 00:03:23.590
+Maybe it'll prove out in time.
+
+00:03:23.590 --> 00:03:27.780
+19 out of 20 is a little
+more, but for most people,
+
+00:03:27.780 --> 00:03:31.620
+for 79% of you,
+that's not enough.
+
+00:03:31.620 --> 00:03:36.110
+The 90 out of 100,000
+seems like good odds,
+
+00:03:36.110 --> 00:03:37.900
+and it's well tested.
+
+00:03:37.900 --> 00:03:44.130
+19 out of 20, if the next person
+tested doesn't get better,
+
+00:03:44.130 --> 00:03:46.570
+now you back to 90%.
+
+00:03:46.570 --> 00:03:48.650
+So that doesn't seem
+like quite enough.
+
+00:03:48.650 --> 00:03:53.372
+What if were 95 out
+of 100 patients.
+
+00:03:53.372 --> 00:03:54.580
+We'll let you click in there.
+
+00:03:54.580 --> 00:03:57.020
+Change number 2 to 95
+out of 100 and let's
+
+00:03:57.020 --> 00:04:00.370
+see what people would do.
+
+00:04:00.370 --> 00:04:02.780
+Oh, you're very
+obliging, 95 out of 100--
+
+00:04:02.780 --> 00:04:04.230
+PROFESSOR 2: Now
+it's about 50-50.
+
+00:04:04.230 --> 00:04:05.527
+PROFESSOR: About 50-50.
+
+00:04:05.527 --> 00:04:06.735
+PROFESSOR 2: Between 2 and 3.
+
+00:04:09.250 --> 00:04:10.750
+PROFESSOR:
+Realistically, of course,
+
+00:04:10.750 --> 00:04:11.833
+what would you want to do?
+
+00:04:11.833 --> 00:04:14.240
+You'd want to do a
+little more research
+
+00:04:14.240 --> 00:04:17.730
+and find out what these trials
+were, how good experiments you
+
+00:04:17.730 --> 00:04:20.820
+thought they were, what
+people are thinking about it.
+
+00:04:20.820 --> 00:04:23.290
+But with just this data, that's
+what people would choose.
+
+00:04:23.290 --> 00:04:25.040
+And would people would
+choose differently.
+
+00:04:25.040 --> 00:04:27.360
+OK.
+
+00:04:27.360 --> 00:04:29.810
+PROFESSOR 2: Let's see.
+
+00:04:29.810 --> 00:04:33.390
+So now I'm going to give
+you a toy problem that
+
+00:04:33.390 --> 00:04:35.670
+actually mirrors the
+same kind of effect we
+
+00:04:35.670 --> 00:04:37.470
+saw on the last slide.
+
+00:04:37.470 --> 00:04:44.100
+So, suppose in this MIT mug,
+I have dice of two types,
+
+00:04:44.100 --> 00:04:47.710
+4-sided and 20-sided.
+
+00:04:47.710 --> 00:04:48.210
+All right?
+
+00:04:48.210 --> 00:04:50.760
+So I'm going to
+reach into the mug.
+
+00:04:50.760 --> 00:04:53.380
+I'm not going to look.
+
+00:04:53.380 --> 00:04:55.880
+Much.
+
+00:04:55.880 --> 00:04:58.935
+I'm going to randomly
+pull out a die.
+
+00:04:58.935 --> 00:04:59.810
+I'm going to roll it.
+
+00:05:02.750 --> 00:05:05.200
+All right, I got a 1.
+
+00:05:05.200 --> 00:05:06.450
+OK.
+
+00:05:06.450 --> 00:05:07.270
+I got a 1.
+
+00:05:07.270 --> 00:05:13.190
+Now, just based on this
+information, which type of die
+
+00:05:13.190 --> 00:05:14.480
+do you think I randomly chose?
+
+00:05:17.340 --> 00:05:17.962
+The 4-sided.
+
+00:05:17.962 --> 00:05:20.170
+Someone want to give an
+explanation of why they think
+
+00:05:20.170 --> 00:05:21.728
+the 4-sided is more likely?
+
+00:05:21.728 --> 00:05:23.307
+AUDIENCE: It's
+greater probability.
+
+00:05:23.307 --> 00:05:24.890
+PROFESSOR 2: It's
+greater probability.
+
+00:05:24.890 --> 00:05:28.180
+What's the probability of
+getting a 1 on the 4-sided die?
+
+00:05:28.180 --> 00:05:30.230
+And what about a 20-sided sided?
+
+00:05:30.230 --> 00:05:30.960
+OK.
+
+00:05:30.960 --> 00:05:35.300
+So we see that it would
+be more likely to roll a 1
+
+00:05:35.300 --> 00:05:38.180
+with a 4-sided die than
+with a 20-sided die.
+
+00:05:38.180 --> 00:05:43.570
+So, suppose I tell you that
+I really in this cup only
+
+00:05:43.570 --> 00:05:46.820
+have one die of each type.
+
+00:05:46.820 --> 00:05:49.380
+So does that change
+your analysis
+
+00:05:49.380 --> 00:05:50.820
+of which die is most likely?
+
+00:05:50.820 --> 00:05:52.680
+Don't hit forward yet.
+
+00:05:52.680 --> 00:05:54.120
+PROFESSOR: I would think of it.
+
+00:05:54.120 --> 00:05:56.450
+My hands are staying.
+
+00:05:56.450 --> 00:06:00.130
+PROFESSOR 2: Or do you want to
+stick with the same reasoning?
+
+00:06:00.130 --> 00:06:00.850
+All right.
+
+00:06:00.850 --> 00:06:02.683
+Let me show you what's
+actually in this cup.
+
+00:06:09.002 --> 00:06:09.960
+PROFESSOR: Ouch.
+
+00:06:09.960 --> 00:06:12.630
+PROFESSOR 2: Oh, you
+can't see it yet.
+
+00:06:12.630 --> 00:06:15.720
+Let's go with the
+document camera.
+
+00:06:18.940 --> 00:06:22.610
+OK, that was actually
+what I had in this cup.
+
+00:06:22.610 --> 00:06:24.560
+Now what?
+
+00:06:24.560 --> 00:06:26.510
+So does this change at
+all of your analysis
+
+00:06:26.510 --> 00:06:29.250
+of which die you think I
+rolled and got a 1 with?
+
+00:06:29.250 --> 00:06:31.082
+What type of die, rather?
+
+00:06:31.082 --> 00:06:31.665
+AUDIENCE: Yes.
+
+00:06:31.665 --> 00:06:32.100
+PROFESSOR 2: Yeah?
+
+00:06:32.100 --> 00:06:33.810
+Now what do you
+think is more likely?
+
+00:06:33.810 --> 00:06:34.817
+4-sided or 20-sided?
+
+00:06:34.817 --> 00:06:36.400
+AUDIENCE: How many
+20 sided are there?
+
+00:06:36.400 --> 00:06:38.441
+PROFESSOR 2: I think I
+got 20 20-sided die there.
+
+00:06:45.110 --> 00:06:49.080
+All right, so raise your hand
+if you like a 4-sided die.
+
+00:06:49.080 --> 00:06:51.850
+Raise your hand if you
+like the 20-sided die.
+
+00:06:51.850 --> 00:06:52.350
+Great.
+
+00:06:52.350 --> 00:06:55.230
+So that reasoning that
+you're doing intuitively
+
+00:06:55.230 --> 00:06:57.560
+is something that we want
+to formalize this week
+
+00:06:57.560 --> 00:06:59.930
+and next week using
+Bayes' Theorem
+
+00:06:59.930 --> 00:07:02.460
+to do these calculations
+in a systematic way,
+
+00:07:02.460 --> 00:07:06.380
+to evaluate hypotheses
+based on data.
+
+00:07:06.380 --> 00:07:10.230
+And these numbers,
+for example, how many
+
+00:07:10.230 --> 00:07:12.370
+die I had of one
+type versus another,
+
+00:07:12.370 --> 00:07:14.980
+we can encode that information
+in what's called a prior,
+
+00:07:14.980 --> 00:07:16.285
+and we'll come to that today.
+
+00:07:16.285 --> 00:07:18.410
+And you should've seen, in
+your reading, this idea.
+
+00:07:22.612 --> 00:07:24.820
+PROFESSOR: OK so I'm going
+to work through an example
+
+00:07:24.820 --> 00:07:25.420
+to start with.
+
+00:07:25.420 --> 00:07:31.090
+We have 3 types of coins:
+type A, B, and C. However
+
+00:07:31.090 --> 00:07:34.210
+it happens, the probability
+of getting heads with type A
+
+00:07:34.210 --> 00:07:35.040
+is 0.5.
+
+00:07:35.040 --> 00:07:36.130
+That's a fair coin.
+
+00:07:36.130 --> 00:07:40.820
+The probability of getting
+heads with type B is 0.6,
+
+00:07:40.820 --> 00:07:44.000
+and of type C is 0.9.
+
+00:07:44.000 --> 00:07:48.210
+And here's a box that
+contains two of the fair coins
+
+00:07:48.210 --> 00:07:49.460
+and one of each of the other.
+
+00:07:49.460 --> 00:07:54.070
+So two of type A, one of
+type B, and one of type C.
+
+00:07:54.070 --> 00:07:56.490
+Suppose I pick one at
+random and I get heads.
+
+00:07:56.490 --> 00:08:00.160
+So this is like John picking a
+die at random, and getting a 1.
+
+00:08:00.160 --> 00:08:02.900
+I get heads.
+
+00:08:02.900 --> 00:08:04.900
+Here's the question:
+before I flipped it,
+
+00:08:04.900 --> 00:08:08.930
+I have a prior belief
+in the probability
+
+00:08:08.930 --> 00:08:11.290
+that the coin was
+of each type based
+
+00:08:11.290 --> 00:08:13.610
+on the number in my drawer.
+
+00:08:13.610 --> 00:08:17.390
+After flipping it,
+my belief changes.
+
+00:08:17.390 --> 00:08:22.180
+The probability will change
+based on the data I get.
+
+00:08:22.180 --> 00:08:24.160
+And so a question you
+could ask: what was
+
+00:08:24.160 --> 00:08:27.590
+learned by flipping the coin?
+
+00:08:27.590 --> 00:08:31.150
+What we want to teach you to
+do to answer these questions,
+
+00:08:31.150 --> 00:08:33.270
+we have a nice
+way of summarizing
+
+00:08:33.270 --> 00:08:36.280
+all of that once in a table.
+
+00:08:36.280 --> 00:08:44.090
+So here the notation, we
+have this nice scripty H--
+
+00:08:44.090 --> 00:08:44.775
+that's no good.
+
+00:08:48.110 --> 00:08:49.496
+H is our hypothesis.
+
+00:08:52.820 --> 00:08:58.740
+That is, you're of
+type A or B or C.
+
+00:08:58.740 --> 00:09:06.690
+We're going to make a conjecture
+on what we think the coin was.
+
+00:09:06.690 --> 00:09:11.330
+Before we do anything,
+we have a prior.
+
+00:09:11.330 --> 00:09:13.910
+So what's the
+probability of-- how
+
+00:09:13.910 --> 00:09:17.240
+did I label this-- that
+the coin was of type A?
+
+00:09:21.240 --> 00:09:24.045
+Where all you know is I
+pulled it out of the drawer.
+
+00:09:24.045 --> 00:09:26.385
+So what's the probability
+it's of type A.
+
+00:09:26.385 --> 00:09:28.135
+PROFESSOR 2: Let me
+go back and remind you
+
+00:09:28.135 --> 00:09:31.570
+what the drawer looks like.
+
+00:09:31.570 --> 00:09:33.850
+What is it?
+
+00:09:33.850 --> 00:09:35.040
+PROFESSOR: 0.5.
+
+00:09:35.040 --> 00:09:36.590
+0.5, or I'll write it like this.
+
+00:09:36.590 --> 00:09:39.390
+2 out of 4, which is 0.5.
+
+00:09:39.390 --> 00:09:41.240
+And what's the
+probability-- I'll
+
+00:09:41.240 --> 00:09:52.180
+shorten this-- for just
+type B. Yeah, 1/4 or 0.25.
+
+00:09:52.180 --> 00:09:58.940
+The probability that we're
+of type C is 1/4 or 0.25.
+
+00:09:58.940 --> 00:10:01.565
+This was one of our
+simpler counting problems.
+
+00:10:04.130 --> 00:10:06.380
+In the table, you can
+see that's encoded
+
+00:10:06.380 --> 00:10:09.860
+in the line in the
+column marked prior.
+
+00:10:09.860 --> 00:10:13.150
+Before we take any data,
+this is what we'd say.
+
+00:10:13.150 --> 00:10:16.221
+This is the sort of
+odds we'd give if we
+
+00:10:16.221 --> 00:10:18.440
+were going to bet on this.
+
+00:10:18.440 --> 00:10:19.770
+But now we have some data.
+
+00:10:22.790 --> 00:10:28.000
+So once we have data we
+can get the likelihood.
+
+00:10:32.470 --> 00:10:34.540
+The likelihood is
+the probability
+
+00:10:34.540 --> 00:10:37.556
+of seeing the data
+given a hypothesis.
+
+00:10:40.200 --> 00:10:43.590
+I won't write this out, I'll
+just point at the slide.
+
+00:10:43.590 --> 00:10:46.749
+John has a-- you were going
+to make your mouse bigger.
+
+00:10:46.749 --> 00:10:47.540
+PROFESSOR 2: I was.
+
+00:10:47.540 --> 00:10:48.123
+PROFESSOR: OK.
+
+00:10:50.790 --> 00:10:53.180
+So the likelihood
+column-- we use
+
+00:10:53.180 --> 00:10:56.210
+this term when we are talking
+about maximum likelihood--
+
+00:10:56.210 --> 00:11:00.240
+is the probability of the
+data given the hypothesis.
+
+00:11:00.240 --> 00:11:06.010
+And this is typically easy,
+or often easy, to figure out.
+
+00:11:06.010 --> 00:11:07.800
+What's the probability
+of seeing heads--
+
+00:11:07.800 --> 00:11:12.850
+our data was I flipped a heads--
+if my coin is a 0.5 probability
+
+00:11:12.850 --> 00:11:13.350
+coin.
+
+00:11:17.560 --> 00:11:25.550
+So the probability of seeing
+heads given a type A coin
+
+00:11:25.550 --> 00:11:26.170
+is what?
+
+00:11:26.170 --> 00:11:28.660
+Somebody.
+
+00:11:28.660 --> 00:11:30.644
+It's 0.5.
+
+00:11:30.644 --> 00:11:32.310
+This is particularly
+easy because that's
+
+00:11:32.310 --> 00:11:33.018
+what we told you.
+
+00:11:33.018 --> 00:11:38.480
+The probability of heads
+with a type A coin is 0.5.
+
+00:11:38.480 --> 00:11:47.160
+What about for B
+and C. 0.6 and 0.9.
+
+00:11:47.160 --> 00:11:52.650
+So there right here is the
+likelihood column in the table.
+
+00:11:52.650 --> 00:11:56.350
+Now, how do we
+get the posterior?
+
+00:11:56.350 --> 00:12:02.390
+Bayes' Theorem says
+the probability of H
+
+00:12:02.390 --> 00:12:04.760
+given D, which is what I want.
+
+00:12:04.760 --> 00:12:06.630
+I want to know,
+given this data, what
+
+00:12:06.630 --> 00:12:08.670
+do I believe the coin to be?
+
+00:12:08.670 --> 00:12:11.060
+What's its probability?
+
+00:12:11.060 --> 00:12:17.610
+Is the probability of D given
+H times the probability of H
+
+00:12:17.610 --> 00:12:20.840
+all over the probability of D.
+
+00:12:20.840 --> 00:12:24.230
+Well, notice this
+numerator right here.
+
+00:12:24.230 --> 00:12:28.430
+That's just our likelihood
+times our hypothesis,
+
+00:12:28.430 --> 00:12:32.280
+our prior belief
+in our hypothesis.
+
+00:12:32.280 --> 00:12:36.390
+And so what do we get when
+I multiply the prior column
+
+00:12:36.390 --> 00:12:37.860
+by the likelihood column?
+
+00:12:37.860 --> 00:12:39.720
+I get this column in red.
+
+00:12:39.720 --> 00:12:41.910
+And I'll call that the
+unnormalized posterior.
+
+00:12:41.910 --> 00:12:42.880
+Why unnormalized?
+
+00:12:42.880 --> 00:12:46.320
+Because it doesn't sum to 1.
+
+00:12:46.320 --> 00:12:48.160
+How do I get it to sum to 1?
+
+00:12:48.160 --> 00:12:52.070
+There I have to divide by
+the probability of the data.
+
+00:12:52.070 --> 00:12:54.050
+And how do I get the
+probability of the data?
+
+00:12:58.190 --> 00:13:03.942
+That's called the-- I
+see someone mouthing it.
+
+00:13:03.942 --> 00:13:05.150
+The Law of Total Probability.
+
+00:13:07.920 --> 00:13:10.540
+And the Law of Total
+Probability says
+
+00:13:10.540 --> 00:13:14.330
+you multiply, for
+each hypothesis,
+
+00:13:14.330 --> 00:13:19.340
+this value times this
+value and add them up.
+
+00:13:19.340 --> 00:13:25.820
+Which is in fact just the
+sum of the red column.
+
+00:13:25.820 --> 00:13:28.340
+So there I've written it: 0.625.
+
+00:13:28.340 --> 00:13:29.750
+And now, how do I normalize?
+
+00:13:29.750 --> 00:13:34.160
+I just divide all my values
+in my unnormalized column
+
+00:13:34.160 --> 00:13:37.430
+by that normalizing
+factor, 0.625,
+
+00:13:37.430 --> 00:13:40.640
+and I get these, what
+I call the posterior.
+
+00:13:44.690 --> 00:13:47.117
+Let's say-- well, now
+let's analyze this.
+
+00:13:47.117 --> 00:13:48.200
+So now what's your belief?
+
+00:13:48.200 --> 00:13:52.130
+Which coin is the
+most likely coin?
+
+00:13:52.130 --> 00:13:53.400
+After seeing this data.
+
+00:13:56.760 --> 00:13:59.870
+Still A. But what's
+happened to the probability
+
+00:13:59.870 --> 00:14:02.770
+from our prior probability?
+
+00:14:02.770 --> 00:14:03.370
+It's dropped.
+
+00:14:03.370 --> 00:14:06.041
+Which one has
+gained probability.
+
+00:14:06.041 --> 00:14:06.540
+AUDIENCE: C.
+
+00:14:06.540 --> 00:14:07.998
+PROFESSOR: C. Does
+that make sense?
+
+00:14:07.998 --> 00:14:14.440
+If I flip a heads, which coin is
+the most likely to flip heads?
+
+00:14:14.440 --> 00:14:15.930
+C. So I've shifted it.
+
+00:14:15.930 --> 00:14:19.120
+Suppose I flipped
+heads three more times.
+
+00:14:19.120 --> 00:14:21.955
+What would you see in the
+probability as I kept updating?
+
+00:14:29.763 --> 00:14:30.846
+PROFESSOR 2: Say it again.
+
+00:14:30.846 --> 00:14:32.290
+AUDIENCE: The probability
+of C gets bigger.
+
+00:14:32.290 --> 00:14:33.664
+PROFESSOR 2: The
+probability of C
+
+00:14:33.664 --> 00:14:36.800
+would get bigger at the
+expense of the probabilities
+
+00:14:36.800 --> 00:14:37.830
+of the others.
+
+00:14:37.830 --> 00:14:39.740
+If I flipped heads
+9 times in a row,
+
+00:14:39.740 --> 00:14:46.120
+I'd be very convinced
+that I had a type C coin.
+
+00:14:46.120 --> 00:14:49.240
+One last thing to
+note about this table.
+
+00:14:49.240 --> 00:14:50.920
+I put totals down here.
+
+00:14:50.920 --> 00:14:53.540
+What does this total of 1
+represent in the first column?
+
+00:14:56.190 --> 00:14:56.690
+Emily.
+
+00:14:56.690 --> 00:14:59.445
+AUDIENCE: The total
+probabilities of anything, so
+
+00:14:59.445 --> 00:15:01.120
+the total space.
+
+00:15:01.120 --> 00:15:02.800
+PROFESSOR: Yeah.
+
+00:15:02.800 --> 00:15:04.760
+When I sum up the
+total probabilities,
+
+00:15:04.760 --> 00:15:07.200
+they sum up to 1.
+
+00:15:07.200 --> 00:15:08.440
+Same with this last.
+
+00:15:08.440 --> 00:15:10.030
+That's a probability.
+
+00:15:10.030 --> 00:15:12.390
+This I could sum, because
+they were probabilities.
+
+00:15:12.390 --> 00:15:14.550
+Why didn't I sum this column?
+
+00:15:20.980 --> 00:15:22.670
+Those are the
+likelihoods, and what's
+
+00:15:22.670 --> 00:15:26.010
+changing as I move
+down this column?
+
+00:15:26.010 --> 00:15:30.570
+What's changing is H. That's
+not a probability function.
+
+00:15:30.570 --> 00:15:32.970
+It doesn't sum to 1.
+
+00:15:32.970 --> 00:15:37.540
+There's no reason that the
+likelihoods have to sum to 1,
+
+00:15:37.540 --> 00:15:42.200
+and here you can see they
+clearly don't sum to 1.
+
+00:15:42.200 --> 00:15:43.330
+So I don't sum that.
+
+00:15:43.330 --> 00:15:48.390
+That's an important, maybe
+slightly subtle point,
+
+00:15:48.390 --> 00:15:54.110
+that the likelihood function
+is not a probability function.
+
+00:15:54.110 --> 00:15:55.410
+OK, any questions here?
+
+00:15:58.644 --> 00:16:00.500
+PROFESSOR 2: All right.
+
+00:16:00.500 --> 00:16:06.760
+So, let's go back to
+this document camera.
+
+00:16:06.760 --> 00:16:08.540
+I got my trusty platonic solids.
+
+00:16:14.680 --> 00:16:18.810
+So, we're going to go through a
+series of board questions now,
+
+00:16:18.810 --> 00:16:22.640
+three board questions which are
+going to allow you to practice
+
+00:16:22.640 --> 00:16:25.240
+making these tables and
+getting a sense for how
+
+00:16:25.240 --> 00:16:29.470
+to do Bayesian Updating, how to
+iterate it, just how it works.
+
+00:16:29.470 --> 00:16:33.780
+And our toy problem is going
+to be involving these 5
+
+00:16:33.780 --> 00:16:34.800
+platonic dice.
+
+00:16:34.800 --> 00:16:37.567
+You all have them, but let's
+not break them out today,
+
+00:16:37.567 --> 00:16:39.900
+because it would be very noisy
+with the cameras I think.
+
+00:16:39.900 --> 00:16:46.440
+We'll use our 4-sided--
+here, I got big ones.
+
+00:16:46.440 --> 00:16:49.690
+We've got our 4-sided,
+8-sided, 6-sided.
+
+00:16:49.690 --> 00:16:50.880
+No 6-sided.
+
+00:16:50.880 --> 00:16:53.546
+No, I don't have a 6-sided.
+
+00:16:53.546 --> 00:16:54.910
+I have the wrong dice.
+
+00:16:54.910 --> 00:16:55.800
+Hold on.
+
+00:16:55.800 --> 00:17:02.290
+We got 20, we got 4, we
+got 12, we got 8, ah-- 10,
+
+00:17:02.290 --> 00:17:03.816
+what are you doing there?
+
+00:17:03.816 --> 00:17:04.649
+That's not platonic.
+
+00:17:09.800 --> 00:17:12.829
+OK, and 6.
+
+00:17:15.670 --> 00:17:17.760
+So now I'm actually
+going to take these.
+
+00:17:17.760 --> 00:17:18.609
+You can watch this.
+
+00:17:18.609 --> 00:17:20.380
+All right, this is empty cup.
+
+00:17:24.079 --> 00:17:25.680
+OK, they're in there right?
+
+00:17:25.680 --> 00:17:26.180
+OK.
+
+00:17:28.950 --> 00:17:30.710
+How do we do this?
+
+00:17:30.710 --> 00:17:31.780
+How do we convince them?
+
+00:17:31.780 --> 00:17:32.810
+PROFESSOR: Should we
+choose one at random?
+
+00:17:32.810 --> 00:17:33.560
+PROFESSOR 2: Yeah.
+
+00:17:36.985 --> 00:17:37.860
+All right, choose it.
+
+00:17:37.860 --> 00:17:40.580
+Don't let anyone see.
+
+00:17:40.580 --> 00:17:41.810
+Hand it me.
+
+00:17:41.810 --> 00:17:43.270
+OK.
+
+00:17:43.270 --> 00:17:45.100
+So I have this die.
+
+00:17:45.100 --> 00:17:47.190
+Don't look at the others.
+
+00:17:47.190 --> 00:17:50.300
+I'm going to start
+rolling it, all right?
+
+00:17:50.300 --> 00:17:51.450
+In this secret bin.
+
+00:17:51.450 --> 00:17:53.700
+Jerry, you can ver-- we can
+have a student come verify
+
+00:17:53.700 --> 00:17:56.200
+that I'm not making this up.
+
+00:17:56.200 --> 00:17:57.640
+You ready?
+
+00:17:57.640 --> 00:17:59.596
+OK, here we go.
+
+00:17:59.596 --> 00:18:01.360
+OK, what did I get?
+
+00:18:01.360 --> 00:18:02.220
+8.
+
+00:18:02.220 --> 00:18:03.200
+All right.
+
+00:18:03.200 --> 00:18:05.430
+So, which die is it so far?
+
+00:18:05.430 --> 00:18:06.340
+What do you think?
+
+00:18:06.340 --> 00:18:08.340
+Could it be 4, the 4-sided die?
+
+00:18:08.340 --> 00:18:09.580
+6-sided?
+
+00:18:09.580 --> 00:18:10.921
+8?
+
+00:18:10.921 --> 00:18:12.262
+12?
+
+00:18:12.262 --> 00:18:13.480
+20?
+
+00:18:13.480 --> 00:18:15.460
+What's most likely?
+
+00:18:15.460 --> 00:18:17.940
+All right.
+
+00:18:17.940 --> 00:18:20.522
+Come take a look at another one.
+
+00:18:20.522 --> 00:18:21.022
+Ready?
+
+00:18:25.802 --> 00:18:27.264
+Ah, got a 1.
+
+00:18:27.264 --> 00:18:28.430
+AUDIENCE: It's the same die?
+
+00:18:28.430 --> 00:18:30.910
+PROFESSOR 2: It's the same
+die, it's the same die.
+
+00:18:30.910 --> 00:18:33.061
+All right, so now what?
+
+00:18:33.061 --> 00:18:35.470
+How does this change,
+anyone want to tell me
+
+00:18:35.470 --> 00:18:40.450
+how would this, now, change from
+before what you believe to be?
+
+00:18:40.450 --> 00:18:43.060
+Does it change what you
+believe at all, in any way?
+
+00:18:43.060 --> 00:18:44.930
+You still think
+it's the 8-sided.
+
+00:18:44.930 --> 00:18:48.350
+Does it make the 8-sided less
+likely, more likely relative
+
+00:18:48.350 --> 00:18:49.880
+to the others?
+
+00:18:49.880 --> 00:18:50.690
+More likely.
+
+00:18:50.690 --> 00:18:51.190
+Wonderful.
+
+00:18:51.190 --> 00:18:53.090
+See you guys all sense
+this in your bones.
+
+00:18:53.090 --> 00:18:53.690
+It's great.
+
+00:18:53.690 --> 00:18:54.340
+This is going to be so easy.
+
+00:18:54.340 --> 00:18:55.340
+For all of you.
+
+00:18:55.340 --> 00:18:56.870
+All right.
+
+00:18:56.870 --> 00:19:00.310
+We've got to keep going until
+we figure out with this die.
+
+00:19:00.310 --> 00:19:01.630
+You, you love to participate.
+
+00:19:01.630 --> 00:19:02.180
+Come on.
+
+00:19:05.376 --> 00:19:07.740
+Ready?
+
+00:19:07.740 --> 00:19:08.240
+AUDIENCE: 3.
+
+00:19:08.240 --> 00:19:09.621
+PROFESSOR 2: 3, oh man.
+
+00:19:09.621 --> 00:19:10.120
+All right.
+
+00:19:12.860 --> 00:19:14.805
+Ready?
+
+00:19:14.805 --> 00:19:15.782
+AUDIENCE: 12.
+
+00:19:15.782 --> 00:19:16.490
+PROFESSOR 2: Ooh.
+
+00:19:21.780 --> 00:19:24.190
+Now what happened?
+
+00:19:24.190 --> 00:19:25.060
+It's a 12-sided die?
+
+00:19:25.060 --> 00:19:27.270
+But it could be a
+20-sided die, right?
+
+00:19:27.270 --> 00:19:29.811
+All right, let me just do a few
+more, I'll tell you it I get.
+
+00:19:29.811 --> 00:19:39.580
+I get 1, I get 10, I get 10,
+I get 12, I get 3, I get 10.
+
+00:19:39.580 --> 00:19:41.060
+All right.
+
+00:19:41.060 --> 00:19:43.660
+Who wants to bet?
+
+00:19:43.660 --> 00:19:45.380
+What would you be
+willing to bet?
+
+00:19:45.380 --> 00:19:47.930
+Suppose I was willing to
+give you like, I don't know,
+
+00:19:47.930 --> 00:19:50.700
+10 to 1 odds that
+it's a 20-sided die.
+
+00:19:55.080 --> 00:19:57.640
+I mean, of course,
+maybe I know something.
+
+00:19:57.640 --> 00:19:59.990
+I can see the die.
+
+00:19:59.990 --> 00:20:01.990
+Right, so what we
+want to be able to do
+
+00:20:01.990 --> 00:20:04.445
+is precisely answer
+that question.
+
+00:20:04.445 --> 00:20:06.570
+All right, and it's just
+do this Bayesian Updating.
+
+00:20:06.570 --> 00:20:09.800
+It's not so hard, but organizing
+your work is really important.
+
+00:20:09.800 --> 00:20:11.000
+So, all right.
+
+00:20:11.000 --> 00:20:13.190
+It was the 12-sided after all.
+
+00:20:13.190 --> 00:20:15.180
+So you all did good.
+
+00:20:15.180 --> 00:20:18.140
+All right, so this is
+the first board question.
+
+00:20:18.140 --> 00:20:18.640
+All right.
+
+00:20:18.640 --> 00:20:21.700
+I want to practice making
+the table Jerry showed you.
+
+00:20:21.700 --> 00:20:23.640
+Make one for if it were 13.
+
+00:20:23.640 --> 00:20:26.240
+Make one if I had
+rolled 5 instead.
+
+00:20:26.240 --> 00:20:28.430
+Or do the same question
+if I had rolled a 9.
+
+00:20:28.430 --> 00:20:31.710
+In each case, compute the
+posterior probabilities
+
+00:20:31.710 --> 00:20:33.090
+of each of the 5 types of dice.
+
+00:20:47.210 --> 00:20:48.960
+PROFESSOR: You knew
+it was a 20-sided die?
+
+00:20:48.960 --> 00:20:49.410
+AUDIENCE: Yeah.
+
+00:20:49.410 --> 00:20:51.284
+PROFESSOR: All right,
+what about if it's a 5?
+
+00:20:51.284 --> 00:20:52.419
+AUDIENCE: Yeah.
+
+00:20:52.419 --> 00:20:53.460
+PROFESSOR: But that's it.
+
+00:20:53.460 --> 00:20:57.580
+But you see how that captures
+it very nicely in a table.
+
+00:20:57.580 --> 00:20:58.540
+All of your intuition.
+
+00:20:58.540 --> 00:20:59.653
+You knew it was a--
+
+00:21:26.780 --> 00:21:29.310
+PROFESSOR 2: So right now you're
+doing the D equals 13 case?
+
+00:21:29.310 --> 00:21:31.601
+AUDIENCE: Yeah, or I guess
+we could combine the tables.
+
+00:21:33.395 --> 00:21:34.520
+PROFESSOR 2: Oh, I'm sorry.
+
+00:21:34.520 --> 00:21:35.400
+You're not combining tables.
+
+00:21:35.400 --> 00:21:36.590
+This is your
+likelihood column here?
+
+00:21:36.590 --> 00:21:36.930
+AUDIENCE: Yeah.
+
+00:21:36.930 --> 00:21:38.770
+PROFESSOR 2: And then this is
+your unnormalized posterior
+
+00:21:38.770 --> 00:21:39.550
+column.
+
+00:21:39.550 --> 00:21:40.590
+Is that right?
+
+00:21:40.590 --> 00:21:42.640
+Or, no this is
+actually normalized.
+
+00:21:42.640 --> 00:21:44.800
+AUDIENCE: This is for if
+it were like any number.
+
+00:21:44.800 --> 00:21:46.550
+Like if we didn't know
+what number it was.
+
+00:21:48.434 --> 00:21:49.600
+PROFESSOR 2: The likelihood?
+
+00:21:49.600 --> 00:21:50.050
+AUDIENCE: Yes.
+
+00:21:50.050 --> 00:21:51.050
+PROFESSOR 2: Absolutely.
+
+00:21:51.050 --> 00:21:54.931
+So the likelihood
+doesn't depend on-- wait.
+
+00:21:54.931 --> 00:21:55.680
+What are we doing?
+
+00:21:55.680 --> 00:21:56.900
+Rolling a 5 or a 13?
+
+00:21:56.900 --> 00:21:58.757
+AUDIENCE: Rolling a 13, right?
+
+00:21:58.757 --> 00:22:01.090
+PROFESSOR 2: Right, so rolling
+a 13, for the likelihood,
+
+00:22:01.090 --> 00:22:03.510
+you're computing the probability
+of data that you saw,
+
+00:22:03.510 --> 00:22:08.344
+the 13, given the hypothesis
+say that it's the 4-sided die.
+
+00:22:08.344 --> 00:22:09.010
+AUDIENCE: Right.
+
+00:22:09.010 --> 00:22:10.426
+PROFESSOR 2: It's
+the 4-sided die,
+
+00:22:10.426 --> 00:22:12.480
+what's the probability
+you would roll a 13?
+
+00:22:12.480 --> 00:22:13.115
+AUDIENCE: 0.
+
+00:22:13.115 --> 00:22:13.906
+PROFESSOR 2: Great.
+
+00:22:13.906 --> 00:22:14.790
+Same with this, this and this.
+
+00:22:14.790 --> 00:22:15.850
+But what about here?
+
+00:22:15.850 --> 00:22:17.527
+If it's the 20-sided
+die, if that's
+
+00:22:17.527 --> 00:22:19.860
+your hypothesis, what's the
+probability you'd roll a 13.
+
+00:22:19.860 --> 00:22:20.840
+AUDIENCE: Oh no.
+
+00:22:20.840 --> 00:22:21.820
+Oh, 1/20.
+
+00:22:21.820 --> 00:22:22.800
+PROFESSOR 2: Exactly.
+
+00:22:22.800 --> 00:22:25.130
+So that's the likelihood column.
+
+00:22:25.130 --> 00:22:26.992
+So this we're going to erase.
+
+00:22:26.992 --> 00:22:28.840
+OK.
+
+00:22:28.840 --> 00:22:31.565
+AUDIENCE 2: Then we multiply
+this by this and get that.
+
+00:22:31.565 --> 00:22:32.440
+PROFESSOR 2: Exactly.
+
+00:22:32.440 --> 00:22:37.000
+AUDIENCE: [INAUDIBLE]
+divided by [INAUDIBLE].
+
+00:22:37.000 --> 00:22:38.420
+PROFESSOR 2: Exactly, exactly.
+
+00:22:38.420 --> 00:22:39.757
+Does that make sense?
+
+00:22:39.757 --> 00:22:41.590
+AUDIENCE: Wait, we
+multiply these together--
+
+00:22:41.590 --> 00:22:43.090
+AUDIENCE 2: Multiply
+those together.
+
+00:22:54.088 --> 00:23:03.474
+And then we divide 1 over
+100, so it's going to be 0--
+
+00:23:03.474 --> 00:23:04.390
+PROFESSOR 2: So, yeah.
+
+00:23:04.390 --> 00:23:06.740
+So you get to just--
+
+00:23:06.740 --> 00:23:07.657
+AUDIENCE: And then HD.
+
+00:23:07.657 --> 00:23:08.489
+PROFESSOR 2: No, no.
+
+00:23:08.489 --> 00:23:09.610
+Oh yeah, you're right.
+
+00:23:09.610 --> 00:23:10.110
+HD.
+
+00:23:12.630 --> 00:23:17.350
+One thing I want to point out
+is instead of using a comma,
+
+00:23:17.350 --> 00:23:19.810
+all right, this is
+conditional probability
+
+00:23:19.810 --> 00:23:24.070
+so it's probability of
+D given H, like this.
+
+00:23:24.070 --> 00:23:24.660
+OK.
+
+00:23:24.660 --> 00:23:26.455
+There you go.
+
+00:23:26.455 --> 00:23:27.580
+So that's absolutely right.
+
+00:23:27.580 --> 00:23:29.630
+At the end, we want to
+know how likely each
+
+00:23:29.630 --> 00:23:31.000
+die was given the data.
+
+00:23:31.000 --> 00:23:33.362
+AUDIENCE: Because
+this total is just P.
+
+00:23:33.362 --> 00:23:34.445
+PROFESSOR 2: That's right.
+
+00:23:37.790 --> 00:23:47.700
+Which is 1 over 100.
+
+00:23:47.700 --> 00:23:48.200
+Great.
+
+00:23:48.200 --> 00:23:49.587
+So now, do it again.
+
+00:23:49.587 --> 00:23:50.170
+Yeah, exactly.
+
+00:23:50.170 --> 00:23:51.836
+You don't even need
+to make a new table.
+
+00:24:02.450 --> 00:24:04.692
+PROFESSOR 2: Awesome.
+
+00:24:04.692 --> 00:24:06.604
+AUDIENCE: So this
+column [INAUDIBLE]
+
+00:24:06.604 --> 00:24:08.516
+to the probability,
+because [INAUDIBLE].
+
+00:24:11.980 --> 00:24:14.692
+PROFESSOR 2: Yeah, you take each
+hypothesis times probability
+
+00:24:14.692 --> 00:24:16.150
+of data given the
+hypothesis, which
+
+00:24:16.150 --> 00:24:20.210
+is the same as the
+probability of D and H.
+
+00:24:20.210 --> 00:24:21.210
+AUDIENCE: Yeah, exactly.
+
+00:24:21.210 --> 00:24:23.170
+PROFESSOR 2: So your
+partitioning it up, sort of,
+
+00:24:23.170 --> 00:24:24.170
+based on the hypotheses.
+
+00:24:24.170 --> 00:24:27.502
+AUDIENCE: Because this equals
+that times probability of D.
+
+00:24:27.502 --> 00:24:28.585
+PROFESSOR 2: That's right.
+
+00:24:28.585 --> 00:24:29.724
+AUDIENCE: D confuses me.
+
+00:24:29.724 --> 00:24:30.500
+What is P of D?
+
+00:24:30.500 --> 00:24:32.041
+PROFESSOR 2:
+Probability of the data.
+
+00:24:32.041 --> 00:24:33.770
+So, right.
+
+00:24:33.770 --> 00:24:37.020
+So a priori, you don't know
+which die it is, right?
+
+00:24:37.020 --> 00:24:40.810
+But there's still a
+probability of getting a 13.
+
+00:24:40.810 --> 00:24:41.420
+Right?
+
+00:24:41.420 --> 00:24:43.140
+And what is the probability?
+
+00:24:43.140 --> 00:24:46.140
+Well first, we would
+have to, in this case,
+
+00:24:46.140 --> 00:24:47.685
+we could only pick
+the 20-sided die,
+
+00:24:47.685 --> 00:24:49.470
+that has a 1/5
+chance of happening.
+
+00:24:49.470 --> 00:24:51.970
+And then, given that we
+picked the 20-sided die,
+
+00:24:51.970 --> 00:24:55.010
+we have to roll a 13,
+which is a 1/20 chance.
+
+00:24:55.010 --> 00:24:59.736
+Which is exactly why
+this sums to 1 in a 100.
+
+00:24:59.736 --> 00:25:01.110
+And then more
+generally, you have
+
+00:25:01.110 --> 00:25:02.318
+the Law of Total Probability.
+
+00:25:09.310 --> 00:25:15.875
+So here, I think you should
+keep in mind which is the D
+
+00:25:15.875 --> 00:25:18.230
+and which is H.
+Maybe write it above,
+
+00:25:18.230 --> 00:25:24.050
+otherwise it's a little
+confusing to know what-- great.
+
+00:25:24.050 --> 00:25:26.610
+OK, and so these are
+the final probabilities
+
+00:25:26.610 --> 00:25:29.138
+you got if you rolled a 9.
+
+00:25:29.138 --> 00:25:30.620
+Is that right?
+
+00:25:30.620 --> 00:25:32.775
+So there's something
+off here right?
+
+00:25:32.775 --> 00:25:34.358
+AUDIENCE: Sorry,
+these are our priors.
+
+00:25:36.464 --> 00:25:38.750
+I'm not labeling this.
+
+00:25:38.750 --> 00:25:39.458
+These are priors.
+
+00:25:39.458 --> 00:25:40.955
+This is gonna be [INAUDIBLE].
+
+00:25:45.132 --> 00:25:47.590
+PROFESSOR 2: So actually here,
+I think you have likelihood.
+
+00:25:47.590 --> 00:25:50.230
+This is likelihood
+here, exactly.
+
+00:25:50.230 --> 00:25:52.390
+That's likelihood.
+
+00:25:52.390 --> 00:25:54.710
+Your prior should be what?
+
+00:25:54.710 --> 00:25:55.949
+AUDIENCE: 0.2.
+
+00:25:55.949 --> 00:25:57.240
+PROFESSOR 2: What should it be?
+
+00:25:57.240 --> 00:25:58.030
+AUDIENCE: 0.2 for each one.
+
+00:25:58.030 --> 00:25:58.410
+PROFESSOR 2: Yeah, 1/5.
+
+00:25:58.410 --> 00:25:59.576
+Oh, I didn't see the points.
+
+00:25:59.576 --> 00:26:02.260
+Yeah, so that's your
+prior, 1/5 for each.
+
+00:26:02.260 --> 00:26:03.620
+This is your likelihood.
+
+00:26:03.620 --> 00:26:05.304
+Then you multiply
+them, and that's
+
+00:26:05.304 --> 00:26:06.720
+the unnormalized
+posterior, right?
+
+00:26:09.426 --> 00:26:11.050
+Let's have a brief
+discussion about it,
+
+00:26:11.050 --> 00:26:11.980
+and then we're going
+to give you something
+
+00:26:11.980 --> 00:26:13.063
+a little more challenging.
+
+00:26:15.910 --> 00:26:20.050
+So for rolling a 13, right,
+the first thing you do
+
+00:26:20.050 --> 00:26:22.510
+is ask, what is the prior?
+
+00:26:22.510 --> 00:26:23.980
+And you saw, I had 5 dice.
+
+00:26:23.980 --> 00:26:25.370
+I shook it around.
+
+00:26:25.370 --> 00:26:27.840
+A student reached in
+randomly, not even me.
+
+00:26:27.840 --> 00:26:31.800
+So we can trust that it
+was 1/5 for each die.
+
+00:26:31.800 --> 00:26:35.330
+Equally likely, that's a
+uniform prior, right, discrete
+
+00:26:35.330 --> 00:26:37.920
+probability mass function.
+
+00:26:37.920 --> 00:26:39.200
+Great.
+
+00:26:39.200 --> 00:26:40.140
+Likelihood.
+
+00:26:40.140 --> 00:26:42.430
+Well, that's going to
+depend on the data,
+
+00:26:42.430 --> 00:26:45.740
+because it's the probability of
+the data given the hypotheses.
+
+00:26:45.740 --> 00:26:49.310
+The hypothesis in this case
+is how many sides on the die.
+
+00:26:49.310 --> 00:26:53.430
+So, if the data's 13, what's
+the probability that I
+
+00:26:53.430 --> 00:26:57.950
+would roll that data, a 13,
+given that it was the 4-sided
+
+00:26:57.950 --> 00:26:59.300
+die.
+
+00:26:59.300 --> 00:26:59.890
+0.
+
+00:26:59.890 --> 00:27:00.390
+Right?
+
+00:27:00.390 --> 00:27:01.150
+It's impossible.
+
+00:27:01.150 --> 00:27:04.780
+Similarly 4, 6, 8 and 12 sides.
+
+00:27:04.780 --> 00:27:07.440
+But given that I had
+the 20-sided die,
+
+00:27:07.440 --> 00:27:10.850
+there would be a 1/20
+probability of rolling a 13.
+
+00:27:10.850 --> 00:27:12.306
+That's the likelihood column.
+
+00:27:12.306 --> 00:27:13.280
+All right.
+
+00:27:13.280 --> 00:27:16.140
+The next column, what we called
+the unnormalized posterior, we
+
+00:27:16.140 --> 00:27:19.840
+multiply, everything is 0,
+and then we get 1 out of 100
+
+00:27:19.840 --> 00:27:25.140
+as the product for
+the 20-sided die.
+
+00:27:25.140 --> 00:27:29.100
+If we sum this up by the
+Law of Total Probability,
+
+00:27:29.100 --> 00:27:31.201
+we get the probability
+of the data.
+
+00:27:31.201 --> 00:27:32.950
+Now, a student asked,
+what does that mean?
+
+00:27:32.950 --> 00:27:34.770
+We don't know which die it was?
+
+00:27:34.770 --> 00:27:37.850
+In this case, what
+it means is that it's
+
+00:27:37.850 --> 00:27:42.630
+reasonable to ask the question,
+well, if someone reaches in,
+
+00:27:42.630 --> 00:27:45.780
+grabs 1 of these 5 dice
+randomly and rolls it
+
+00:27:45.780 --> 00:27:48.070
+and gets-- I mean,
+what's the probability
+
+00:27:48.070 --> 00:27:50.440
+that the result would be a 13.
+
+00:27:50.440 --> 00:27:50.980
+Right?
+
+00:27:50.980 --> 00:27:53.270
+That's a reasonable question.
+
+00:27:53.270 --> 00:27:56.790
+And in this case, it's not so
+hard to analyze that directly,
+
+00:27:56.790 --> 00:27:58.870
+because the only way
+that could happen
+
+00:27:58.870 --> 00:28:02.780
+is if they picked the 20-sided
+die and then rolled a 13.
+
+00:28:02.780 --> 00:28:06.370
+Well, given that they
+picked the 20-sided die.
+
+00:28:06.370 --> 00:28:09.440
+Well, there's a 1/5 chance
+they picked the 20-sided die,
+
+00:28:09.440 --> 00:28:13.010
+and then a 1/20 chance they
+roll of 13 given that they
+
+00:28:13.010 --> 00:28:15.080
+picked the 20-sided die.
+
+00:28:15.080 --> 00:28:20.880
+So the probability of rolling
+a 13 overall is 1 in 100.
+
+00:28:20.880 --> 00:28:23.369
+The probability of the data.
+
+00:28:23.369 --> 00:28:25.160
+PROFESSOR: John, let
+me just say one thing.
+
+00:28:25.160 --> 00:28:27.035
+The way we would have
+done this before is you
+
+00:28:27.035 --> 00:28:28.990
+would have made a tree.
+
+00:28:28.990 --> 00:28:30.690
+The top branch of
+the tree would have
+
+00:28:30.690 --> 00:28:33.440
+gone to the 5 types of die,
+and then each of those die
+
+00:28:33.440 --> 00:28:35.570
+would have gone to
+all the possibilities.
+
+00:28:35.570 --> 00:28:39.340
+And the only branch
+that leads to a 13
+
+00:28:39.340 --> 00:28:42.874
+is down to the 20-sided die
+and then down to the 13.
+
+00:28:42.874 --> 00:28:44.540
+PROFESSOR 2: Notice
+also that this would
+
+00:28:44.540 --> 00:28:47.100
+be a very big tree, right?
+
+00:28:47.100 --> 00:28:50.700
+You have 5 branches, and
+then this would have 4 and 6,
+
+00:28:50.700 --> 00:28:53.480
+and 8, and 12, and
+20 coming off of it.
+
+00:28:53.480 --> 00:28:54.630
+Finally we normalize.
+
+00:28:54.630 --> 00:28:57.330
+Using Bayes Rule, this gives
+us a posterior probability mass
+
+00:28:57.330 --> 00:28:57.890
+function.
+
+00:28:57.890 --> 00:29:01.370
+It's 0 for everything but
+the 20-sided hypothesis.
+
+00:29:01.370 --> 00:29:06.090
+Therefore, we get 100%
+belief, 100% probability,
+
+00:29:06.090 --> 00:29:09.930
+given that we rolled a 13,
+that it was the 20-sided die.
+
+00:29:09.930 --> 00:29:12.870
+Now of course you all
+knew that immediately.
+
+00:29:12.870 --> 00:29:15.140
+If you roll a 13, it has
+to be the 20-sided die.
+
+00:29:15.140 --> 00:29:17.540
+So let's look at a more
+interesting one that you did,
+
+00:29:17.540 --> 00:29:18.050
+the 5.
+
+00:29:18.050 --> 00:29:18.950
+So what changes?
+
+00:29:18.950 --> 00:29:21.270
+That's the big question.
+
+00:29:21.270 --> 00:29:27.494
+The only thing that
+changes is the likelihood.
+
+00:29:27.494 --> 00:29:28.910
+I mean, granted,
+the rest changes.
+
+00:29:28.910 --> 00:29:30.540
+But everything in
+these two columns
+
+00:29:30.540 --> 00:29:32.250
+are computed from the first two.
+
+00:29:32.250 --> 00:29:37.080
+The prior stays the same, but
+the likelihood function changes
+
+00:29:37.080 --> 00:29:38.860
+because we have different data.
+
+00:29:38.860 --> 00:29:40.890
+In this case, if we
+roll a 5, we can't
+
+00:29:40.890 --> 00:29:42.980
+get that on the 4-sided die.
+
+00:29:42.980 --> 00:29:45.930
+We have a 1/6 chance on the
+6-sided, 1/8 on the 8-sided,
+
+00:29:45.930 --> 00:29:48.970
+1/12 on the 12-sided and
+1/20 on the 20-sided.
+
+00:29:48.970 --> 00:29:52.270
+Multiply those columns, get
+the unnormalized probability,
+
+00:29:52.270 --> 00:29:54.860
+or the unnormalized posterior.
+
+00:29:54.860 --> 00:29:58.040
+That sums to the
+probability of getting a 5.
+
+00:29:58.040 --> 00:30:01.160
+When you divide by it, it
+normalizes the posterior,
+
+00:30:01.160 --> 00:30:02.990
+and what do we see?
+
+00:30:02.990 --> 00:30:07.260
+Well, of course you couldn't
+have used the 4-sided die,
+
+00:30:07.260 --> 00:30:11.500
+and of the remaining the most
+likely, the most probable,
+
+00:30:11.500 --> 00:30:15.560
+given the data, is
+the 6-sided die.
+
+00:30:15.560 --> 00:30:17.310
+It has a probability,
+that hypothesis
+
+00:30:17.310 --> 00:30:21.470
+has a probability of about 40%,
+compared to the 20-sided die,
+
+00:30:21.470 --> 00:30:24.020
+which is only about 12%.
+
+00:30:24.020 --> 00:30:25.270
+OK.
+
+00:30:25.270 --> 00:30:27.450
+Last one.
+
+00:30:27.450 --> 00:30:28.620
+So this is the same deal.
+
+00:30:28.620 --> 00:30:31.530
+Again, the likelihood
+function changes.
+
+00:30:31.530 --> 00:30:32.890
+The prior's the same.
+
+00:30:32.890 --> 00:30:34.230
+We go through the table.
+
+00:30:34.230 --> 00:30:36.450
+The only two possibilities
+are the 12 and 20-sided,
+
+00:30:36.450 --> 00:30:38.850
+and the 12-sided, given
+that you rolled a 9,
+
+00:30:38.850 --> 00:30:42.360
+is about twice as likely
+as the 20-sided, which
+
+00:30:42.360 --> 00:30:45.680
+should fit with your intuition.
+
+00:30:45.680 --> 00:30:46.530
+OK.
+
+00:30:46.530 --> 00:30:50.150
+So next, we want you to
+not erase, but go back
+
+00:30:50.150 --> 00:30:51.810
+to the boards
+you've already made,
+
+00:30:51.810 --> 00:30:54.370
+and we're going to explore a
+little bit the idea of repeated
+
+00:30:54.370 --> 00:30:55.070
+trials.
+
+00:30:55.070 --> 00:30:55.570
+Right?
+
+00:30:55.570 --> 00:30:58.070
+Often if you're collecting
+data, you don't just
+
+00:30:58.070 --> 00:31:00.120
+collect one data
+point, you collect
+
+00:31:00.120 --> 00:31:02.860
+a series of data points,
+maybe a series of patients
+
+00:31:02.860 --> 00:31:03.950
+in a clinical trial.
+
+00:31:03.950 --> 00:31:05.520
+You have data coming in, right?
+
+00:31:05.520 --> 00:31:06.730
+And you can update.
+
+00:31:06.730 --> 00:31:09.110
+You can update each
+time you get more data.
+
+00:31:09.110 --> 00:31:12.585
+And when you do this, your
+prior becomes a posterior
+
+00:31:12.585 --> 00:31:13.960
+in the first
+update, and then you
+
+00:31:13.960 --> 00:31:17.110
+use that posterior as the
+prior for the next update.
+
+00:31:17.110 --> 00:31:21.680
+Your beliefs are being
+updated as more data comes in.
+
+00:31:21.680 --> 00:31:24.390
+If you think about it, like when
+you walk outside this course,
+
+00:31:24.390 --> 00:31:26.694
+if you're like me
+you'll sort of suddenly
+
+00:31:26.694 --> 00:31:28.610
+realize you're doing
+this process all the time
+
+00:31:28.610 --> 00:31:30.500
+in your life, and you'll start
+approaching problems this way.
+
+00:31:30.500 --> 00:31:31.874
+And if you really
+like me, you'll
+
+00:31:31.874 --> 00:31:34.530
+change your religion on
+Facebook to Bayesian.
+
+00:31:34.530 --> 00:31:37.110
+But you don't have
+to be that extreme.
+
+00:31:37.110 --> 00:31:39.180
+So great.
+
+00:31:39.180 --> 00:31:42.970
+So here what we want you to do
+is pretend that I roll the die
+
+00:31:42.970 --> 00:31:43.860
+and then got a 5.
+
+00:31:43.860 --> 00:31:45.320
+And then I rolled the same die.
+
+00:31:45.320 --> 00:31:46.200
+I didn't get a different one.
+
+00:31:46.200 --> 00:31:47.824
+I just rolled the
+same die, just like I
+
+00:31:47.824 --> 00:31:49.950
+did in that demonstration,
+and then I got a 9.
+
+00:31:49.950 --> 00:31:54.110
+OK, so now we have a sequence
+of two pieces of data, 5 and 9.
+
+00:31:54.110 --> 00:32:06.120
+So I want to find the posterior
+that-- update in two steps.
+
+00:32:06.120 --> 00:32:07.590
+I'm doing this one.
+
+00:32:07.590 --> 00:32:08.990
+I'm doing this one!
+
+00:32:08.990 --> 00:32:13.895
+OK, so let me show you how to
+do this, and then you'll do it.
+
+00:32:13.895 --> 00:32:15.770
+OK, so first we're going
+to update for the 5.
+
+00:32:15.770 --> 00:32:19.310
+Then we're going to
+update again for the 9.
+
+00:32:19.310 --> 00:32:21.530
+Magic!
+
+00:32:21.530 --> 00:32:24.410
+The prior, 1/5 for each, right?
+
+00:32:24.410 --> 00:32:26.030
+That's where we're
+starting from.
+
+00:32:26.030 --> 00:32:27.400
+We roll a 5.
+
+00:32:27.400 --> 00:32:28.890
+That's our likelihood.
+
+00:32:28.890 --> 00:32:31.410
+Again, you get a
+0 for the 4-sided
+
+00:32:31.410 --> 00:32:35.070
+and you get 1 over n for
+each of the other n-sided
+
+00:32:35.070 --> 00:32:36.050
+possibilities.
+
+00:32:36.050 --> 00:32:37.300
+We multiply.
+
+00:32:37.300 --> 00:32:39.090
+That gives us our
+unnormalized posterior
+
+00:32:39.090 --> 00:32:40.630
+for the first piece of data.
+
+00:32:40.630 --> 00:32:41.420
+Great.
+
+00:32:41.420 --> 00:32:45.620
+Now that is going
+to be our new prior.
+
+00:32:45.620 --> 00:32:47.570
+Now, you may complain,
+wait a minute.
+
+00:32:47.570 --> 00:32:49.170
+This doesn't add to 1.
+
+00:32:49.170 --> 00:32:53.340
+But it's OK, because we're
+going to do it again.
+
+00:32:53.340 --> 00:32:56.430
+At the very end we'll normalize,
+and we'll get the same answer
+
+00:32:56.430 --> 00:32:59.240
+as if we had normalized here
+and then normalized again.
+
+00:32:59.240 --> 00:33:01.840
+Because we're just
+multiplying the whole column
+
+00:33:01.840 --> 00:33:03.700
+by the same scalar, by
+the same real number.
+
+00:33:03.700 --> 00:33:04.200
+OK?
+
+00:33:04.200 --> 00:33:06.020
+So it saves you
+work to not bother
+
+00:33:06.020 --> 00:33:08.951
+to normalize the first time.
+
+00:33:08.951 --> 00:33:09.450
+Great.
+
+00:33:09.450 --> 00:33:11.440
+So that's our new prior.
+
+00:33:11.440 --> 00:33:13.740
+We get our next
+piece of data, the 9.
+
+00:33:13.740 --> 00:33:18.460
+We have 0, 0, 0, 1/12, and
+1/20 as the likelihoods.
+
+00:33:18.460 --> 00:33:22.450
+We multiply this new
+prior by this likelihood,
+
+00:33:22.450 --> 00:33:25.220
+get the new
+unnormalized posterior.
+
+00:33:25.220 --> 00:33:30.390
+It only has two possible
+nonzero probabilities in it.
+
+00:33:30.390 --> 00:33:35.680
+The sum, the total probability
+of rolling a 5 and then a 9
+
+00:33:35.680 --> 00:33:44.646
+is only 0.0019, OK?
+
+00:33:44.646 --> 00:33:47.001
+PROFESSOR: That's [INAUDIBLE]
+unnormalized [INAUDIBLE].
+
+00:33:47.001 --> 00:33:48.890
+PROFESSOR 2: Ah!
+
+00:33:48.890 --> 00:33:49.580
+Jerry caught me.
+
+00:33:49.580 --> 00:33:51.730
+I was hoping a student
+would catch me.
+
+00:33:51.730 --> 00:33:52.470
+OK, maybe not.
+
+00:33:52.470 --> 00:33:54.550
+Maybe I was fooling myself.
+
+00:33:54.550 --> 00:33:56.130
+We haven't normalized.
+
+00:33:56.130 --> 00:33:59.250
+So, it's not quite right.
+
+00:33:59.250 --> 00:34:01.800
+If we had normalized here, then
+by the time we got to here,
+
+00:34:01.800 --> 00:34:05.280
+we could interpret this
+as that total probability.
+
+00:34:05.280 --> 00:34:07.890
+But in any case, the
+point is we can normalize
+
+00:34:07.890 --> 00:34:10.750
+to get to the final stage,
+this final posterior,
+
+00:34:10.750 --> 00:34:13.120
+by dividing by the sum here.
+
+00:34:13.120 --> 00:34:15.527
+Now it adds to 1, and
+at the end of the day,
+
+00:34:15.527 --> 00:34:16.360
+what do we conclude?
+
+00:34:16.360 --> 00:34:20.199
+We conclude that it's almost
+three times more likely
+
+00:34:20.199 --> 00:34:23.770
+that it was the 12-sided
+die than that it
+
+00:34:23.770 --> 00:34:26.100
+was the 20-sided die.
+
+00:34:26.100 --> 00:34:26.600
+Right?
+
+00:34:26.600 --> 00:34:29.880
+So this is very similar to
+what happened when randomly
+
+00:34:29.880 --> 00:34:31.600
+had the 12-sided and rolled it.
+
+00:34:31.600 --> 00:34:34.800
+After two times, I had data
+that looked a lot like this,
+
+00:34:34.800 --> 00:34:37.290
+and if we had rigorously
+computed those probabilities,
+
+00:34:37.290 --> 00:34:39.170
+this is what we
+would have gotten.
+
+00:34:39.170 --> 00:34:41.489
+OK?
+
+00:34:41.489 --> 00:34:44.639
+So now, now it's your turn.
+
+00:34:44.639 --> 00:34:48.190
+So, we want to try the same
+thing, but in the other order.
+
+00:34:48.190 --> 00:34:51.100
+Suppose I first roll the
+9 and then I roll the 5.
+
+00:34:51.100 --> 00:34:52.469
+So that's the first question.
+
+00:34:52.469 --> 00:34:55.600
+The second question is,
+can you do it in one go?
+
+00:34:55.600 --> 00:34:59.120
+Instead of doing it updating
+for the 9 and then for the 5,
+
+00:34:59.120 --> 00:35:02.340
+can you incorporate
+both the 9 and the 5
+
+00:35:02.340 --> 00:35:05.800
+into a single
+likelihood function
+
+00:35:05.800 --> 00:35:07.520
+and do the updating in one step?
+
+00:35:07.520 --> 00:35:10.080
+All right, so try these and
+think about what's similar,
+
+00:35:10.080 --> 00:35:12.510
+what's different
+than what I just did.
+
+00:35:12.510 --> 00:35:13.920
+You don't have to.
+
+00:35:13.920 --> 00:35:15.747
+You don't have to.
+
+00:35:15.747 --> 00:35:17.330
+You could normalize
+it, then you would
+
+00:35:17.330 --> 00:35:19.000
+multiply by the likelihood.
+
+00:35:19.000 --> 00:35:20.850
+You'd get something
+again unnormalized,
+
+00:35:20.850 --> 00:35:22.544
+and then you'd have
+normalize again,
+
+00:35:22.544 --> 00:35:24.210
+and then you'd get
+to your final answer.
+
+00:35:24.210 --> 00:35:27.430
+Or, don't bother
+normalizing at this stage.
+
+00:35:27.430 --> 00:35:30.290
+Just multiply this by the
+likelihood, and then just only
+
+00:35:30.290 --> 00:35:31.600
+normalize once at the very end.
+
+00:35:31.600 --> 00:35:34.580
+And you'll get the same
+answer because, you know,
+
+00:35:34.580 --> 00:35:36.530
+normalizing once and
+then normalizing again
+
+00:35:36.530 --> 00:35:39.704
+is the same as just
+normalizing at the very end.
+
+00:35:39.704 --> 00:35:41.620
+You're just multiplying
+a vector, this column,
+
+00:35:41.620 --> 00:35:44.585
+by rescaling it to
+make it unit length--
+
+00:35:44.585 --> 00:35:46.251
+AUDIENCE: And then
+you're multiplying it
+
+00:35:46.251 --> 00:35:47.043
+by something else--
+
+00:35:47.043 --> 00:35:47.917
+PROFESSOR 2: Exactly.
+
+00:35:47.917 --> 00:35:48.890
+Exactly.
+
+00:35:48.890 --> 00:35:50.616
+AUDIENCE: Isn't
+number 1 going to be
+
+00:35:50.616 --> 00:35:52.945
+the same answer as the
+example we just did,
+
+00:35:52.945 --> 00:35:54.820
+because you're going to
+be updating-- I mean,
+
+00:35:54.820 --> 00:35:55.694
+it's going different.
+
+00:35:55.694 --> 00:35:58.061
+OK, we just have to do it.
+
+00:35:58.061 --> 00:35:59.060
+PROFESSOR 2: Absolutely.
+
+00:35:59.060 --> 00:36:01.699
+So, yes, absolutely.
+
+00:36:01.699 --> 00:36:03.490
+All of these could give
+you the same answer
+
+00:36:03.490 --> 00:36:05.156
+because it's the same
+exact data, right?
+
+00:36:05.156 --> 00:36:06.790
+Starting from the same priors.
+
+00:36:06.790 --> 00:36:08.400
+But what we want
+you to really see
+
+00:36:08.400 --> 00:36:10.702
+is how the math proves that.
+
+00:36:10.702 --> 00:36:13.160
+AUDIENCE: I mean we're just
+multiplying in different order.
+
+00:36:13.160 --> 00:36:14.243
+PROFESSOR 2: That's right.
+
+00:36:14.243 --> 00:36:16.900
+So it all comes down to what?
+
+00:36:16.900 --> 00:36:19.280
+What property of multiplication?
+
+00:36:19.280 --> 00:36:20.944
+AUDIENCE: Associative?
+
+00:36:20.944 --> 00:36:21.860
+AUDIENCE: Commutative.
+
+00:36:21.860 --> 00:36:22.820
+PROFESSOR 2: Commutative.
+
+00:36:22.820 --> 00:36:24.486
+I guess you're also
+using associativity.
+
+00:36:24.486 --> 00:36:27.290
+It's just that multiplication
+is commutative, right?
+
+00:36:27.290 --> 00:36:30.640
+So it doesn't matter what order
+you multiply these columns in,
+
+00:36:30.640 --> 00:36:32.776
+the final result's
+going to be the same.
+
+00:36:32.776 --> 00:36:35.860
+So just about how the
+order changes depending
+
+00:36:35.860 --> 00:36:38.740
+on the order of the 5
+versus the 9, and also,
+
+00:36:38.740 --> 00:36:40.490
+what happens if you
+think of both at once,
+
+00:36:40.490 --> 00:36:42.837
+how would you then make a
+table directly for that?
+
+00:36:42.837 --> 00:36:43.670
+[INTERPOSING VOICES]
+
+00:37:03.650 --> 00:37:04.220
+PROFESSOR: 5.
+
+00:37:04.220 --> 00:37:04.720
+Oh, I see.
+
+00:37:04.720 --> 00:37:08.602
+So you multiplied-- here,
+is this your likelihood?
+
+00:37:08.602 --> 00:37:09.560
+So you multiplied that.
+
+00:37:09.560 --> 00:37:11.890
+Where's your plus times this?
+
+00:37:11.890 --> 00:37:14.850
+Oh, you even normalized.
+
+00:37:14.850 --> 00:37:15.357
+Right.
+
+00:37:15.357 --> 00:37:16.940
+So did you understand
+John's statement
+
+00:37:16.940 --> 00:37:19.016
+that you didn't actually
+have to normalize?
+
+00:37:19.016 --> 00:37:19.750
+AUDIENCE: Right.
+
+00:37:19.750 --> 00:37:20.960
+I mean, if you'd
+already done it.
+
+00:37:20.960 --> 00:37:22.126
+PROFESSOR: No, I understand.
+
+00:37:22.126 --> 00:37:23.430
+It's a nicer number than 1/60.
+
+00:37:23.430 --> 00:37:24.860
+But if you didn't
+have it, you could
+
+00:37:24.860 --> 00:37:27.068
+have just used this column
+and normalized at the end.
+
+00:37:27.068 --> 00:37:27.867
+That make sense?
+
+00:37:27.867 --> 00:37:28.367
+Excellent.
+
+00:37:35.049 --> 00:37:35.840
+I'm not trying to--
+
+00:37:35.840 --> 00:37:37.820
+AUDIENCE: This is just
+if you do it in one step.
+
+00:37:37.820 --> 00:37:38.286
+PROFESSOR: I see.
+
+00:37:38.286 --> 00:37:39.000
+AUDIENCE: You just multiply.
+
+00:37:39.000 --> 00:37:40.040
+PROFESSOR: Did you
+get different answers?
+
+00:37:40.040 --> 00:37:40.740
+AUDIENCE: No, it's the same.
+
+00:37:40.740 --> 00:37:41.250
+PROFESSOR: It's the same.
+
+00:37:41.250 --> 00:37:41.920
+It makes sense.
+
+00:37:41.920 --> 00:37:42.670
+You have the data.
+
+00:37:42.670 --> 00:37:44.852
+That's the evidence you have.
+
+00:37:44.852 --> 00:37:46.620
+Right.
+
+00:37:46.620 --> 00:37:48.342
+So was this all clear?
+
+00:37:48.342 --> 00:37:49.800
+Was John's statement
+about not only
+
+00:37:49.800 --> 00:37:51.440
+needing the
+unnormalized posterior
+
+00:37:51.440 --> 00:37:54.310
+in the middle reasonably clear?
+
+00:37:54.310 --> 00:37:55.810
+AUDIENCE: What were
+talking about is
+
+00:37:55.810 --> 00:37:59.394
+if you were to use
+the normalized one,
+
+00:37:59.394 --> 00:38:01.386
+would then your
+unnormalized posterior
+
+00:38:01.386 --> 00:38:03.690
+be the actual probabilities?
+
+00:38:03.690 --> 00:38:04.860
+PROFESSOR: No.
+
+00:38:04.860 --> 00:38:09.360
+No, because in order to use
+the Law of Total Probability,
+
+00:38:09.360 --> 00:38:10.860
+you have to multiply
+your likelihood
+
+00:38:10.860 --> 00:38:12.730
+by genuine probabilities.
+
+00:38:12.730 --> 00:38:15.407
+And the unnormalized posterior
+is not a genuine probability.
+
+00:38:15.407 --> 00:38:17.240
+AUDIENCE: But if you
+use the normalized one.
+
+00:38:17.240 --> 00:38:18.990
+PROFESSOR: If you used
+the normalized one,
+
+00:38:18.990 --> 00:38:24.210
+then it would be-- that would be
+the total probability of that.
+
+00:38:24.210 --> 00:38:25.235
+That's exactly right.
+
+00:38:25.235 --> 00:38:26.610
+AUDIENCE: But, in
+this case, it's
+
+00:38:26.610 --> 00:38:28.050
+this that's the total
+probability, right?
+
+00:38:28.050 --> 00:38:28.716
+PROFESSOR: Yeah.
+
+00:38:28.716 --> 00:38:31.440
+This is now your
+posterior probability.
+
+00:38:31.440 --> 00:38:32.690
+These are now the probability.
+
+00:38:32.690 --> 00:38:34.110
+So, make a distinction.
+
+00:38:34.110 --> 00:38:36.970
+The total probability
+is about the data,
+
+00:38:36.970 --> 00:38:42.249
+and these probabilities here
+are about the hypotheses.
+
+00:38:42.249 --> 00:38:45.182
+AUDIENCE: Sort of like the fit
+of the hypothesis to the data.
+
+00:38:45.182 --> 00:38:46.640
+PROFESSOR: You
+could think of that.
+
+00:38:46.640 --> 00:38:47.890
+They're genuine probabilities.
+
+00:38:47.890 --> 00:38:52.700
+This is the probability that
+you chose the 12-sided die given
+
+00:38:52.700 --> 00:38:53.200
+the data.
+
+00:38:53.200 --> 00:38:59.410
+That is, if I did this a
+million times and every time,
+
+00:38:59.410 --> 00:39:02.360
+I only looked at the times
+I rolled a 9 and then the 5,
+
+00:39:02.360 --> 00:39:05.160
+you would find this
+fraction of those times
+
+00:39:05.160 --> 00:39:07.460
+would be-- it
+would be a 12-sided
+
+00:39:07.460 --> 00:39:09.060
+and this fraction
+would be a 20-sided.
+
+00:39:09.060 --> 00:39:12.320
+So, I forget what the
+numbers were, like 3 to 1.
+
+00:39:12.320 --> 00:39:12.920
+Yeah.
+
+00:39:12.920 --> 00:39:13.942
+Makes sense?
+
+00:39:13.942 --> 00:39:15.270
+Excellent.
+
+00:39:15.270 --> 00:39:19.010
+AUDIENCE: So we multiply
+them together, but then--
+
+00:39:19.010 --> 00:39:21.170
+PROFESSOR 2: You get the
+same exact answer, right?
+
+00:39:21.170 --> 00:39:23.332
+AUDIENCE: So we get
+these, this answer.
+
+00:39:23.332 --> 00:39:25.790
+AUDIENCE 2: That's right,
+so it's unnormalized.
+
+00:39:25.790 --> 00:39:26.520
+PROFESSOR: And
+then you normalize
+
+00:39:26.520 --> 00:39:27.770
+it and you get this, right.
+
+00:39:27.770 --> 00:39:31.015
+AUDIENCE: There's no way
+to normalize it without--
+
+00:39:31.015 --> 00:39:33.390
+PROFESSOR 2: All right, let's
+come back together and take
+
+00:39:33.390 --> 00:39:35.070
+a look at what happened here.
+
+00:39:38.470 --> 00:39:39.910
+I saw some aha moments.
+
+00:39:39.910 --> 00:39:40.590
+That was great.
+
+00:39:43.410 --> 00:39:45.160
+Some people cited The
+Commutative Property
+
+00:39:45.160 --> 00:39:46.040
+of Multiplication.
+
+00:39:46.040 --> 00:39:47.040
+That made me very happy.
+
+00:39:49.510 --> 00:39:52.100
+So, what do we do?
+
+00:39:52.100 --> 00:39:54.175
+So when we do the
+9 and then the 5,
+
+00:39:54.175 --> 00:39:56.300
+it looks just like what I
+did with the 5 and the 9,
+
+00:39:56.300 --> 00:39:59.240
+except the likelihood
+columns are flipped.
+
+00:39:59.240 --> 00:40:04.490
+So we have our prior,
+the likelihood for the 9
+
+00:40:04.490 --> 00:40:07.050
+gives us this column.
+
+00:40:07.050 --> 00:40:10.550
+The product gives us an,
+first, unnormalized posterior.
+
+00:40:10.550 --> 00:40:14.540
+Then we do the likelihood
+for rolling a 5.
+
+00:40:14.540 --> 00:40:17.000
+The product of the
+unnormalized posterior
+
+00:40:17.000 --> 00:40:18.750
+and the second
+likelihood gives us
+
+00:40:18.750 --> 00:40:22.410
+our final unnormalized
+posterior.
+
+00:40:22.410 --> 00:40:25.550
+And notice the sum is still
+exactly what it was before,
+
+00:40:25.550 --> 00:40:27.910
+0.019.
+
+00:40:27.910 --> 00:40:30.940
+When we normalize, we get
+exactly the same answer
+
+00:40:30.940 --> 00:40:31.810
+that we had before.
+
+00:40:31.810 --> 00:40:34.720
+Now, if you contrast
+this with the table
+
+00:40:34.720 --> 00:40:36.680
+we looked at when we
+did the 5 and then
+
+00:40:36.680 --> 00:40:41.940
+the 9, what changed is these
+two columns were flipped around.
+
+00:40:41.940 --> 00:40:44.210
+And so I suppose this
+column was different
+
+00:40:44.210 --> 00:40:45.960
+and this column was
+different as a result.
+
+00:40:45.960 --> 00:40:50.740
+And then the final result,
+however, was exactly the same.
+
+00:40:50.740 --> 00:40:53.674
+Now, what if we do
+them both at once?
+
+00:40:53.674 --> 00:40:54.590
+What should that mean?
+
+00:40:57.340 --> 00:40:59.500
+If we do them both
+at once, then,
+
+00:40:59.500 --> 00:41:02.220
+well we start from the
+same uniform prior,
+
+00:41:02.220 --> 00:41:05.780
+and our likelihood-- now,
+we should think of the data
+
+00:41:05.780 --> 00:41:09.700
+as both rolls, the 5 and the 9.
+
+00:41:09.700 --> 00:41:10.790
+OK.
+
+00:41:10.790 --> 00:41:15.100
+Now what's important here
+is that if we condition
+
+00:41:15.100 --> 00:41:16.400
+on a given hypothesis.
+
+00:41:16.400 --> 00:41:18.970
+For example, if we
+condition on the hypothesis
+
+00:41:18.970 --> 00:41:22.980
+that it's a 12-sided
+die, then the first roll
+
+00:41:22.980 --> 00:41:27.130
+and the second roll are
+independent events, right?
+
+00:41:27.130 --> 00:41:31.260
+It means that we can figure
+out the probability of a 5
+
+00:41:31.260 --> 00:41:33.430
+and then a 9 on
+the 12-sided die.
+
+00:41:33.430 --> 00:41:35.610
+It's just the product
+of the probability
+
+00:41:35.610 --> 00:41:38.820
+of a 5 and a 12-sided die
+and the probability of a 9
+
+00:41:38.820 --> 00:41:40.140
+on a 12-sided die.
+
+00:41:40.140 --> 00:41:42.270
+That's why we're justified
+in taking the product.
+
+00:41:42.270 --> 00:41:45.890
+If we condition on the die
+that it is, on the hypothesis,
+
+00:41:45.890 --> 00:41:50.280
+12-sided, then the rolls are
+all independent of each other.
+
+00:41:50.280 --> 00:41:55.070
+In particular, we get 1/12
+times 1/12 for rolling a 5
+
+00:41:55.070 --> 00:41:56.080
+and then rolling a 9.
+
+00:41:56.080 --> 00:41:58.820
+And for the 20-sided die,
+we get 1/20 times 1/20.
+
+00:42:01.750 --> 00:42:05.260
+So now in one step, we update.
+
+00:42:05.260 --> 00:42:12.100
+Same exact sum, we
+normalize, same exact answer.
+
+00:42:12.100 --> 00:42:16.300
+And I mentioned that some
+groups, maybe when slightly
+
+00:42:16.300 --> 00:42:21.290
+prompted by me, said oh,
+multiplication is commutative.
+
+00:42:21.290 --> 00:42:22.020
+Right?
+
+00:42:22.020 --> 00:42:24.390
+That's all that's going on here.
+
+00:42:24.390 --> 00:42:26.260
+In the end, all
+we're doing is taking
+
+00:42:26.260 --> 00:42:29.300
+our prior, the first likelihood
+column, the second likelihood
+
+00:42:29.300 --> 00:42:31.660
+column, multiplying them
+together and then normalizing
+
+00:42:31.660 --> 00:42:32.180
+it.
+
+00:42:32.180 --> 00:42:33.182
+Right?
+
+00:42:33.182 --> 00:42:35.390
+It doesn't matter what order
+those likelihood columns
+
+00:42:35.390 --> 00:42:35.680
+are in.
+
+00:42:35.680 --> 00:42:37.263
+It doesn't matter
+if we think of the 5
+
+00:42:37.263 --> 00:42:39.310
+and then the 9, the 9
+and the 5, or the 5 and 9
+
+00:42:39.310 --> 00:42:41.900
+multiplied together to make
+their own likelihood column.
+
+00:42:41.900 --> 00:42:44.240
+You get the same exact
+unnormalized result no matter
+
+00:42:44.240 --> 00:42:45.870
+what.
+
+00:42:45.870 --> 00:42:46.580
+OK.
+
+00:42:46.580 --> 00:42:50.380
+So this is all there is
+to why it doesn't matter
+
+00:42:50.380 --> 00:42:53.900
+what order you update
+the data in sequentially,
+
+00:42:53.900 --> 00:42:56.110
+it just matters
+what the data is.
+
+00:42:56.110 --> 00:42:57.960
+Now I also had a question.
+
+00:42:57.960 --> 00:43:00.880
+Why, if you could
+do it all once,
+
+00:43:00.880 --> 00:43:04.740
+would you even bother with
+doing it once and then
+
+00:43:04.740 --> 00:43:06.280
+doing it again?
+
+00:43:06.280 --> 00:43:08.180
+It's a very good question.
+
+00:43:08.180 --> 00:43:11.079
+Does anyone want to
+suggest a reason?
+
+00:43:11.079 --> 00:43:12.745
+Maybe other than the
+group that I talked
+
+00:43:12.745 --> 00:43:16.594
+to specifically about it Yeah.
+
+00:43:16.594 --> 00:43:18.010
+AUDIENCE: Well,
+I'm just thinking,
+
+00:43:18.010 --> 00:43:20.146
+as you're saying, if you
+have ongoing patients
+
+00:43:20.146 --> 00:43:22.450
+and you have to like
+continuously update,
+
+00:43:22.450 --> 00:43:25.866
+then the first
+data set may be all
+
+00:43:25.866 --> 00:43:27.616
+that you have at that
+moment, but then you
+
+00:43:27.616 --> 00:43:29.004
+have to keeping adding on to it.
+
+00:43:29.004 --> 00:43:30.420
+PROFESSOR 2: That's
+exactly right.
+
+00:43:30.420 --> 00:43:31.370
+That's exactly right.
+
+00:43:31.370 --> 00:43:36.280
+So, in life and in
+clinical trials,
+
+00:43:36.280 --> 00:43:38.680
+you don't get all the
+data necessarily at once.
+
+00:43:38.680 --> 00:43:42.579
+It sort of comes
+in continuously.
+
+00:43:42.579 --> 00:43:44.370
+When I wake up in the
+morning, I don't know
+
+00:43:44.370 --> 00:43:46.900
+what temperature it is outside.
+
+00:43:46.900 --> 00:43:49.004
+I have a prior, based
+on what temperature
+
+00:43:49.004 --> 00:43:50.670
+it was yesterday at
+about the same time,
+
+00:43:50.670 --> 00:43:52.227
+like I have a memory of that.
+
+00:43:52.227 --> 00:43:53.810
+So it gives me some
+prior distribution
+
+00:43:53.810 --> 00:43:55.140
+on the temperature.
+
+00:43:55.140 --> 00:43:57.640
+OK, that might be a continuous
+one, like maybe a bell curve.
+
+00:43:57.640 --> 00:44:00.441
+We're going to get to that next
+week, these continuous updating
+
+00:44:00.441 --> 00:44:00.940
+problems.
+
+00:44:00.940 --> 00:44:02.110
+OK.
+
+00:44:02.110 --> 00:44:03.590
+And then, when I
+get out of bed, I
+
+00:44:03.590 --> 00:44:06.940
+see that the window is
+covered in condensation.
+
+00:44:06.940 --> 00:44:08.310
+That's some data.
+
+00:44:08.310 --> 00:44:09.440
+I can update my beliefs.
+
+00:44:09.440 --> 00:44:12.790
+Probably means
+it's kind of cold.
+
+00:44:12.790 --> 00:44:13.910
+Great.
+
+00:44:13.910 --> 00:44:16.640
+Then I can open the
+window to let the cat out,
+
+00:44:16.640 --> 00:44:18.870
+and a burst of freezing
+cold air comes in,
+
+00:44:18.870 --> 00:44:21.328
+like it did this morning--
+well, actually not this morning.
+
+00:44:21.328 --> 00:44:22.960
+This morning was great.
+
+00:44:22.960 --> 00:44:25.700
+Yesterday it was cold.
+
+00:44:25.700 --> 00:44:28.841
+And again, now I have more
+data and I update my beliefs.
+
+00:44:28.841 --> 00:44:29.340
+All right.
+
+00:44:29.340 --> 00:44:30.715
+You can go through
+life this way.
+
+00:44:30.715 --> 00:44:32.810
+It'll give you a headache,
+but you can do it.
+
+00:44:32.810 --> 00:44:36.070
+Now, with clinical trials,
+the same thing can happen.
+
+00:44:36.070 --> 00:44:37.320
+Maybe you do a pilot study.
+
+00:44:37.320 --> 00:44:44.930
+Maybe you have some belief
+that eating almonds causes
+
+00:44:44.930 --> 00:44:48.220
+something, stomach cramps.
+
+00:44:48.220 --> 00:44:48.970
+Great.
+
+00:44:48.970 --> 00:44:50.940
+And maybe it's just for you.
+
+00:44:50.940 --> 00:44:52.582
+But you want to do
+a study about that.
+
+00:44:52.582 --> 00:44:55.040
+So maybe you know for yourself
+that eating almonds give you
+
+00:44:55.040 --> 00:44:56.500
+stomach cramps.
+
+00:44:56.500 --> 00:44:58.550
+You're at the Harvard
+School of Public Health
+
+00:44:58.550 --> 00:45:00.820
+and you really want to
+investigate this further,
+
+00:45:00.820 --> 00:45:03.130
+so you gather a few
+willing subjects,
+
+00:45:03.130 --> 00:45:05.780
+you feed them some almonds, you
+see if they get stomach cramps,
+
+00:45:05.780 --> 00:45:07.080
+how many of them.
+
+00:45:07.080 --> 00:45:09.800
+And maybe your prior
+ahead was you just kind of
+
+00:45:09.800 --> 00:45:12.024
+felt like you had this
+really strong belief that
+
+00:45:12.024 --> 00:45:13.690
+almonds cause stomach
+cramps, because it
+
+00:45:13.690 --> 00:45:14.670
+does for you and you
+really haven't even
+
+00:45:14.670 --> 00:45:15.650
+asked a lot of other people.
+
+00:45:15.650 --> 00:45:17.483
+So you might have a lot
+of prior probability
+
+00:45:17.483 --> 00:45:19.630
+on that hypothesis being true.
+
+00:45:19.630 --> 00:45:21.060
+Once you collect
+a few more people
+
+00:45:21.060 --> 00:45:22.930
+and maybe you ask your
+friends, maybe you
+
+00:45:22.930 --> 00:45:25.054
+find that most of them
+don't have the same problem.
+
+00:45:25.054 --> 00:45:27.920
+Suddenly your posterior
+belief changes
+
+00:45:27.920 --> 00:45:30.880
+and now you're not quite so
+convinced that it's true.
+
+00:45:30.880 --> 00:45:32.470
+And then, if you're
+really ambitious
+
+00:45:32.470 --> 00:45:35.010
+and you have a lot of
+grant money from the NIH,
+
+00:45:35.010 --> 00:45:36.880
+you recruit 1,000
+people and you do
+
+00:45:36.880 --> 00:45:39.020
+a randomized controlled
+trial with placebo
+
+00:45:39.020 --> 00:45:43.760
+and you find out that
+exactly 10% of the folks
+
+00:45:43.760 --> 00:45:46.310
+complain about the stomach
+cramps with almonds.
+
+00:45:46.310 --> 00:45:48.069
+Maybe 10% on placebo
+also, so you're
+
+00:45:48.069 --> 00:45:49.360
+not quite sure what's going on.
+
+00:45:49.360 --> 00:45:51.528
+But the point is,
+you're getting data
+
+00:45:51.528 --> 00:45:52.736
+a little more, a little more.
+
+00:45:52.736 --> 00:45:57.410
+And you can keep incorporating
+it, updating your beliefs.
+
+00:45:57.410 --> 00:45:58.810
+So that's the principle.
+
+00:45:58.810 --> 00:46:00.660
+One last thing
+I'll point out is,
+
+00:46:00.660 --> 00:46:02.640
+what if you have a
+prior belief that
+
+00:46:02.640 --> 00:46:07.210
+is so strong, so you are
+so sure, for example,
+
+00:46:07.210 --> 00:46:10.025
+that almonds don't
+cause stomach pain,
+
+00:46:10.025 --> 00:46:12.400
+because it doesn't for you
+and you're just sure that that
+
+00:46:12.400 --> 00:46:14.136
+would be ridiculous, right?
+
+00:46:14.136 --> 00:46:15.885
+So you've put your
+prior probability at 0.
+
+00:46:18.557 --> 00:46:20.640
+How much evidence will it
+take, how much data will
+
+00:46:20.640 --> 00:46:22.680
+take for you to be convinced?
+
+00:46:25.280 --> 00:46:26.150
+Infinite.
+
+00:46:26.150 --> 00:46:30.480
+No amount of data is going
+to convince you otherwise.
+
+00:46:30.480 --> 00:46:33.580
+This is why whenever you do
+this kind of Bayesian Updating,
+
+00:46:33.580 --> 00:46:37.620
+it's generally best to leave
+a little bit of possibility
+
+00:46:37.620 --> 00:46:39.580
+for Santa Claus, OK.
+
+00:46:39.580 --> 00:46:41.300
+Like a little bit.
+
+00:46:41.300 --> 00:46:46.040
+Just so that, should a fat
+white man come down your chimney
+
+00:46:46.040 --> 00:46:48.170
+and deliver the
+presents one year,
+
+00:46:48.170 --> 00:46:52.300
+you have a
+possibility to adjust.
+
+00:46:52.300 --> 00:46:55.340
+So those are some
+things to keep in mind.
+
+00:46:55.340 --> 00:46:57.770
+I think we've got one
+more board question
+
+00:46:57.770 --> 00:46:59.860
+that Jerry's going to lead.
+
+00:46:59.860 --> 00:47:05.080
+PROFESSOR: Right, so it's
+nice to get probabilities
+
+00:47:05.080 --> 00:47:08.110
+for hypotheses, but one
+thing you also want to do
+
+00:47:08.110 --> 00:47:10.850
+is predict what's
+going to come next.
+
+00:47:10.850 --> 00:47:15.320
+And so that's what we call
+probabilistic prediction.
+
+00:47:15.320 --> 00:47:19.870
+If I pick one of the John's 5
+die, and I'm about to roll it,
+
+00:47:19.870 --> 00:47:23.200
+you could tell me using the
+Law of Total Probability
+
+00:47:23.200 --> 00:47:27.740
+the probability that I get a 5.
+
+00:47:27.740 --> 00:47:30.530
+And we've done that, we
+did that in the first unit
+
+00:47:30.530 --> 00:47:32.890
+on probability in this class.
+
+00:47:32.890 --> 00:47:37.960
+But suppose he rolls a 5 first.
+
+00:47:37.960 --> 00:47:41.650
+Now I can update my
+probabilities for which
+
+00:47:41.650 --> 00:47:43.200
+die it is, which
+is going to update
+
+00:47:43.200 --> 00:47:48.200
+my estimation of the
+probability of rolling, say a 4
+
+00:47:48.200 --> 00:47:49.779
+on the next roll.
+
+00:47:49.779 --> 00:47:51.820
+This is what we'll call
+probabilistic prediction.
+
+00:47:51.820 --> 00:47:54.240
+We can predict what's
+going to happen next,
+
+00:47:54.240 --> 00:47:59.104
+at least with probabilities,
+based on the data
+
+00:47:59.104 --> 00:47:59.770
+that we've seen.
+
+00:47:59.770 --> 00:48:03.660
+We update our predictions
+based on that.
+
+00:48:03.660 --> 00:48:05.220
+So here's a set up.
+
+00:48:05.220 --> 00:48:06.510
+D_1 is the first roll.
+
+00:48:06.510 --> 00:48:07.380
+D_2 is the second.
+
+00:48:10.840 --> 00:48:12.202
+I'll do this example.
+
+00:48:12.202 --> 00:48:13.410
+Oh no, this a board question.
+
+00:48:13.410 --> 00:48:15.280
+You're going to do this.
+
+00:48:15.280 --> 00:48:16.430
+You're on your own here.
+
+00:48:16.430 --> 00:48:18.860
+So first, you
+don't know anything
+
+00:48:18.860 --> 00:48:23.510
+about the die except that 1
+of the 5 was chosen at random.
+
+00:48:23.510 --> 00:48:27.320
+What's the probability that
+the first roll will be a 5?
+
+00:48:27.320 --> 00:48:31.690
+Now you've rolled that once,
+and you're going to roll again.
+
+00:48:31.690 --> 00:48:34.030
+And you can ask, well
+now I've seen some data.
+
+00:48:34.030 --> 00:48:38.350
+I have some information
+about which die was chosen.
+
+00:48:38.350 --> 00:48:41.810
+What's the probability that
+I'll see a 4 on the next die.
+
+00:48:41.810 --> 00:48:45.280
+So that's your job to find
+that for this problem.
+
+00:48:52.368 --> 00:48:54.826
+PROFESSOR 2: Cool, all right,
+so this is your first answer?
+
+00:48:54.826 --> 00:48:55.492
+AUDIENCE: Right.
+
+00:48:55.492 --> 00:48:58.810
+And then, now we're
+just multiplying across.
+
+00:48:58.810 --> 00:49:01.798
+You get 0.
+
+00:49:01.798 --> 00:49:14.248
+1 over 180, 1 over 320,
+1 over 740, [INAUDIBLE].
+
+00:49:14.248 --> 00:49:19.726
+And then add those up.
+
+00:49:19.726 --> 00:49:22.150
+PROFESSOR 2: Yeah, get
+out your calculator.
+
+00:49:22.150 --> 00:49:23.775
+What are you dividing
+by to normalize?
+
+00:49:23.775 --> 00:49:25.397
+AUDIENCE: Is this--
+I don't know.
+
+00:49:25.397 --> 00:49:26.480
+PROFESSOR 2: That's right.
+
+00:49:26.480 --> 00:49:31.190
+So this is, when you add these
+up, exactly the probability
+
+00:49:31.190 --> 00:49:32.249
+of the 5, right?
+
+00:49:32.249 --> 00:49:34.040
+So now, if you want to
+repeat this process,
+
+00:49:34.040 --> 00:49:36.920
+you need to use your
+normalized posterior instead
+
+00:49:36.920 --> 00:49:37.920
+of the original prior.
+
+00:49:37.920 --> 00:49:38.826
+AUDIENCE: That's what we were--
+
+00:49:38.826 --> 00:49:39.732
+PROFESSOR 2: Yeah.
+
+00:49:39.732 --> 00:49:41.550
+Great.
+
+00:49:41.550 --> 00:49:43.100
+Now, you just need
+to do division.
+
+00:49:43.100 --> 00:49:46.140
+That I can't help you with.
+
+00:49:46.140 --> 00:49:48.780
+Calculator.
+
+00:49:48.780 --> 00:49:50.226
+Division skills, either way.
+
+00:49:58.207 --> 00:49:59.040
+[INTERPOSING VOICES]
+
+00:50:13.597 --> 00:50:15.555
+PROFESSOR 2: Now, is this
+the probability of 4,
+
+00:50:15.555 --> 00:50:18.184
+or the probability of 4 given 5?
+
+00:50:18.184 --> 00:50:18.725
+That's right.
+
+00:50:21.350 --> 00:50:25.700
+So tell me what you
+did to get these.
+
+00:50:25.700 --> 00:50:28.676
+AUDIENCE: So this
+column [INAUDIBLE]
+
+00:50:28.676 --> 00:50:31.156
+which we calculated
+for, and then you
+
+00:50:31.156 --> 00:50:34.628
+sum it up to get the total
+probability of getting a 5.
+
+00:50:34.628 --> 00:50:36.116
+And then [INAUDIBLE]
+normalized it,
+
+00:50:36.116 --> 00:50:40.100
+and then took the new
+[INAUDIBLE] times the same--
+
+00:50:40.100 --> 00:50:41.475
+PROFESSOR 2: The
+same likelihood.
+
+00:50:41.475 --> 00:50:43.183
+AUDIENCE: And then
+you get the new column
+
+00:50:43.183 --> 00:50:44.265
+and then you add it up.
+
+00:50:44.265 --> 00:50:46.425
+[INAUDIBLE]
+
+00:50:46.425 --> 00:50:47.300
+PROFESSOR 2: Perfect.
+
+00:50:47.300 --> 00:50:49.832
+Now you said, just for the
+heck of it you normalized it,
+
+00:50:49.832 --> 00:50:52.040
+but it's actually really
+important that you normalize
+
+00:50:52.040 --> 00:50:54.060
+it, because if you're going
+to use the Law of Total
+
+00:50:54.060 --> 00:50:55.640
+Probability again,
+right, you've got
+
+00:50:55.640 --> 00:50:58.170
+to be working with a probability
+mass function, something
+
+00:50:58.170 --> 00:50:59.362
+that adds to 1 here.
+
+00:50:59.362 --> 00:51:01.320
+If you didn't normalize,
+then your final answer
+
+00:51:01.320 --> 00:51:03.300
+would get multiplied
+by something, right?
+
+00:51:03.300 --> 00:51:05.220
+Whatever that
+normalization constant was,
+
+00:51:05.220 --> 00:51:05.710
+or its reciprocal.
+
+00:51:05.710 --> 00:51:06.210
+Perfect.
+
+00:51:12.955 --> 00:51:13.830
+Check these guys out.
+
+00:51:20.110 --> 00:51:23.617
+PROFESSOR: And this right
+here is not a probability,
+
+00:51:23.617 --> 00:51:24.700
+because it's unnormalized.
+
+00:51:24.700 --> 00:51:26.670
+So what should you
+normalize this by?
+
+00:51:26.670 --> 00:51:29.230
+AUDIENCE: [INAUDIBLE]
+
+00:51:29.230 --> 00:51:29.920
+PROFESSOR: Yeah.
+
+00:51:29.920 --> 00:51:32.410
+In other words, if you made a
+normalized probability here,
+
+00:51:32.410 --> 00:51:34.810
+it would be this divided by
+that, this divided by that.
+
+00:51:34.810 --> 00:51:36.010
+AUDIENCE: So all we need
+to do is divide this--
+
+00:51:36.010 --> 00:51:37.051
+PROFESSOR: Exactly right.
+
+00:51:54.042 --> 00:51:55.208
+PROFESSOR 2: How's it going?
+
+00:51:55.208 --> 00:51:57.580
+AUDIENCE: It's going fine.
+
+00:51:57.580 --> 00:51:58.587
+So we're just saying--
+
+00:51:58.587 --> 00:51:59.420
+[INTERPOSING VOICES]
+
+00:52:17.379 --> 00:52:19.170
+PROFESSOR 2: So, what
+did you get for this?
+
+00:52:19.170 --> 00:52:20.490
+How did you find it?
+
+00:52:20.490 --> 00:52:23.480
+So you summed up this, right?
+
+00:52:23.480 --> 00:52:26.189
+Great, and then what
+did you do next?
+
+00:52:26.189 --> 00:52:27.730
+AUDIENCE: We do the
+same thing for 4.
+
+00:52:27.730 --> 00:52:29.354
+PROFESSOR 2: So,
+starting from scratch.
+
+00:52:29.354 --> 00:52:31.940
+AUDIENCE: Yeah, starting
+from scratch if you roll a 4.
+
+00:52:31.940 --> 00:52:32.800
+AUDIENCE: OK.
+
+00:52:32.800 --> 00:52:38.840
+So how does that incorporate the
+fact that you first rolled a 5?
+
+00:52:38.840 --> 00:52:41.429
+AUDIENCE: So we're trying to
+go back to the original Bayes,
+
+00:52:41.429 --> 00:52:43.470
+but that didn't work out
+so well because we don't
+
+00:52:43.470 --> 00:52:44.677
+know how to calculate this.
+
+00:52:44.677 --> 00:52:46.010
+PROFESSOR 2: Exactly, all right.
+
+00:52:46.010 --> 00:52:47.990
+So this is no easier than that.
+
+00:52:47.990 --> 00:52:54.230
+So here's the idea: so you
+start with this belief, right?
+
+00:52:54.230 --> 00:52:55.660
+And you have your likelihood.
+
+00:52:55.660 --> 00:52:57.493
+You multiply them, Law
+of Total Probability,
+
+00:52:57.493 --> 00:52:59.850
+and you get the
+probability of rolling a 5.
+
+00:52:59.850 --> 00:53:03.070
+Now at that point, after
+you've rolled this 5,
+
+00:53:03.070 --> 00:53:05.070
+your beliefs have
+changed, based on that,
+
+00:53:05.070 --> 00:53:08.370
+about the probability that
+you have each of the 5 dice.
+
+00:53:08.370 --> 00:53:12.500
+So if we take that and
+you use that as your prior
+
+00:53:12.500 --> 00:53:16.320
+here, then the likelihood,
+multiply and sum,
+
+00:53:16.320 --> 00:53:18.304
+that should give you--
+
+00:53:18.304 --> 00:53:19.220
+AUDIENCE: I like that.
+
+00:53:19.220 --> 00:53:20.130
+PROFESSOR 2: OK?
+
+00:53:20.130 --> 00:53:21.857
+AUDIENCE: Oh, but
+now we have decimals.
+
+00:53:21.857 --> 00:53:23.190
+AUDIENCE: Now you have decimals.
+
+00:53:23.190 --> 00:53:24.555
+I can't make your life too easy.
+
+00:53:31.093 --> 00:53:31.926
+AUDIENCE: Use these.
+
+00:53:35.430 --> 00:53:38.010
+PROFESSOR: Right, so
+you multiply this number
+
+00:53:38.010 --> 00:53:39.984
+by this, this number by this.
+
+00:53:39.984 --> 00:53:41.900
+So in the end, you'll
+get all of these numbers
+
+00:53:41.900 --> 00:53:44.440
+except they're all
+multiplied by, divided by.
+
+00:53:44.440 --> 00:53:48.540
+So you should divide this
+by-- to get a probability.
+
+00:53:48.540 --> 00:53:50.940
+That make sense?
+
+00:53:50.940 --> 00:53:55.010
+So you have to be
+careful for figuring out
+
+00:53:55.010 --> 00:53:57.420
+probabilities of
+hypotheses, we can
+
+00:53:57.420 --> 00:53:59.760
+avoid using the unnormalized.
+
+00:53:59.760 --> 00:54:01.450
+We don't have to
+keep normalizing.
+
+00:54:01.450 --> 00:54:03.890
+But when you want to do
+posterior prediction,
+
+00:54:03.890 --> 00:54:07.280
+you want real
+probabilities of data.
+
+00:54:07.280 --> 00:54:09.280
+So you're going to
+have to normalize
+
+00:54:09.280 --> 00:54:11.700
+these numbers at some point.
+
+00:54:11.700 --> 00:54:13.384
+Either first or at the end.
+
+00:54:13.384 --> 00:54:15.300
+It's probably, if you're
+going to do it a lot,
+
+00:54:15.300 --> 00:54:16.345
+easier to just keep doing it.
+
+00:54:16.345 --> 00:54:17.220
+AUDIENCE: OK, Thanks.
+
+00:54:30.700 --> 00:54:32.182
+AUDIENCE: How are we doing?
+
+00:54:32.182 --> 00:54:33.140
+PROFESSOR: You tell me.
+
+00:54:36.090 --> 00:54:37.520
+It's a beautiful use of color.
+
+00:54:40.339 --> 00:54:41.172
+[INTERPOSING VOICES]
+
+00:54:48.735 --> 00:54:50.860
+PROFESSOR: So is this
+normalized or not normalized?
+
+00:54:50.860 --> 00:54:51.980
+AUDIENCE: This is normalized.
+
+00:54:51.980 --> 00:54:52.896
+PROFESSOR: Normalized.
+
+00:54:52.896 --> 00:54:54.960
+Good, because you want
+real probabilities there.
+
+00:54:54.960 --> 00:54:55.670
+Yes, thank you.
+
+00:54:55.670 --> 00:54:56.545
+AUDIENCE: [INAUDIBLE]
+
+00:54:59.553 --> 00:55:00.928
+AUDIENCE: And so
+then we multiply
+
+00:55:00.928 --> 00:55:03.400
+by what are the likelihoods.
+
+00:55:03.400 --> 00:55:04.234
+PROFESSOR: Yeah.
+
+00:55:04.234 --> 00:55:06.646
+AUDIENCE: [INAUDIBLE]
+
+00:55:06.646 --> 00:55:08.520
+PROFESSOR: And now you're
+going to sum it up.
+
+00:55:08.520 --> 00:55:09.452
+AUDIENCE: Yeah.
+
+00:55:09.452 --> 00:55:10.850
+PROFESSOR: That's perfect.
+
+00:55:10.850 --> 00:55:12.222
+AUDIENCE: Way to go Caitlin!
+
+00:55:12.222 --> 00:55:13.680
+PROFESSOR: Because
+the Law of Total
+
+00:55:13.680 --> 00:55:16.044
+Probabilities says
+multiply this by this.
+
+00:55:16.044 --> 00:55:17.710
+That's just what you
+did with the trees,
+
+00:55:17.710 --> 00:55:19.460
+do you see the trees
+when I wave my hands?
+
+00:55:24.452 --> 00:55:24.952
+Beautiful.
+
+00:55:24.952 --> 00:55:25.827
+AUDIENCE: [INAUDIBLE]
+
+00:55:32.182 --> 00:55:34.700
+AUDIENCE: Our new prior is
+given the data we had before.
+
+00:55:34.700 --> 00:55:35.325
+PROFESSOR: Yes.
+
+00:55:40.210 --> 00:55:42.182
+That's good.
+
+00:55:42.182 --> 00:55:44.880
+PROFESSOR 2: You're
+adding them up?
+
+00:55:44.880 --> 00:55:46.170
+OK, so that looks right.
+
+00:55:49.050 --> 00:55:51.530
+So let's think, how
+does this number
+
+00:55:51.530 --> 00:55:53.900
+compare to what you
+would have, if you didn't
+
+00:55:53.900 --> 00:55:55.230
+know this other information?
+
+00:55:55.230 --> 00:55:59.250
+So suppose you knew
+nothing going in,
+
+00:55:59.250 --> 00:56:03.169
+do you think that the fact that
+you rolled a 5 the first time
+
+00:56:03.169 --> 00:56:04.710
+makes it more or
+less likely that you
+
+00:56:04.710 --> 00:56:05.840
+roll a 4 the second time.
+
+00:56:05.840 --> 00:56:07.329
+AUDIENCE: It should
+be less likely.
+
+00:56:07.329 --> 00:56:08.620
+PROFESSOR 2: Is it less likely?
+
+00:56:08.620 --> 00:56:10.580
+AUDIENCE: Because you
+get rid of the 4--
+
+00:56:10.580 --> 00:56:13.280
+the die has only 4 sides.
+
+00:56:13.280 --> 00:56:15.370
+PROFESSOR 2: So it might
+make you go down, right?
+
+00:56:15.370 --> 00:56:17.703
+On the other hand, you're
+going to give more probability
+
+00:56:17.703 --> 00:56:20.660
+to the 6-sided, let's say
+that, than it had originally.
+
+00:56:20.660 --> 00:56:22.160
+So they're sort of
+competing forces.
+
+00:56:22.160 --> 00:56:23.201
+So I'm actually not sure.
+
+00:56:23.201 --> 00:56:25.239
+I'm not actually sure
+which is the right answer.
+
+00:56:25.239 --> 00:56:27.697
+But anyway, it's something you
+can easily check or compute.
+
+00:56:30.704 --> 00:56:32.120
+PROFESSOR: This
+is a standard day.
+
+00:56:32.120 --> 00:56:33.880
+We always finish ahead of time.
+
+00:56:38.480 --> 00:56:40.055
+I don't need that right here.
+
+00:56:46.020 --> 00:56:48.350
+Like with all the other
+answers today, we'll
+
+00:56:48.350 --> 00:56:52.130
+use the screens
+to show the table.
+
+00:56:54.850 --> 00:56:58.540
+So when we go through it, we do
+the usual thing we did before.
+
+00:56:58.540 --> 00:57:02.030
+We started with a
+5, so we'll update
+
+00:57:02.030 --> 00:57:05.860
+our probabilities of the
+hypotheses based on that 5.
+
+00:57:05.860 --> 00:57:08.970
+So that's the first
+column is the prior, then
+
+00:57:08.970 --> 00:57:12.260
+the likelihood of
+getting a 5, which
+
+00:57:12.260 --> 00:57:16.850
+is 0, if you have the 4-sided
+die, 1/6, 1/8, 1/12, and 1/20.
+
+00:57:16.850 --> 00:57:18.810
+We get our
+unnormalized posterior.
+
+00:57:18.810 --> 00:57:20.580
+And then in this
+table, I actually
+
+00:57:20.580 --> 00:57:22.480
+got the normalized
+posterior, because when
+
+00:57:22.480 --> 00:57:25.570
+you're computing
+predictive probabilities,
+
+00:57:25.570 --> 00:57:27.790
+you need to use
+normalized probabilities.
+
+00:57:27.790 --> 00:57:30.430
+They should be
+true probabilities.
+
+00:57:30.430 --> 00:57:35.750
+So we use this column here
+of the posterior probability.
+
+00:57:35.750 --> 00:57:38.160
+There's different orders you
+could do this calculation.
+
+00:57:38.160 --> 00:57:42.700
+I think this is one of
+the straightforward ones.
+
+00:57:42.700 --> 00:57:50.400
+Then we look at the likelihood
+of D_2 in the next column.
+
+00:57:50.400 --> 00:57:52.500
+Now I put a star for
+H_4 because there's
+
+00:57:52.500 --> 00:57:56.990
+no way you could get
+a probability there
+
+00:57:56.990 --> 00:57:59.180
+if you have D_1 and D_2.
+
+00:57:59.180 --> 00:58:01.880
+If I had left off the
+D_1, which most people did
+
+00:58:01.880 --> 00:58:04.580
+and which is OK because
+of the independence
+
+00:58:04.580 --> 00:58:07.100
+John talked about--
+given the hypothesis
+
+00:58:07.100 --> 00:58:09.220
+the rolls are independent--
+I would have had
+
+00:58:09.220 --> 00:58:11.230
+a 1/4 where I have the star.
+
+00:58:11.230 --> 00:58:14.990
+But I'm going to multiply it
+by 0 anyway, so who cares.
+
+00:58:14.990 --> 00:58:19.580
+So I have my new
+priors-- excuse me,
+
+00:58:19.580 --> 00:58:23.210
+my new likelihoods for
+the second bit of data,
+
+00:58:23.210 --> 00:58:27.060
+which are the same as the old
+ones: 1/6, 1/8, 1/12, 1/20.
+
+00:58:27.060 --> 00:58:30.000
+Now my total probability
+is done the same way.
+
+00:58:30.000 --> 00:58:33.200
+You multiply in this
+new language posterior
+
+00:58:33.200 --> 00:58:37.610
+1, which is your prior
+for likelihood 2,
+
+00:58:37.610 --> 00:58:42.810
+times likelihood 2 and sum them
+up, and I get this last column.
+
+00:58:47.720 --> 00:58:51.730
+So again, once I have
+my new, my posterior
+
+00:58:51.730 --> 00:58:53.470
+for the first bit
+of data, I can use
+
+00:58:53.470 --> 00:58:56.210
+that in the Law of
+Total Probability
+
+00:58:56.210 --> 00:58:57.751
+to make a prediction.
+
+00:58:57.751 --> 00:58:59.000
+So what's happened right here?
+
+00:58:59.000 --> 00:59:00.230
+What's become more likely?
+
+00:59:05.120 --> 00:59:10.240
+This 0.124 seems a
+little bit larger
+
+00:59:10.240 --> 00:59:12.460
+than I would have
+guessed ahead of time.
+
+00:59:15.790 --> 00:59:18.016
+What's happened with
+rolling a 5 and then a 4
+
+00:59:18.016 --> 00:59:19.390
+to make that a
+little bit bigger?
+
+00:59:25.620 --> 00:59:26.120
+Any ideas?
+
+00:59:33.700 --> 00:59:35.340
+AUDIENCE: When you
+roll a 5 first,
+
+00:59:35.340 --> 00:59:37.252
+it increases the
+probability that it's
+
+00:59:37.252 --> 00:59:38.836
+one of the lower dice.
+
+00:59:38.836 --> 00:59:39.710
+PROFESSOR: Excellent.
+
+00:59:39.710 --> 00:59:41.578
+AUDIENCE: So then it
+makes it more likely
+
+00:59:41.578 --> 00:59:42.925
+that you'll get a 4.
+
+00:59:42.925 --> 00:59:43.800
+PROFESSOR: Excellent.
+
+00:59:43.800 --> 00:59:45.850
+That's what I would think too.
+
+00:59:45.850 --> 00:59:48.400
+Seeing a 5-- a 4,
+what did roll first?
+
+00:59:48.400 --> 00:59:51.820
+The 5-- makes the
+smaller die more likely.
+
+00:59:51.820 --> 00:59:53.540
+If the smaller die
+is more likely,
+
+00:59:53.540 --> 00:59:57.170
+then you're more likely
+to roll a 4 and a 5.
+
+00:59:57.170 --> 01:00:00.780
+For instance, if I
+had the 6-sided die,
+
+01:00:00.780 --> 01:00:02.960
+what's the probability
+I'd roll a 4 and a 5
+
+01:00:02.960 --> 01:00:04.150
+with the 6-sided die?
+
+01:00:07.520 --> 01:00:11.030
+1 in 36 which is about 3%.
+
+01:00:11.030 --> 01:00:13.010
+So this doesn't get
+up to 3%, but it's
+
+01:00:13.010 --> 01:00:15.610
+a little bigger than
+if I had the 20-sided
+
+01:00:15.610 --> 01:00:19.045
+die where it would
+be-- what's 1/400.
+
+01:00:19.045 --> 01:00:20.380
+PROFESSOR 2: Very small.
+
+01:00:20.380 --> 01:00:23.030
+PROFESSOR: Small,
+John says it's small.
+
+01:00:23.030 --> 01:00:25.580
+PROFESSOR 2: So, this is one
+argument you can make, right?
+
+01:00:25.580 --> 01:00:30.470
+That rolling the 5 makes it
+likely that it's a smaller die,
+
+01:00:30.470 --> 01:00:32.290
+and therefore more
+likely to roll a 4 next.
+
+01:00:32.290 --> 01:00:34.380
+But is there
+another argument you
+
+01:00:34.380 --> 01:00:37.009
+can make for why
+maybe rolling the 5
+
+01:00:37.009 --> 01:00:38.300
+would have the opposite effect?
+
+01:00:38.300 --> 01:00:42.910
+It might make it less
+likely to roll a 4 next?
+
+01:00:42.910 --> 01:00:45.776
+AUDIENCE: My initial
+thought was if you roll a 5,
+
+01:00:45.776 --> 01:00:47.950
+you know it's not
+the 4-sided die.
+
+01:00:47.950 --> 01:00:52.207
+And that's your die that
+you're most likely to roll a 4.
+
+01:00:52.207 --> 01:00:53.290
+PROFESSOR 2: That's right.
+
+01:00:53.290 --> 01:00:56.880
+So I'm not as sure as you as to
+whether this goes up or down.
+
+01:00:56.880 --> 01:00:59.680
+I think there are two
+competing arguments.
+
+01:00:59.680 --> 01:01:02.190
+That on the one hand,
+it makes it more likely
+
+01:01:02.190 --> 01:01:05.150
+it's a 6 or 8-sided, but it also
+makes it completely impossible
+
+01:01:05.150 --> 01:01:06.005
+that it's a 4-sided.
+
+01:01:06.005 --> 01:01:08.213
+PROFESSOR: I'll give you 3
+to 1 odds that it goes up.
+
+01:01:08.213 --> 01:01:09.834
+PROFESSOR 2: Aw crap.
+
+01:01:09.834 --> 01:01:11.250
+PROFESSOR: So what
+he doesn't know
+
+01:01:11.250 --> 01:01:13.550
+is whether I've computed
+it already or not.
+
+01:01:13.550 --> 01:01:15.770
+PROFESSOR 2: He probably has.
+
+01:01:15.770 --> 01:01:18.730
+But he probably did it at like
+3 AM, so I don't trust it.
+
+01:01:18.730 --> 01:01:20.530
+PROFESSOR: I simulated it in R.
+
+01:01:20.530 --> 01:01:22.460
+PROFESSOR 2: I see.
+
+01:01:22.460 --> 01:01:23.869
+Are there any questions?
+
+01:01:23.869 --> 01:01:25.660
+That's what we have
+for today, so are there
+
+01:01:25.660 --> 01:01:27.340
+any questions about
+Bayesian Updating
+
+01:01:27.340 --> 01:01:28.506
+or doing these computations?
+
+01:01:32.190 --> 01:01:34.240
+All right, great.

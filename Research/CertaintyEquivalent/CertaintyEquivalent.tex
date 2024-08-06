@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\textbf{Theorem:} More risk-averse investors will have a lower certainty equivalent for a given risky investment, while less risk-averse investors will have a higher certainty equivalent, assuming a CRRA utility function.
+
+\textbf{Proof:}
+The CRRA utility function is given by:
+\begin{equation}
+U(W) = 
+\begin{cases}
+\frac{W^{1-\gamma}}{1-\gamma}, & \text{for } \gamma \neq 1 \\
+\ln(W), & \text{for } \gamma = 1
+\end{cases}
+\end{equation}
+where $W$ is wealth, and $\gamma$ is the coefficient of relative risk aversion. A higher $\gamma$ indicates higher risk aversion.
+
+Consider a risky investment with two possible outcomes: $W_1$ with probability $p$, and $W_2$ with probability $(1-p)$. The expected utility of this investment is:
+\begin{equation}
+\mathbb{E}[U(W)] = p \cdot U(W_1) + (1-p) \cdot U(W_2)
+\end{equation}
+
+The certainty equivalent (CE) is the guaranteed wealth level that provides the same utility as the expected utility of the risky investment. Mathematically:
+\begin{equation}
+U(CE) = \mathbb{E}[U(W)]
+\end{equation}
+
+Step 1: Express CE in terms of the utility function.
+\begin{equation}
+U(CE) = \mathbb{E}[U(W)] \Rightarrow CE = U^{-1}(\mathbb{E}[U(W)])
+\end{equation}
+Reason: By definition, the certainty equivalent provides the same utility as the expected utility of the risky investment.
+
+Step 2: Apply the CRRA utility function for $\gamma \neq 1$.
+\begin{equation}
+\frac{CE^{1-\gamma}}{1-\gamma} = p \cdot \frac{W_1^{1-\gamma}}{1-\gamma} + (1-p) \cdot \frac{W_2^{1-\gamma}}{1-\gamma}
+\end{equation}
+Reason: Substitute the CRRA utility function into the equation from Step 1.
+
+Step 3: Take the derivative of CE with respect to $\gamma$.
+\begin{align}
+\frac{\partial CE}{\partial \gamma} &= \frac{1}{CE^\gamma} \cdot \frac{\partial}{\partial \gamma}\left[p \cdot W_1^{1-\gamma} + (1-p) \cdot W_2^{1-\gamma}\right] \\
+&= \frac{1}{CE^\gamma} \cdot \left[-p \cdot W_1^{1-\gamma} \cdot \ln(W_1) - (1-p) \cdot W_2^{1-\gamma} \cdot \ln(W_2)\right]
+\end{align}
+Reason: To determine how the certainty equivalent changes with risk aversion, we take the derivative of CE with respect to $\gamma$.
+
+Step 4: Analyze the sign of $\frac{\partial CE}{\partial \gamma}$.
+Since $W_1$, $W_2$, $p$, and $(1-p)$ are all positive, and $\ln(W_1)$ and $\ln(W_2)$ are real numbers, the term inside the square brackets is always negative. Additionally, $\frac{1}{CE^\gamma}$ is always positive. Therefore, $\frac{\partial CE}{\partial \gamma}$ is always negative.
+
+Reason: The sign of the derivative determines whether the certainty equivalent increases or decreases with risk aversion.
+
+\textbf{Conclusion:} As $\frac{\partial CE}{\partial \gamma} < 0$, an increase in $\gamma$ (i.e., an increase in risk aversion) leads to a decrease in the certainty equivalent (CE). Conversely, a decrease in $\gamma$ (i.e., a decrease in risk aversion) leads to an increase in the certainty equivalent (CE). This proves that more risk-averse investors will have a lower certainty equivalent for a given risky investment, while less risk-averse investors will have a higher certainty equivalent, assuming a CRRA utility function.
+
+\end{document}

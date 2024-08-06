@@ -1,0 +1,34 @@
+SLIDE 1
+
+The optimal portfolio is a theoretical construct that offers the  highest expected return for a given level of risk, or the lowest risk for a given level of expected return. It's the "best" portfolio you can have based on your risk-return preferences.
+
+A stochastic discount factor is a bit more complex. It is also a theoretical construct. It's literally a discount factor that is stochastic or random -- it varies with different states.
+
+So what this statement means is that the assets in the optimal portfolio are priced correctly when their expected returns discounted by the SDF, equal their current prices.
+
+
+SLIDE 2
+
+Their approach is a regularization of the left-hand side of the predictability problem - "which factors are predictable?" - rather than the right-hand side - "which variables are useful predictors?". Use only the book-to-market ratio of each portfolio as a measure to predict its returns.
+
+
+SLIDE 3
+
+They construct the portfolios as follows. 
+	- Use the universe of CRSP and Compustat stocks and sort them into ten value-weighted portfolios for each of the fifty characteristics studied in Kozak et al. (2020). 
+	- Portfolios include all NYSE, AMEX, and NASDAQ firms; however, the breakpoints use only NYSE firms as in Fama and French (2016). 
+	- Sample consists of monthly returns from January 1974 to December 2017.
+
+The book-to-market ratio, bm, of a portfolio is defined as the sum of book equity relative to the total market capitalization of all firms in that portfolio. Equivalently, it is the market-capitalization weighted average of individual stocks’ bm ratios.
+
+
+SLIDE 4
+
+...
+
+
+SLIDE 5
+
+Their internet appendix has details on the derivation of this formula and on how the five PCs fulfill this criterion.
+
+

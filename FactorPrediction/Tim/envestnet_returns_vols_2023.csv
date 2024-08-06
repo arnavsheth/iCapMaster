@@ -1,0 +1,56 @@
+﻿Asset Class,Expected Return (%),Annualized Risk (%)
+All Cap,6.85%,15.61%
+Alternative,5.95%,5.36%
+Alternative Fixed Income,5.20%,3.24%
+Asset Allocated,5.72%,9.59%
+Balanced,5.72%,9.59%
+Bank Loan,6.36%,6.30%
+Bear Market,-5.88%,16.93%
+Cash,3.71%,0.60%
+Commodity,4.90%,16.02%
+Emerging-Markets Bond,5.34%,9.32%
+Equity Market Neutral,2.45%,3.89%
+Event Driven,5.76%,5.92%
+Foreign Large Cap Core,7.59%,16.89%
+Foreign Large Cap Growth,7.46%,16.94%
+Foreign Large Cap Value,7.73%,17.71%
+Foreign Small Mid Cap Core,7.67%,17.09%
+Foreign Small Mid Cap Growth,7.61%,17.88%
+Foreign Small Mid Cap Value,7.73%,17.35%
+Global Equity,7.06%,15.10%
+Global Macro,6.06%,6.87%
+Hedged Equity,6.82%,7.28%
+High Yield,5.82%,7.92%
+Inflation-Protected Bond,3.68%,5.61%
+International Developed Mkts,7.61%,16.79%
+International Emerging Mkts,8.69%,21.75%
+Intermediate Bond,4.05%,3.12%
+Intermediate Muni,2.85%,3.49%
+International Bond,3.78%,7.70%
+Inverse,N/A,24.59%
+Large-Cap Core,6.83%,15.46%
+Large-Cap Growth,6.74%,17.04%
+Large-Cap Value,6.91%,15.19%
+Leveraged,N/A,31.34%
+Long Bond,4.32%,9.76%
+Long Muni,2.85%,3.99%
+Long/Short Credit,6.83%,5.06%
+Managed Futures,5.54%,3.98%
+Mid-Cap Core,7.07%,17.13%
+Mid-Cap Growth,7.01%,20.27%
+Mid-Cap Value,7.10%,16.42%
+Multi-Strategy,5.62%,5.20%
+Private Credit,8.26%,9.67%
+Private Equity,9.99%,14.49%
+Private Real Estate,6.34%,7.34%
+Other,5.72%,9.59%
+REITs,6.80%,17.03%
+Short Bond,3.80%,1.46%
+Short Muni,2.80%,1.86%
+Small-Cap Core,7.09%,19.96%
+Small-Cap Growth,6.97%,22.76%
+Small-Cap Value,7.22%,18.21%
+Structured – Minimal Market Sensitivity,3.80%,1.46%
+Structured – Low Market Sensitivity,5.82%,7.92%
+Structured – Medium Market Sensitivity,5.72%,9.59%
+Structured – High Market Sensitivity,7.06%,15.10%

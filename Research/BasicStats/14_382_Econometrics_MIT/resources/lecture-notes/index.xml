@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lecture Notes on MIT OpenCourseWare</title>
+    <link>/resources/lecture-notes/</link>
+    <description>Recent content in Lecture Notes on MIT OpenCourseWare</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/resources/lecture-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>14.382 Spring 2017 Lecture 1: Least Squares, Adaptive Partialling Out, Simultaneous Inference</title>
+      <link>/resources/mit14_382s17_lec1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec1/data.json</guid>
+      <description>This file contains information regarding lecture notes 1.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 10: Nonlinear Panel Data</title>
+      <link>/resources/mit14_382s17_lec10/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec10/data.json</guid>
+      <description>This file contains information regarding lecture notes 10.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 11: Inference for High-Dimensional Sparse Econometric Models</title>
+      <link>/resources/mit14_382s17_lec11/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec11/data.json</guid>
+      <description>This file contains information regarding lecture notes 11.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 12: Treatment Effects</title>
+      <link>/resources/mit14_382s17_lec12/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec12/data.json</guid>
+      <description>This file contains information regarding lecture notes 12.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 2: Structural Equations Models and IV, Take 1</title>
+      <link>/resources/mit14_382s17_lec2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec2/data.json</guid>
+      <description>This file contains information regarding lecture notes 2.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 3: Structural Equations Models and GMM</title>
+      <link>/resources/mit14_382s17_lec3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec3/data.json</guid>
+      <description>This file contains information regarding lecture notes 3.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 4: Euler Equations, Nonlinear GMM, and Other Adventures</title>
+      <link>/resources/mit14_382s17_lec4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec4/data.json</guid>
+      <description>This file contains information regarding lecture notes 4.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 5: Bootstrapping</title>
+      <link>/resources/mit14_382s17_lec5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec5/data.json</guid>
+      <description>This file contains information regarding lecture notes 5.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 7: Distribution Regression and Counterfactual Analysis</title>
+      <link>/resources/mit14_382s17_lec7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec7/data.json</guid>
+      <description>This file contains information regarding lecture notes 7.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 8: Linear Panel Data Models Under Strict and Weak Exogeneity</title>
+      <link>/resources/mit14_382s17_lec8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec8/data.json</guid>
+      <description>This file contains information regarding lecture notes 8.</description>
+    </item>
+    
+    <item>
+      <title>14.382 Spring 2017 Lecture 9: GMM Under Moderately High Dimensions</title>
+      <link>/resources/mit14_382s17_lec9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec9/data.json</guid>
+      <description>This file contains information regarding lecture notes 9.</description>
+    </item>
+    
+    <item>
+      <title>14.38Spring 2017 Lecture 6: Nonlinear and Binary Regression, Predictive Effects, and M-Estimation</title>
+      <link>/resources/mit14_382s17_lec6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit14_382s17_lec6/data.json</guid>
+      <description>This file contains information regarding lecture notes 6.</description>
+    </item>
+    
+    <item>
+      <title>401k-ATE-v3.R</title>
+      <link>/resources/401k-ate-v3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/401k-ate-v3/data.json</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>401k-QTE.R</title>
+      <link>/resources/401k-qte/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/401k-qte/data.json</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lecture Notes</title>
+      <link>/pages/lecture-notes/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/lecture-notes/data.json</guid>
+      <description>Lecture notes by Victor Chernozhukov (MIT) and Ivan Fernandez-Val (BU).
+LEC # TOPIC 1 Least Squares, Adaptive Partialling-Out, Simultaneous Inference (PDF) 2 Structural Equations Models and IV, Take 1 (PDF) 3 Structural Equations Models and GMM (PDF) 4 Euler Equations, Nonlinear GMM, and Other Adventures (PDF) 5 Bootstrapping (PDF) 6 Nonlinear and Binary Regression, Predictive Effects, and M-Estimation (PDF) 7 Distribution Regression and Counterfactual Analysis 8 Linear Panel Data Models Under Strict and Weak Exogeneity (PDF) 9 GMM Under Moderately High Dimensions (PDF) 10 Nonlinear Panel Data (PDF)</description>
+    </item>
+    
+    <item>
+      <title>R-NPA-functions-1se-union-rweight.R</title>
+      <link>/resources/r-npa-functions-1se-union-rweight/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/r-npa-functions-1se-union-rweight/data.json</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sipp1991.dta</title>
+      <link>/resources/sipp1991/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/sipp1991/data.json</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

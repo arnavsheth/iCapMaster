@@ -1,0 +1,10 @@
+\babel@toc {nil}{}\relax 
+\beamer@sectionintoc {1}{Coin Toss}{3}{0}{1}
+\beamer@sectionintoc {2}{Motivation}{4}{0}{2}
+\beamer@sectionintoc {3}{Some History}{5}{0}{3}
+\beamer@sectionintoc {4}{Frequentist Statistics}{6}{0}{4}
+\beamer@sectionintoc {5}{Bayesian Statistics}{7}{0}{5}
+\beamer@sectionintoc {6}{Advantage: Bayesians?}{9}{0}{6}
+\beamer@sectionintoc {7}{Some Examples}{10}{0}{7}
+\beamer@subsectionintoc {7}{1}{More Coin Tosses}{10}{0}{7}
+\beamer@subsectionintoc {7}{2}{Are you a vampire?}{18}{0}{7}

@@ -1,0 +1,13 @@
+The papers provide mixed evidence on private equity returns and risk. Some find private equity outperforms public markets (Ang 2014, Ang 2016, Gredil 2019), while others find underperformance or market-level returns (Driessen 2008, Driessen 2011, Jegadeesh 2009, Jegadeesh 2014).
+
+Ang (2014, 2016) develop a methodology to estimate private equity returns from limited partner cash flows. They find private equity returns are cyclical and outperform public markets, especially for buyout funds. The outperformance is partly due to capital market segmentation (Ang 2014, Ang 2016).
+
+In contrast, Driessen (2008, 2011) find no evidence of outperformance for buyout funds and underperformance for venture capital funds before and after fees. They argue that self-reported net asset values overstate the values of mature and inactive private equity funds (Driessen 2008, Driessen 2011).  
+
+Similarly, Jegadeesh (2009, 2014) estimate private equity risk and returns using market prices of publicly traded private equity funds and funds of funds. They find private equity has a market beta of one, positive exposure to the size factor, and negative exposure to credit spreads. The market expects private equity to earn returns between -0.5% and 2% per year (Jegadeesh 2009, Jegadeesh 2014).
+
+Gredil (2019) take a different approach, evaluating private equity performance using consumption-based asset pricing models. In contrast to CAPM-based studies, they find venture capital outperformed buyouts and generalists, especially in post-2000 vintages. Venture capital also provides a better hedge against consumption shocks. They argue private equity excess returns are more stable under consumption-based models (Gredil 2019).
+
+Finally, Buchner (2015) develops a public market equivalent measure to evaluate private equity performance using the CAPM and multi-factor models. Using venture capital data, they find substantial outperformance relative to public markets. Venture capital returns resemble small growth stocks and have little exposure to liquidity risk (Buchner 2015).
+
+In summary, while some studies find private equity outperforms public markets, especially for buyout and venture capital funds, others argue returns are at or below market levels. The mixed findings suggest private equity returns and risk depend on the time period, fund type, and methodology used.

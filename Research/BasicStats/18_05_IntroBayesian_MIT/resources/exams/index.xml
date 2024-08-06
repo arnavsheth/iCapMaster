@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exams on MIT OpenCourseWare</title>
+    <link>/resources/exams/</link>
+    <description>Recent content in Exams on MIT OpenCourseWare</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/resources/exams/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exam 1</title>
+      <link>/resources/mit18_05s14_exam1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam1/data.json</guid>
+      <description>This is a resource file that contains information regarding exam 1.</description>
+    </item>
+    
+    <item>
+      <title>Exam 1 Practice Questions I</title>
+      <link>/resources/mit18_05s14_prac_exam1a/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exam1a/data.json</guid>
+      <description>This is a resource file that contains information regarding exam 1 practice questions 1.</description>
+    </item>
+    
+    <item>
+      <title>Exam 1 Practice Questions II</title>
+      <link>/resources/mit18_05s14_prac_exa1b/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exa1b/data.json</guid>
+      <description>This is a resource file that contains exam 1 practice questions II.</description>
+    </item>
+    
+    <item>
+      <title>Exam 1 Practice Questions: Long List</title>
+      <link>/resources/mit18_05s14_prac_exa1_long/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exa1_long/data.json</guid>
+      <description>This is a resource file that contains information regarding long list.</description>
+    </item>
+    
+    <item>
+      <title>Exam 2</title>
+      <link>/resources/mit18_05s14_exam2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam2/data.json</guid>
+      <description>This is a resource file that contains information regarding exam 2.</description>
+    </item>
+    
+    <item>
+      <title>Exam 2 Practice Questions</title>
+      <link>/resources/mit18_05s14_prac_exam2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exam2/data.json</guid>
+      <description>This is a resource file that contains information regarding exam 2 practice questions.</description>
+    </item>
+    
+    <item>
+      <title>Exams</title>
+      <link>/pages/exams/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/exams/data.json</guid>
+      <description>Listed in the following table are practice exam questions and solutions, and the exam questions and solutions. Additional materials for exam preparation can be found under the class sessions dedicated to exam review. Students were encouraged to prepare a 4x6 inch notecard to use for reference during each exam.
+EXAMS QUESTIONS SOLUTIONS 1 Exam 1 Practice Questions I (PDF) Solutions to Exam 1 Practice Questions I (PDF) Exam 1 Practice Questions II (PDF) Solutions to Exam 1 Practice Questions II (PDF) Exam 1 Practice Questions: Long List (PDF) Solutions to Exam 1 Practice Questions: Long List (PDF) Exam 1 (PDF) Solutions to Exam 1 (PDF) 2 Exam 2 Practice Questions (PDF) Solutions to Exam 2 Practice Questions (PDF) Exam 2 (PDF) Solutions to Exam 2 (PDF) Final Final Exam Practice Questions (PDF)</description>
+    </item>
+    
+    <item>
+      <title>Final Exam</title>
+      <link>/resources/mit18_05s14_exam_final/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam_final/data.json</guid>
+      <description>This is a resource file that contains information regarding final exam.</description>
+    </item>
+    
+    <item>
+      <title>Final Exam Practice Questions</title>
+      <link>/resources/mit18_05s14_prac_fnal_exm/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_fnal_exm/data.json</guid>
+      <description>This file contains information regarding Final Exam Practice Questions.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 1</title>
+      <link>/resources/mit18_05s14_exam1_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam1_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to exam 1.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 1 Practice Questions I</title>
+      <link>/resources/mit18_05s14_prac_exa1a_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exa1a_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to exam 1 practice questions I.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 1 Practice Questions II</title>
+      <link>/resources/mit18_05s14_prac_exa1b_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exa1b_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to exam 1 practice questions II.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 1 Practice Questions: Long List</title>
+      <link>/resources/mit18_05s14_pr_ex1_lng_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_pr_ex1_lng_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding long list.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 2</title>
+      <link>/resources/mit18_05s14_exam2_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam2_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to exam 2.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Exam 2 Practice Questions</title>
+      <link>/resources/mit18_05s14_prac_exa2_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prac_exa2_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to exam 2 practice questions.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Final Exam</title>
+      <link>/resources/mit18_05s14_exam_final_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_exam_final_sol/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to final exam.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Final Exam Practice Questions</title>
+      <link>/resources/mit18_05s14_prafnl_exm_sol/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_prafnl_exm_sol/data.json</guid>
+      <description>This file contains information regarding final exam practice questions.</description>
+    </item>
+    
+  </channel>
+</rss>

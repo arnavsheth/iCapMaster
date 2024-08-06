@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Assignments on MIT OpenCourseWare</title>
+    <link>/resources/assignments/</link>
+    <description>Recent content in Assignments on MIT OpenCourseWare</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="/resources/assignments/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignments</title>
+      <link>/pages/assignments/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/data.json</guid>
+      <description>Listed in the following table are problem sets and solutions. Students in the class were able to work on the assigned problems in the PDF file, then use an interactive problem set checker to input each answer into a box and find out if the answer was correct or incorrect. Students could use the problem set checker as many times as they wanted to, and they weren’t graded on this in any way.</description>
+    </item>
+    
+    <item>
+      <title>Calculator Help</title>
+      <link>/pages/assignments/calculator-help/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/calculator-help/data.json</guid>
+      <description>problemNumber = 0; wl(&amp;quot;&amp;lt;h3&amp;gt;Calculator&amp;lt;/h3&amp;gt;&amp;quot;); writecalculator(&amp;ldquo;psetcheckcalcid&amp;rdquo;, &amp;ldquo;Calculate&amp;rdquo;); whr(kdivcol,kdivwid);
+Basic Arthmetic You can do basic calculations like: 2+3, 2-3, 2*3, 3/2, 2^3, 5*(2-6).
+Constants The calculator knows the constants pi and e.
+Functions You can use the functions sin, cos, exp, log, log10.
+Factorials Conveniently it knows factorials, e.g. 5!.
+Temporary variables You can set the value of a variable and use it later. You do this by separating multiple expressions by semicolons.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 1</title>
+      <link>/pages/assignments/problem-set-1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-1/data.json</guid>
+      <description>Problem Set 1 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 1</title>
+      <link>/resources/mit18_05s14_ps1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps1/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 1.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 2</title>
+      <link>/pages/assignments/problem-set-2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-2/data.json</guid>
+      <description>Problem Set 2 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 2</title>
+      <link>/resources/mit18_05s14_ps2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps2/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 2.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 3</title>
+      <link>/pages/assignments/problem-set-3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-3/data.json</guid>
+      <description>Problem Set 3 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 3</title>
+      <link>/resources/mit18_05s14_ps3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps3/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 3.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 4</title>
+      <link>/pages/assignments/problem-set-4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-4/data.json</guid>
+      <description>Problem Set 4 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 4</title>
+      <link>/resources/mit18_05s14_ps4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps4/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 4.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 5</title>
+      <link>/pages/assignments/problem-set-5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-5/data.json</guid>
+      <description>Problem Set 5 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 5</title>
+      <link>/resources/mit18_05s14_ps5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps5/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 5.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 6</title>
+      <link>/pages/assignments/problem-set-6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-6/data.json</guid>
+      <description>Problem Set 6 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 6</title>
+      <link>/resources/mit18_05s14_ps6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps6/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 6.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 7</title>
+      <link>/pages/assignments/problem-set-7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-7/data.json</guid>
+      <description>Problem Set 7 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 7</title>
+      <link>/resources/mit18_05s14_ps7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps7/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 7.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 8</title>
+      <link>/pages/assignments/problem-set-8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-8/data.json</guid>
+      <description>Problem Set 8 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 8</title>
+      <link>/resources/mit18_05s14_ps8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps8/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 8.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 9</title>
+      <link>/pages/assignments/problem-set-9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/pages/assignments/problem-set-9/data.json</guid>
+      <description>Problem Set 9 Answer Checker Work on the assigned problems in the associated Problem Set PDF file, then use the problem set checker to find out if the answer was correct or incorrect. To check your answers put them in the appropriate box and click the &amp;lsquo;Check&amp;rsquo; button. Every checker box can do arithmetic and calculate standard functions (see calculator help). If you give decimal answers, give them to at least 3 decimal places.</description>
+    </item>
+    
+    <item>
+      <title>Problem Set 9</title>
+      <link>/resources/mit18_05s14_ps9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps9/data.json</guid>
+      <description>This is a resource file that contains information regarding problem set 9.</description>
+    </item>
+    
+    <item>
+      <title>ps6-post.r</title>
+      <link>/resources/ps6-post/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/ps6-post/data.json</guid>
+      <description>This is a special file related problem set 6 post.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 1</title>
+      <link>/resources/mit18_05s14_ps1_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps1_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 1.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 2</title>
+      <link>/resources/mit18_05s14_ps2_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps2_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 2.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 3</title>
+      <link>/resources/mit18_05s14_ps3_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps3_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 3.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 4</title>
+      <link>/resources/mit18_05s14_ps4_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps4_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 4.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 5</title>
+      <link>/resources/mit18_05s14_ps5_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps5_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 5.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 6</title>
+      <link>/resources/mit18_05s14_ps6_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps6_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 6.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 7</title>
+      <link>/resources/mit18_05s14_ps7_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps7_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 7.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 8</title>
+      <link>/resources/mit18_05s14_ps8_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps8_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 8.</description>
+    </item>
+    
+    <item>
+      <title>Solutions to Problem Set 9</title>
+      <link>/resources/mit18_05s14_ps9_solutions/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resources/mit18_05s14_ps9_solutions/data.json</guid>
+      <description>This is a resource file that contains information regarding solutions to problem set 9.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "14f8b185-8ce7-42fd-9528-1b47c1b7ab82",
+		"name": "Refinitiv DataScope",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19738463"
+	},
+	"item": [
+		{
+			"name": "Request Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Credentials\": {\n        \"Username\": \"{{username}}\",\n        \"Password\": \"{{password}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "https://selectapi.datascope.refinitiv.com/RestApi/v1/Authentication/RequestToken",
+					"protocol": "https",
+					"host": [
+						"selectapi",
+						"datascope",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"RestApi",
+						"v1",
+						"Authentication",
+						"RequestToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Extract With Notes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Prefer",
+						"value": "respond-async",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Token _uWeFDqqQPhvoMZ-CA9zhfsERXNKYtjz0SIdvqH22u_b1UBrUrSICBXjQxx57ues92Gr4K_IdbPNe9sALQmv5dvta9a778fhH6Fxqg33QMYV2vwZHhaBAqcKsIvAWnfVlXJcqzBZVkkkNnu7aedzDJfx3Ov5gu7qiO9fN32LzMjRXntGxXUg_f2AcemM6zbY_BE28y5WCRRYgmtcLyrvqV7oANurMverP3Y-zN553LinrH9oSqqOQBv7V_pFBWhZpxtQmVR64nWbb6aeJRQzccmRXpqbWwk5Cd2YsbwpNHFU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ExtractionRequest\": {\n        \"@odata.type\": \"#DataScope.Select.Api.Extractions.ExtractionRequests.PriceHistoryExtractionRequest\",\n        \"ContentFieldNames\": [\n            \"RIC\",\n            \"Trade Date\",\n            \"Universal Close Price\"\n        ],\n        \"IdentifierList\": {\n            \"@odata.type\": \"#DataScope.Select.Api.Extractions.ExtractionRequests.InstrumentIdentifierList\",\n            \"InstrumentIdentifiers\": [\n                {\n                    \"Identifier\": \".SPCBMIRGLRET\",\n                    \"IdentifierType\": \"Ric\"\n                }\n            ],\n            \"ValidationOptions\": {\"AllowHistoricalInstruments\": false, \"AllowOpenAccessInstruments\": true},\n            \"UseUserPreferencesForValidationOptions\": false\n        },\n        \"Condition\": {\n            \"AdjustedPrices\": true,\n            \"QueryStartDate\": \"1980-01-24T00:00:00.000Z\",\n            \"QueryEndDate\": \"2024-02-22T00:00:00.000Z\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://selectapi.datascope.refinitiv.com/RestApi/v1/Extractions/ExtractWithNotes",
+					"protocol": "https",
+					"host": [
+						"selectapi",
+						"datascope",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"RestApi",
+						"v1",
+						"Extractions",
+						"ExtractWithNotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Valid Content Field Types",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Prefer",
+						"value": "respond-async",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Token _Sc3iqwVnnMup7CH7TZT46be_i1xe0FS8-bGHQSYzlbHSv65L55ndT9RTY9mq-J030NGfx9Zm9oR8juNmBFwHe-DOw5ZN53wEikcxAD3DKbrt10VLIXGwMDE6hM2Pi2NkmhDz5JuJ1gRC63BqrSHv2GPd_Obf-H_Swtqplw549fkcC6zWO_b-BBbkf7JBnU7duBRJuL8-z6L9lXS92HTKmgj8x4AqAroUGgrKIKRmACdwYzjQ03anWWh5SHN5AeW9J6IfzZ3IVWDwlyt8Vs0Mx2-I_CYp8mzkg4JqCWp3ZJs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://selectapi.datascope.refinitiv.com/RestApi/v1/Extractions/GetValidContentFieldTypes(ReportTemplateType=DataScope.Select.Api.Extractions.ReportTemplates.ReportTemplateTypes'PriceHistory')",
+					"protocol": "https",
+					"host": [
+						"selectapi",
+						"datascope",
+						"refinitiv",
+						"com"
+					],
+					"path": [
+						"RestApi",
+						"v1",
+						"Extractions",
+						"GetValidContentFieldTypes(ReportTemplateType=DataScope.Select.Api.Extractions.ReportTemplates.ReportTemplateTypes'PriceHistory')"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "9033025",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "k7z@FRk@3NKw",
+			"type": "string"
+		}
+	]
+}

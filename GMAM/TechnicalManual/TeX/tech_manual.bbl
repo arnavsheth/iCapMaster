@@ -1,0 +1,71 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Geltner(1993)]{geltner1993}
+David Geltner.
+\newblock Estimating market values from appraised values without assuming an
+  efficient market.
+\newblock \emph{The Journal of Real Estate Research}, 8\penalty0 (3):\penalty0
+  324--345, 1993.
+
+\bibitem[George and McCulloch(1993)]{george_and_mcculloch}
+Edward~I. George and Robert~E. McCulloch.
+\newblock Variable selection via gibbs sampling.
+\newblock \emph{Journal of the American Statistical Association}, 88\penalty0
+  (423):\penalty0 881--889, 1993.
+
+\bibitem[Getmansky et~al.(2004)Getmansky, Lo, and Makarov]{getmansky_etal}
+Mila Getmansky, Andrew~W. Lo, and Igor Makarov.
+\newblock An econometric model of serial correlation and illiquidity in hedge
+  fund returns.
+\newblock \emph{Journal of Financial Economics}, 74\penalty0 (3):\penalty0
+  529--609, 2004.
+
+\bibitem[Ishwaran and Rao(2005)]{ishwaran2005spike}
+Hemant Ishwaran and J.~Sunil Rao.
+\newblock Spike and slab variable selection: frequentist and bayesian
+  strategies.
+\newblock \emph{The Annals of Statistics}, 33\penalty0 (2):\penalty0 730--733,
+  2005.
+
+\bibitem[Kaplan and Schoar(2005)]{Kaplan2005}
+Steven~N Kaplan and Antoinette Schoar.
+\newblock Private equity performance: Returns, persistence, and capital flows.
+\newblock \emph{The Journal of Finance}, 60\penalty0 (4):\penalty0 1791--1823,
+  2005.
+
+\bibitem[Markowitz(1952)]{markowitz}
+Harry~M. Markowitz.
+\newblock Portfolio selection.
+\newblock \emph{Journal of Finance}, 7\penalty0 (1):\penalty0 77--91, 1952.
+
+\bibitem[Mitchell and Beauchamp(1988)]{mitchell_beauchamp}
+T.J. Mitchell and J.J. Beauchamp.
+\newblock Bayesian variable selection in linear regression.
+\newblock \emph{Journal of the American Statistical Association}, 83:\penalty0
+  1023--1036, 1988.
+
+\bibitem[Phalippou(2008)]{Phalippou2008}
+Ludovic Phalippou.
+\newblock The hazards of using irr to measure performance: The case of private
+  equity.
+\newblock 2008.
+\newblock URL
+  \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1111796}.
+
+\bibitem[Piironen and Vehtari(2017)]{piironen_vehtari}
+Juho Piironen and Aki Vehtari.
+\newblock Comparison of bayesian predictive methods for model selection.
+\newblock \emph{Statistics and Computing}, 27:\penalty0 711--735, 2017.
+
+\bibitem[Sorensen and Jagannathan(2013)]{Sorensen2013}
+Morten Sorensen and Ravi Jagannathan.
+\newblock The public market equivalent and private equity performance, 2013.
+\newblock URL
+  \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2347972}.
+
+\end{thebibliography}

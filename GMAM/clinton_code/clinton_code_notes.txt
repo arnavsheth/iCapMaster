@@ -1,0 +1,11 @@
+iodgpanalysisplotparams
+
+Dict(Symbol("β[1]") => (;
+label="ALPHA",
+Fdensitystat=Symbol("β[1]") ,
+Fdensitystatcalcmethod=:mean,
+densitymethod=:kerneldensity,
+xupperbound=0.3
+))
+
+this will generate full distributions for betas

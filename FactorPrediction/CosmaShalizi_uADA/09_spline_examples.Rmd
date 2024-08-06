@@ -1,0 +1,180 @@
+---
+title: "Spline examples"
+output: html_document
+---
+
+
+Simple demo of splines
+=====
+
+First generate some pretend data (this will look familiar)
+```{r}
+set.seed(3)
+true.curve = function(x) {sin(x)*cos(5*x)}
+ylim = c(-2,2)
+n = 100
+x = sort(rnorm(n,1.5,.5))
+y = true.curve(x)+rnorm(length(x),0,0.15)
+plot(x,y,xlab="x",ylab=expression(f(x)+epsilon),ylim=ylim)
+curve(true.curve(x),col="grey",add=TRUE)
+data = data.frame(x=x,y=y)
+```
+
+We can fit splines with `smooth.spline`.
+
+- We can manually specify lambda with `spar` (actually specifies a monotone function of it)
+- We can feed the data in as separate `x` and `y` arguments, or as a data frame with `x` and `y` columns
+
+We can predict new values with `predict`.
+
+- To see help file, do `?predict.smooth.spline`
+- Takes new `x` values as `x` argument
+- Returns data frame with `x` and `y` elements (sorted)
+
+Very low $\lambda$:
+```{r}
+fit_rough = smooth.spline(data,spar = 0)
+eval.grid = seq(from=min(data$x),to=max(data$x),length.out=1000)
+plot(data)
+lines(predict(fit_rough, x=eval.grid))
+```
+
+Very high $\lambda$:
+```{r}
+fit_verysmooth = smooth.spline(data,spar=2)
+plot(data)
+lines(predict(fit_verysmooth, x=eval.grid))
+```
+
+Slightly lower, but still very high $\lambda$:
+```{r}
+fit_smooth = smooth.spline(data,spar=1)
+plot(data)
+lines(predict(fit_smooth, x=eval.grid))
+```
+
+Cross validated $\lambda$:
+```{r}
+fit_cv = smooth.spline(data)
+plot(data)
+lines(predict(fit_cv, x=eval.grid))
+```
+
+
+Fit a spline to financial data
+=====
+
+First, we load data from Yahoo finance
+
+- Note, I had problems with this.  You can email me if you try to replicate this and also have issues.
+
+```{r, eval=FALSE}
+require(pdfetch)
+sp <- pdfetch_YAHOO("SPY", fields="adjclose",
+  from=as.Date("1993-02-09"), to=as.Date("2015-02-09"))
+```
+```{r, echo=FALSE}
+load('09.Rdata')
+```
+```{r}
+# Compute log returns
+sp <- diff(log(sp))
+# need to drop the initial NA which makes difficulties later
+sp <- sp[-1]
+```
+
+```{r,warning=FALSE}
+#All but the last entry
+sp.today <- head(sp,-1)
+#All but the first entry
+sp.tomorrow <- tail(sp,-1)
+#Plot tomorrow versus today
+plot(as.numeric(sp.today),as.numeric(sp.tomorrow),pch=20,col=rgb(0,0,0,.3))
+#Add a nice horizontal line
+abline(h=0,lty=3)
+
+#Fit a linear model, see the coefficients
+sp.linear = lm(sp.tomorrow ~ sp.today)
+coefficients(sp.linear)
+abline(sp.linear,col='grey',lwd=2)
+```
+
+We can fit a spline instead of a line:
+```{r}
+#Fit a spline
+sp.spline <- smooth.spline(x=sp.today,y=sp.tomorrow,cv=TRUE)
+sp.spline
+sp.spline$lambda
+#Plot the spline (and the other stuff)
+plot(as.numeric(sp.today),as.numeric(sp.tomorrow),pch=20,col=rgb(0,0,0,.3),xlab="Today's log-return", ylab="Tomorrow's log-return")
+abline(h=0,lty=3)
+abline(sp.linear,col='grey',lwd=2)
+lines(sp.spline,type='l',lwd=2,col='blue') # The spline
+```
+
+What happens if we play around with the $\lambda$ parameter:
+```{r, warning=FALSE}
+plot(as.numeric(sp.today),as.numeric(sp.tomorrow),pch=20,col=rgb(0,0,0,.3),xlab="Today's log-return", ylab="Tomorrow's log-return")
+abline(sp.linear,col="grey")
+lines(sp.spline)
+lines(smooth.spline(sp.today,sp.tomorrow,spar=1.5),col="blue")
+lines(smooth.spline(sp.today,sp.tomorrow,spar=2),col="blue",lty=2)
+lines(smooth.spline(sp.today,sp.tomorrow,spar=1.1),col="red")
+lines(smooth.spline(sp.today,sp.tomorrow,spar=0.5),col="red",lty=2)
+```
+
+Generate error bounds
+=====
+
+We notice that the spline is steeper on the left than on the right!  Could this be sampling error?  Let's find bootstrap error bounds on the fit!
+
+First, we build a resampling function to get bootstrap data sets:
+```{r, warning=FALSE}
+# A data frame to hold our data.  Makes it easier to sample rows
+sp.frame <- data.frame(today=sp.today,tomorrow=sp.tomorrow)
+# A function to sample rows with replacement
+sp.resampler <- function() {
+  n <- nrow(sp.frame)
+  resample.rows <- sample(1:n,size=n,replace=TRUE)
+  return(sp.frame[resample.rows,])
+}
+```
+
+We set up a function to evaluate predictions on an even grid
+```{r, warning=FALSE}
+# Set up a grid of evenly-spaced points on which to evaluate the spline
+grid.300 <- seq(from=min(sp.today),to=max(sp.today),length.out=300)
+
+sp.spline.estimator <- function(data,eval.grid=grid.300) {
+  # Fit spline to data, with cross-validation to pick lambda
+  fit <- smooth.spline(x=data[,1],y=data[,2],cv=TRUE)
+  # Do the prediction on the grid and return the predicted values
+  return(predict(fit,x=eval.grid)$y)  # We only want the predicted values
+}
+```
+
+A function to draw $B$ bootstrap samples and compute pointwise quantiles:
+```{r, warning=FALSE}
+sp.spline.cis <- function(B,alpha,eval.grid=grid.300) {
+  spline.main <- sp.spline.estimator(sp.frame, eval.grid=eval.grid)
+  # Draw B boottrap samples, fit the spline to each
+  # Result has length(eval.grid) rows and B columns
+  spline.boots <- replicate(B, sp.spline.estimator(sp.resampler(),eval.grid=eval.grid))
+  cis.lower <- 2*spline.main - apply(spline.boots,1,quantile,probs=1-alpha/2)
+  cis.upper <- 2*spline.main - apply(spline.boots,1,quantile,probs=alpha/2)
+  return(list(main.curve=spline.main, lower.ci=cis.lower, upper.ci=cis.upper, x=eval.grid))
+}
+```
+
+Now we run it all together!
+```{r, warning=FALSE, cache=TRUE}
+#Get the confidence intervals
+sp.cis <- sp.spline.cis(B=1000,alpha=0.05)
+#Plot the confidence intervals
+plot(as.vector(sp.today),as.vector(sp.tomorrow),xlab="Today's log-return",
+  ylab="Tomorrow's log-return",pch=16,cex=0.5,col="grey")
+abline(sp.linear,col="darkgrey")
+lines(x=sp.cis$x,y=sp.cis$main.curve,lwd=2)
+lines(x=sp.cis$x,y=sp.cis$lower.ci)
+lines(x=sp.cis$x,y=sp.cis$upper.ci)
+```

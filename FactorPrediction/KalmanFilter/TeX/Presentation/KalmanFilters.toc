@@ -1,0 +1,4 @@
+\babel@toc {nil}{}\relax 
+\beamer@sectionintoc {1}{Intro}{3}{0}{1}
+\beamer@sectionintoc {2}{The Math}{6}{0}{2}
+\beamer@sectionintoc {3}{References}{13}{0}{3}

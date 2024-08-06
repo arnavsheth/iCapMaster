@@ -1,0 +1,82 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: LitReview.aux
+The style file: plainnat.bst
+Database file #1: LitReview.bib
+Warning--entry type for "Gredil2014" isn't style-file defined
+--line 37 of file LitReview.bib
+Warning--entry type for "Kaplan2005" isn't style-file defined
+--line 46 of file LitReview.bib
+Warning--entry type for "Kaplan2015" isn't style-file defined
+--line 61 of file LitReview.bib
+Warning--entry type for "Fama1993" isn't style-file defined
+--line 76 of file LitReview.bib
+Warning--entry type for "Ljungqvist2002" isn't style-file defined
+--line 94 of file LitReview.bib
+Warning--entry type for "Cambridge2013" isn't style-file defined
+--line 102 of file LitReview.bib
+Warning--entry type for "Buchner2009" isn't style-file defined
+--line 117 of file LitReview.bib
+Warning--entry type for "Stucke2011" isn't style-file defined
+--line 126 of file LitReview.bib
+Warning--entry type for "Cox1985" isn't style-file defined
+--line 134 of file LitReview.bib
+Warning--entry type for "Klimko1978" isn't style-file defined
+--line 164 of file LitReview.bib
+Warning--entry type for "Cochrane2004" isn't style-file defined
+--line 174 of file LitReview.bib
+Warning--entry type for "Moskowitz2002" isn't style-file defined
+--line 183 of file LitReview.bib
+Warning--entry type for "Takahashi2002" isn't style-file defined
+--line 192 of file LitReview.bib
+Warning--entry type for "Jacquier2004" isn't style-file defined
+--line 203 of file LitReview.bib
+Warning--entry type for "Geweke1991" isn't style-file defined
+--line 235 of file LitReview.bib
+Warning--empty journal in Ang2014
+Warning--empty journal in Hwang2005
+Warning--empty journal in Karatas2021
+Warning--empty journal in Korteweg2019
+Warning--empty journal in Long1996
+You've used 34 entries,
+            2773 wiz_defined-function locations,
+            813 strings with 10674 characters,
+and the built_in function-call counts, 12679 in all, are:
+= -- 1083
+> -- 721
+< -- 22
++ -- 247
+- -- 213
+* -- 895
+:= -- 1957
+add.period$ -- 102
+call.type$ -- 34
+change.case$ -- 172
+chr.to.int$ -- 34
+cite$ -- 73
+duplicate$ -- 580
+empty$ -- 1116
+format.name$ -- 271
+if$ -- 2666
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 14
+newline$ -- 178
+num.names$ -- 136
+pop$ -- 422
+preamble$ -- 1
+purify$ -- 139
+quote$ -- 0
+skip$ -- 519
+stack$ -- 0
+substring$ -- 152
+swap$ -- 34
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 369
+warning$ -- 5
+while$ -- 107
+width$ -- 0
+write$ -- 415
+(There were 20 warnings)

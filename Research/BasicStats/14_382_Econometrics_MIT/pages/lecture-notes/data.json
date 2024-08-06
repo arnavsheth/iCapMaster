@@ -1,0 +1,6 @@
+
+{
+  "title":"Lecture Notes",
+  "content":"Lecture notes by Victor Chernozhukov (MIT) and Ivan Fernandez-Val (BU).\nLEC # TOPIC 1 Least Squares, Adaptive Partialling-Out, Simultaneous Inference (PDF) 2 Structural Equations Models and IV, Take 1 (PDF) 3 Structural Equations Models and GMM (PDF) 4 Euler Equations, Nonlinear GMM, and Other Adventures (PDF) 5 Bootstrapping (PDF) 6 Nonlinear and Binary Regression, Predictive Effects, and M-Estimation (PDF) 7 Distribution Regression and Counterfactual Analysis 8 Linear Panel Data Models Under Strict and Weak Exogeneity (PDF) 9 GMM Under Moderately High Dimensions (PDF) 10 Nonlinear Panel Data (PDF)\n11 Inference for High-Dimensional Sparse Econometric Models (PDF)\nBelow are the data and codes for this lecture, in case you want to apply this one day.\n12 Treatment Effects (PDF)\nBelow are the data and codes for this lecture, in case you want to apply this one day.\nData and Codes R-code and data for lectures 11–12\nR-code NPA Functions (R)\nR-code 401k-ATE (R)\nData for Lecture 10 (DTA)\nR-code for 401k-QTE (R)\n"}
+
+

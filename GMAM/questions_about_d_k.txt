@@ -1,0 +1,20 @@
+-I have in my notes that for gamma_k > 0.5, then beta is likely to be selected. However, I also have in my notes that gamma_k is either zero or one -- some kind of factor indicator. What is gamma_k? What is its purpose in the larger model? And is it zero, one, or something inbetween?
+
+Creates the spike and slab effect. Regularization for the factor model. Something that induces sparsity -- the difference between OLS and LASSO. Gamma_k is 0/1 and it's the expectation of Gamma_k that's 0.5.
+
+Spike and slab is like Bayesian parsimony. Did a ton of reading on this. Want to drive the most value to clients with respect to being able to analyze risk. Don't want to waste their time with a factor that has a low likelihood of being a driver of those PE returns. Business standpoint. It's akin to saying that there are primary risk factors for each PE fund. 
+
+Expect that S&P500 would have material exposure to the MSCI World (market factor in our factor set). You would expect economic significance of a factor. Spike-slab assigns a point-mass probability to zero. It assigns a high-prob, low-var, to various factors.
+
+d_k is either 0 or 1. The v^2 is a precision parameter that 
+
+PAPERS:
+-George and McCulloch - both papers.
+-Ishwaran and Rao.
+-Rossi slides.
+
+-Regarding nu:
+	-You mention Wand et all 2011 but that is on Variational Bayes. Is this correct?
+	-Which t-distribution are you talking about?
+	
+Updating nu is not a conjugate prior. It's a nonstandard mixture distribution for the updating. Metropolis Hastings is used to sample. Look at page 31 of the model notes.

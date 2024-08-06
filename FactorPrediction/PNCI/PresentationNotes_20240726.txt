@@ -1,0 +1,128 @@
+SLIDE 8
+
+If I were to sum it up in one sentence, it would be: we go from CMAs to Factors to Assets to Opimization.
+
+1. De-smoothing of Asset Class Returns:
+The process begins with de-smoothing asset class returns using a proprietary methodology. 
+
+This step removes biases and distortions in the data, providing a clearer picture of the “true economic returns” of all asset classes. 
+
+This helps us in understanding the actual performance of assets, free from artificial influences.
+
+2. Decomposition into Core Drivers:
+The methodology then decomposes these true economic returns into core drivers that influence factor returns. 
+
+This is a two-step process that I'll talk about in a few minutes in some more detail. 
+
+This involves identifying the fundamental components that drive the returns and risks of individual factors and consequently, assets. 
+
+It provides a detailed understanding of what does and does not influence each factor, allowing for a more precise projection of future returns.
+
+3. Integration of Externally-Provided Capital Market Assumptions (CMAs):
+The use of PNCI's CMAs helps in enhancing the projection process. 
+
+These CMAs, combined with the core drivers from above, allow for a comprehensive projection of both expected returns and associated risks for various factors. 
+
+This step ensures that the projections are grounded in current market assumptions and expectations of risk, returns, and correlations of  various asset classes.
+
+
+4. Derivation of Expected Returns and Standard Deviations:
+The projected factor risks and returns are then used to derive expected returns and standard deviations for individual assets. 
+
+This provides detailed risk-return profiles for each asset, which are essential for making informed investment decisions.
+
+As I mentioned earlier, we go from CMAs to Factors to Assets. 
+
+5. Optimization and Harmonized Asset Allocation:
+The final step involves optimizing the expected risk and return metrics to achieve a harmonized asset allocation. 
+
+The optimization process ensures that the asset allocation is efficient, balancing both alternative and public market securities to achieve the desired investment goals. 
+
+This step leverages financial econometrics and machine learning to refine the allocation strategy, ensuring it is robust and adaptable to changing market conditions.
+
+
+If I were to sum it up in one sentence, it would be: we go from CMAs to Factors to Assets to Opimization.
+
+
+SLIDE 9
+
+INPUTS:
+
+1. Historical Returns:
+The methodology starts with historical returns data for a range of asset classes. 
+
+This data serves as a foundation for understanding past performance and trends, providing a basis for projecting future returns.
+
+2.Capital Market Assumptions (CMAs):
+Alongside historical data, Capital Market Assumptions (CMAs) are incorporated. 
+
+These assumptions include expected returns, volatilities for each asset class, and their respective correlations. 
+
+CMAs are crucial for grounding the projections in current and expected market realities.
+
+3.Customization and Use Case:
+In this specific use case, PNCI’s CMAs have been utilized. 
+
+This highlights the flexibility of the methodology in incorporating different sets of assumptions, depending on the client’s requirements and available data.
+
+REFINEMENT TO CORE DRIVERS:
+
+WHAT ARE CORE DRIVERS?	
+Core drivers are fundamental factors or variables that primarily influence the behavior of the asset classes. 
+
+This step may include statistical methods like factor analysis, principal component analysis, and (later) machine learning techniques to identify these core influences.
+
+IDENTIFICATION OF LATENT DRIVERS:
+The refinement process is thorough and includes the potential identification of latent (unseen) drivers if they exist. 
+
+These latent drivers might not be immediately apparent but can have significant impacts on asset returns and risks. Identifying these drivers can provide deeper insights into the underlying forces affecting the market.
+
+
+KEY BENEFITS AND APPLICATIONS:
+This detailed approach ensures that the asset allocation strategies are based on a comprehensive understanding of both historical data and current market expectations.
+
+By distilling complex data into core drivers, the methodology allows for more targeted and effective investment strategies.
+
+The use of both observable data and latent factors provides a more nuanced and complete view of the market dynamics, enhancing the robustness of the projections.
+
+
+SLIDE 10
+
+
+FURTHER REFINEMENT OF CORE DRIVERS:
+1. Machine Learning Techniques:
+We use advanced machine learning techniques in our proprietary methodology to further refine the set of core drivers. 
+
+This step involves filtering the initially identified drivers down to a more concentrated subset that has the most significant impact on factor (and therefore, asset) returns. 
+
+By leveraging machine learning, the process can efficiently handle large datasets and uncover complex relationships that might not be immediately apparent.
+
+2.Identification of Key Factors:
+The refinement process narrows down the core drivers to a final set of (say) 5 core drivers, from the original 19. 
+
+These selected drivers are the most relevant factors influencing the returns, ensuring that the analysis focuses on the most impactful variables. 
+
+This step might involve techniques such as feature selection and principal component analysis to identify the most predictive drivers.
+
+As I said earlier, we go from CMAs, to Factors, to Assets to Optimization. 
+
+Once we identify the core drivers, we then project out factor returns. To get asset-level returns we use our Global Multi-Asset Model which is in its third version currently.
+
+Using GMAM:
+1.Global Multi-Asset Model:
+These factor expected returns are incorporated into our Global Multi-Asset Model, which calculates the exposures of different assets to these factors. 
+
+This comprehensive model integrates the various factors to provide a holistic view of the expected returns for each asset.
+
+2.Expected Returns for Individual Assets:
+The final output is the expected return for each individual asset. 
+
+This detailed information helps in constructing portfolios that align with the investor’s goals.
+
+KEY BENEFITS AND APPLICATIONS:
+Enhanced Predictive Power: By using machine learning to refine the core drivers, the methodology improves the predictive power and accuracy of the projections, capturing subtle and complex patterns in the data.
+
+Targeted Insights: The reduced set of drivers allows for a more focused analysis, providing clearer insights into the factors that are most likely to influence asset returns.
+
+Optimized Asset Allocation: The outputs from the Global Multi-Asset Model are crucial for developing optimized asset allocation strategies, helping investors to allocate resources efficiently based on a robust understanding of expected returns and risks.
+

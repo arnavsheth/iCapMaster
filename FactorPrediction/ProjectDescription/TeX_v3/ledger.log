@@ -1,0 +1,136 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.19)  1 APR 2024 10:40
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**ledger.cls
+(./ledger.cls
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-22>
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+
+LaTeX Warning: You have requested package `',
+               but the package provides `ledger'.
+
+Package: ledger 
+(/usr/local/texlive/2023/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+LaTeX Info: Redefining \cite on input line 441.
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/03/12 v3.6j Customizing captions (AR)
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
+\caption@tempdima=\dimen141
+\captionmargin=\dimen142
+\caption@leftmargin=\dimen143
+\caption@rightmargin=\dimen144
+\caption@width=\dimen145
+\caption@indent=\dimen146
+\caption@parindent=\dimen147
+\caption@hangindent=\dimen148
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count193
+\c@continuedfloat=\count194
+)
+\c@KVtest=\count195
+\sf@farskip=\skip50
+\sf@captopadj=\dimen149
+\sf@capskip=\skip51
+\sf@nearskip=\skip52
+\c@subfigure=\count196
+\c@subfigure@save=\count197
+\c@lofdepth=\count198
+\c@subtable=\count199
+\c@subtable@save=\count266
+\c@lotdepth=\count267
+\sf@top=\skip53
+\sf@bottom=\skip54
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/numprint/numprint.sty
+Package: numprint 2012/08/20 v1.39 Print numbers (HH)
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen150
+\ar@mcellbox=\box51
+\extrarowheight=\dimen151
+\NC@list=\toks17
+\extratabsurround=\skip55
+\backup@length=\skip56
+\ar@cellbox=\box52
+)
+\c@nprt@mantissa@digitsbefore=\count268
+\c@nprt@mantissa@digitsafter=\count269
+\c@nprt@exponent@digitsbefore=\count270
+\c@nprt@exponent@digitsafter=\count271
+\nprt@digitwidth=\skip57
+\nprt@sepwidth=\skip58
+\nprt@decimalwidth=\skip59
+\nprt@blockwidth=\skip60
+\nprt@digittoks=\toks18
+\nprt@pretoks=\toks19
+\nprt@posttoks=\toks20
+\nprt@thisdigit=\count272
+\nprt@curpos=\count273
+\nprt@rndpos=\count274
+\c@nprt@digitsfirstblock=\count275
+\c@nprt@blockcnt=\count276
+\c@nprt@cntprint=\count277
+
+No configuration file `numprint.cfg' found.)
+
+./ledger.cls:20: LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.20 \usepackage[utf8]{
+                       inputenc}
+? 
+./ledger.cls:20: Emergency stop.
+ ...                                              
+                                                  
+l.20 \usepackage[utf8]{
+                       inputenc}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+ 
+Here is how much of TeX's memory you used:
+ 2255 strings out of 476025
+ 40531 string characters out of 5790017
+ 1849388 words of memory out of 5000000
+ 22774 multiletter control sequences out of 15000+600000
+ 512287 words of font info for 32 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 69i,0n,79p,224b,78s stack positions out of 10000i,1000n,20000p,200000b,200000s
+./ledger.cls:20:  ==> Fatal error occurred, no output PDF file produced!

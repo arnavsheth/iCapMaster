@@ -1,0 +1,20 @@
+{
+  "course_title":"Econometrics",
+  "course_description":"The course will cover several key models as well as identification and estimation methods used in modern econometrics. We shall being with exploring some leading models of econometrics, then seeing structures, then providing methods of identification, estimation, and inference. You will get lots of hands-on experience with using the methods on real data sets.\n",
+  "site_uid":"29fcbcb1-16eb-4429-b517-39e8fea8fa77",
+  "legacy_uid":"79443c67-d1ee-223f-a0dc-8e3086b9e086","instructors": [{
+    "first_name":"Victor",
+    "last_name":"Chernozhukov",
+    "middle_initial":"",
+    "salutation":"Prof.",
+    "title":"Prof. Victor Chernozhukov"}],"department_numbers":["14"],
+  "learning_resource_types":["Problem Sets","Exams","Lecture Notes"],
+  "topics":[["Social Science","Economics"],["Social Science","Economics","Econometrics"]],
+  "primary_course_number":"14.382",
+  "extra_course_numbers":"",
+  "term":"Spring",
+  "year":"2017",
+  "level":["Graduate"],
+  "image_src":"./static_resources/a555d61b6f6aa37ec7d121ac246e9286_14-382s17.jpg",
+  "course_image_metadata":{"content_type":"resource","description":"","draft":false,"file":"/courses/14-382-econometrics-spring-2017/a555d61b6f6aa37ec7d121ac246e9286_14-382s17.jpg","file_type":"image/jpeg","image_metadata":{"caption":" An 1875 illustration showing that the adult children's heights tended to deviate less than the mean height of their parents. This idea suggested the concept of \"regression toward the mean\", giving the concept of regression its name. Linear regression is one of the topics covered in this course. (Image is in the [public domain](https://en.wikipedia.org/wiki/Linear_regression#/media/File:Galton%27s_correlation_diagram_1875.jpg).)","credit":"Image is in the public domain.","image-alt":"A black and white illustration of a graph, which has a large circle in the middle with lines radiating from a center point."},"iscjklanguage":false,"learning_resource_types":[],"license":"https://creativecommons.org/licenses/by-nc-sa/4.0/","ocw_type":"OCWImage","resourcetype":"Image","title":"14-382s17.jpg","uid":"a555d61b-6f6a-a37e-c7d1-21ac246e9286","video_metadata":{"youtube_id":null}}}
+

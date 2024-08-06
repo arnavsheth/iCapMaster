@@ -1,0 +1,6 @@
+
+{
+  "title":"Homework 3",
+  "content":"Solve one of the problems 1–4 and one of the problems 5–6 from Lecture 3 (PDF). You can use any econometric/statistical software you like. In Stata you can used \u0026ldquo;reg3\u0026rdquo; or \u0026ldquo;gmm\u0026rdquo; command to implement limited information and full information estimation. In R, please see the attached code for consultation. (Please do write your own code though). The data sets are posted below. Please provide theoretical foundations of your analysis and provide step-by-step explanation for your empirical analysis. Think that you are writing an empirical portion of your paper and you are trying to communicate the results to your colleagues and referees. You can work in groups to discuss the homework, but all the write-ups and all the coding should be individual. You must list your collaborators on the homework at the top of your submitted solutions.\nAssociated Files Big-fish Data (CSV)\nOriginal Fish Data (DTA)\nR-code (R)\n"}
+
+

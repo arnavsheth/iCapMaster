@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Simple Example}{2}{section.2}%
+\contentsline {section}{\numberline {3}Probability and Statistics Are Two Sides of the Same Coin}{3}{section.3}%
+\contentsline {section}{\numberline {4}History}{4}{section.4}%
+\contentsline {section}{\numberline {5}Frequentist Statistics}{4}{section.5}%
+\contentsline {section}{\numberline {6}Bayesian Statistics}{5}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Math}{6}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Some Advantages to Bayesian Statistics}{7}{section.7}%
+\contentsline {section}{\numberline {8}Examples}{9}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Coin Toss}{9}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Vampirism}{10}{subsection.8.2}%
