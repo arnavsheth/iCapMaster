@@ -1,0 +1,19 @@
+TITLE: 
+identify auxiliary variables with missing data indicators;
+DATA: file = pain.dat;
+VARIABLE:  
+names = id txgrp male age edugroup workhrs exercise paingrps pain 
+	anxiety stress control depress interfere disability 
+	dep1-dep7 interf1-interf6 disab1-disab6;
+usevariables = age exercise anxiety stress control disability mdep mint mpain;
+missing = all(999);
+DATA MISSING:
+! create binary missing data indicators;
+names = depress interfere pain;
+type = missing;
+binary = mdep mint mpain;
+MODEL:
+age exercise anxiety stress control disability on mpain; 
+OUTPUT:
+! standardize auxiliary variables (outcomes) to get Cohen's d effect sizes;
+stdy;

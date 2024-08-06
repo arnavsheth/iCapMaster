@@ -1,0 +1,15 @@
+# input data and variables
+DATA: aeraworkshop.dat;
+VARIABLES: id male esl riskgrp atrisk behsymp1 lrnprob1 read1 read9 read9grp stanread7;
+MISSING: 999;
+# categorical variables
+NOMINAL: male riskgrp;
+# complete predictors
+FIXED: male lrnprob1;
+MODEL: 
+# regression equation
+read9 ~ read1 lrnprob1 male riskgrp; 
+# mcmc  settings
+BURN: 2000;
+ITERATIONS: 10000;
+SEED: 90291;

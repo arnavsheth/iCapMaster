@@ -1,0 +1,35 @@
+TITLE: 
+example 4.10: bayesian means and covariances with wishart prior (ss = 0, df = -(v + 1));
+DATA: 
+file = employeecomplete.dat;
+VARIABLE: 
+names = employee team turnover male empower lmx worksat climate cohesion;
+usevariables = worksat empower lmx;
+ANALYSIS:
+estimator = bayes;
+fbiterations = 10000;
+bseed = 90291;
+MODEL:
+! label covvariances;
+worksat with empower (ws_em_c);
+worksat with lmx (ws_lmx_c);
+empower with lmx (em_lmx_c);
+! label variances;
+worksat (ws_var); empower (emp_var); lmx (lmx_var);
+MODEL CONSTRAINT:
+new(ws_sd, emp_sd, lmx_sd,ws_emp_r,ws_lmx_r,em_lmx_r);
+ws_sd = sqrt(ws_var);
+emp_sd = sqrt(emp_var);
+lmx_sd = sqrt(lmx_var);
+ws_emp_r = ws_em_c / (ws_sd * emp_sd);
+ws_lmx_r = ws_lmx_c / (ws_sd * lmx_sd);
+em_lmx_r = em_lmx_c / (emp_sd * lmx_sd);
+OUTPUT:
+patterns stdyx tech8;
+MODEL PRIORS:
+ws_em_c ~ IW(0,-4);
+ws_lmx_c ~ IW(0,-4);
+em_lmx_c ~ IW(0,-4);
+ws_var ~ IW(0,-4);
+emp_var ~ IW(0,-4);
+lmx_var ~ IW(0,-4);

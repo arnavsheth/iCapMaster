@@ -1,0 +1,23 @@
+TITLE: 
+example 2.10: fiml regression with likelihood ratio test;
+DATA:
+file = smokingcomplete.dat;
+VARIABLE:
+names = id intensity hvysmoker age parsmoke female race income educ;
+usevariables = intensity parsmoke age income;
+DEFINE:
+center age income (grandmean);
+ANALYSIS:
+estimator = ml;
+MODEL:
+! label slope coefficients in focal model;
+intensity on parsmoke (b1)
+	age (b2)
+	income (b3);
+MODEL CONSTRAINT:
+! constraining slopes to 0 gives LRT versus the saturated model;
+0 = b1; 
+0 = b2;
+0 = b3;
+OUTPUT:
+sampstat stdyx cinterval;

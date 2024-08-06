@@ -1,0 +1,27 @@
+MONTECARLO:
+
+NAMES ARE y x1 x2 x3;
+NOBSERVATIONS = 250;
+NREPS = 5000;
+SEED = 56798;
+PATMISS =
+y(0) x1 (1) x2(0) x3 (0) |
+y(0) x1 (0) x2(1) x3 (0) |
+y(0) x1 (0) x2(0) x3 (1);
+PATPROBS = .333 | .333 | .334;
+
+MODEL POPULATION:
+
+[y-x3*0];
+y-x3*1;
+y with x1-x3*.30;
+x1 with x2-x3*.30;
+x2 with x3*.30;
+
+ANALYSIS:
+
+MODEL: 
+
+MODEL: 
+x1 x2 x3;
+y on x1 x2 x3;

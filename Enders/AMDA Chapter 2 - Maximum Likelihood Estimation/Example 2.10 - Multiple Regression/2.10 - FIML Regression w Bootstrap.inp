@@ -1,0 +1,15 @@
+TITLE: 
+example 2.10: fiml regression with bootstrap standard errors;
+DATA:
+file = smokingcomplete.dat;
+VARIABLE:
+names = id intensity hvysmoker age parsmoke female race income educ;
+usevariables = intensity parsmoke age income;
+DEFINE:
+center age income (grandmean);
+ANALYSIS:
+bootstrap = 2000;
+MODEL:
+intensity on parsmoke age income;
+OUTPUT:
+sampstat stdyx cinterval(bootstrap);

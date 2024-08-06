@@ -1,0 +1,20 @@
+# input data and variables
+DATA: aeraworkshop.dat;
+VARIABLES: id male esl riskgrp atrisk behsymp1 lrnprob1 read1 read9 read9grp stanread7;
+MISSING: 999;
+# categorical variables
+NOMINAL: male;
+# complete predictors
+FIXED: male lrnprob1;
+MODEL: 
+# regression equation with parameters labeled
+read9 ~ read1@beta1 lrnprob1@beta2 male@beta3; 
+# Bayesian significance tests
+TEST: beta1:beta3 = 0; 
+TEST: beta1 = 0; 
+TEST: beta2 = 0; 
+TEST: beta3 = 0; 
+# mcmc  settings
+SEED: 90291;
+BURN: 1000;
+ITERATIONS: 10000;

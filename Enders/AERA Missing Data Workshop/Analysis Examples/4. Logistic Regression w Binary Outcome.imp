@@ -1,0 +1,16 @@
+# input data and variables
+DATA: aeraworkshop.dat;
+VARIABLES: id male esl riskgrp atrisk behsymp1 lrnprob1 read1 read9 read9grp stanread7;
+MISSING: 999;
+# categorical variables
+ORDINAL: esl read9grp;
+NOMINAL: male;
+# complete predictors
+FIXED: male lrnprob1;
+MODEL: 
+# logistic regression equation
+logit(read9grp) ~ read1 lrnprob1 male esl; 
+# mcmc  settings
+BURN: 2000;
+ITERATIONS: 10000;
+SEED: 90291;

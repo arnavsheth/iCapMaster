@@ -1,0 +1,22 @@
+# input data and variables
+DATA: aeraworkshop.dat;
+VARIABLES: id male esl riskgrp atrisk behsymp1 lrnprob1 read1 read9 read9grp stanread7;
+MISSING: 999;
+# categorical variables
+ORDINAL: esl;
+NOMINAL: male;
+# complete predictors
+FIXED:  male;
+# center interacting predictors at the grand mean
+CENTER: read1 lrnprob1;
+MODEL: 
+# regression equation with product term and a parameter label
+read9 ~ read1 lrnprob1 read1*lrnprob1@interaction male esl; 
+# simple slopes of reading at different levels of learning problems
+SIMPLE: read1 | lrnprob1;
+# Bayesian significance test
+TEST: interaction = 0; 
+# mcmc settings
+SEED: 90291;
+BURN: 2000;
+ITERATIONS: 10000;

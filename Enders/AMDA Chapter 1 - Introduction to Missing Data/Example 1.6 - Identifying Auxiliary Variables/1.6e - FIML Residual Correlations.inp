@@ -1,0 +1,21 @@
+TITLE: 
+identify auxiliary variables with residual correlations;
+DATA: 
+file = pain.dat;
+VARIABLE:  
+names = id txgrp male age edugroup workhrs exercise paingrps pain 
+	anxiety stress control depress interfere disability 
+	dep1-dep7 interf1-interf6 disab1-disab6;
+usevariables = age exercise anxiety stress control disability depress interfere pain;
+missing = all(999);
+MODEL:
+! missing variable regressed on other analysis variables;
+interfere on depress pain;
+! residual (semipartial) correlations;
+interfere with age-disability;
+! correlate regressors and auxiliary variables;
+depress pain with age-disability;
+! correlate auxiliary variables;
+age-disability with age-disability
+OUTPUT: 
+sampstat stdyx;

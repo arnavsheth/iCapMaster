@@ -1,0 +1,29 @@
+TITLE: 
+example 2.13: fiml logistic regression;
+DATA: 
+file = employeecomplete.dat;
+VARIABLE: 
+names = employee team turnover male empower lmx worksat climate cohesion;
+usevariables = turnover lmx empower male;
+categorical = turnover;
+ANALYSIS:
+estimator = mlr;
+link = logit;
+MODEL:
+! label threshold parameter
+[turnover$1] (thresh);
+! label slope coefficients in focal model;
+turnover on lmx (b1)
+	empower (b2)
+	male (b3);
+MODEL CONSTRAINT:
+! define intercept as new parameter;
+new(b0);
+b0 = -thresh;
+MODEL TEST:
+! wald test that all slopes equal 0;
+b1 = 0;
+b2 = 0;
+b3 = 0;
+OUTPUT:
+sampstat stdyx;
