@@ -1,0 +1,27 @@
+Jan 23 2024
+
+private equity paper
+
+black litterman 
+original purpose was to resolve estimation errors
+
+
+illiquid alts
+
+liquid equivalent minus the option to do something else
+
+short the option of liquidity (some representation of liquidity)
+
+kritzman and golts journal of derivatives 2015?
+
+alts are not divisible (e.g., office buildings)
+
+black litterman is a bayesian shrinkage argument
+can't use it if illiquid and indivisible
+
+1995 paper rick and dibartolomeo
+bootstrap resampling to create conf ints on optimal weights instead of point estimates
+
+use the cash inflows to adjust the weights (e.g., rents from office buildings)
+
+put the cash where you want it, doesn't have to go back into the same asset class

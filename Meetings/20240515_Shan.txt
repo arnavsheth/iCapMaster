@@ -1,0 +1,6 @@
+NOTES FOR SHAN:
+(1) Slide 13 -- forward-looking inputs (maybe a forward-looking index?).
+(2) Slide 15 -- desmoothed using G3?
+(3) Slide 16 -- you get better results from Windsorizing?
+(4) Slide 19 -- how did you ad 20% to a 60-40 portfolio?
+(5) Slide 19 -- how did you calculate yield?

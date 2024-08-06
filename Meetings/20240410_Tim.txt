@@ -1,0 +1,8 @@
+CONVERSATION WITH TIM (April 10 2024)
+- Talked about issues relating to implementation:
+	- If we are going to have CMAs then we should have a check on how the CMAs perform before implementing them.
+	- We should not be using prod time to check and experiment.
+- Talked about a new idea for product development:
+	- Increasing the level of quantitative analytics offering on Architect.
+	- Suggested portfolio allocations for users
+	- Suggested SIs for users based on advanced analytics (Sharpe, volatility, hedging, etc.)

@@ -1,0 +1,5 @@
+Betas: 14 PCs, one for each plus 1 constant. 13 factors, one set of 15 for each. So: 15 x 13.
+
+PCs: 14 x 186 plus a constant, so 15 x 186 or 186 x 15.
+
+PCs.Betas = 186 x 15 . 15 x 13 = 186 x 13 (one for each factor).

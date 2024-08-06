@@ -1,0 +1,192 @@
+12/6/2023 Bien Ngo
+
+Nick Veronis - model portfolio, fund of funds
+Kunal Shroff - new product innovations at iCap
+Michael Kelgh - new product innovations
+
+Lisa Tharcali?
+Mike November
+
+Evergreen Funds - how can we showcase the value of these funds? Also, how can we optimize portfolios with these funds?
+
+12/11/2023 Cheryl Goodnow
+
+- Use indices to promote and sell iCapital
+- You need a good PR 
+- First and foremost purpose is referential and what it refers to is important
+- How do you create the name for an index that fits into roughly 12 characters
+- Heavily regulated: FINRA and SEC
+
+Four indices:
+	1) PE funds on marketplace
+	2) PE funds on marketplace that iCap distributes - full due diligence
+	3) All HF on marketplace
+	4) HF that iCap distributes - full due diligence
+	
+Funds that are available to accredited investors
+
+- We have at least 20 funds in those categories
+- Looking at credit and real estate (many of those are non-traditional fund structures)
+	- Might be something I can help with
+
+- Synthesis of what are characteristics of key indices used today?
+	- Cambridge
+	- Preqin
+	- Pitchbook
+	- Burgess (bought by MSCI)
+	- HFR for hedge funds
+	- Cliffwater
+	- NCREIF
+	
+- Chart with how many constituents, net or gross of fees, how often rebalanced?
+
+12/27/2023 Cheryl Goodnow
+
+- Cambridge tried to market their indices with IHS Markit
+- No experience in marketing indices
+- Cambridge does not have any PMEs
+
+- So what does iCapital have to add? Why do it at all?
+	- None of them have the ability to show a non-institutional investor ("retail")
+	- Only iCap has a broad enough view into alt funds to represent a decent benchmark of performance
+	- Say there are 16K alt funds raising money globally
+	- Marketplace as a small subset (~100 funds)
+
+- Why create indices?
+	- We have the representative funds for retail investors 
+	- Retail does not have the knowledge about this
+	- Retail have even less awareness 
+	- Not aware that there are investments in that asset class that are available to them as an individual
+	- We have an opportunity to create indices that represent to the individual investor a swath of investment opportunities that they are not aware of
+	- Not all are available to everyone
+	- Some are available to everyone, some to "accredited"
+
+- What is the index?
+	- We've agreed that 20 funds are a reasonable number for this
+		- We = Lawrence, Kunal, Cheryl
+		- Why 20? Data availability
+		- Enter the index and leave the index
+		- Reconstitute every 6 months
+		- Funds will be added/substracted based on ground rules
+		- Equal-weighted and will be anonymized
+
+- Say we create the index 
+	- What's the value if you can't identify what the underlying funds?
+	- The value is you can still measure performance.
+- Why should funds be anonymized?
+	- Don't have the rights from GPs to use the data publicly.
+	- Have rights to use the data privately.
+	- Have the rights to use the data for back-office operations.
+	- Have the rights to use the data in an aggregated and anonymized fashion.
+	
+- Because we sell the underlying investments. We are also the OS/backbone for the industry.
+	- Take the LSE. They have a unit that does research. They have a unit that sells listings. 
+	- Makes money off of ETFs. 
+	- What they don't do is do everything under the same umbrella entity.
+	- Can't affect the index return so that the other investments make more money.
+	- Can't affect the objectivity of the research.
+	- Regulators think of iCap as a broker/dealer and RIA.
+	- Regulators don't think of iCap as a fintech companies.
+	- iCap may head there but we are not there right now.
+		- Index will be the first "information product".
+		- Veronis and Vinay thought about this when they started.
+		- 10 years later still not there.
+
+- Telling me this because we are a highly regulated entity.
+	- Not used to that as an academic. 
+	- Regulators take the license away. Can find these companues on their websites.
+	- Anyone more than three years will tell you that indices will be what makes iCap loses its license.
+	- Regulators "brain will explode" if we create a "bad" index.
+		- Ihor heads up GP relationship management.
+		- He talks about performance to the GPs. 
+	- Index building is an existential risk for iCap.
+	
+- Why is now the time?
+	- GPs are freaking out because "milk and honey" since 2008 and companies stopped going public.
+	- Majority of the opportunity happens in private markets.
+	- Until now, individuals were not even aware they could invest in private markets.
+	- Yahoo Finance will have an iCapital index.
+		- To get there, we have to go through the full burden of measuring and mitigating the regulatory risk.
+		- Once we create the methodology and ground rules we will have to outsource the management of the index.
+			- Because of LIBOR.
+			
+- First question to ask: "Will it cause regulatory issues?"
+	- General answer is yes.
+	- Equal-weighted will cause the least regulatory issues.
+	- Madeline will push back on everything ( in charge of compliance ).
+	- High level of protection against individual investors.
+	- Institutionally it is caveat emptor.
+	
+- What can Arnav do?
+	- Task Force: 
+			- Pat Callaghan
+			- Shan Hasnat
+			- One more - didn't get the name
+		- Kunal Shroff (Head of Pvt Mkts), Joe Burns (Head of HF)
+		- Nominated people to work with Cheryl on financial information products.
+			- Indices; trends and insights (BDCs went down, outflows in this type of fund, inflows in this type of fund).
+	- Joe and Kunal's team select the funds; do the due diligence.
+	- Outsource operational due diligence and some other kinds of diligence by Castle Hall.
+	- Do not sell a fund that Kunal's teams that have not diligenced.
+	- Team also conduct research, thought leadership, attend conferences.
+	- 30-40 funds picked by Kunal and Joe's teams. 
+	- More are sold by GPs on Marketplace.
+		- May or may not have diligenced.
+
+
+- What are next steps?	
+	- Get Clinton's approval.
+	- Should meet Kunal and Joe.
+
+	
+01092024
+Talk with Shan
+Team:
+	- Adrian Czebeniak (?) doing the data stuff for the team
+	- Cheryl
+	- Someone from marketing
+	
+
+	
+01122024
+- Synthetic daily returns
+
+01242024
+- Reach out to:
+	- Chris Piazza
+	- Mike November
+	- Adrian Czebeniak
+
+"Working on the Architect Team. Would love to meet with you!"
+	
+Adrian Czebeniak (Chief Data Officer, but not really)
+
+Michael Kushner (CFO, many hats, HR reports into him, CorpDev, Legal, Compliance, as well)
+- Any liquidity event will be driven by Kushner
+
+
+- Smooth out revenue line. Subscription revenue is sticky.
+	- Current revenue is basis point driven. When a structured product expires revenue dries up.
+- Reduce dependency on various business lines.
+- Increase diversification.
+
+- CALPERS wants to invest in companies that have smooth revenues that are predictable.
+	- Need to be more predictable to be a public company.
+	- Case in point: S&P (also in the information space) pays out dividends every year since 1957.
+	
+- OpCo on Feb 21 (Jason Broder).
+	- At that meeting update on Indices.
+
+- Find out about iDirect.
+
+- Advisors are gatekeepers, some funds anyone can invest in.
+
+- All HFs on Marketplace.
+- All Pvt Credit and Pvt Equity funds.
+
+
+- Morningstar allows practically everyone access to the funds.
+	- Democratizing alts investing.
+	
+
+

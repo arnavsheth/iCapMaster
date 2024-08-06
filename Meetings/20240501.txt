@@ -1,0 +1,15 @@
+How do we create confidence estimates of the coefficients in the final OLS?
+
+Options:
+	(1) Block bootstrap (circular vs noncircular)
+	(2) Parametric bootstrap under the null hypothesis
+		- comparing against a simulation of the original series
+
+- For client-provided CMAs, have them upload history and include it with our CMAs.
+
+- For a one-factor model (for example), the model is inefficient, but we should use the residuals, and the cross-correlation.
+	- When projecting covariance matrix. 
+
+- For asset-level variance-covariance matrix, we can use the G3 factor loadings and multiply them with the long-run historical var-covar of the factors themselves.
+	- we can also use some other var-covar matrix instead of the long-run historical
+	- for example, the one from the PCA 

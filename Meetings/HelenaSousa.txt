@@ -1,0 +1,74 @@
+Meeting with Helena:
+
+Product Origination team
+
+Why is iCapital not in India?
+SLIDE 1
+
+The optimal portfolio is a theoretical construct that offers the  highest expected return for a given level of risk, or the lowest risk for a given level of expected return. It's the "best" portfolio you can have based on your risk-return preferences.
+
+A stochastic discount factor is a bit more complex. It is also a theoretical construct. It's literally a discount factor that is stochastic or random -- it varies with different states.
+
+So what this statement means is that the assets in the optimal portfolio are priced correctly when their expected returns discounted by the SDF, equal their current prices.
+
+
+SLIDE 2
+
+Their approach is a regularization of the left-hand side of the predictability problem - "which factors are predictable?" - rather than the right-hand side - "which variables are useful predictors?". Use only the book-to-market ratio of each portfolio as a measure to predict its returns.
+
+
+SLIDE 3
+
+They construct the portfolios as follows. 
+	- Use the universe of CRSP and Compustat stocks and sort them into ten value-weighted portfolios for each of the fifty characteristics studied in Kozak et al. (2020). 
+	- Portfolios include all NYSE, AMEX, and NASDAQ firms; however, the breakpoints use only NYSE firms as in Fama and French (2016). 
+	- Sample consists of monthly returns from January 1974 to December 2017.
+
+The book-to-market ratio, bm, of a portfolio is defined as the sum of book equity relative to the total market capitalization of all firms in that portfolio. Equivalently, it is the market-capitalization weighted average of individual stocks’ bm ratios.
+
+
+SLIDE 4
+
+...
+
+
+SLIDE 5
+
+Their internet appendix has details on the derivation of this formula and on how the five PCs fulfill this criterion.
+
+
+
+They found a partner decided not to move ahead. Parked the potential opportunity for two main reasons:
+
+(1) More attractive markets -- APAC and Middle East
+
+(2) How do you go into the new market? Partner up, buy a local, go on your own
+	- Done on their own in EMEA and APac 
+	- Appropriate licenses, legal entity
+	
+Dealing with:
+- Israel: just getting into 
+- France:
+- Japan: big committment
+- Australia:
+
+Touch base on Jan 30.
+
+FOLLOW UP QUESTIONS: 
+	- Do we have partners in other countries? 
+	- What do we look for in a partner?
+	
+SHAN 01/22/2024
+- Australia
+- Maybe Chinese money.
+- One person in Japan.
+
+- No point in reaching out to individual funds -- just not worth it being listed on the platform.
+	- Best to reach out to a bank that has some funds in their wealth management group and they need feeders for those funds because clients don't have large enough capital.
+	
+- If an Indian expat does not want to deal with bureaucracy or capital controls but wants to invest in India.
+	- Feeder fund set up in the Caymans will allow them to funnel money through to India.
+	- This is what they're doing in Israel.
+	
+- 
+

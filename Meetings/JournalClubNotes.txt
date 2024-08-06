@@ -1,0 +1,17 @@
+Aniket JC Jan 10 2024
+- Create slideset containing three things. Overview of:
+	1. Vector Autoregression (VAR)
+	2. Kalman Filters and Extended Kalman Filters
+	3. CM-IEWMA (Schmelzer)
+	
+Aniken JC Jan 17 2024
+
+Questions on Kalman Filters:
+- How is it an extension of ARMA?
+- How does it differ from Markov models where you are estimating transition probabilities?
+
+One potential issue:
+- Trying to project several months (up to a year) into the future.
+
+Efficacy test:
+- How far outside the 95% confidence bounds is it?

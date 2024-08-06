@@ -1,0 +1,4 @@
+G4 ideas
+- instrumental PCA
+- variational bayes
+- kalman filters

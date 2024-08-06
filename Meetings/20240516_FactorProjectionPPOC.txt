@@ -1,0 +1,67 @@
+Aniket - 
+	1. Standardize to compare projections. 
+
+		Use the projected mean and standard deviation to create standardized value for all the returns for all the factors, monthly in 2024. 4 months of data. 13 x 4 = 52 data points. Of the 52 how many are bigger than 95%.
+
+		Do that on 2024 data. No need for any additional code.
+
+	2. Look at only the test scores for both methods instead of the difference between the two.
+	
+	3. Update LARS Lasso writeup.
+
+
+Tim - 
+	1. Why is Test routinely greater than Train? Check to see the value of the RMSE for each split.
+		Kunpeng:
+			- the test period is more recent, so that might be the issue.
+		Tim:
+			- distribution across the different folds has an extreme good number.
+			- expanding window means more recent windows.
+
+
+	2. When we use the expected returns from the external CMA providers, what asset classes will we be using? Our own, or the external providers?
+		- Will we be generating our own CMAs? Is there a more systematic way to map the CMAs to our asset classes?
+		- Take existing views, derive view on asset class (e.g., Fund of Funds, Pvt Real Asset). Or come up with a more systematic method of mapping asset classes to CMAs.
+		
+		ANSWER: asset classes and expected returns for those specific asset classes will be provided each time we run the code.
+		
+		- crude mapping and make sure everyone is ok with it.
+		- given the CMA provider's expectations, can we construct new asset classes from what they've given us.
+		
+		- treat the asset class as an asset in G3. Use projected factor expectations, and coefficients from G3 to get an expected return on the asset.
+		- if the asset classes from user match up with our asset classes, we can replace our asset class with their history.
+		
+		MAJOR ISSUE:
+			- what if the client gives us a view on an asset class that we don't have, and we provide a view, what if our view conflicts with the client's view?
+			- more specifically, what if the client does NOT give us a view on a particular asset class, and we provide a view. what if our view does not match up with their views on the asset classes for which the client does have views?
+			- for example, if we have a view on pvt real assets, it should somehow relate to asset classes for which the client does have views.
+		
+		
+	3. What exactly do we need to show to BizDev. What is the use-case for this?
+		
+		ANSWER: it is an input into the optimization as a future expected return. 
+			- Showing other info for asset-level performance. Big compliance barriers there.
+			
+
+	- We know the model doesn't perform well on equity (Tim).
+
+Aniket - 
+	Resids from G3 added to resids from PCR for varcovar projections.
+
+
+Yang - 
+	Are the two resids above correlated?
+
+
+For the follow up meeting, some rough plan for the var-covariance. 
+
+TEAM MEETING: MAY 20 2024
+
+Clinton: 
+	- By doing PCR, we are biasing the results in terms of the bias-variance tradeoff.
+	- By doing G3, we are biasing the results in the priors.
+	
+Aniket:
+	- Model efficacy for the PCR, out of sample R^2 (same as for G2).
+	
+	

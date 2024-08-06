@@ -1,0 +1,10 @@
+Factor Prediction
+
+1. Reduce dimensions of the CMA factors.
+2. Regress our 13 factors one by one (on the LHS) with the reduced PCs on the RHS.
+3. Plug in expected returns from CMAs for getting next-period factor return.
+
+Kunpeng and Clinton have created a PSD and a PD matrix from the CMAs.
+First step is to make it PSD using an iterative algorithm from the CS literature.
+Second step is to make it PD using a convex combination of Ledoit Wolf shrinkage matrix and the PSD matrix.
+

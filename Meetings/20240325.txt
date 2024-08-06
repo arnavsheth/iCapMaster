@@ -1,0 +1,26 @@
+Use R^2 instead of RMSE as a selection criterion.
+	-Switch to leave-one-out.
+	-Use out-of-sample. 
+
+Lasso via LARS: it selects the RHS vars that adds the most explanatory power. Implemented for G2.
+
+To assess whether asset classes are good with the indexes. Group R^2.
+
+Say, we have 55 asset classes. We select 15. Run 55 regressions with the 15 on the right-hand-side. Drop the 15 on the RHS that match up with the 55 on the LHS (one by one, of course).
+
+Updated 20240402:
+	- Do the R^2 stuff on the asset classes. Not the factor projections. 
+	- How do we select the 15?
+
+COVARIANCE CALCULATION:
+
+Take the 55 residual series, calculate variances, and then divide that by the sum variances of the original series. Multivariate R^2 ("percent variance explained").
+
+Talk with Kunpeng about how to modify externally provided variance covariance matrix.
+
+Updated 20240408:
+
+Let $\Sigma = L^T L$ -- so basically, Sigma is psd
+
+What is the jacobian of Sigma-inverse ($Sigma^{-1}$)? Specifically, the determinant for it?
+

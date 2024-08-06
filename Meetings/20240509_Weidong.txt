@@ -1,0 +1,7 @@
+
+Spoke with Weidong about the indexing idea. Where I take the asset level projections and combine them to create some kind of forward-looking index.
+
+- Follow up with Shan on what he's doing with the model portfolios, and whether an index will be able to help him in some fashion.
+- Check with both Shan and Cheryl on where the indexing project is.
+
+- Check up on evergeen funds. Apparently that was a thing in today's Product Town Hall. Weidong said there will be plenty of opportunities for quant analysis with these kinds of funds.

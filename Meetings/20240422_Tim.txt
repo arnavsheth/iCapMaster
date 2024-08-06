@@ -1,0 +1,21 @@
+What is it supposed to do? What are the requirements?
+	-Based on this, how should we prioritize testing?
+	-Is it asset class?
+	-How long will it take to test?
+	-What is the first phase?
+	-What are the sources of risk to the timeline?
+	
+PHASE 1: Asset class level (what might cause problems here (i.e., what are the sources of risk?))
+PHASE 2: Asset level (data will change, what are the sources of risk)
+
+Thinking about things in phases. What are the risks associated with each phase?
+
+KUNPENG (Later that day):
+- Why not project assets directly? Why do it via this two-step of projecting factor returns?
+	- This requires another scheduled job.
+
+- Biz dev has a better understanding of user needs. So we want their buy-in for the asset classes.
+- No surprises for the asset classes. Everyone should be agreed on it.
+	- It's a very subjective process so we want everyone internally to agree on it.
+	
+- What about Structured Investments?

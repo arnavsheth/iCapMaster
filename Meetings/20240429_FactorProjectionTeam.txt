@@ -1,0 +1,30 @@
+Design discussion -
+	What will be the specific outputs of the factor projection "module" and in what format
+	Where will these outputs be stored and how
+	What parts of these outputs will the optimizer "module" ingest and in what format
+Work allocation and Timeline - 
+	When will the RPoC be ready (Arnav)
+	When will the PPoC be ready (Aniket)
+	When is the final productionizing expected
+
+
+ANIKET AND KUNPENG
+- Factor returns are going to be used primarily for optimization.
+- We will provide 10-year projections because the CMAs are 10-year projections.
+- They will be updated every month as the data updates.
+- Expected returns are going to be shown at the porfolio level to the user.
+- Covariance matrix will be calculated at the factor level and at the asset level, in the same way.
+	- Beta * Historical Varcovar * Beta^T
+	- Will the resulting varcovar projection be well-conditioned?
+
+
+YANG
+- Is it necessary to update every month? 
+	- Will the client be comfortable with this?
+		- Client will only see portfolio returns and risk after the optimization.
+		- They are not going to see the factor-projected returns and covariances.
+	- Clients will run the optimization over and over again. If they see very different results in each month, this is a problem.
+		- That will happen if the asset betas are changing dramatically.
+		- We will have a good explanation for it.
+	- How sensitive is the optimizer to these changes (in the G3 betas, in the factor projections, in the CMAs)?
+		- It's possible.

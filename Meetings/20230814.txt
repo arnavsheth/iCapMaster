@@ -1,0 +1,37 @@
+Efficacy:
+- WAIC issue: because it's not a filtering model, it's not entirely clear how to apply WAIC. Very naive versions of AIC and BIC. Model is not cleanly partitionable. Can't take a slice of the model and treat it as independent of the rest of the model.
+- Naive expectations of X and Beta, assuming error terms are normal.
+- 
+
+Why Bayesian?
+(1) Able to observe joint pdfs of all parameters.
+(2) Incorporate model and parameter uncertainty in an elegant way.
+
+Why not frequentist?
+(1) For tractability, you would have to use Kalman Filter (which btw can either be Bayesian or frequentist), and this is constrained to normality
+(2) nonlinear GMM is another option but then you get local optima and can't be confident in your answers
+(3) SMM?
+
+This is not a traditional filtering approach. It treats entire series of returns as a single high dimensional model.
+
+Why not a traditional filtering approach?
+Working with coarse data; small matrices, low data availability; it is far more computationally performant. Filtering not tractable with data.
+
+Why those priors?
+- Priors are weakly informative. This is usually done by default.
+- Sensitivity analysis with weakly informative priors is standard practice.
+
+Uninformative priors:
+- There are issues -- sometimes not pdfs at all.
+- Basically a likelihood function.
+- Conceptual issue: is the true beta 10,000?
+- Real way to answer this question is to use different priors and the results should not change much. This is what he meant by "sensitivity analysis" earlier today.
+
+Data:
+- Have a cutoff of 5 years for quarterly and 3 years for monthly.
+- There should be a calibration exercise for setting a minimum history so that the hyperparameters don't change.
+
+Unique contributions:
+- Giving us an asset-level distribution of statistics on both, return and risk. 
+- Also distributions of factor loadings (also asset-level).
+

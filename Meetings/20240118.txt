@@ -1,0 +1,15 @@
+Clinton Jan 18 2024
+
+- Get indices related to the CMA asset classes and associated time series returns.
+- Connect those with our 13 factors (economically).
+
+- Generate the future returns from that relationship. Recognize that there will be lead-lag effect.
+
+- Kalman Filter may not be the most appropriate if we can see the state variables in the form of time series.
+
+- Read the factor timing paper. Keep things simple.
+
+Another question:
+- Suppose we have the expected returns and covariance of the assets going forward.
+- ???
+

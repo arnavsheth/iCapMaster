@@ -1,0 +1,55 @@
+Have the CMAs which we will use to get FACTOR CMAs and a covariance matrix.
+
+Articulate the approach -- no need for the data itself. 
+
+PCA -->
+Regression (don't assume residual independence -- use the explained part and unexplained part from residuals) -->
+Plug in Exp Rtns from the CMAs using regression coefficients -->
+Get E(r) for our factors and covariance matrices (going to include CMA index regression components) -->
+Use factor loadings from G3 -->
+Get asset level CMAs
+
+COVARIANCE MATRIX METHODOLOGY
+
+In regression analysis, the covariance matrix of the regression coefficients can be obtained using the following steps:
+
+1. **Fit the Regression Model**: First, you fit your regression model to the data using the least squares method. This yields estimates of the regression coefficients.
+
+2. **Compute Residuals**: Calculate the residuals, which are the differences between the observed values and the predicted values from the regression model.
+
+3. **Compute Variance-Covariance Matrix**: Use the residuals to compute the variance-covariance matrix of the regression coefficients. This matrix provides information about the uncertainty or variability in the estimated coefficients.
+
+Here's how you can compute the variance-covariance matrix in Python using scikit-learn and numpy:
+
+```python
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Assuming X is your feature matrix and y is your target variable
+# Fit the regression model
+regression_model = LinearRegression()
+regression_model.fit(X, y)
+
+# Calculate residuals
+y_pred = regression_model.predict(X)
+residuals = y - y_pred
+
+# Compute variance-covariance matrix
+covariance_matrix = np.linalg.inv(X.T @ X) * (np.sum(residuals**2) / (X.shape[0] - X.shape[1]))
+
+print("Variance-Covariance Matrix:")
+print(covariance_matrix)
+```
+
+In this code:
+- We fit a linear regression model to the data using scikit-learn's `LinearRegression` class.
+- We calculate the residuals by subtracting the predicted values from the actual target values.
+- We then use the formula for the variance-covariance matrix of the regression coefficients, which involves the inverse of the product of the transpose of the feature matrix (`X`) and the feature matrix itself, multiplied by the sum of squared residuals divided by the degrees of freedom (number of observations minus the number of features).
+
+This approach assumes homoscedasticity (constant variance of errors) and independence of errors. If your data violates these assumptions, you may need to use robust standard errors or other techniques to compute the covariance matrix.
+
+2024 02 22
+
+Calculate the variance between two assets whose data generating process is governed by a linear factor model of arbitrary factors.
+
+

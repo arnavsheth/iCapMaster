@@ -1,0 +1,9 @@
+Who's going to work with me to productionalize it? Who's going to work on the PPOC?
+
+Factor projection project should be implemented because once we have CMAs we don't want to bottleneck.
+
+Kunpeng should code it.
+	
+INDEX IDEA:
+	- Precendent for statistically-generated index using PCA.
+

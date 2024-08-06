@@ -1,0 +1,24 @@
+CLINTON
+
+- Biggest issue with implementation is having the right indexes.
+	-Good stretch activity.
+
+- Schedule a meeting with Tim, look at the indexes for CMAs and make sure they are appropriate for our purposes.
+	- Qualititative: methodology, etc.
+		-Preference is to use a proper index instead of an ETF
+		-Using an ETF is "bush league"
+		-Not like when they buy MSCI EAFE they are investing in every stock
+	- Quant: plugging in and making sure everything looks ok.
+	- Offload the work as much as you can.
+	
+- Talk to Yang about Kunpeng or Jesse.
+
+- Conference presentations. Decide on a number per year and shoot for it.
+	- Academic conferences are ok. Encouraged.
+	- Milken Conference.
+	- 
+	
+- Patent instead of publishing?
+	- Jason said publishing better for business.
+	- Lawrence worried about IP.
+	

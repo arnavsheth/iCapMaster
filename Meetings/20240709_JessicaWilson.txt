@@ -1,0 +1,24 @@
+super helpful super friendly want to figure this out
+want an integrated platform from icapital
+
+icapital relationship manager at pnci: larry wasserman (head of due diligence, cfa, cfp)
+
+nick bailey -- most engaged. they develop the pnci model portfolios. conservative-moderate-aggressive. 
+
+- they are trying to attach a sleeve of alts to the model portfolios
+- that's what icap is trying to sell them through our connection with envestnet
+
+- optimization = "harmonization"
+
+- they are creating the CMAs and they are putting the portfolios together
+- recent conversation: nick bailey (senior member) asked how we derive SI and alts CMAs.
+	- here's the methodology for factor projections
+
+
+- stay at the 10,000-foot level
+- non-PhD-level audience
+
+- what is icap optimization going to suggest for PNCI CMAs?
+- what if i add asset classes to traditional 60-40? how will the optimization get affected?
+
+- we can upsell them to wanting to use our CMAs for their optimization
