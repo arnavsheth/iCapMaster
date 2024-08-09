@@ -1,0 +1,19 @@
+- compile CMAs for the iCMA project
+	- iCMA project uses asset-class level CMAs and asset-class return index histories to create inputs into the Bayesian shrinkage algorithm
+	- Not spent enough time compiling CMA estimates and also dealing with the compliance implications using it as one input into a larger process
+- Two pieces:
+	(1) identify subjective inputs which will form teh basis of the priors, e.g. envestnet CMAs adjusted by DD or Anastasia's group which would then be used in an official capacity to feed into the iCMA engine
+	(2) get as many CMA estimates as possible to use for testing purposes
+
+- Bottomline: get more CMA estimates which we can work with compliance to use as inputs into the iCMA engine
+
+- Work with people within the firm and get their CMAs
+	- If external, then we need compliance-approval
+	
+PRIORITY should be factor projection:
+	- get it productionalized
+	- explore edge cases
+	- tweak where necessary
+
+ALSO HIGH PRIORIY:
+	- getting the paper submitted before EOY

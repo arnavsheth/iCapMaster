@@ -1,0 +1,109 @@
+OLD STUFF
+---------
+
+The areas we believe can be improved as a team:
+1. Expand Quant Team Influence Beyond Architect:
+	(Contribute to other iCapital functions, utilizing our expertise to add value at low cost and enhance visibility)
+	Focus on leveraging out core competencies in portfolio analytics and quantitative finance to maintain our competitive edge
+	For example, implement analytics in due diligence for added value
+
+Aniket: decent work; work with due diligence team; some more achievable than others; but will help us achieve the objective. Some of the work on sale is getting productionized in Q3.
+
+Clinton: been involved with the model portfolios in DD; helped them with nowcasting; done some one-off work with them; excited about UAF. Done ok here. Give us a B. 
+
+Aniket: still the Architect Quant Team, but still can do support work for other teams.
+
+Clinton: I've made it clear we are available for this; Yang been's helping out with datafeed on teh HF team; never gotten any pushback from Jason on this. Being upfront and transparent plays to our advantage.
+
+Alice: For UAF, got a chance to work with the AI team. Having some connection there.
+
+
+2. Clarify Research and Development Processes:
+		Address development team’s pushback
+		Consider initiating production POC before completing research POC
+
+
+Clinton: second bullet we have been good; first one, I'm not so sure.
+
+Aniket: this was specific to Arnav's factor projection from Tim and Yang; 
+
+Address Uncertainty in Architect’s Future Post-Mirador Acquisition:
+	Clarity on the business model expected within the next six months
+
+Clinton: Need more time for clarity; tabled until next retro.
+
+3. Enhance Collaboration Within the Quant Research Team:
+	Maintain a live document for project tracking, detailing tasks, progress, and challenges
+	Use a Confluence page for meeting agendas and slide uploads, with a weekly rotation for meeting facilitation
+
+Arnav: Aniket made a valiant attempt and it fizzled out; it's a lot of work!
+
+Clinton: we should have an agenda for each team meeting. Whoever is facilitating the biweekly standard meeting has to decide for the paper for Journal Club. Then the person who facilitates the discussion for each JC will be random. 
+
+4. Refine Meeting Audience Scope:
+	Re-evaluate the necessity of attending Architect meetings (e.g., Architect retro, Architect QA, Architect Biz Dev, etc.)
+
+Aniket: we have done well on this.
+
+5. Schedule a quarterly retro for the Quant team
+
+Clinton: done.
+
+6. Reconsider Weekly Meeting Schedule:
+	Can skip some weekly meetings when there are no discussion points
+
+7. Reduce Meeting Overload to Minimize Context Switching:
+	Encourage the team to decline non-essential ad-hoc requests
+
+8 . Allocate Time for Creative and Learning Endeavors:
+	Set aside Thursday afternoon for exploratory research and self-development beyond current projects 
+ 
+Some areas we are happy with as a team:
+1. Access to CT 
+
+Check.
+
+2. Full-size team 
+
+Clinton: let's get another body for the team. Thinking about it.
+
+3. Open communication, support, accessibility, and trust
+
+Check.
+
+4. Good balance between meeting and practices
+
+Check.
+
+5. Engaging work
+
+Check.
+
+6. Academic culture
+
+Check.
+
+7. Ultra high powered team
+
+Check.
+
+NEW STUFF
+---------
+
+- Pushback was discussed. Solution: involve Yang early on, keep him in the loop on what we're doing.
+
+- More presentations on what we're working on. Every opportunity we get we should get more facetime with Jason. Goal: one presentation with Jason every quarter. Target - two of us being involved. Trying to get us client presentations. Maybe Jason + clients. This is an Action Item.
+
+- Biweekly meetings are moved to Wednesdays.
+
+- For JC: can we use this in the business somehow?
+
+- Team expansion.
+
+- Stamford: at least once.
+
+- Team lunches in CT. Shoot for one team meal per month. 
+
+- "We are living the dream" -CT
+
+
